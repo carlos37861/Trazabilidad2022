@@ -1,0 +1,63 @@
+﻿
+@{
+    Layout = null;
+}
+<!-- include common vendor stylesheets -->
+<head>
+    <script type="text/javascript" src="~/node_modules/jquery/dist/jquery.js"></script>
+    <script src="~/node_modules/popper.js/dist/umd/popper.js"></script>
+    <link href="~/node_modules/fortawesome/fontawesome-free/css/fontawesome.css" rel="stylesheet" />
+    <link href="~/node_modules/fortawesome/fontawesome-free/css/regular.css" rel="stylesheet" />
+    <link href="~/node_modules/fortawesome/fontawesome-free/css/brands.css" rel="stylesheet" />
+    <link href="~/node_modules/fortawesome/fontawesome-free/css/solid.css" rel="stylesheet" />
+    <script type="text/javascript" src="~/node_modules/bootstrap/dist/js/bootstrap.js"></script>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="~/node_modules/bootstrap-table/dist/bootstrap-table.min.js"></script>
+    <link href="~/node_modules/bootstrap-table/dist/bootstrap-table.css" rel="stylesheet" />
+    @*JQUERY DE FUNCIONALIDAD*@
+    <script src="~/content/js/login.js"></script>
+    @*LINK DE FONTS DE GOOGLE*@
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    @*LINK DE SWEET ALERT 2*@
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    @*CSS DE LOGIN*@
+    <link href="~/content/css/login.css" rel="stylesheet" />
+</head>
+    <div class="wrapper fadeInDown">
+        <div id="formContent"> 
+            <CENTER><p class="fadeIn first" style="padding-bottom: 2em; padding-top: 2em;"><strong>SISTEMA DE INSPECCIONES DE LABORES MINERAS - TRAZABILIDAD</strong></p></CENTER>
+            <div class="fadeIn first">
+                <img src="https://image.flaticon.com/icons/png/512/1828/1828506.png" id="icon" style="width:20%;padding-top:1em" alt="User Icon" />
+            </div>
+            <!-- Login Form-->
+            <form id="loginForm" class="pt-2">
+                <input type="text" id="TxtUsuario" class="fadeIn second" name="Usuario" placeholder="USUARIO" autocomplete="off">
+                <label id="lblErrorTxtUsuario" style="color:red;font-size: 14px !important;"></label>
+                <input type="password" id="TxtPassword" class="fadeIn third" name="Password" placeholder="CONTRASEÑA" autocomplete="off">
+                <label id="lblErrorTxtPassword" style="color:red;font-size: 14px !important;"></label>
+                <div style="width: 60%; margin: 0 auto;" class="pt-3">
+                    <select id="cmbPerfil" class="fadeIn third form-control" name="cmbPerfil" style="display:none">
+                    </select>
+                    <label id="lblErrorcmbPerfil" style="color:red;font-size: 14px !important;"></label>
+                </div>
+            </form>
+            <input type="submit" class="fadeIn fourth" value="Ingresar" id="btnLogin" onclick="login()" autocomplete="off">
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal" id="myModalLoading" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class=" d-flex flex-column justify-content-between align-items-center">
+                        <p class="pt-2" style="color:darkblue">Iniciando Sesión.....</p>
+                        <div class="fas fa-spinner fa-spin text-purple-m1 fa-2x mb-3"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+

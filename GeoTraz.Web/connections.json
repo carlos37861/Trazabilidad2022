@@ -1,0 +1,15 @@
+{
+  "ConnectionStrings": {
+    "UriGeneral": "http://172.16.0.244:2703/",
+    //"UriGeneral": "http://172.16.0.244:2703/",
+    //"ConnSeguridad": "xL9aoa+Uoi6Nzq6iHQeiY8MaFka7mxGqBdX1P",
+    //"ConnIntegra": "xL9aoa+Uoi6Nzq6iHQeiY8MaFka7mxGqBdX1PjW"
+    "UriPrueba": "https://localhost:44317/api/"
+    //"UriPrueba": "http://172.16.0.244:2703/"
+  },
+  "Initial": {
+    "Empresa": "73",
+    "UriFtp": "ftp://172.16.0.236:2101/DEMO01/images/"
+  }
+}
+

@@ -1,0 +1,910 @@
+﻿@*<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>@ViewData["Title"] - TRAZ.Web</title>
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="~/css/site.css" />
+    </head>
+    <body>
+        <header>
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+                <div class="container">
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">TRAZ.Web</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <div class="container">
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+        </div>
+
+        <footer class="border-top footer text-muted">
+            <div class="container">
+                &copy; 2021 - TRAZ.Web - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            </div>
+        </footer>
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+        @await RenderSectionAsync("Scripts", required: false)
+    </body>
+    </html>*@
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
+    <base href="../" />
+    <title>SISTEMA DE INSPECCION DE LABORES MINERAS - TRAZABILIDAD</title>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <!-- include common vendor stylesheets -->
+
+    <script type="text/javascript" src="~/node_modules/jquery/dist/jquery.js"></script>
+    <script src="~/node_modules/popper.js/dist/umd/popper.js"></script>
+    <link href="~/node_modules/fortawesome/fontawesome-free/css/fontawesome.css" rel="stylesheet" />
+    <link href="~/node_modules/fortawesome/fontawesome-free/css/regular.css" rel="stylesheet" />
+    <link href="~/node_modules/fortawesome/fontawesome-free/css/brands.css" rel="stylesheet" />
+    <link href="~/node_modules/fortawesome/fontawesome-free/css/solid.css" rel="stylesheet" />
+    <script type="text/javascript" src="~/node_modules/bootstrap/dist/js/bootstrap.js"></script>
+
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="~/node_modules/bootstrap-table/dist/bootstrap-table.min.js"></script>
+    <link href="~/node_modules/bootstrap-table/dist/bootstrap-table.css" rel="stylesheet" />
+
+
+    <!-- include vendor stylesheets used in "Dashboard" page. see "application/views/default/pages/partials/dashboard/vendor-stylesheets.hbs" -->
+
+
+    <link rel="stylesheet" type="text/css" href="~/dist/css/ace-font.css">
+
+
+
+    <link rel="stylesheet" type="text/css" href="~/dist/css/ace.css">
+
+
+    <link rel="icon" type="image/png" href="~/assets/image/user2.png" />
+
+    <!-- "Dashboard" page styles specific to this page for demo purposes -->
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="~/node_modules/bootstrap-table/dist/bootstrap-table.min.js"></script>
+    <link href="~/node_modules/bootstrap-table/dist/bootstrap-table.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="body-container">
+        <nav class="navbar navbar-expand-lg navbar-fixed navbar-default">
+            <div class="navbar-inner">
+
+                <div class="navbar-intro justify-content-xl-between">
+
+                    <button type="button" class="btn btn-burger burger-arrowed static collapsed ml-2 d-flex d-xl-none" data-toggle-mobile="sidebar" data-target="#sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle sidebar">
+                        <span class="bars"></span>
+                    </button><!-- mobile sidebar toggler button -->
+
+                    <a class="navbar-brand text-white" href="#">
+                        <center>
+                            <img src="~/images/logo-light-text-laytaruma.png" id="imgLaytaruma" alt="Laytaruma" width="80%" /><img src="~/images/logo-light-icon-laytaruma.png" id="imgLaytaruma2"  class="pl-2" alt="Laytaruma" width="25%" />
+
+                        </center>
+                    </a><!-- /.navbar-brand -->
+
+                    <button type="button" class="btn btn-burger mr-2 d-none d-xl-flex " data-toggle="sidebar" data-target="#sidebar" aria-controls="sidebar" aria-expanded="true" aria-label="Toggle sidebar">
+                        <span class="bars bg-white"></span>
+                    </button><!-- sidebar toggler button -->
+
+                </div><!-- /.navbar-intro -->
+                <!-- mobile #navbarMenu toggler button -->
+                <button class="navbar-toggler ml-1 mr-2 px-1" type="button" data-toggle="collapse" data-target="#navbarMenu" aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navbar menu">
+                    <span class="pos-rel">
+                        <img class="border-2 brc-white-tp1 radius-round" width="36" src="assets/image/user2.png">
+                        <span class="bgc-warning radius-round border-2 brc-white p-1 position-tr mr-1px mt-1px"></span>
+                    </span>
+                </button>
+
+
+                <div class="navbar-menu collapse navbar-collapse navbar-backdrop" id="navbarMenu">
+
+                    <div class="navbar-nav">
+                        <ul class="nav">
+
+                            <li class="nav-item dd-backdrop dropdown dropdown-mega">
+                                <a class="nav-link dropdown-toggle pl-lg-3 pr-lg-4 pt-2" data-toggle="" role="button" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fa fa-map-marker  text-110 icon-animated-vertical mr-lg-1"></i>
+                                    <span class="d-inline-block d-lg-none ml-2 badge-warning"></span><!-- show only on mobile -->
+                                    <span id="id-navbar-badge2" class="badge badge-sm text-90 text-success-l4"></span>
+                                    <span id="txtSedeUser"></span>
+                                </a>
+                            </li>
+                            <li class="nav-item dropdown order-first order-lg-last ml-1">
+                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                    <img id="id-navbar-user-image" class="d-none d-lg-inline-block radius-round border-2 brc-white-tp1 mr-3" src="assets/image/user2.png">
+                                    <span class="d-inline-block d-lg-none d-xl-inline-block">
+                                        <span class="text-90" id="id-user-welcome">Bienvenido(a),</span>
+                                        <span class="nav-user-name">
+                                            @*<label id="lblusuario"></label>*@
+                                            @ViewBag.message
+                                        </span>
+                                    </span>
+                                    <i class="caret fa fa-angle-down d-none d-xl-block ml-3"></i>
+                                    <i class="caret fa fa-angle-left d-block d-lg-none ml-3 "></i>
+                                </a>
+                                <div class="dropdown-menu dropdown-caret dropdown-menu-right dropdown-animated brc-primary-m3">
+                                    <div class="d-none d-lg-block d-xl-none">
+                                        <div class="dropdown-header">
+                                            Bienvenido(a) as, <p>
+                                                @*@if (Session["UserId"] != null)
+                                                    {
+                                                        @Session["UserName"]
+                                                    }*@
+                                                @ViewBag.message
+                                            </p>
+                                        </div>
+                                        <div class="dropdown-divider"></div>
+                                    </div>
+
+                                    <a class="dropdown-item btn btn-outline-blue" href="@Url.Action("Logout","Home")">
+                                        <i class="fa fa-power-off text-warning-d1 text-105 mr-1 "></i>
+                                        Cerrar Sesión
+                                    </a>
+                                </div>
+                            </li><!-- /.nav-item:last -->
+
+                        </ul><!-- /.navbar-nav menu -->
+                    </div><!-- /.navbar-nav -->
+
+                </div><!-- /.navbar-menu.navbar-collapse -->
+
+            </div><!-- /.navbar-inner -->
+        </nav>
+        <div class="main-container">
+            <div id="sidebar" class="sidebar sidebar-fixed expandable sidebar-default d-none d-xl-block">
+                <div class="sidebar-inner">
+
+                    <div class="ace-scroll flex-grow-1" ace-scroll>
+
+                        <div class="sidebar-section my-2">
+                        </div>
+                        <hr />
+                        <ul class="nav has-active-border" role="navigation" aria-label="Main">
+                            <li class="nav-item"  id="lidashboard">
+                            
+                                <a href="@Url.Action("Dashboard","Home")" class="nav-link" >
+
+                                    <i class="nav-icon fa fa-user-circle text-blue"></i>
+                                    <span class="nav-text fadeable">
+                                        <span>TRAZABILIDAD</span>
+                                    </span>
+                                </a>
+                                    <b class="sub-arrow"></b>
+                            </li>
+                        </ul>
+                        <hr />
+                        <ul class="nav has-active-border" role="navigation" aria-label="Main" id="ulMenu">
+                            @*<li class="nav-item" id="liMantenimiento" style="display:none">
+                                    <a href="#" class="nav-link dropdown-toggle">
+                                        <i class="nav-icon fa fa-cog"></i>
+                                        <span class="nav-text fadeable">
+                                            <span>Mantenimientos</span>
+                                        </span>
+                                        <b class="caret fa fa-angle-left rt-n90"></b>
+                                    </a>
+                                        <div class="hideable submenu collapse">
+                                            <ul class="submenu-inner">
+                                                <li class="nav-item" id="liproveedor">
+                                                    <a href="@Url.Action("Proveedor","Home")" class="nav-link">
+                                                        <i class="nav-icon fa fa-building"></i>
+                                                        <span class="nav-text fadeable">
+                                                            <span>Proveedores</span>
+                                                        </span>
+                                                    </a>
+                                                    <b class="sub-arrow"></b>
+                                                </li>
+                                                <li class="nav-item" id="liconcesion">
+                                                    <a href="@Url.Action("Concesion","Home")" class="nav-link">
+                                                        <i class="nav-icon fa fa-id-card"></i>
+                                                        <span class="nav-text fadeable">
+                                                            <span>Concesiones</span>
+                                                        </span>
+                                                    </a>
+                                                    <b class="sub-arrow"></b>
+                                                </li>
+                                            </ul>
+                                        </div>
+                            <b class="sub-arrow"></b>
+                        </li>
+                            <li class="nav-item" id="lireinfominero" style="display:none">
+                                <a href="@Url.Action("Reinfo","Home")" class="nav-link">
+                                    <i class="nav-icon fa fa-list-alt"></i>
+                                    <span class="nav-text fadeable">
+                                        <span>Reinfo Minero</span>
+                                    </span>
+                                </a>
+                                <b class="sub-arrow"></b>
+                            </li>
+                            <li class="nav-item" id="liigafom" style="display:none">
+                                <a href="@Url.Action("Igafom","Home")" class="nav-link">
+                                    <i class="nav-icon fa fa-tasks"></i>
+                                    <span class="nav-text fadeable">
+                                        <span>Igafom</span>
+                                    </span>
+                                </a>
+                                <b class="sub-arrow"></b>
+                            </li>
+                            <li class="nav-item" id="lideclaracionminera" style="display:none">
+                                <a href="@Url.Action("DeclaracionMinera","Home")" class="nav-link">
+                                    <i class="nav-icon fa fa-industry"></i>
+                                    <span class="nav-text fadeable">
+                                        <span>Declaración de <br /> producción minera</span>
+                                    </span>
+                                </a>
+                                <b class="sub-arrow"></b>
+                            </li>
+                            <li class="nav-item" id="liformalizados" style="display:none">
+                                <a href="@Url.Action("Formalizados","Home")" class="nav-link">
+                                    <i class="nav-icon fa fa-id-card"></i>
+                                    <span class="nav-text fadeable">
+                                        <span>Formalizados</span>
+                                    </span>
+                                </a>
+                                <b class="sub-arrow"></b>
+                            </li>
+                            <li class="nav-item" id="lireporte" style="display: none">
+                                <a href="#" class="nav-link dropdown-toggle">
+                                    <i class="nav-icon nav-icon fa fa-file"></i>
+                                    <span class="nav-text fadeable">
+                                        <span>Reportes</span>
+                                    </span>
+                                    <b class="caret fa fa-angle-left rt-n90"></b>
+                                </a>
+                                <div class="hideable submenu collapse">
+                                    <ul class="submenu-inner">
+                                        <li class="nav-item" id="lireporte2" style="display: block">
+                                            <a href="@Url.Action("Reporte","Home")" class="nav-link">
+                                                <i class="nav-icon fa fa-file"></i>
+                                                <span class="nav-text fadeable">
+                                                    <span>Historico Reportes</span>
+                                                </span>
+                                            </a>
+                                            <b class="sub-arrow"></b>
+                                        </li>
+                                        <li class="nav-item" id="lireporte3" style="display: block">
+                                            <a href="@Url.Action("ReporteGeneral","Home")" class="nav-link">
+                                                <i class="nav-icon fa fa-file-excel"></i>
+                                                <span class="nav-text fadeable">
+                                                    <span>Reporte Reinfo Minero</span>
+                                                </span>
+                                            </a>
+                                            <b class="sub-arrow"></b>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <b class="sub-arrow"></b>
+                            </li>
+                            <li class="nav-item" id="liDocumentosGeneral" style="display:none">
+                                <a href="#" class="nav-link dropdown-toggle">
+                                    <i class="nav-icon nav-icon fa fa-folder"></i>
+                                    <span class="nav-text fadeable">
+                                        <span>Material de<br />Formación</span>
+                                    </span>
+                                    <b class="caret fa fa-angle-left rt-n90"></b>
+                                </a>
+                                <div class="hideable submenu collapse">
+                                    <ul class="submenu-inner">
+                                        <li class="nav-item" id="lidocumentosayuda" style="display: block">
+                                            <a href="@Url.Action("Documentos","Home")" class="nav-link">
+                                                <i class="nav-icon fa fa-paperclip"></i>
+                                                <span class="nav-text fadeable">
+                                                    <span>Documentos Ayuda</span>
+                                                </span>
+                                            </a>
+                                            <b class="sub-arrow"></b>
+                                        </li>
+                                        <li class="nav-item" id="lidocumentocapacitacion" style="display: block">
+                                            <a href="@Url.Action("DocuCapacitacion","Home")" class="nav-link">
+                                                <i class="nav-icon fa fa-handshake"></i>
+                                                <span class="nav-text fadeable">
+                                                    <span>Capacitaciones</span>
+                                                </span>
+                                            </a>
+                                            <b class="sub-arrow"></b>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <b class="sub-arrow"></b>
+                            </li>
+                            <li class="nav-item" id="liDocDeProveedor" style="display:none">
+                                <a href="#" class="nav-link dropdown-toggle">
+                                    <i class="nav-icon fa fa-archive"></i>
+                                    <span class="nav-text fadeable">
+                                        <span>Documentos <br /> Complementarios <br />del Proveedor</span>
+                                    </span>
+                                    <b class="caret fa fa-angle-left rt-n90"></b>
+                                </a>
+                                <div class="hideable submenu collapse">
+                                    <ul class="submenu-inner">
+                                        <li class="nav-item" id="lidocumentoproveedor">
+                                            <a href="@Url.Action("DocuProveedor","Home")" class="nav-link">
+                                                <i class="nav-icon fa fa-clipboard"></i>
+                                                <span class="nav-text fadeable">
+                                                    <span>Documentos<br /> Proveedor</span>
+                                                </span>
+                                            </a>
+                                            <b class="sub-arrow"></b>
+                                        </li>
+                                        <li class="nav-item" id="lidocatalogo">
+                                            <a href="@Url.Action("Catalogo","Home")" class="nav-link">
+                                                <i class="nav-icon fa fa-book"></i>
+                                                <span class="nav-text fadeable">
+                                                    <span>Catálogo de<br /> Documentos</span>
+                                                </span>
+                                            </a>
+                                            <b class="sub-arrow"></b>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <b class="sub-arrow"></b>
+                            </li>*@
+                        </ul>
+                    </div><!-- /.sidebar scroll -->
+                </div>
+            </div><!-- /#sidebar -->
+            <div role="main" class="main-content">
+                <div class="d-none content-nav mb-1 bgc-grey-l4">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <ol class="breadcrumb pl-2">
+                            <li class="breadcrumb-item active text-grey">
+                                <i class="fa fa-home text-dark-m3 mr-1"></i>
+                                <a class="text-blue" href="#">
+                                    Home
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item active text-grey-d1">Dashboard</li>
+                        </ol>
+
+                        <div class="nav-search">
+                            <form class="form-search">
+                                <span class="d-inline-flex align-items-center">
+                                    <input type="text" placeholder="Search ..." class="form-control pr-4 form-control-sm radius-1 brc-info-m2 text-grey" autocomplete="off" />
+                                    <i class="fa fa-search text-info-m1 ml-n4"></i>
+                                </span>
+                            </form>
+                        </div><!-- /.nav-search -->
+                    </div>
+                </div><!-- breadcrumbs -->
+                <div class="m-2">
+                    @RenderBody()
+                </div><!-- /.page-content -->
+
+                <footer class="footer d-none d-sm-block">
+                    <div class="footer-inner bgc-white-tp1">
+                        <div class="pt-3 border-none border-t-3 brc-grey-l1 border-double">
+                            <span class="text-primary-m2 font-bolder text-120"> </span>
+                            <span class="text-muted">Sistema de inspecciones de labores mineras - trazabilidad &copy; 2021</span>
+                        </div>
+                    </div><!-- .footer-inner -->
+
+                    <div class="footer-tools">
+                        <a id="btn-scroll-up" href="#" class="btn-scroll-up btn btn-dark btn-smd mb-2 mr-2">
+                            <i class="fa fa-angle-double-up mx-1"></i>
+                        </a>
+                    </div>
+                </footer>
+                <!-- footer toolbox for mobile view -->
+
+            </div><!-- /main -->
+            <div id="id-ace-settings-modal" class="my-1 my-lg-2 modal modal-nb ace-aside aside-right aside-offset aside-below-nav" data-backdrop="false" tabindex="-1" role="dialog" aria-hidden="true">
+
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content w-auto flex-grow-1 pb-1px radius-0 radius-l-2 border-y-2 border-l-1 brc-default-m3 bgc-white-tp1 shadow">
+
+                        <div class="modal-header p-0 radius-0 mx-3">
+                            <h4 class="modal-title text-blue-m1 pt-2 pl-1">Demo Settings</h4>
+                            <button type="button" class="close m-0 mr-n2" data-dismiss="modal" aria-label="Close">
+                                <i class="fa fa-times text-70" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                        <div class="modal-body mx-md-2" ace-scroll='{"smooth": true, "lock": true}'>
+                            <div class="d-flex flex-column flex-md-row justify-content-md-between align-items-md-center">
+                                <h5 class="text-secondary-m1">Zoom</h5>
+                                <div class="btn-group btn-group-toggle align-self-end" data-toggle="buttons">
+                                    <label class="btn btn-sm btn-light-grey btn-h-light-primary btn-a-primary">
+                                        90%
+                                        <input type="radio" name="zoom-level" value="90" autocomplete="off" />
+                                    </label>
+                                    <label class="btn btn-sm btn-light-grey btn-h-light-primary btn-a-primary active">
+                                        100%
+                                        <input type="radio" name="zoom-level" value="none" autocomplete="off" checked />
+                                    </label>
+                                    <label class="btn btn-sm btn-light-grey btn-h-light-primary btn-a-primary">
+                                        110%
+                                        <input type="radio" name="zoom-level" value="110" autocomplete="off" />
+                                    </label>
+                                    <label class="btn btn-sm btn-light-grey btn-h-light-primary btn-a-primary">
+                                        120%
+                                        <input type="radio" name="zoom-level" value="120" autocomplete="off" />
+                                    </label>
+                                </div>
+                            </div>
+                            <hr class="border-double my-md-3" />
+                            <h5 class="text-purple-m2">
+                                Themes
+                            </h5>
+                            <div class="bgc-secondary-l3 py-1 radius-1 mb-3 border-1 radius-1 border-l-3 brc-secondary-m3">
+                                <label class="mt-1 pr-2 d-flex align-items-center" for="id-auto-match">
+                                    <input type="checkbox" class="input-lg mx-15" id="id-auto-match" autocomplete="off" checked />
+
+                                    <div class="pl-0 text-secondary-d1 text-90 font-bolder">Match sidebar &amp; navbar themes</div>
+                                </label>
+                            </div>
+                            <div class="d-flex flex-column flex-md-row justify-content-md-between align-items-md-center">
+                                <h6 class="text-95 pl-1 text-grey-d1">Sidebar:</h6>
+                                <div class="btn-group btn-group-toggle align-self-end flex-wrap px-0  col-10 col-sm-7" data-toggle="buttons">
+                                    <label class="btn btn-sm btn-outline-default active mb-1">
+                                        Default
+                                        <input type="radio" name="sidebar-theme" value="default" autocomplete="off" checked />
+                                    </label>
+
+                                    <label class="btn btn-sm btn-outline-default mb-1">
+                                        Dark
+                                        <input type="radio" name="sidebar-theme" value="dark" autocomplete="off" />
+                                    </label>
+
+                                    <label class="btn btn-sm btn-outline-default mb-1 ">
+                                        Light
+                                        <input type="radio" name="sidebar-theme" value="light" autocomplete="off" />
+                                    </label>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="d-none bgc-secondary-l1 radius-1 px-1 mb-3 mt-1 text-center" id="id-sidebar-themes-dark">
+                                    <div class="btn-group btn-group-toggle align-self-end flex-wrap justify-content-center w-75 mx-auto align-items-center my-2 flex-equal-sm" data-toggle="buttons">
+                                        <label class="btn btn-xs sidebar-color border-0 sidebar-dark d-style active">
+                                            <i class="fa fa-check text-white v-active"></i>
+                                            <input type="radio" name="sidebar-dark" value="dark" autocomplete="off" checked />
+                                        </label>
+                                        <label class="btn btn-xs sidebar-color border-0 sidebar-darkblue d-style">
+                                            <i class="fa fa-check text-white v-active"></i>
+                                            <input type="radio" name="sidebar-dark" value="darkblue" autocomplete="off" />
+                                        </label>
+
+                                        <label class="btn btn-xs sidebar-color border-0 sidebar-darkslategrey d-style">
+                                            <i class="fa fa-check text-white v-active"></i>
+                                            <input type="radio" name="sidebar-dark" value="darkslategrey" autocomplete="off" />
+                                        </label>
+                                        <label class="btn btn-xs sidebar-color border-0 sidebar-cadetblue d-style">
+                                            <i class="fa fa-check text-white v-active"></i>
+                                            <input type="radio" name="sidebar-dark" value="cadetblue" autocomplete="off" />
+                                        </label>
+                                        <label class="btn btn-xs sidebar-color border-0 sidebar-plum d-style my-1px">
+                                            <i class="fa fa-check text-white v-active"></i>
+                                            <input type="radio" name="sidebar-dark" value="plum" autocomplete="off" />
+                                        </label>
+                                        <label class="btn btn-xs sidebar-color border-0 sidebar-darkslateblue d-style">
+                                            <i class="fa fa-check text-white v-active"></i>
+                                            <input type="radio" name="sidebar-dark" value="darkslateblue" autocomplete="off" />
+                                        </label>
+                                        <label class="btn btn-xs sidebar-color border-0 sidebar-purple d-style">
+                                            <i class="fa fa-check text-white v-active"></i>
+                                            <input type="radio" name="sidebar-dark" value="purple" autocomplete="off" />
+                                        </label>
+                                        <label class="btn btn-xs sidebar-color border-0 sidebar-steelblue d-style">
+                                            <i class="fa fa-check text-white v-active"></i>
+                                            <input type="radio" name="sidebar-dark" value="steelblue" autocomplete="off" />
+                                        </label>
+
+                                        <label class="btn btn-xs sidebar-color border-0 sidebar-blue d-style">
+                                            <i class="fa fa-check text-white v-active"></i>
+                                            <input type="radio" name="sidebar-dark" value="blue" autocomplete="off" />
+                                        </label>
+
+                                        <label class="btn btn-xs sidebar-color border-0 sidebar-teal d-style">
+                                            <i class="fa fa-check text-white v-active"></i>
+                                            <input type="radio" name="sidebar-dark" value="teal" autocomplete="off" />
+                                        </label>
+
+                                        <label class="btn btn-xs sidebar-color border-0 sidebar-green d-style">
+                                            <i class="fa fa-check text-white v-active"></i>
+                                            <input type="radio" name="sidebar-dark" value="green" autocomplete="off" />
+                                        </label>
+
+                                        <label class="btn btn-xs sidebar-color border-0 sidebar-darkcrimson d-style">
+                                            <i class="fa fa-check text-white v-active"></i>
+                                            <input type="radio" name="sidebar-dark" value="darkcrimson" autocomplete="off" />
+                                        </label>
+
+                                        <label class="btn btn-xs sidebar-color border-0 sidebar-gradient1 d-style">
+                                            <i class="fa fa-check text-white v-active"></i>
+                                            <input type="radio" name="sidebar-dark" value="gradient1" autocomplete="off" />
+                                        </label>
+
+                                        <label class="btn btn-xs sidebar-color border-0 sidebar-gradient2 d-style">
+                                            <i class="fa fa-check text-white v-active"></i>
+                                            <input type="radio" name="sidebar-dark" value="gradient2" autocomplete="off" />
+                                        </label>
+
+                                        <label class="btn btn-xs sidebar-color border-0 sidebar-gradient3 d-style">
+                                            <i class="fa fa-check text-white v-active"></i>
+                                            <input type="radio" name="sidebar-dark" value="gradient3" autocomplete="off" />
+                                        </label>
+
+                                        <label class="btn btn-xs sidebar-color border-0 sidebar-gradient4 d-style">
+                                            <i class="fa fa-check text-white v-active"></i>
+                                            <input type="radio" name="sidebar-dark" value="gradient4" autocomplete="off" />
+                                        </label>
+
+                                        <label class="btn btn-xs sidebar-color border-0 sidebar-gradient5 d-style">
+                                            <i class="fa fa-check text-white v-active"></i>
+                                            <input type="radio" name="sidebar-dark" value="gradient5" autocomplete="off" />
+                                        </label>
+                                    </div>
+                                </div><!-- #id-sidebar-themes-dark -->
+
+
+                                <div class="d-none" id="id-sidebar-themes-light">
+                                    <div class="bgc-secondary-tp2 radius-1 py-1 px-1 mb-3 mt-1 text-center">
+                                        <div class="d-flex btn-group btn-group-toggle align-self-end flex-wrap justify-content-center mx-auto align-items-center my-2 flex-equal-sm" data-toggle="buttons">
+
+                                            <label class="active btn btn-xs border-0 sidebar-lightblue d-style my-1px">
+                                                <i class="fa fa-check text-muted v-active"></i>
+                                                <input type="radio" name="sidebar-light" value="lightblue" autocomplete="off" checked />
+                                            </label>
+
+                                            <label class="btn btn-xs border-0 sidebar-lightpurple d-style">
+                                                <i class="fa fa-check text-muted v-active"></i>
+                                                <input type="radio" name="sidebar-light" value="lightpurple" autocomplete="off" />
+                                            </label>
+
+                                            <label class="btn btn-xs border-0 sidebar-lightblue2 d-style">
+                                                <i class="fa fa-check text-muted v-active"></i>
+                                                <input type="radio" name="sidebar-light" value="lightblue2" autocomplete="off" />
+                                            </label>
+
+                                            <label class="btn btn-xs border-0 sidebar-white2 d-style">
+                                                <i class="fa fa-check text-muted v-active"></i>
+                                                <input type="radio" name="sidebar-light" value="white2" autocomplete="off" />
+                                            </label>
+
+                                            <label class="btn btn-xs border-0 sidebar-white d-style">
+                                                <i class="fa fa-check text-muted v-active"></i>
+                                                <input type="radio" name="sidebar-light" value="white" autocomplete="off" />
+                                            </label>
+
+                                            <label class="btn btn-xs border-0 sidebar-white3 d-style">
+                                                <i class="fa fa-check text-muted v-active"></i>
+                                                <input type="radio" name="sidebar-light" value="white3" autocomplete="off" />
+                                            </label>
+
+                                            <label class="btn btn-xs border-0 sidebar-light d-style">
+                                                <i class="fa fa-check text-muted v-active"></i>
+                                                <input type="radio" name="sidebar-light" value="light" autocomplete="off" />
+                                            </label>
+
+                                        </div>
+                                    </div>
+                                </div><!-- #id-sidebar-themes-light -->
+                            </div>
+
+                            <hr class="border-dotted" />
+                            <div class="d-flex flex-column flex-md-row justify-content-md-between align-items-md-center">
+                                <h6 class="text-95 pl-1 text-grey-d1">Navbar:</h6>
+                                <div class="btn-group btn-group-toggle align-self-end flex-wrap px-0 col-10 col-sm-7" data-toggle="buttons">
+                                    <label class="btn btn-sm btn-outline-green active mb-1">
+                                        Default
+                                        <input type="radio" name="navbar-theme" value="default" autocomplete="off" checked />
+                                    </label>
+                                    <label class="btn btn-sm btn-outline-green mb-1">
+                                        Light
+                                        <input type="radio" name="navbar-theme" value="light" autocomplete="off" />
+                                    </label>
+                                    <label class="btn btn-sm btn-outline-green mb-1">
+                                        Dark
+                                        <input type="radio" name="navbar-theme" value="dark" autocomplete="off" />
+                                    </label>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="d-none bgc-secondary-l1 radius-1 px-1 mb-3 mt-1 text-center" id="id-navbar-themes-dark">
+                                    <div class="btn-group btn-group-toggle align-self-end flex-wrap justify-content-center w-75 mx-auto align-items-center my-2 flex-equal-sm" data-toggle="buttons">
+                                        <label class="btn btn-xs navbar-color border-0 navbar-steelblue d-style active my-1px">
+                                            <i class="fa fa-check text-white v-active"></i>
+                                            <input type="radio" name="navbar-dark" value="steelblue" autocomplete="off" checked />
+                                        </label>
+                                        <label class="btn btn-xs border-0 navbar-blue d-style">
+                                            <i class="fa fa-check text-white v-active"></i>
+                                            <input type="radio" name="navbar-dark" value="blue" autocomplete="off" />
+                                        </label>
+                                        <label class="btn btn-xs navbar-color border-0 navbar-teal d-style">
+                                            <i class="fa fa-check text-white v-active"></i>
+                                            <input type="radio" name="navbar-dark" value="teal" autocomplete="off" />
+                                        </label>
+                                        <label class="btn btn-xs navbar-color border-0 navbar-mediumseagreen d-style">
+                                            <i class="fa fa-check text-white v-active"></i>
+                                            <input type="radio" name="navbar-dark" value="mediumseagreen" autocomplete="off" />
+                                        </label>
+                                        <label class="btn btn-xs navbar-color border-0 navbar-cadetblue d-style">
+                                            <i class="fa fa-check text-white v-active"></i>
+                                            <input type="radio" name="navbar-dark" value="cadetblue" autocomplete="off" />
+                                        </label>
+                                        <label class="btn btn-xs navbar-color border-0 navbar-plum d-style">
+                                            <i class="fa fa-check text-white v-active"></i>
+                                            <input type="radio" name="navbar-dark" value="plum" autocomplete="off" />
+                                        </label>
+                                        <label class="btn btn-xs navbar-color border-0 navbar-purple d-style">
+                                            <i class="fa fa-check text-white v-active"></i>
+                                            <input type="radio" name="navbar-dark" value="purple" autocomplete="off" />
+                                        </label>
+                                        <label class="btn btn-xs navbar-color border-0 navbar-orange d-style">
+                                            <i class="fa fa-check text-white v-active"></i>
+                                            <input type="radio" name="navbar-dark" value="orange" autocomplete="off" />
+                                        </label>
+                                        <label class="btn btn-xs navbar-color border-0 navbar-burlywood d-style">
+                                            <i class="fa fa-check text-white v-active"></i>
+                                            <input type="radio" name="navbar-dark" value="burlywood" autocomplete="off" />
+                                        </label>
+                                        <label class="btn btn-xs navbar-color border-0 navbar-darkseagreen d-style">
+                                            <i class="fa fa-check text-white v-active"></i>
+                                            <input type="radio" name="navbar-dark" value="darkseagreen" autocomplete="off" />
+                                        </label>
+                                        <label class="btn btn-xs border-0 navbar-skyblue d-style">
+                                            <i class="fa fa-check text-white v-active"></i>
+                                            <input type="radio" name="navbar-dark" value="skyblue" autocomplete="off" />
+                                        </label>
+                                        <label class="btn btn-xs navbar-color border-0 navbar-secondary d-style">
+                                            <i class="fa fa-check text-white v-active"></i>
+                                            <input type="radio" name="navbar-dark" value="secondary" autocomplete="off" />
+                                        </label>
+                                        <label class="btn btn-xs navbar-color border-0 navbar-slategrey d-style">
+                                            <i class="fa fa-check text-white v-active"></i>
+                                            <input type="radio" name="navbar-dark" value="slategrey" autocomplete="off" />
+                                        </label>
+                                    </div>
+                                </div><!-- #id-navbar-themes-dark -->
+                                <div class="d-none" id="id-navbar-themes-light">
+                                    <div class="bgc-secondary-tp2 radius-1 py-1 px-1 mb-3 mt-1 text-center">
+                                        <div class="d-flex btn-group btn-group-toggle align-self-end flex-wrap justify-content-center mx-auto align-items-center my-2 flex-equal-sm" data-toggle="buttons">
+                                            <label class="active btn btn-xs border-0 navbar-lightblue d-style my-1px">
+                                                <i class="fa fa-check text-muted v-active"></i>
+                                                <input type="radio" name="navbar-light" value="lightblue" autocomplete="off" checked />
+                                            </label>
+                                            <label class=" btn btn-xs border-0 navbar-white d-style my-1px">
+                                                <i class="fa fa-check text-muted v-active"></i>
+                                                <input type="radio" name="navbar-light" value="white" autocomplete="off" />
+                                            </label>
+                                            <label class=" btn btn-xs border-0 navbar-white2 d-style my-1px">
+                                                <i class="fa fa-check text-muted v-active"></i>
+                                                <input type="radio" name="navbar-light" value="white2" autocomplete="off" />
+                                            </label>
+                                            <label class="btn btn-xs border-0 navbar-lightpurple d-style">
+                                                <i class="fa fa-check text-muted v-active"></i>
+                                                <input type="radio" name="navbar-light" value="lightpurple" autocomplete="off" />
+                                            </label>
+                                            <label class="btn btn-xs border-0 navbar-lightgreen d-style">
+                                                <i class="fa fa-check text-muted v-active"></i>
+                                                <input type="radio" name="navbar-light" value="lightgreen" autocomplete="off" />
+                                            </label>
+                                            <label class="btn btn-xs border-0 navbar-lightgrey d-style">
+                                                <i class="fa fa-check text-muted v-active"></i>
+                                                <input type="radio" name="navbar-light" value="lightgrey" autocomplete="off" />
+                                            </label>
+                                            <label class="btn btn-xs border-0 navbar-lightyellow d-style">
+                                                <i class="fa fa-check text-muted v-active"></i>
+                                                <input type="radio" name="navbar-light" value="lightyellow" autocomplete="off" />
+                                            </label>
+                                            <label class="btn btn-xs border-0 navbar-khaki d-style">
+                                                <i class="fa fa-check text-muted v-active"></i>
+                                                <input type="radio" name="navbar-light" value="khaki" autocomplete="off" />
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div><!-- #id-navbar-themes-light -->
+                            </div>
+                            <hr class="border-dotted" />
+                            <div class="text-95">
+                                <h5 class="text-success-m1">Layout</h5>
+                                <div class="mt-3 d-flex justify-content-between align-items-center">
+                                    <label for="id-navbar-fixed" class="pl-1 text-grey-d1">Fixed Navbar</label>
+                                    <input type="checkbox" class="ace-switch" id="id-navbar-fixed" checked autocomplete="off" />
+                                </div>
+                                <div class="mt-2 d-flex justify-content-between align-items-center">
+                                    <label for="id-sidebar-fixed" class="pl-1 text-grey-d1">Fixed Sidebar</label>
+                                    <input type="checkbox" class="ace-switch" id="id-sidebar-fixed" checked autocomplete="off" />
+                                </div>
+                                <div class="mt-2 d-flex justify-content-between align-items-center">
+                                    <label for="id-footer-fixed" class="pl-1 text-grey-d1">Fixed Footer</label>
+                                    <input type="checkbox" class="ace-switch" id="id-footer-fixed" autocomplete="off" />
+                                </div>
+                                <div class="mt-2 d-none d-xl-flex flex-column flex-md-row justify-content-md-between align-items-md-center">
+                                    <div class="pl-1 text-grey-d1">Boxed Layout</div>
+
+                                    <div class="w-50 btn-group btn-group-toggle flex-row flex-wrap fl1ex-md-nowrap" data-toggle="buttons">
+                                        <label class="btn btn-sm btn-outline-info rounded-0 mx-0">
+                                            None
+                                            <input type="radio" name="boxed-layout" value="none" autocomplete="off" />
+                                        </label>
+
+                                        <label class="btn btn-sm btn-outline-info mx-0">
+                                            All
+                                            <input type="radio" name="boxed-layout" value="all" autocomplete="off" />
+                                        </label>
+
+                                        <label class="btn btn-sm btn-outline-info mx-0">
+                                            Not Navbar
+                                            <input type="radio" name="boxed-layout" value="not-navbar" autocomplete="off" />
+                                        </label>
+
+                                        <label class="btn btn-sm btn-outline-info rounded-0 mx-0 mt-n1px active">
+                                            Only Content
+                                            <input type="radio" name="boxed-layout" value="only-content" autocomplete="off" checked />
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div id="id-body-bg" class="collapse">
+                                    <div class="mt-3 d-none d-xl-flex flex-column flex-md-row justify-content-md-between align-items-md-center">
+                                        <h6 class="text-95 pl-1 text-grey-d1">Body Background:</h6>
+                                        <div class="btn-group btn-group-toggle align-self-end" data-toggle="buttons">
+                                            <label class="btn btn-sm btn-outline-purple active  mb-1">
+                                                Auto
+                                                <input type="radio" name="body-theme" value="auto" autocomplete="off" checked />
+                                            </label>
+
+                                            <label class="btn btn-sm btn-outline-purple mb-1">
+                                                Image 1
+                                                <input type="radio" name="body-theme" value="img1" autocomplete="off" />
+                                            </label>
+
+                                            <label class="btn btn-sm btn-outline-purple mb-1">
+                                                Image 2
+                                                <input type="radio" name="body-theme" value="img2" autocomplete="off" />
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr class="border-dotted my-2" />
+
+                                <div class="mt-1 d-flex justify-content-between align-items-center">
+                                    <label for="id-rtl" class="pl-1 text-grey-d1">RTL (right to left)</label>
+
+                                    <input type="checkbox" class="ace-switch" id="id-rtl" autocomplete="off" />
+                                </div>
+                            </div>
+                            <hr class="border-double my-md-4" />
+                            <div class="d-flex flex-column flex-md-row justify-content-md-between align-items-md-center">
+                                <h5 class="text-info">Font</h5>
+                                <div class="align-self-end w-75">
+                                    <select autocomplete="off" id="id-change-font" class="ace-select radius-round w-100 text-grey brc-h-info-m2">
+                                        <option value="lato">Lato</option>
+                                        <option value="montserrat">Montserrat</option>
+                                        <option value="noto-sans">Noto Sans</option>
+                                        <option value="open-sans" selected>Open Sans</option>
+                                        <option value="poppins">Poppins</option>
+                                        <option value="raleway">Raleway</option>
+                                        <option value="roboto" class="text-primary-d2 text-600">Roboto (popular)</option>
+                                        <option value="">----</option>
+                                        <option value="markazi">Markazi (for RTL languages)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <hr class="border-double my-md-4" />
+                            <div class="text-95">
+                                <h5 class="text-warning-d1 ml-n2px">Sidebar</h5>
+                                <div class="mt-2 d-none d-xl-flex justify-content-between align-items-center">
+                                    <div class="pl-1 text-grey-d1">Collapsed Mode</div>
+                                    <div class="btn-group btn-group-toggle flex-row" data-toggle="buttons">
+                                        <label class="btn btn-sm btn-outline-red active mx-0">
+                                            Expand
+                                            <input type="radio" name="sidebar-collapsed" value="expandable" autocomplete="off" checked />
+                                        </label>
+                                        <label class="btn btn-sm btn-outline-red mx-0">
+                                            Popup
+                                            <input type="radio" name="sidebar-collapsed" value="hoverable" autocomplete="off" />
+                                        </label>
+
+                                        <label class="btn btn-sm btn-outline-red mx-0">
+                                            Hide
+                                            <input type="radio" name="sidebar-collapsed" value="hideable" autocomplete="off" />
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="mt-3 d-none d-xl-flex justify-content-between align-items-center">
+                                    <label for="id-sidebar-hover" class="pl-1 text-grey-d1">Submenu on Hover</label>
+
+                                    <label>
+                                        <input type="checkbox" class="ace-switch" id="id-sidebar-hover" autocomplete="off" />
+                                    </label>
+                                </div>
+                                <div class="mt-2 d-flex d-xl-none justify-content-between align-items-center">
+                                    <label for="id-push-content" class="pl-1 text-grey-d1">Push Content</label>
+
+                                    <label>
+                                        <input type="checkbox" class="ace-switch" id="id-push-content" autocomplete="off" />
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="my-1"></div>
+                        </div>
+                        <div class="modal-footer d-none justify-content-center">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">
+                                <i class="fa fa-times mr-1"></i>
+                                Close
+                            </button>
+                            <button type="button" class="btn btn-info">
+                                <i class="fa fa-check mr-1"></i>
+                                Keep changes
+                            </button>
+                        </div>
+                    </div><!-- .modal-content -->
+                </div><!-- .modal-dialog -->
+            </div><!-- .modal-aside -->
+        </div><!-- /.main-container -->
+        <!-- include common vendor scripts used in demo pages -->
+        <!-- include vendor scripts used in "Dashboard" page. see "application/views/default/pages/partials/dashboard/vendor-scripts.hbs" -->
+        <script type="text/javascript" src="~/node_modules/chart.js/dist/Chart.js"></script>
+
+
+        <script type="text/javascript" src="~/node_modules/sortablejs/Sortable.js"></script>
+
+
+        <script type="text/javascript" src="~/node_modules/autosize/dist/autosize.js"></script>
+        <script type="text/javascript" src="~/node_modules/bootstrap-maxlength/bootstrap-maxlength.js"></script>
+
+
+        <script src="~/node_modules/inputmask/dist/jquery.inputmask.js"></script>
+
+        <!-- include Ace script -->
+        <script type="text/javascript" src="~/dist/js/ace.js"></script>
+
+
+        <script type="text/javascript" src="~/assets/js/demo.js"></script>
+        <!-- this is only for Ace's demo and you don't need it -->
+        <!-- "Dashboard" page script to enable its demo functionality -->
+        <!-- include vendor scripts used in "Form Elements" page. see "application/views/default/pages/partials/form-elements/vendor-scripts.hbs" -->
+        <script type="text/javascript" src="~/node_modules/autosize/dist/autosize.js"></script>
+        <script type="text/javascript" src="~/node_modules/bootstrap-maxlength/bootstrap-maxlength.js"></script>
+
+
+
+
+        <!-- this is only for Ace's demo and you don't need it -->
+        <!-- "Form Elements" page script to enable its demo functionality -->
+
+
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <!-- include vendor scripts used in "Bootstrap Table" page. see "application/views/default/pages/partials/table-bootstrap/vendor-scripts.hbs" -->
+        <script type="text/javascript" src="~/node_modules/tableexport.jquery.plugin/tableExport.min.js"></script>
+        <script type="text/javascript" src="~/node_modules/tableexport.jquery.plugin/libs/FileSaver/FileSaver.min.js"></script>
+
+
+        <script type="text/javascript" src="~/node_modules/bootstrap-table/dist/bootstrap-table.min.js"></script>
+        <script type="text/javascript" src="~/node_modules/bootstrap-table/dist/extensions/export/bootstrap-table-export.js"></script>
+        <script type="text/javascript" src="~/node_modules/bootstrap-table/dist/extensions/print/bootstrap-table-print.js"></script>
+        <script src="~/content/js/Layout.js"></script>
+
+    </div><!-- /.body-container -->
+
+
+</body>
+

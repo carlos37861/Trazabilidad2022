@@ -1,0 +1,249 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@*<script>
+        document.onreadystatechange = function () {
+            console.log("ready!");
+            fnValidaSesion()
+        }
+    </script>*@
+<div>
+    <div class="card radius-1 pt-0">
+        <div class="card-header">
+            <h5 class="card-title text-110 text-dark-tp2">
+                @*@ViewBag.Message*@
+                PROVEEDORES
+            </h5>
+        </div><!-- /.card-header -->
+    </div>
+</div>
+
+
+<link rel="stylesheet" type="text/css" href="./node_modules/bootstrap-table/dist/bootstrap-table.css">
+<div>
+    <div class="card radius-1 pt-2 pl-3 pb-0">
+        <div class="card-header p-0">
+            <h5 class="card-title text-110 text-dark-tp2">
+                <button class="btn btn-secondary radius-2 border-b-2 px-0 py-2px  btn-text-slide-x text-white" id="BtnAgregar" onclick="getProveedor(0)" style="width: 18.5rem">
+                    <span class="btn-text-2 move-right">
+                        <span class="d-inline-block bgc-white-tp9 shadow-sm radius-2px h-4 px-25 pt-1 mr-1 border-1">
+                            <i class="fa fa-plus text-white-tp2 text-110 mt-3px"></i>
+                        </span>
+                    </span>Nuevo Proveedor
+                </button>
+            </h5>
+        </div><!-- /.card-header -->
+        <div class="">
+            <table class="table text-dark-m2 text-95" id="table">
+            </table>
+        </div><!-- /.card-body -->
+    </div>
+</div>
+
+<div class="modal fade" id="myModalProveedor" role="dialog">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+
+        <!-- Modal content-->
+        <div class="modal-content m-0">
+            <div class="modal-header">
+                <h4 class="modal-title"> Datos de la Empresa o Persona Jurídica</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="card">
+                <div class="card-body p-0">
+                    <div class="p-1">
+                        <div class="col-sm-12">
+                            <input type="text" id="TxtIndicador" style="display:none" />
+                            <input type="text" id="txtId_Proveedor" style="display:none" />
+
+                            <div class="form-row">
+                                <div class="form-group col-sm-3">
+                                    <label>Tipo de Persona</label>
+                                    <select class="form-control" id="cmbTipoPersona">
+                                        <option selected value="0">ELEGIR...</option>
+                                        <option value="J">Jurídica</option>
+                                        <option value="N">Natural</option>
+                                    </select>
+                                    <label id="lblErrorcmbTipoPersona" style="color: red; font-size: 12px !important; display: none"></label>
+                                </div>
+                                <div class="form-group col-sm-3">
+                                    <label>Tipo de Documento</label>
+                                    <select class="form-control" id="cmbTipoDoc">
+                                        <option selected value="0">ELEGIR...</option>
+                                        <option value="DNI">DNI</option>
+                                        <option value="RUC">RUC</option>
+                                    </select>
+                                    <label id="lblErrorcmbTipoDoc" style="color: red; font-size: 12px !important; display: none"></label>
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <label>N°de Documento</label>
+                                    <input type="text" class="form-control input-number" id="txtRucProveedor" autocomplete="off"  />
+                                    <label id="lblErrortxtRucProveedor" style="color: red; font-size: 12px !important; display: none"></label>
+                                </div>
+                            </div>
+                            <div class="form-row" id="ContentJuridico">
+                                <div class="form-group col-sm-12">
+                                    <label>Nombre o Razón Social</label>
+                                    <input type="text" class="form-control" id="txtRazonSocial" autocomplete="off" onkeyup="mayus(this);">
+                                    <label id="lblErrortxtRazonSocial" style="color: red; font-size: 12px !important; display: none"></label>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-sm-3">
+                                        <label>Usuario MEM</label>
+                                        <input type="text" class="form-control" id="txtUsuMem" autocomplete="off" onkeyup="mayus(this);">
+                                        <label id="lblErrortxtUsuMem" style="color: red; font-size: 12px !important; display: none"></label>
+                                    </div>
+                                    <div class="form-group col-sm-3">
+                                        <label>Contraseña MEM</label>
+                                        <input type="text" class="form-control" id="txtPassMem" autocomplete="off" onkeyup="mayus(this);">
+                                        <label id="lblErrortxtPassMem" style="color: red; font-size: 12px !important; display: none"></label>
+                                    </div>
+                                    <div class="form-group col-sm-3">
+                                        <label>Usuario SUNAT</label>
+                                        <input type="text" class="form-control" id="txtUsuSunat" autocomplete="off" onkeyup="mayus(this);">
+                                        <label id="lblErrortxtUsuSunat" style="color: red; font-size: 12px !important; display: none"></label>
+                                    </div>
+                                    <div class="form-group col-sm-3">
+                                        <label>Clave Sol SUNAT</label>
+                                        <input type="text" class="form-control" id="txtClaveSol" autocomplete="off" onkeyup="mayus(this);">
+                                        <label id="lblErrortxtClaveSol" style="color: red; font-size: 12px !important; display: none"></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row" id="ContentNatural">
+                                <div class="form-group col-sm-4">
+                                    <label>Nombres</label>
+                                    <input type="text" class="form-control" id="txtNombreNatural" autocomplete="off" onkeyup="mayus(this);">
+                                    <label id="lblErrortxtNombreNatural" style="color: red; font-size: 12px !important; display: none"></label>
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label>Apellido Paterno</label>
+                                    <input type="text" class="form-control" id="txtApePatNatural" autocomplete="off" onkeyup="mayus(this);">
+                                    <label id="lblErrortxtApePatNatural" style="color: red; font-size: 12px !important; display: none"></label>
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label>Apellido Materno</label>
+                                    <input type="text" class="form-control" id="txtApeMatNatural" autocomplete="off" onkeyup="mayus(this);">
+                                    <label id="lblErrortxtApeMatNatural" style="color: red; font-size: 12px !important; display: none"></label>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-sm-12">
+                                    <label for="txtDireccion">Dirección</label>
+                                    <input type="text" name="txtDireccion" class="form-control" id="txtDireccion" autocomplete="off" onkeyup="mayus(this);">
+                                    <label id="lblErrortxtDireccion" style="color: red; font-size: 12px !important; display: none"></label>
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label>Correo</label>
+                                    <input type="email" class="form-control" id="txtCorreo" autocomplete="off">
+                                    <label id="lblErrortxtCorreo" style="color: red; font-size: 12px !important; display: none"></label>
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label>Teléfono</label>
+                                    <input type="text" class="form-control input-number" id="txtTelefono" autocomplete="off">
+                                    <label id="lblErrortxtTelefono" style="color: red; font-size: 12px !important; display: none"></label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- /.card-body -->
+            </div>
+            <div class="card" id="IdCardPerNatural">
+                <div class="card-header border-0 bgc-primary-d1 card-header-sm p-0">
+                    <h6 class="card-title text-white pl-2 p-0">
+                        Datos del Representante Legal
+                    </h6>
+                </div><!-- /.card-header -->
+                <div class="card-body p-0">
+                    <div class="p-1">
+                        <div class="col-sm-12">
+                            <div class="form-row">
+                                <div class="form-group col-sm-6">
+                                    <label>Tipo de Documento</label>
+                                    <select class="form-control" id="cmbTipoDocRepLegal">
+                                        <option selected value="0">ELEGIR...</option>
+                                        <option value="DNI" selected>DNI</option>
+                                        @*<option value="RUC">RUC</option>*@
+                                    </select>
+                                        </div>
+                                        <div class="form-group col-sm-6">
+                                            <label>N° Doc. Representante Legal</label>
+                                            <input type="text" class="form-control input-number" id="txtCodRepLegal" onkeyup="mayus(this);" autocomplete="off">
+                                            <label id="lblErrortxtCodRepLegal" style="color: red; font-size: 12px !important; display: none"></label>
+                                            <input type="text" id="txtId_RepLegal" style="display:none" />
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-sm-4">
+                                            <label>Nombre Representante</label>
+                                            <input type="text" class="form-control" id="txtNombreRepLegal" autocomplete="off" onkeyup="mayus(this);">
+                                            <label id="lblErrortxtNombreRepLegal" style="color: red; font-size: 12px !important; display: none"></label>
+                                        </div>
+                                        <div class="form-group col-sm-4">
+                                            <label>Apellido Paterno</label>
+                                            <input type="email" class="form-control" id="txtApePatRepLegal" autocomplete="off" onkeyup="mayus(this);">
+                                            <label id="lblErrortxtApePatRepLegal" style="color: red; font-size: 12px !important; display: none"></label>
+                                        </div>
+                                        <div class="form-group col-sm-4">
+                                            <label>Apellido Materno</label>
+                                            <input type="email" class="form-control" id="txtApeMatRepLegal" autocomplete="off" onkeyup="mayus(this);">
+                                            <label id="lblErrortxtApeMatRepLegal" style="color: red; font-size: 12px !important; display: none"></label>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-sm-4">
+                                            <label>Celular</label>
+                                            <input type="text" class="form-control input-number" id="txtTelefonoRepLegal" autocomplete="off" onkeyup="mayus(this);">
+                                            <label id="lblErrortxtTelefonoRepLegal" style="color: red; font-size: 12px !important; display: none"></label>
+                                        </div>
+                                        <div class="form-group col-sm-4">
+                                            <label>Correo</label>
+                                            <input type="email" class="form-control" id="txtCorreoRepLegal" autocomplete="off">
+                                            <label id="lblErrortxtCorreoRepLegal" style="color: red; font-size: 12px !important; display: none"></label>
+                                        </div>
+                                        <div class="form-group col-sm-4">
+                                            <label>Contraseña Correo</label>
+                                            <input type="email" class="form-control" id="txtPassCorreo" autocomplete="off">
+                                            <label id="lblErrortxtPassCorreo" style="color: red; font-size: 12px !important; display: none"></label>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-sm-12">
+                                            <label for="txtDireccion">Dirección</label>
+                                            <input type="text" name="txtDireccionRepLegal" class="form-control" autocomplete="off" onkeyup="mayus(this);" id="txtDireccionRepLegal">
+                                            <label id="lblErrortxtDireccionRepLegal" style="color: red; font-size: 12px !important; display: none"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- /.card-body -->
+                    </div>
+                    <div>
+                        <center>
+                            <br />
+                            <button type="button" class="btn btn-success" id="GuardarProveedor" onclick="AgregarOeditarProveedor()"><i class="fa fa-save text-110 align-text-bottom mr-1"></i>Guardar</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal" id="btnCancelar"><i class="fa fa-times-circle text-110 align-text-bottom mr-1"></i>Cancelar</button><br /><br />
+                        </center>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal" id="myModalLoading" tabindex="-1" role="dialog" style="display: block;" hidden>
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class=" d-flex flex-column justify-content-between align-items-center">
+                            <p class="pt-2" style="color:darkblue">Por favor espere.....</p>
+                            <div class="fas fa-spinner fa-spin text-purple-m1 fa-2x mb-3"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js"></script>
+
+        <script src="~/content/js/proveedor.js"></script>
+        <script src="~/content/js/General.js"></script>
+        <link href="~/node_modules/toastr/toastr.min.css" rel="stylesheet" />
+        <script src="~/node_modules/toastr/toastr.min.js"></script>

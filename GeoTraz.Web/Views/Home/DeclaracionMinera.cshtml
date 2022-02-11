@@ -1,0 +1,500 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@*<script>
+        document.onreadystatechange = function () {
+            console.log("ready!");
+            fnValidaSesion()
+        }
+    </script>*@
+<div>
+    <div class="card radius-1 pt-0">
+        <div class="card-header">
+            <h5 class="card-title text-110 text-dark-tp2">
+                @*@ViewBag.Message*@
+                DECLARACIÓN DE PRODUCCIÓN MINERA
+            </h5>
+
+
+        </div><!-- /.card-header -->
+
+
+
+    </div>
+</div>
+<div class="cards-container ">
+    <div class="card  ">
+        <div class="card-header p-0 pl-2 pt-1">
+            <h5 class="card-title text-black-50">
+                <i class="fa fa-filter mr-2px "></i>  Filtros de Búsqueda
+            </h5>
+        </div>
+        <div class="card-body p-1">
+            <div class="p-2">
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label>RUC</label>
+                        <input type="text" class="form-control input-number" id="txtRucFiltrar" placeholder="RUC">
+                    </div>
+
+                    <div class="form-group col-md-3">
+                        <label for="inputCity">Razón Social</label>
+                        <input type="text" class="form-control" placeholder="Razón Social" id="txtRazonSocialFiltrar">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="inputZip">Código Concesión</label>
+                        <input type="text" class="form-control" id="txtCodConcesionFiltrar" placeholder="Código Concesión">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="inputZip">Nombre Concesión</label>
+                        <input type="text" class="form-control" id="txNombreConceFiltrar" placeholder="Nombre Concesión">
+                    </div>
+
+
+                </div>
+                <div class="form-row">
+
+                    <div class="form-group col-md-3">
+                        <label for="inputZip">Nombre del Derecho Minero</label>
+                        <input type="text" class="form-control" id="txtNomDerechoMineroFiltrar" placeholder="Nombre del Derecho Minero">
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label>Trazabilidad</label>
+                        <select id="cmbResultadoFiltrar" class="form-control">
+                            <option selected value="0">TODOS...</option>
+                            <option>TRAZABLE</option>
+                            <option>PENDIENTE</option>
+                            <option>NO TRAZABLE</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="form-field-mask-1">
+                            Fecha de Reinfo
+                        </label>
+                        <div class="input-group">
+                            <input type="date" class="form-control form-control" id="txtFechaReinfoFiltrar" />
+                        </div>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="form-field-mask-1">
+                            Sede
+                        </label>
+                        <div class="input-group">
+                            <select id="cmbSedeFiltrar" class="form-control">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-1">
+                        <label>Buscar</label><br />
+                        <button class="btn btn-success text-white" id="btnSearch"><i class="fas fa-search text-110 align-text-bottom mr-1"></i> Buscar</button>
+                    </div>
+                    <div class="form-group col-md-1">
+                        <label for="inputCity">Acción</label><br />
+                        <button class="btn btn-warning text-white" id="btnReset"><i class="fas fa-sync-alt text-110 align-text-bottom mr-1"></i> Limpiar</button>
+                    </div>
+                    <div class="form-group col-md-1">
+                        <label for="">Exportar</label><br />
+                        <button class="btn btn-secondary text-white" id="btnExportar"><i class="fa fa-download text-110 align-text-bottom mr-1"></i> Exportar</button>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<link rel="stylesheet" type="text/css" href="./node_modules/bootstrap-table/dist/bootstrap-table.css">
+<div>
+    <div class="card radius-1 pt-2 pl-3 pb-0">
+
+        <div class="">
+
+
+            <table class="table text-dark-m2 text-95" id="table" style="zoom:93%" >
+            </table>
+
+
+        </div><!-- /.card-body -->
+
+
+    </div>
+</div>
+
+<div class="modal fade" id="myModalDeclaracionMinera" role="dialog">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h4 class="modal-title">Declaración Minera</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="cards-container p-0">
+                <div class="card  p-0">
+                    <div class="card-header border-0 bgc-primary-d1 card-header-sm p-0">
+                        <h6 class="card-title text-white-tp2 pl-2">
+                            Datos de Reinfo Minero
+                        </h6>
+                    </div><!-- /.card-header -->
+                    <div class="card-body p-2">
+                        <div class="p-2">
+                            <input type="text" id="TxtIndicador" style="display:none" />
+                            <input type="text" id="txtId_IdReinfo" style="display:none" />
+
+                            <div class="form-row">
+                                <div class="form-group col-sm-8">
+                                    <label>Nombre y/o Razón Social</label>
+                                    <input type="text" class="form-control input-number" id="txtRazonSocial" readonly />
+
+                                </div>
+
+                                <div class="form-group col-sm-4">
+                                    <label>Ruc</label>
+                                    <input type="text" class="form-control" id="txtRucProveedor" readonly>
+
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-sm-4">
+                                    <label>Nombre Derecho Minero</label>
+                                    <input type="text" class="form-control input-number" id="txtNomDerechoMinero" readonly>
+
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label>Codigo Concesión</label>
+                                    <input type="text" class="form-control input-number" id="txtCodConcesion" readonly>
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label>Nombre Concesión</label>
+                                    <input type="text" class="form-control input-number" id="txtNomConcesion" readonly>
+
+                                </div>
+                            </div>
+                        </div><!-- /.card-body -->
+                    </div>
+
+                </div>
+            </div>
+            <div class="cards-container p-0" id="DivRepLegal">
+                <div class="card  p-0">
+                    <div class="card-header border-0 bgc-primary-d1 card-header-sm p-0">
+                        <h6 class="card-title text-white-tp2 pl-2">
+                            Credenciales del Proveedor
+                        </h6>
+                    </div><!-- /.card-header -->
+                    <div class="card-body p-2">
+                        <div class="p-2">
+
+                            <div class="form-row">
+                                <div class="form-group col-sm-3">
+                                    <label>Usuario Mem</label>
+                                    <input type="text" class="form-control" id="txtUsuMem" readonly>
+
+                                </div>
+                                <div class="form-group col-sm-3">
+                                    <label>
+                                        Contraseña Mem
+                                    </label>
+                                    <input type="text" class="form-control" id="txtPassMem" readonly>
+
+                                </div>
+                                <div class="form-group col-sm-3">
+                                    <label>Usuario Sunat</label>
+                                    <input type="text" class="form-control" id="txtUsuSunat" readonly>
+
+                                </div>
+                                <div class="form-group col-sm-3">
+                                    <label>Clave Sol Sunat</label>
+                                    <input type="text" class="form-control" id="txtClaveSol" readonly>
+
+                                </div>
+                            </div>
+
+
+                        </div><!-- /.card-body -->
+                    </div>
+
+                </div>
+            </div>
+            <div class="cards-container p-0" id="DivRepLegal">
+                <div class="card  p-0">
+                    <div class="card-header border-0 bgc-primary-d1 card-header-sm p-0">
+                        <h6 class="card-title text-white-tp2 pl-2">
+                            Datos del Representante Legal
+                        </h6>
+                    </div><!-- /.card-header -->
+                    <div class="card-body p-2">
+                        <div class="p-2">
+
+                            <div class="form-row">
+                                <div class="form-group col-sm-4">
+                                    <label>Nombre Representante Legal</label>
+                                    <input type="text" class="form-control" id="txtNombreRepLegal" readonly>
+
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label>Apellido Paterno</label>
+                                    <input type="text" class="form-control" id="txtApePat" readonly>
+
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label>Apellido Materno</label>
+                                    <input type="text" class="form-control" id="txtApeMat" readonly>
+
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-sm-6">
+                                    <label>Dirección</label>
+                                    <input type="text" class="form-control" id="txtDireccion" readonly>
+
+                                </div>
+                                <div class="form-group col-sm-3">
+                                    <label>Teléfono</label>
+                                    <input type="text" class="form-control input-number" id="txtTelefono" readonly>
+
+                                </div>
+                                <div class="form-group col-sm-3">
+                                    <label>Correo Electrónico</label>
+                                    <input type="text" class="form-control" id="txtEmail" readonly>
+
+                                </div>
+                                <div class="form-group col-sm-3">
+                                    <label>Contraseña de Correo</label>
+                                    <input type="text" class="form-control" id="txtEmailPass" readonly>
+
+                                </div>
+                            </div>
+
+                        </div><!-- /.card-body -->
+                    </div>
+
+                </div>
+            </div>
+            <div class="cards-container p-0" id="DivPerNat">
+                <div class="card  p-0">
+                    <div class="card-header border-0 bgc-primary-d1 card-header-sm p-0">
+                        <h6 class="card-title text-white-tp2 pl-2">
+                            Persona Natural
+                        </h6>
+                    </div><!-- /.card-header -->
+                    <div class="card-body p-2">
+                        <div class="p-2">
+
+                            <div class="form-row">
+                                <div class="form-group col-sm-4">
+                                    <label>Correo</label>
+                                    <input type="text" class="form-control" id="txtCorreoPerNat" readonly>
+
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label>Dirección</label>
+                                    <input type="text" class="form-control" id="txtDirecPerNat" readonly>
+
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label>Teléfono</label>
+                                    <input type="text" class="form-control" id="txtTelPerNat" readonly>
+
+                                </div>
+                            </div>
+
+
+                        </div><!-- /.card-body -->
+                    </div>
+
+                </div>
+            </div>
+            <div class="cards-container p-0">
+                <div class="card  p-0">
+                    <div class="card-header border-0 bgc-primary-d1 card-header-sm p-0">
+                        <h6 class="card-title text-white-tp2 pl-2">
+                            Ubicación Política
+                        </h6>
+                    </div><!-- /.card-header -->
+                    <div class="card-body p-2">
+                        <div class="p-2">
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label>Departamento</label>
+                                    <select id="cmbDepartamento" class="form-control">
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label>Provincia</label>
+                                    <select id="cmbProvincia" class="form-control">
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label>Ciudad</label>
+                                    <select id="cmbCiudad" class="form-control">
+                                    </select>
+                                </div>
+
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-sm-3">
+                                    <label>Tipo Actividad</label>
+                                    <select class="form-control" id="txtTipoActividad" disabled>
+                                        <option selected value="0">ELEGIR...</option>
+                                        <option value="EXPLOTACION"> EXPLOTACIÓN</option>
+                                        <option value="BENEFICIO"> BENEFICIO</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-sm-3">
+                                    <label>Sede</label>
+                                    <select class="form-control" id="cmbSede" disabled>
+                                    </select>
+                                </div>
+
+                            </div>
+
+                        </div><!-- /.card-body -->
+                    </div>
+
+                </div>
+            </div>
+            <div class="cards-container p-0">
+                <div class="card  p-0">
+                    <div class="card-header border-0 bgc-primary-d1 card-header-sm p-0">
+                        <h6 class="card-title text-white-tp2 pl-2">
+                            Datos del Contador
+                        </h6>
+                    </div><!-- /.card-header -->
+                    <div class="card-body p-2">
+                        <div class="p-2">
+                            <div class="form-row">
+                                <div class="form-group col-sm-6">
+                                    <label>Nombre Contador</label>
+                                    <input type="text" class="form-control" id="txtNomContador" autocomplete="off">
+                                    <label id="lblErrortxtNomContador" style="color: red; font-size: 12px !important; display: none" "></label>
+                                </div>
+                                <div class="form-group col-sm-3">
+                                    <label>Celular Contador</label>
+                                    <input type="text" class="form-control" id="txtCelContador" autocomplete="off">
+                                    <label id="lblErrortxtCelContador" style="color: red; font-size: 12px !important; display: none"></label>
+                                </div>
+                                <div class="form-group col-sm-3">
+                                    <label>Correo Contador</label>
+                                    <input type="text" class="form-control" id="txtCorreoContador" autocomplete="off">
+                                    <label id="lblErrortxtCorreoContador" style="color: red; font-size: 12px !important; display: none"></label>
+                                </div>
+                            </div>
+                        </div><!-- /.card-body -->
+                    </div>
+                </div>
+            </div>
+            <div class="cards-container p-0">
+                <div class="card  p-0">
+                    <div class="card-header border-0 bgc-primary-d1 card-header-sm p-0">
+                        <h6 class="card-title text-white-tp2 pl-2">
+                            Cargo de Declaración minera
+                        </h6>
+                    </div><!-- /.card-header -->
+                    <div class="card-body p-2">
+                        <div class="p-2">
+                            <div class="row">
+                                <div class="form-group col-sm-12">
+                                    <label>Observación</label>
+                                    <textarea class="form-control" id="txtObsDecMin" onkeyup="mayus(this);" autocomplete="off" maxlength="255" placeholder="Observaciones" style="resize:none"></textarea>
+                                    <label id="lblErrortxtObsDecMin" style="color: red; font-size: 12px !important; display: none"></label>
+                                </div>
+                            </div>
+                            <div id="divDecMinera">
+                                Agregar Cargo de Declaración minera
+                                <hr />
+                                <div class="form-row">
+                                    <div class="form-group col-sm-3">
+                                        <label>Año</label>
+                                        <select id="cmbTipoImag" class="form-control">
+                                            <option value="2021">2021</option>
+                                            <option value="2022">2022</option>
+                                        </select>
+                                        <label id="lblErrorcmbTipoImg" style="color: red; font-size: 12px !important; display: none"></label>
+                                    </div>
+                                    <div class="form-group col-sm-3">
+                                        <label>Semestre</label>
+                                        <select id="cmbTipoIgaf" class="form-control">
+                                            <option value="SEMESTRE1">Semestre 1</option>
+                                            <option value="SEMESTRE2">Semestre 2</option>
+                                        </select>
+                                        <label id="lblErrorcmbTipoImag" style="color: red; font-size: 12px !important; display: none"></label>
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <label>Subir Archivo</label><br />
+                                        <input id="filesDocMin" name="filesDocMin" type="file" class="pr-2" size="1" />
+                                    </div>
+                                </div>
+                            </div>
+                                <div class="row">
+                                    <div class="col-lg-12 order-last order-lg-first">
+                                        <div class="card border-0">
+                                            <div class="card-header bg-transparent border-0 pl-1">
+                                                <h5 class="card-title mb-2 mb-md-0 text-120">
+                                                    <i class="fa fa-file mr-1 text-default text-90"></i>
+                                                    <span class="text-105">Documentos</span>
+                                                </h5>
+                                                <div class="card-toolbar align-self-center">
+                                                    <a href="#" data-action="toggle" class="card-toolbar-btn text-grey text-110"><i class="fa fa-chevron-up"></i></a>
+                                                </div>
+                                            </div>
+                                            <div class="card-body p-0 border-t-2 brc-default-l2">
+                                                <table class="table text-dark-m2 text-95" id="tableCargoDecMin">
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><!-- /.card-body -->
+                       </div>
+                </div>
+            </div>
+            @*<div>
+                    <figure class="highcharts-figure">
+                        <div id="container"></div>
+                    </figure>
+                </div>*@
+            <div class="col-md-12 p-2">
+                <div>
+                    <center>
+                        <button type="button" class="btn btn-success" id="btnAgregarEditarDeclaracion" onclick="AgregarOeditarDeclaracion()">Guardar</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal" id="btnCancelar">Cancelar</button><br /><br />
+                        @*<button type="button" class="btn btn-success" data-dismiss="modal">Guardar</button>*@
+                    </center>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="myModalLoading" tabindex="-1" role="dialog" style="display: block;" hidden>
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <div class="modal-body">
+
+                <div class=" d-flex flex-column justify-content-between align-items-center">
+                    <p class="pt-2" style="color:darkblue">Por favor espere.....</p>
+                    <div class="fas fa-spinner fa-spin text-purple-m1 fa-2x mb-3"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js"></script>
+<link href="~/content/css/declaracionminera.css" rel="stylesheet" />
+
+
+<script src="~/content/js/produccionminera.js"></script>
+<script src="~/content/js/General.js"></script>
+<link href="~/node_modules/toastr/toastr.min.css" rel="stylesheet" />
+<script src="~/node_modules/toastr/toastr.min.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/series-label.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>

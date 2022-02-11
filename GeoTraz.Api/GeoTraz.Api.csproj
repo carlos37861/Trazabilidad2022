@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GeoTraz.Core\GeoTraz.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Common.Identity">
+      <HintPath>..\Librerias\Common.Identity.dll</HintPath>
+    </Reference>
+    <Reference Include="General.Entities">
+      <HintPath>..\Librerias\General.Entities.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

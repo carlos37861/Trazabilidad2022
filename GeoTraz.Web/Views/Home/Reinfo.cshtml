@@ -1,0 +1,1008 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@*<script>
+        document.onreadystatechange = function () {
+            console.log("ready!");
+            fnValidaSesion()
+        }
+    </script>*@
+<div>
+    <div class="card radius-1 pt-0">
+        <div class="card-header">
+            <h5 class="card-title text-110 text-dark-tp2">
+                @*@ViewBag.Message*@
+                REINFO MINERO
+            </h5>
+
+
+        </div><!-- /.card-header -->
+
+    </div>
+</div>
+<div class="cards-container">
+    <div class="card ">
+        <div class="card-header p-0 pl-2 pt-1">
+            <h5 class="card-title text-black-50">
+                <i class="fa fa-filter mr-2px "></i>  Filtros de Búsqueda
+            </h5>
+        </div>
+        <div class="card-body p-1">
+            <div class="p-2">
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label>RUC</label>
+                        <input type="text" class="form-control input-number" id="txtRucFiltrar" placeholder="RUC">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="inputCity">Razón Social</label>
+                        <input type="text" class="form-control" placeholder="Razón Social" id="txtRazonSocialFiltrar">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="inputZip">Código Concesión</label>
+                        <input type="text" class="form-control" id="txtCodConcesionFiltrar" placeholder="Código Concesión">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="inputZip">Nombre Concesión</label>
+                        <input type="text" class="form-control" id="txNombreConceFiltrar" placeholder="Nombre Concesión">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-3"> 
+                        <label for="inputZip">Nombre del Derecho Minero</label>
+                        <input type="text" class="form-control" id="txtNomDerechoMineroFiltrar" placeholder="Nombre del Derecho Minero">
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label>Trazabilidad</label>
+                        <select id="cmbResultadoFiltrar" class="form-control">
+                            <option selected value="0">TODOS...</option>
+                            <option>TRAZABLE</option>
+                            <option>PENDIENTE</option>
+                            <option>NO TRAZABLE</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="form-field-mask-1">
+                            Fecha de Reinfo
+                        </label>
+                        <div class="input-group">
+                            <input type="date" class="form-control form-control" id="txtFechaReinfoFiltrar" />
+                        </div>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="form-field-mask-1">
+                            Sede
+                        </label>
+                        <div class="input-group">
+                            <select id="cmbSedeFiltrar" class="form-control">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-1">
+                        <label>Buscar</label><br />
+                        <button class="btn btn-success text-white" id="btnSearch"><i class="fas fa-search text-110 align-text-bottom mr-1"></i> Buscar</button>
+                    </div>
+                    <div class="form-group col-md-1">
+                        <label for="">Acción</label><br />
+                        <button class="btn btn-warning text-white" id="btnReset"><i class="fas fa-sync-alt text-110 align-text-bottom mr-1"></i> Limpiar</button>
+                    </div>
+                    <div class="form-group col-md-1">
+                        <label for="">Exportar</label><br />
+                        <button class="btn btn-secondary text-white" id="btnExportar"><i class="fa fa-download text-110 align-text-bottom mr-1"></i> Exportar</button>
+                    </div>
+                  </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<link rel="stylesheet" type="text/css" href="./node_modules/bootstrap-table/dist/bootstrap-table.css">
+<div>
+    <div class="card radius-1 pt-2 pl-3 pb-0">
+        <div class="card-header p-0">
+
+            <h5 class="card-title text-110 text-dark-tp2">
+                <button type="button" class="btn btn-secondary radius-2 border-b-2 px-0 py-2px  btn-text-slide-x text-white" data-toggle="modal" id="BtnAgregarReinfo" onclick="getReinfo(0)">
+                    <span class="btn-text-2 move-right">
+                        <span class="d-inline-block bgc-white-tp9 shadow-sm radius-2px h-4 px-25 pt-1 mr-1 border-1">
+                            <i class="fa fa-plus text-white-tp2 text-110 mt-3px"></i>
+                        </span>
+                    </span>Nuevo Reinfo Minero
+                </button>
+            </h5>
+        </div><!-- /.card-header -->
+
+        <div class="">
+            <table class="table text-dark-m2 text-95"  id="table">
+            </table>
+        </div><!-- /.card-body -->
+    </div>
+</div>
+
+<div class="modal fade m-0" id="myModalReinfo" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title">Reinfo Minero</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body ace-scrollbar p-0">
+                <div class="cards-container p-0">
+                    <div class="card  p-0">
+                        <div class="card-header border-0 bgc-default-d1 card-header-sm p-0">
+                            <h6 class="card-title text-white-tp2 pl-2">
+                                1. DATOS GENERALES
+                            </h6>
+                        </div><!-- /.card-header -->
+                        <div class="card-body p-2">
+                            <div class="p-2">
+                                <div class="form-row">
+                                    <div class="form-group col-md-4">
+                                        <input type="text" id="TxtIndicador" style="display:none" />
+                                        <input type="text" id="txtId_reinfo" style="display:none" />
+                                        <label for="inputCity">RUC</label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control form-control" readonly id="txtRuc" maxlength="11" />
+                                            <div class="input-group-append">
+                                                <button class="btn btn-secondary" type="button" id="btnBuscarProve"><i class="fa fa fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                        <label id="lblErrortxtRuc" style="color: red; font-size: 12px !important; display: none"></label>
+                                    </div>
+
+                                    <div class="form-group col-md-8">
+                                        <label for="inputZip">Persona Natural/Jurídica</label>
+                                        <input type="text" class="form-control" id="txtPersonNatJur" readonly placeholder="" autocomplete="off">
+                                        <label id="lblErrortxtPersonNatJur" style="color: red; font-size: 12px !important; display: none"></label>
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group col-md-4">
+                                        <label>Código Concesión</label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control form-control" readonly id="txtCodigoDM" placeholder="" maxlength="25" />
+                                            <div class="input-group-append">
+                                                <button class="btn btn-secondary"  type="button" id="btnBuscarConce"><i class="fa fa fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                        <label id="lblErrortxtCodigoDM" style="color: red; font-size: 12px !important; display: none"></label>
+                                    </div>
+                                    <div class="form-group col-md-8">
+                                        <label for="inputCity">Nombre Concesión</label>
+                                        <input type="text" class="form-control" id="txtConcesion" maxlength="25" readonly autocomplete="off">
+                                        <label id="lblErrortxtConcesion" style="color: red; font-size: 12px !important;  display: none"></label>
+                                    </div>
+                                </div>
+
+
+                            </div><!-- /.card-body -->
+                        </div>
+
+                    </div>
+                    <div class="card  p-0">
+                        <div class="card-header border-0 bgc-default-d1 card-header-sm p-0">
+                            <h6 class="card-title text-white-tp2 pl-2">
+                                1.1 TONELADAS
+                            </h6>
+                        </div><!-- /.card-header -->
+                        <div class="card-body p-2">
+                            <div class="p-2">
+
+                                <div class="form-row">
+
+                                    <div class="form-group col-md-4">
+                                        <label for="inputZip">TM-PH/Mes</label>
+                                        <input type="text" class="form-control" id="txtTmph" maxlength="8" autocomplete="off" onkeypress="return filterFloat(event,this);">
+                                        <label id="lblErrortxtTmph" style="color: red; font-size: 12px !important; display: none"></label>
+
+                                    </div>
+                                    <div class="form-group col-md-4" style="display:none">
+                                        <label for="inputCity">TM-PS/Mes</label>
+                                        <input type="text" class="form-control" id="txtTmps" maxlength="8" autocomplete="off" onkeypress="return filterFloat(event,this);">
+                                        <label id="lblErrortxtTmps" style="color: red; font-size: 12px !important; display: none"></label>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label>Condición de Concesión</label>
+                                        <select id="cmbIngemmet" class="form-control">
+                                            <option selected value="0">ELEGIR...</option>
+                                            <option value="VIGENTE">VIGENTE</option>
+                                            <option value="EXTINGUIDO">EXTINGUIDO</option>
+                                        </select>
+                                        <label id="lblErrorcmbIngemmet" style="color: red; font-size: 12px !important; display: none"></label>
+                                    </div>
+
+                                </div>
+                                <div id="DivFileIngemmetPrincipal">
+                                    <h6 class="card-title text-info-m1 p-0">
+                                        DOCUMENTO DE INGEMMET
+                                    </h6>
+                                    <hr class="p-0" />
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-12">
+                                        <div class="row pl-3">
+                                            <select id="cmbTipoDocIngemmet" class="form-control mr-lg-4" style="width:25%">
+                                                <option selected value="0">Tipo Documento...</option>
+                                                <option value="CONSTANCIA REINFO">Constancia Reinfo</option>
+                                                <option value="MAPA UBICACION">Mapa Ubicación</option>
+                                                <option value="REPORTE CONCESION">Reporte Concesión</option>
+                                            </select>
+                                            <input id="filesIngemmet" name="filesIngemmet" type="file" size="1" class="mr-4" disabled />
+                                            <button id="btnAgregarDocIngemmet" class="btn btn-success mr-2" disabled><i class="fa fa-plus text-110 text-white"></i></button>
+                                            <button id="btnLimpiarDocIngemmet" class="btn btn-danger mr-2"><i class="fa fa-trash-alt text-110 text-white"></i></button>
+                                        </div>
+                                        <table id="idListaDocIngemmet" class="table p-3" width="50%">
+                                        </table>
+                                        <div class="row" id="IdDivfileIngemmet">
+                                            <div class="col-lg-12 order-last order-lg-first">
+                                                <div class="card border-0">
+                                                    <div class="card-header bg-transparent border-0 pl-1">
+                                                        <h5 class="card-title mb-2 mb-md-0 text-120">
+                                                            <i class="fa fa-file mr-1 text-default text-90"></i>
+                                                            <span class="text-90 text-info-m1">DOCUMENTO DE INGEMMET</span>
+                                                        </h5>
+                                                        <select id="cmbTipoDocIngemmet1" class="form-control mr-2" style="width:20%;">
+                                                            <option selected value="0">Tipo Documento...</option>
+                                                            <option value="CONSTANCIA REINFO">Constancia Reinfo</option>
+                                                            <option value="MAPA UBICACION">Mapa Ubicación</option>
+                                                            <option value="REPORTE CONCESION">Reporte Concesión</option>
+                                                        </select>
+                                                        <input id="filesIngemmet1" name="filesIngemmet1" type="file" class="pr-2" size="1" disabled />
+                                                        <div class="card-toolbar align-self-center">
+                                                            <a href="#" data-action="toggle" class="card-toolbar-btn text-grey text-110"><i class="fa fa-chevron-up"></i></a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-body p-0 border-t-2 brc-default-l2">
+                                                        <table class="table text-dark-m2 text-95" id="tablefilesingemmet">
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                            </div><!-- /.card-body -->
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="cards-container p-0">
+                    <div class="card  p-0">
+                        <div class="card-header border-0 bgc-default-d1 card-header-sm p-0">
+                            <h6 class="card-title text-white-tp2 pl-2">
+                                2. COORDENADAS
+                            </h6>
+                        </div><!-- /.card-header -->
+                        <div class="card-body p-2">
+                            <strong>2.1 EN REINFO / DECLARACIÓN MINERA</strong>
+                            <hr />
+                            <div class="p-2">
+                                <div class="form-row">
+                                    <div class="form-group col-md-3">
+                                        <label>Departamento</label>
+                                        <select id="cmbDepartamento" class="form-control">
+                                        </select>
+                                        <label id="lblErrorcmbDepartamento" style="color: red; font-size: 12px !important; display: none"></label>
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label>Provincia</label>
+                                        <select id="cmbProvincia" class="form-control">
+                                        </select>
+                                        <label id="lblErrorcmbProvincia" style="color: red; font-size: 12px !important; display: none"></label>
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label>Ciudad</label>
+                                        <select id="cmbCiudad" class="form-control">
+                                        </select>
+                                        <label id="lblErrorcmbCiudad" style="color: red; font-size: 12px !important; display: none"></label>
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label>Sede</label>
+                                        <select id="cmbSede" class="form-control">
+                                        </select>
+                                        <label id="lblErrorcmbSede" style="color: red; font-size: 12px !important; display: none"></label>
+                                    </div>
+
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group col-md-4">
+                                        <label>Derecho Minero</label>
+                                        <input type="text" class="form-control" id="txtNomDerMin" onkeyup="mayus(this);" maxlength="30" autocomplete="off">
+                                        <label id="lblErrortxtNomDerMin" style="color: red; font-size: 12px !important; display: none"></label>
+                                    </div>
+
+                                    <div class="form-group col-md-2">
+                                        <label>Zona</label>
+                                        <select id="cmbZonaRein" class="form-control">
+                                            <option selected value="0">ELEGIR...</option>
+                                            <option>17</option>
+                                            <option>18</option>
+                                            <option>19</option>
+                                        </select>
+                                        <label id="lblErrorcmbZonaRein" style="color: red; font-size: 12px !important; display: none"></label>
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label>Norte 1</label>
+                                        <input type="text" class="form-control" id="txtNorte1" name="txtNorte1" maxlength="8" autocomplete="off" onkeypress="return filterFloat(event,this);" onkeyup="CalcularDifCoordenadas()">
+                                        <label id="lblErrortxtNorte1" style="color: red; font-size: 12px !important; display: none"></label>
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label>Este 1</label>
+                                        <input type="text" class="form-control" id="txtEste1" name="txtEste1" maxlength="8" autocomplete="off" onkeypress="return filterFloat(event,this);" onkeyup="CalcularDifCoordenadas()">
+                                        <label id="lblErrortxtEste1" style="color: red; font-size: 12px !important; display: none"></label>
+                                    </div>
+
+
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-3">
+                                        <label>Tipo de Actividad</label>
+                                        <select id="cmbTipoActiv" class="form-control">
+                                            <option selected value="0">ELEGIR...</option>
+                                            <option value="EXPLOTACION"> EXPLOTACIÓN</option>
+                                            <option value="BENEFICIO"> BENEFICIO</option>
+                                        </select>
+                                        <label id="lblErrorcmbTipoActiv" style="color: red; font-size: 12px !important; display: none"></label>
+                                    </div>
+
+                                    <div class="form-group col-md-3">
+                                        <label>Fecha Reinfo</label>
+                                        <input type="date" class="form-control form-control" id="txtFechaReinfo" autocomplete="off" />
+                                        <label id="lblErrortxtFechaReinfo" style="color: red; font-size: 12px !important; display: none"></label>
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label>Norte 2</label>
+                                        <input type="text" class="form-control" id="txtNorte2" name="txtNorte2" autocomplete="off" maxlength="8" onkeypress="return filterFloat(event,this);">
+                                        <label id="lblErrortxtNorte2" style="color: red; font-size: 12px !important; display: none"></label>
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label>Este 2</label>
+                                        <input type="text" class="form-control" id="txtEste2" name="txtEste2" autocomplete="off" maxlength="8" onkeypress="return filterFloat(event,this);">
+                                        <label id="lblErrortxtEste2" style="color: red; font-size: 12px !important; display: none"></label>
+                                    </div>
+                                </div>
+                                <strong>2.2 EN CAMPO</strong>
+                                <hr />
+                                <div class="form-row">
+                                    @*<div class="form-group col-md-3">
+                                        <label>Componente</label>
+                                        <select id="cmbComponente" class="form-control">
+                                            <option selected value="0">ELEGIR...</option>
+                                            <option value="CORTADA">CORTADA</option>
+                                            <option value="BOCAMINA">BOCAMINA</option>
+                                            <option value="GALERIAS">GALERIAS</option>
+                                            <option value="PIQUE">PIQUE</option>
+                                        </select>
+                                        <label id="lblErrorcmbComponente" style="color: red; font-size: 12px !important; display: none"></label>
+                                    </div>*@
+                                    <div class="form-group col-md-3">
+                                        <label>Componente</label>
+                                        <select id="cmbComponente" class="form-control">
+                                            <option selected value="0">ELEGIR...</option>
+                                            <option value="BOCAMINA-GALERIA">BOCAMINA-GALERIA</option>
+                                            <option value="BOCAMINA-PIQUE">BOCAMINA-PIQUE</option>
+                                            <option value="BOCAMINA-CORTADA">BOCAMINA-CORTADA</option>
+                                        </select>
+                                        <label id="lblErrorcmbComponente" style="color: red; font-size: 12px !important; display: none"></label>
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label>Zona</label>
+                                        <select id="cmbZonaCampo" class="form-control">
+                                            <option selected value="0">ELEGIR...</option>
+                                            <option>17</option>
+                                            <option>18</option>
+                                            <option>19</option>
+                                        </select>
+                                        <label id="lblErrorcmbZonaCampo" style="color: red; font-size: 12px !important; display: none"></label>
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label>Norte C</label>
+                                        <input type="text" class="form-control" autocomplete="off" id="txtNorteC" name="txtNorteC" maxlength="8" onkeypress="return filterFloat(event,this); " onkeyup="CalcularDifCoordenadas()">
+                                        <label id="lblErrortxtNorteC" style="color: red; font-size: 12px !important; display: none"></label>
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label>Este C</label>
+                                        <input type="text" class="form-control" autocomplete="off" id="txtEsteC" name="txtEsteC" maxlength="8" onkeypress="return filterFloat(event,this);" onkeyup="CalcularDifCoordenadas()">
+                                        <label id="lblErrortxtEsteC" style="color: red; font-size: 12px !important; display: none"></label>
+                                    </div>
+                                </div>
+                                <div id="DivFileCampoPrincipal">
+                                    <h6 class="card-title text-success-m1 p-0">
+                                        DOCUMENTO DE CAMPO
+                                    </h6>
+                                    <hr class="p-0" />
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-12">
+                                        <input id="filesCampo" name="filesCampo" type="file" size="1" multiple />
+                                        <div class="row" id="IdDivfileCampo">
+                                            <div class="col-lg-12 order-last order-lg-first">
+                                                <div class="card border-0">
+                                                    <div class="card-header bg-transparent border-0 pl-1">
+                                                        <h5 class="card-title mb-2 mb-md-0 text-120">
+                                                            <i class="fa fa-file mr-1 text-default text-90"></i>
+                                                            <span class="text-90 text-success-m1">DOCUMENTO DE CAMPO</span>
+                                                        </h5>
+                                                        <input id="filesCampo1" name="filesCampo1" type="file" class="pr-2" size="1" multiple />
+                                                        <div class="card-toolbar align-self-center">
+                                                            <a href="#" data-action="toggle" class="card-toolbar-btn text-grey text-110"><i class="fa fa-chevron-up"></i></a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-body p-0 border-t-2 brc-default-l2">
+                                                        <table class="table text-dark-m2 text-95" id="tablefilesCampo">
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label>Diferencia de Coordenadas</label>
+                                        <input type="text" class="form-control" id="txtDifCoordenadas" autocomplete="off" name="txtDifCoordenadas" readonly>
+                                        <label id="lblErrortxtDifCoordenadas" style="color: red; font-size: 12px !important; display: none"></label>
+                                    </div>
+                                </div><!-- /.card-body -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cards-container p-0">
+                    <div class="card  p-0">
+                        <div class="card-header border-0 bgc-default-d1 card-header-sm p-0">
+                            <h6 class="card-title text-white-tp2 pl-2">
+                                3. DESCRIPCIÓN DE LA LABOR
+                            </h6>
+                        </div><!-- /.card-header -->
+                        <div class="card-body p-2">
+                            <div class="p-2">
+                                <div class="form-row">
+                                    <div class="form-group col-md-12">
+                                        <textarea class="form-control" id="txtDescripLabor" onkeyup="mayus(this);" autocomplete="off" maxlength="255" placeholder="Descripción" style="resize:none"></textarea>
+                                        <label id="lblErrortxtDescripLabor" style="color: red; font-size: 12px !important; display: none"></label>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-12">
+                                        <input id="files1" name="files1" accept=".png, .jpg, .jpeg" type="file" size="1" multiple />
+                                        <div class="row" id="IdDivfile1">
+                                            <div class="col-lg-12 order-last order-lg-first">
+                                                <div class="card border-0">
+                                                    <div class="card-header bg-transparent border-0 pl-1">
+                                                        <h5 class="card-title mb-2 mb-md-0 text-120">
+                                                            <i class="fa fa-file mr-1 text-default text-90"></i>
+                                                            <span class="text-105">Imagenes</span>
+                                                        </h5>
+                                                        <input id="files11" name="files11" type="file" accept=".png, .jpg, .jpeg" class="pr-2" size="1" multiple />
+                                                        <div class="card-toolbar align-self-center">
+                                                            <a href="#" data-action="toggle" class="card-toolbar-btn text-grey text-110"><i class="fa fa-chevron-up"></i></a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-body p-0 border-t-2 brc-default-l2">
+                                                        <table class="table text-dark-m2 text-95" id="tablefiles1">
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cards-container p-0">
+                    <div class="card  p-0">
+                        <div class="card-header border-0 bgc-default-d1 card-header-sm p-0">
+                            <h6 class="card-title text-white-tp2 pl-2">
+                                4. EQUIPOS Y HERRAMIENTAS (DETALLAR EQUIPOS MINEROS)
+                            </h6>
+                        </div><!-- /.card-header -->
+                        <div class="card-body p-2">
+                            <div class="p-2">
+                                <div class="form-row">
+                                    <div class="form-group col-md-12">
+                                        <input id="files2" name="files2" accept=".png, .jpg, .jpeg" type="file" size="1" multiple />
+                                        <hr class="p-0" />
+                                        <div class="row pt-1">
+                                            <div class="col-lg-5 order-last order-lg-first">
+                                                <label>Lista de Herramientas</label>
+                                                <select id="LstHerramientas" size="5" style="width:100%">
+                                                </select>
+                                            </div>
+                                            <div class="col-lg-2 order-last order-lg-first pt-4">
+                                                <center class="pt-4">
+                                                    <div><button class="btn btn-success" id="btnDerechaHerr">></button></div>
+                                                    <div class="pt-1"><button class="btn btn-danger" id="btnIzquierdaHerr"><</button></div>
+                                                </center>
+                                            </div>
+                                            <div class="col-lg-5 order-last order-lg-first">
+                                                <label>Herramientas de la Empresa</label>
+                                                <select id="LstHerramientasEmpresa" size="5" style="width: 100%">
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row" id="IdDivfile2">
+                                            <div class="col-lg-12 order-last order-lg-first">
+                                                <div class="card border-0">
+                                                    <div class="card-header bg-transparent border-0 pl-1">
+                                                        <h5 class="card-title mb-2 mb-md-0 text-120">
+                                                            <i class="fa fa-file mr-1 text-default text-90"></i>
+                                                            <span class="text-105">Imagenes</span>
+                                                        </h5>
+                                                        <input id="files22" name="files22" accept=".png, .jpg, .jpeg" type="file" class="pr-2" size="1" multiple />
+                                                        <div class="card-toolbar align-self-center">
+                                                            <a href="#" data-action="toggle" class="card-toolbar-btn text-grey text-110"><i class="fa fa-chevron-up"></i></a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-body p-0 border-t-2 brc-default-l2">
+                                                        <table class="table text-dark-m2 text-95" id="tablefiles2">
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="cards-container p-0">
+                    <div class="card  p-0">
+                        <div class="card-header border-0 bgc-default-d1 card-header-sm p-0">
+                            <h6 class="card-title text-white-tp2 pl-2">
+                                5. INSTALACIONES Y AMBIENTES (DETALLAR LAS INSTALACIONES Y/O AMBIENTES)
+                            </h6>
+                        </div><!-- /.card-header -->
+                        <div class="card-body p-2">
+                            <div class="p-2">
+
+                                <div class="form-row">
+                                    <div class="form-group col-md-12">
+                                        <input id="files3" name="files3" accept=".png, .jpg, .jpeg" type="file" size="1" multiple />
+                                        <hr class="p-0" />
+                                        <div class="row pt-1">
+                                            <div class="col-lg-5 order-last order-lg-first">
+                                                <label>Lista de Ambientes</label>
+                                                <select id="LstAmbientes" size="5" style="width:100%">
+                                                </select>
+                                            </div>
+                                            <div class="col-lg-2 order-last order-lg-first pt-4">
+                                                <center class="pt-4">
+                                                    <div><button class="btn btn-success" id="btnDerechaAmb">></button></div>
+                                                    <div class="pt-1"><button class="btn btn-danger" id="btnIzquierdaAmb"><</button></div>
+                                                </center>
+                                            </div>
+                                            <div class="col-lg-5 order-last order-lg-first">
+                                                <label>Ambientes de la Empresa</label>
+                                                <select id="LstAmbientesEmpresa" size="5" style="width: 100%">
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row" id="IdDivfile3">
+                                            <div class="col-lg-12 order-last order-lg-first">
+                                                <div class="card border-0">
+                                                    <div class="card-header bg-transparent border-0 pl-1">
+                                                        <h5 class="card-title mb-2 mb-md-0 text-120">
+                                                            <i class="fa fa-file mr-1 text-default text-90"></i>
+                                                            <span class="text-105">Imagenes</span>
+                                                        </h5>
+                                                        <input id="files33" name="files33" type="file" accept=".png, .jpg, .jpeg" class="pr-2" size="1" multiple />
+                                                        <div class="card-toolbar align-self-center">
+                                                            <a href="#" data-action="toggle" class="card-toolbar-btn text-grey text-110"><i class="fa fa-chevron-up"></i></a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-body p-0 border-t-2 brc-default-l2">
+                                                        <table class="table text-dark-m2 text-95" id="tablefiles3">
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="cards-container p-0">
+                    <div class="card  p-0">
+                        <div class="card-header border-0 bgc-default-d1 card-header-sm p-0">
+                            <h6 class="card-title text-white-tp2 pl-2">
+                                6. FUERZA LABORAL
+                            </h6>
+                        </div><!-- /.card-header -->
+                        <div class="card-body p-2">
+                            <div class="p-2">
+                                <div class="form-row">
+                                    <div class="form-group col-md-4">
+                                        <label>Hombres</label>
+                                        <input type="text" class="form-control input-number" autocomplete="off" maxlength="10" id="txtCantHomb" onkeyup="SumaTrabajadores()" placeholder="N° Hombres">
+                                        <label id="lblErrortxtCantHomb" style="color: red; font-size: 12px !important; display: none"></label>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label>Mujeres</label>
+                                        <input type="text" class="form-control input-number" autocomplete="off" maxlength="10" id="txtCantMuje" onkeyup="SumaTrabajadores()" placeholder="N° Mujeres">
+                                        <label id="lblErrortxtCantMuje" style="color: red; font-size: 12px !important; display: none"></label>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label>Total Personas</label>
+                                        <input type="text" class="form-control input-number" autocomplete="off" id="txtTotalPerso" readonly placeholder="Total">
+                                        <label id="lblErrortxtTotalPerso" style="color: red; font-size: 12px !important; display: none"></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="cards-container p-0">
+                    <div class="card  p-0">
+                        <div class="card-header border-0 bgc-default-d1 card-header-sm p-0">
+                            <h6 class="card-title text-white-tp2 pl-2">
+                                7. IGAFOM
+                            </h6>
+                        </div><!-- /.card-header -->
+
+                        <div class="card-body p-2">
+                            <div class="p-2">
+
+                                <div class="form-row">
+                                    <div class="form-group col-md-4">
+                                        <label>Igafom Correctivo</label>
+                                        <select id="cmbIgafomCorrect" class="form-control">
+                                            <option selected value="0">ELEGIR...</option>
+                                            <option value="APROBADO">Aprobado</option>
+                                            <option value="NO REALIZA">No realiza</option>
+                                            <option value="EN PREPARACION">En Preparación</option>
+                                            <option value="PRESENTADO A DREM">Presentado a DREM</option>
+                                        </select>
+                                        <label id="lblErrorcmbIgafomCorrect" style="color: red; font-size: 12px !important; display: none"></label>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label>Igafom Preventivo</label>
+                                        <select id="cmbIgafomPreven" class="form-control">
+                                            <option selected value="0">ELEGIR...</option>
+                                            <option value="APROBADO">Aprobado</option>
+                                            <option value="NO REALIZA">No realiza</option>
+                                            <option value="EN PREPARACION">En Preparación</option>
+                                            <option value="PRESENTADO A DREM">Presentado a DREM</option>
+                                        </select>
+                                        <label id="lblErrorcmbIgafomPreven" style="color: red; font-size: 12px !important; display: none"></label>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label>Declaración de Producción</label>
+                                            <select id="cmbSituacionMine" class="form-control">
+                                                <option selected value="0">ELEGIR...</option>
+                                                <option value="DECLARADO">Declarado</option>
+                                                <option value="PENDIENTE">Pendiente</option>
+                                                <option value="NO DECLARA">No Declara</option>
+                                            </select>
+                                            <label id="lblErrorcmbSituacionMine" style="color: red; font-size: 12px !important; display: none"></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="cards-container p-0">
+                    <div class="card  p-0">
+                        <div class="card-header border-0 bgc-default-d1 card-header-sm p-0">
+                            <h6 class="card-title text-white-tp2 pl-2">
+                                8. CONCLUSIONES
+                            </h6>
+                        </div><!-- /.card-header -->
+                        <div class="card-body p-2">
+                            <div class="p-2">
+                                <div class="form-row">
+                                    <div class="form-group col-md-2">
+                                        <label>Resultado</label>
+                                        <select id="cmbResultado" class="form-control">
+                                            <option selected value="0">ELEGIR..</option>
+                                            <option value="TRAZABLE">TRAZABLE</option>
+                                            <option value="NO TRAZABLE">NO TRAZABLE</option>
+                                            <option value="PENDIENTE">PENDIENTE</option>
+                                        </select>
+                                        <label id="lblErrorcmbResultado" style="color: red; font-size: 12px !important; display: none"></label>
+                                    </div>
+                                    <div class="form-group col-md-2">
+                                        <label>Estado Proveedor</label>
+                                        <select id="cmbEstadoIgafom" class="form-control">
+                                            <option selected value="0">ELEGIR..</option>
+                                            <option value="FORMALIZADO">FORMALIZADO</option>
+                                            <option value="VIGENTE">VIGENTE</option>
+                                            <option value="SUSPENDIDO">SUSPENDIDO</option>
+                                        </select>
+                                        <label id="lblErrorcmbEstadoIgafom" style="color: red; font-size: 12px !important; display: none"></label>
+                                    </div>
+                                    <div class="form-group col-md-8 pt-2">
+                                        <textarea class="form-control" onkeyup="mayus(this);" autocomplete="off" id="txtConclusion" maxlength="355" placeholder="Conclusión" style="resize:none" rows="5"></textarea>
+                                        <label id="lblErrortxtConclusion" style="color: red; font-size: 12px !important; display: none"></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" id="GuardarReinfo" onclick="AgregarOeditarReinfo()">Guardar</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" id="btnCancelar">Cancelar</button><br /><br />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade m-0" id="myModalProveedores" style="background-color:darkgrey" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered  modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Lista de Proveedores</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body ace-scrollbar p-0 ">
+
+                <div class="cards-container p-0">
+                    <div class="card  p-0">
+                        <div class="card-body p-2">
+                            <div class="p-1">
+                                <table class="table text-dark-m2 text-95" id="table2">
+                                </table>
+
+
+
+                            </div><!-- /.card-body -->
+                        </div>
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade m-0" id="myModalConcesiones" style="background-color:darkgrey" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered  modal-lg" role="document">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title">Lista de Concesiones</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body ace-scrollbar p-0 ">
+
+                <div class="cards-container p-0">
+                    <div class="card  p-0">
+                        <div class="card-body p-2">
+                            <div class="p-1">
+                                <table class="table text-dark-m2 text-95" id="table3">
+                                </table>
+
+
+
+                            </div><!-- /.card-body -->
+                        </div>
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" role="dialog" id="myModalImagen" style="background-color:darkgrey" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog  modal-xl modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <img id="ImagenContent" class="img-rounded" height="100%" width="100%" alt="Imagen" />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade m-0" id="myModalOpcionesExport" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Columnas a exportar</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body ace-scrollbar p-0 ">
+
+                <div class="cards-container p-0">
+                    <div class="card  p-0">
+                        <div class="card-body p-2">
+                            <div class="p-1">
+                                <table class="table table-responsive text-dark-m2 text-95" width="100%">
+                                    <tr><td colspan="8" style="background-color: aliceblue;">DATOS GENERALES</td></tr>
+                                    <tr>
+
+                                        <td><input type="checkbox" class="form-control"></td>
+                                        <td>RUC</td>
+                                        <td><input type="checkbox" class="form-control"></td>
+                                        <td>PROVEEDOR</td>
+                                        <td><input type="checkbox" class="form-control"></td>
+                                        <td>CODIGO CONCESIÓN</td>
+                                        <td><input type="checkbox" class="form-control"></td>
+                                        <td  width="100%">NOMBRE CONCESIÓN</td>
+
+                                    </tr>
+                                    <tr><td colspan="8" style="background-color: aliceblue;">TONELADAS</td></tr>
+                                    <tr>
+                                        <td colspan="1"><input type="checkbox" class="form-control"></td>
+                                        <td colspan="1">N_TMPH</td>
+                                        <td colspan="1"><input type="checkbox" class="form-control"></td>
+                                        <td colspan="5">V_SITUACIONINGEMMET</td>
+                                    </tr>
+                                    <tr><td colspan="8" style="background-color: aliceblue;">COORDENADAS</td></tr>
+                                    <tr>
+                                        <td colspan="1"><input type="checkbox" class="form-control"></td>
+                                        <td colspan="1">V_UBIGEO</td>
+                                        <td colspan="1"><input type="checkbox" class="form-control"></td>
+                                        <td colspan="1">N_SEDE</td>
+                                        <td colspan="1"><input type="checkbox" class="form-control"></td>
+                                        <td colspan="1">V_NOMDERECHMINE</td>
+                                        <td colspan="1"><input type="checkbox" class="form-control"></td>
+                                        <td colspan="1">V_CODZNOAREI</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="1"><input type="checkbox" class="form-control"></td>
+                                        <td colspan="1">N_NORTE1</td>
+                                        <td colspan="1"><input type="checkbox" class="form-control"></td>
+                                        <td colspan="1">N_ESTE1</td>
+                                        <td colspan="1"><input type="checkbox" class="form-control"></td>
+                                        <td colspan="1">N_NORTE2</td>
+                                        <td colspan="1"><input type="checkbox" class="form-control"></td>
+                                        <td colspan="1">N_ESTE2</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="1"><input type="checkbox" class="form-control"></td>
+                                        <td colspan="1">V_CODTIPOACT</td>
+                                        <td colspan="1"><input type="checkbox" class="form-control"></td>
+                                        <td colspan="5">V_FECREINFO</td>
+                                    </tr>
+                                    <tr><td colspan="8" style="background-color: aliceblue;">EN CAMPO</td></tr>
+                                    <tr>
+                                        <td colspan="1"><input type="checkbox" class="form-control"></td>
+                                        <td colspan="1">V_COMPONENT</td>
+                                        <td colspan="1"><input type="checkbox" class="form-control"></td>
+                                        <td colspan="1">V_CODZONACAMP</td>
+                                        <td colspan="1"><input type="checkbox" class="form-control"></td>
+                                        <td colspan="1">N_NORTEC</td>
+                                        <td colspan="1"><input type="checkbox" class="form-control"></td>
+                                        <td colspan="1">N_ESTEC</td>
+                                    </tr>
+                                    <tr><td colspan="8" style="background-color:aliceblue;">DESCRIPCION DE LABOR</td></tr>
+                                    <tr>
+                                        <td colspan="1"><input type="checkbox" class="form-control"></td>
+                                        <td colspan="7">V_DESCRILABOR</td>
+                                    </tr>
+                                    <tr><td colspan="8" style="background-color:aliceblue;">FUERZA LABORAL</td></tr>
+                                    <tr>
+                                        <td colspan="1"><input type="checkbox" class="form-control"></td>
+                                        <td colspan="1">N_CANTHOMBRE</td>
+                                        <td colspan="1"><input type="checkbox" class="form-control"></td>
+                                        <td colspan="1">N_CANTMUJE</td>
+                                        <td colspan="1"><input type="checkbox" class="form-control"></td>
+                                        <td colspan="3">N_TOTALTRAB</td>
+                                    </tr>
+                                    <tr><td colspan="8" style="background-color:aliceblue;">IGAFOM</td></tr>
+                                    <tr>
+                                        <td colspan="1"><input type="checkbox" class="form-control"></td>
+                                        <td colspan="1">V_IGAFOMCORREC</td>
+                                        <td colspan="1"><input type="checkbox" class="form-control"></td>
+                                        <td colspan="1">V_IGAFOMPREV</td>
+                                        <td colspan="1"><input type="checkbox" class="form-control"></td>
+                                        <td colspan="3">V_SITACIONDECMINERA</td>
+                                    </tr>
+                                    <tr><td colspan="8" style="background-color:aliceblue;">CONCLUSIONES</td></tr>
+                                    <tr>
+                                        <td colspan="1"><input type="checkbox" class="form-control"></td>
+                                        <td colspan="1">V_RESULTADOS</td>
+                                        <td colspan="1"><input type="checkbox" class="form-control"></td>
+                                        <td colspan="1">V_ESTADOIGAFOM</td>
+                                        <td colspan="1"><input type="checkbox" class="form-control"></td>
+                                        <td colspan="3">V_CONCLUSION</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="8" style="text-align:end">
+                                            <button class="btn btn-success"><i class="fa fa-download text-110 align-text-bottom mr-1"></i> Exportar</button>
+                                        </td>
+
+                                    </tr>
+                                </table>
+
+
+
+                            </div><!-- /.card-body -->
+                        </div>
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL PARA IMPRIMIR-->
+<div class="modal fade m-0" id="myModalPrint" tabindex="-1" role="dialog" aria-hidden="true">
+ 
+</div>
+
+
+<!-- MODAL PARA IMPRIMIR VERSION 3-->
+@*<div class="modal fade m-0" id="myModalPrintV3" tabindex="-1" role="dialog" aria-hidden="true">
+
+</div>*@
+<div class="modal" id="myModalLoading" tabindex="-1" role="dialog" style="display: block;" hidden>
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <div class="modal-body">
+
+                <div class=" d-flex flex-column justify-content-between align-items-center">
+                    <p class="pt-2" style="color:darkblue">Por favor espere.....</p>
+                    <div class="fas fa-spinner fa-spin text-purple-m1 fa-2x mb-3"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="modal" id="myModalLoading2" tabindex="-1" role="dialog" style="display: block;" hidden>
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <div class="modal-body">
+
+                <div class=" d-flex flex-column justify-content-between align-items-center">
+                    <p class="pt-2 text-110" style="color:indigo">CARGANDO REPORTE.....</p>
+                    <i class="fas fa-sync fa-spin text-purple-m1 text-170 mb-3"></i>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js"></script>
+
+<!-- FIN MODAL PARA IMPRIMIR-->
+
+
+
+<script src="~/content/js/reinfo.js"></script>
+<script src="~/content/js/General.js"></script>
+<link href="~/node_modules/toastr/toastr.min.css" rel="stylesheet" />
+<script src="~/node_modules/toastr/toastr.min.js"></script>
+<script src="~/js/printThis.js"></script>
+
+

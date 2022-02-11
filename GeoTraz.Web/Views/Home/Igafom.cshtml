@@ -1,0 +1,694 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@*<script>
+        document.onreadystatechange = function () {
+            console.log("ready!");
+            fnValidaSesion()
+        }
+    </script>*@
+<div>
+    <div class="card radius-1 pt-0">
+        <div class="card-header">
+            <h5 class="card-title text-110 text-dark-tp2">
+                @*@ViewBag.Message*@
+                IGAFOM
+            </h5>
+
+
+        </div><!-- /.card-header -->
+
+
+
+    </div>
+</div>
+<div class="cards-container ">
+    <div class="card  ">
+        <div class="card-header p-0 pl-2 pt-1">
+            <h5 class="card-title text-black-50">
+                <i class="fa fa-filter mr-2px "></i>  Filtros de Búsqueda
+            </h5>
+        </div>
+        <div class="card-body p-1">
+            <div class="p-2">
+                <div class="form-row">
+                    <div class="form-group col-md-2">
+                        <label>RUC</label>
+                        <input type="text" class="form-control input-number" id="txtRucFiltrar" placeholder="RUC">
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label for="inputCity">Proveedor</label>
+                        <input type="text" class="form-control" placeholder="Proveedor" id="txtRazonSocialFiltrar">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="inputZip">Código Concesión</label>
+                        <input type="text" class="form-control" id="txtCodConcesionFiltrar" placeholder="Código Concesión">
+                    </div>
+
+                    <div class="form-group col-md-1">
+                        <label>Buscar</label><br />
+                        <button class="btn btn-success text-white" id="btnSearch"><i class="fas fa-search text-110 align-text-bottom mr-1"></i> Buscar</button>
+                    </div>
+                    <div class="form-group col-md-1">
+                        <label>Acción</label><br />
+                        <button class="btn btn-warning text-white" id="btnReset"><i class="fas fa-sync-alt text-110 align-text-bottom mr-1"></i> Limpiar</button>
+                    </div>
+                    <div class="form-group col-md-1">
+                        <label for="">Exportar</label><br />
+                        <button class="btn btn-secondary text-white" id="btnExportar"><i class="fa fa-download text-110 align-text-bottom mr-1"></i> Exportar</button>
+                    </div>
+
+
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label for="inputZip">Nombre Concesión</label>
+                        <input type="text" class="form-control" id="txNombreConceFiltrar" placeholder="Nombre Concesión">
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="inputZip">Sede</label>
+                        <select id="cmbSedeFiltrar" class="form-control">
+                        </select>
+                    </div>
+                    <div class="form-group col-md-4">
+                    </div>
+  
+
+
+                </div>
+                    <div class="form-row" style="display:none">
+
+                        <div class="form-group col-md-3">
+                            <label for="inputZip">Nombre del Derecho Minero</label>
+                            <input type="text" class="form-control" id="txtNomDerechoMineroFiltrar" placeholder="Nombre del Derecho Minero">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>Trazabilidad</label>
+                            <select id="cmbResultadoFiltrar" class="form-control">
+                                <option selected value="0">TODOS...</option>
+                                <option>TRAZABLE</option>
+                                <option>PENDIENTE</option>
+                                <option>NO TRAZABLE</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="form-field-mask-1">
+                                Fecha de Reinfo
+                            </label>
+                            <div class="input-group">
+                                <input type="date" class="form-control form-control" id="txtFechaReinfoFiltrar" />
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                </div>
+        </div>
+    </div>
+</div>
+
+
+<link rel="stylesheet" type="text/css" href="./node_modules/bootstrap-table/dist/bootstrap-table.css">
+<div>
+    <div class="card radius-1 pt-2 pl-3 pb-0">
+
+
+        <div class="">
+            <table class="table text-dark-m2 text-95 table-responsive-lg" style="overflow-x:scroll;zoom:90%" id="table">
+            </table>
+        </div><!-- /.card-body -->
+
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="myModalIGafomCorrectivo" role="dialog">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+
+        <!-- Modal content-->
+        <div class="modal-content ">
+            <div class="modal-header">
+
+                <h4 class="modal-title">Igafom Correctivo</h4>
+                <button type="button" id="btnCerrarIgaCorrec" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <div class="cards-container p-0">
+                <div class="card  p-0">
+                    <div class="card-header border-0 bgc-primary-d1 card-header-sm p-0">
+                        <h6 class="card-title text-white-tp2 pl-2">
+                            1. Datos de Reinfo
+                        </h6>
+                    </div><!-- /.card-header -->
+                    <div class="card-body p-2">
+                        <div class="p-2">
+
+                            <input type="text" id="TxtIndicadorCorrec" style="display:none" />
+                            <input type="text" id="txtId_IgafomCorrec" style="display:none" />
+
+
+                            <div class="form-row">
+                                <div class="form-group col-sm-4">
+                                    <label>RUC</label>
+                                    <input type="text" class="form-control input-number" id="txtRucProveedorCorrec" readonly />
+                                    <label id="lblErrortxtRucProveedor" style="color: red; font-size: 12px !important; display: none"></label>
+                                </div>
+                                <div class="form-group col-sm-8">
+                                    <label>Razón Social</label>
+                                    <input type="text" class="form-control" id="txtRazonSocialCorrec" readonly>
+                                    <label id="lblErrortxtRazonSocial" style="color: red; font-size: 12px !important; display: none"></label>
+
+                                </div>
+
+
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-sm-4">
+                                    <label>Código Concesión</label>
+                                    <input type="text" class="form-control input-number" id="txtCodDMCorrec" readonly>
+                                    <label id="lblErrortxtCodDMCorrec" style="color: red; font-size: 12px !important; display: none"></label>
+                                </div>
+                                <div class="form-group col-sm-8">
+                                    <label>Nombre Concesión</label>
+                                    <input type="text" class="form-control" id="txtNomConceCorrec" readonly>
+                                    <label id="lblErrortxtNomConceCorrec" style="color: red; font-size: 12px !important; display: none"></label>
+                                </div>
+
+                            </div>
+
+
+                        </div><!-- /.card-body -->
+                    </div>
+
+                </div>
+            </div>
+            <div class="cards-container p-0">
+                <div class="card  p-0">
+                    <div class="card-header border-0 bgc-primary-d1 card-header-sm p-0">
+                        <h6 class="card-title text-white-tp2 pl-2">
+                            2. Datos de Igafom Correctivo
+                        </h6>
+                    </div><!-- /.card-header -->
+                    <div class="card-body p-2">
+                        <div class="p-2">
+                            <div id="divCondicionCorrectivo">
+                                <div class="form-row">
+                                    <div class="form-group col-sm-2">
+                                        <label>Tipo Archivo</label>
+                                        <select id="cmbTipoArchivoCorrec" class="form-control">
+                                            <option selected value="0">ELEGIR...</option>
+                                            <option value="IMAGEN">Imagen</option>
+                                            <option value="DOCUMENTO">Documento</option>
+                                        </select>
+                                        <label id="lblErrorcmbTipoArchivoCprrec" style="color: red; font-size: 12px !important; display: none"></label>
+                                    </div>
+                                    <div class="form-group col-sm-3">
+                                        <label>Tipo Documento</label>
+                                        <select id="cmbTipoDocCorrec" class="form-control">
+                                            <option selected value="0">ELEGIR...</option>
+                                            <option value="CARGOCORRECTIVO">Cargo Correctivo</option>
+                                            <option value="INFORMECORRECTIVO">Informe Correctivo</option>
+                                            <option value="OTROSCORRECTIVO">Otros documentos Correctivos</option>
+                                        </select>
+                                        <label id="lblErrorcmbTipoDocCorrec" style="color: red; font-size: 12px !important; display: none"></label>
+                                    </div>
+                                    <div class="form-group col-sm-3" id="divDescripArchCorrec" style="display:none">
+                                        <label>Descripción</label>
+                                        <input id="txtDescArchCorrec" name="txtDescArchCorrec" type="text" autocomplete="off" class="pr-2 form-control" size="1" />
+                                        <label id="lblErrortxtDescArchCorrec" style="color: red; font-size: 12px !important; display: none"></label>
+                                    </div>
+                                    <div class="form-group col-sm-4">
+                                        <label>Subir Archivo</label>
+                                        <input id="filesCorrec" name="filesCorrec" type="file" class="pr-2 form-control" size="1" />
+                                        <label id="lblErrortxtDNI" style="color: red; font-size: 12px !important; display: none"></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 order-last order-lg-first">
+                                    <div class="card border-0">
+                                        <div class="card-header bg-transparent border-0 pl-1">
+                                            <h5 class="card-title mb-2 mb-md-0 text-120">
+                                                <i class="fa fa-file mr-1 text-default text-90"></i>
+                                                <span class="text-105">Documentos</span>
+                                            </h5>
+
+                                            <div class="card-toolbar align-self-center">
+                                                <a href="#" data-action="toggle" class="card-toolbar-btn text-grey text-110"><i class="fa fa-chevron-up"></i></a>
+                                            </div>
+                                        </div>
+                                        <div class="card-body p-0 border-t-2 brc-default-l2">
+                                            <table class="table text-dark-m2 text-95" id="tableIgaCorrec">
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div><!-- /.card-body -->
+                    </div>
+                    <div class="p-2">
+                        <center>
+                            <button class="btn btn-success" data-dismiss="modal">Guardar</button>
+                        </center>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="myModalIGafomPrev" role="dialog">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+
+        <!-- Modal content-->
+        <div class="modal-content ">
+            <div class="modal-header">
+
+                <h4 class="modal-title">Igafom Preventivo</h4>
+                <button type="button" class="close" id="btnCerrarIgaPrev" data-dismiss="modal">&times;</button>
+            </div>
+
+            <div class="cards-container p-0">
+                <div class="card  p-0">
+                    <div class="card-header border-0 bgc-primary-d1 card-header-sm p-0">
+                        <h6 class="card-title text-white-tp2 pl-2">
+                            1. Datos de Reinfo
+                        </h6>
+                    </div><!-- /.card-header -->
+                    <div class="card-body p-2">
+                        <div class="p-2">
+                            <input type="text" id="TxtIndicadorPrev" style="display:none" />
+                            <input type="text" id="txtId_IgafomPrev" style="display:none" />
+                            <div class="form-row">
+                                <div class="form-group col-sm-4">
+                                    <label>RUC</label>
+                                    <input type="text" class="form-control input-number" id="txtRucProveedorPrev" readonly />
+                                    <label id="lblErrortxtRucProveedor" style="color: red; font-size: 12px !important; display: none"></label>
+                                </div>
+                                <div class="form-group col-sm-8">
+                                    <label>Razón Social</label>
+                                    <input type="text" class="form-control" id="txtRazonSocialPrev" readonly>
+                                    <label id="lblErrortxtRazonSocial" style="color: red; font-size: 12px !important; display: none"></label>
+
+                                </div>
+
+
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-sm-4">
+                                    <label>Código Concesión</label>
+                                    <input type="text" class="form-control input-number" id="txtCodDMPrev" readonly>
+                                    <label id="lblErrortxtDNI" style="color: red; font-size: 12px !important; display: none"></label>
+                                </div>
+                                <div class="form-group col-sm-8">
+                                    <label>Nombre Concesión</label>
+                                    <input type="text" class="form-control" id="txtNomConcePrev" readonly>
+                                    <label id="lblErrortxtRazonSocial" style="color: red; font-size: 12px !important; display: none"></label>
+                                </div>
+
+                            </div>
+
+
+
+                        </div><!-- /.card-body -->
+                    </div>
+
+                </div>
+            </div>
+            <div class="cards-container p-0">
+                <div class="card  p-0">
+                    <div class="card-header border-0 bgc-primary-d1 card-header-sm p-0">
+                        <h6 class="card-title text-white-tp2 pl-2">
+                            2. Datos de Igafom Preventivo
+                        </h6>
+                    </div><!-- /.card-header -->
+                    <div class="card-body p-2">
+                        <div class="p-2">
+                            <div id="divCondicionPreventivo">
+                                <div class="form-row">
+                                    <div class="form-group col-sm-2">
+                                        <label>Tipo Archivo</label>
+                                        <select id="cmbTipoArchivoPrev" class="form-control">
+                                            <option selected value="0">ELEGIR...</option>
+                                            <option value="IMAGEN">Imagen</option>
+                                            <option value="DOCUMENTO">Documento</option>
+                                        </select>
+                                        <label id="lblErrorcmbTipoArchivoPrev" style="color: red; font-size: 12px !important; display: none"></label>
+                                    </div>
+                                    <div class="form-group col-sm-3">
+                                        <label>Tipo Documento</label>
+                                        <select id="cmbTipoDocPrev" class="form-control">
+                                            <option selected value="0">ELEGIR...</option>
+                                            <option value="CARGOPREVENTIVO">Cargo Preventivo</option>
+                                            <option value="INFORMEPREVENTIVO">Informe Preventivo</option>
+                                            <option value="OTROSPREVENTIVO">Otros documentos Preventivos</option>
+                                        </select>
+                                        <label id="lblErrorcmbTipoDocPrev" style="color: red; font-size: 12px !important; display: none"></label>
+                                    </div>
+                                    <div class="form-group col-sm-3" id="divDescripArchPrev" style="display:none">
+                                        <label>Descripción</label>
+                                        <input id="txtDescArchPrev" name="txtDescArchPrev" autocomplete="off" type="text" class="pr-2 form-control" size="1" />
+                                        <label id="lblErrortxtDescArchPrev" style="color: red; font-size: 12px !important; display: none"></label>
+                                    </div>
+                                    <div class="form-group col-sm-4">
+                                        <label>Subir Archivo</label><br />
+                                        <input id="filesPrev" name="filesPrev" type="file" class="pr-2" size="1" />
+                                        <label id="lblErrortxtDNI" style="color: red; font-size: 12px !important; display: none"></label>
+                                    </div>
+                                </div>
+                            </div>
+                                <div class="row">
+                                    <div class="col-lg-12 order-last order-lg-first">
+                                        <div class="card border-0">
+                                            <div class="card-header bg-transparent border-0 pl-1">
+                                                <h5 class="card-title mb-2 mb-md-0 text-120">
+                                                    <i class="fa fa-file mr-1 text-default text-90"></i>
+                                                    <span class="text-105">Documentos</span>
+                                                </h5>
+
+                                                <div class="card-toolbar align-self-center">
+                                                    <a href="#" data-action="toggle" class="card-toolbar-btn text-grey text-110"><i class="fa fa-chevron-up"></i></a>
+                                                </div>
+                                            </div>
+                                            <div class="card-body p-0 border-t-2 brc-default-l2">
+                                                <table class="table text-dark-m2 text-95" id="tableIgaPrev">
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div><!-- /.card-body -->
+                        </div>
+                    <div class="p-2">
+                        <center>
+                            <button class="btn btn-success" data-dismiss="modal">Guardar</button>
+                        </center>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+
+    </div>
+</div>
+
+<div class="modal fade" id="myModalLevSus" role="dialog">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+
+        <!-- Modal content-->
+        <div class="modal-content ">
+            <div class="modal-header">
+
+                <h4 class="modal-title">Levantamiento de suspensión</h4>
+                <button type="button" class="close" id="btnCerrarLevSus" data-dismiss="modal">&times;</button>
+            </div>
+
+            <div class="cards-container p-0">
+                <div class="card  p-0">
+                    <div class="card-header border-0 bgc-primary-d1 card-header-sm p-0">
+                        <h6 class="card-title text-white-tp2 pl-2">
+                            1. Datos de Reinfo
+                        </h6>
+                    </div><!-- /.card-header -->
+                    <div class="card-body p-2">
+                        <div class="p-2">
+                            <input type="text" id="TxtIndicadorLevSus" style="display:none" />
+                            <input type="text" id="txtId_LevSus" style="display:none" />
+                            <div class="form-row">
+                                <div class="form-group col-sm-4">
+                                    <label>RUC</label>
+                                    <input type="text" class="form-control input-number" id="txtRucProveedorLevSus" readonly />
+                                    <label id="lblErrortxtRucProveedor" style="color: red; font-size: 12px !important; display: none"></label>
+                                </div>
+                                <div class="form-group col-sm-8">
+                                    <label>Razón Social</label>
+                                    <input type="text" class="form-control" id="txtRazonSocialLevSus" readonly>
+                                    <label id="lblErrortxtRazonSocial" style="color: red; font-size: 12px !important; display: none"></label>
+
+                                </div>
+
+
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-sm-4">
+                                    <label>Código Concesión</label>
+                                    <input type="text" class="form-control input-number" id="txtCodDMLevSus" readonly>
+                                    <label id="lblErrortxtDNI" style="color: red; font-size: 12px !important; display: none"></label>
+                                </div>
+                                <div class="form-group col-sm-5">
+                                    <label>Nombre Concesión</label>
+                                    <input type="text" class="form-control" id="txtNomConceLevSus" readonly>
+                                    <label id="lblErrortxtRazonSocial" style="color: red; font-size: 12px !important; display: none"></label>
+                                </div>
+
+                            </div>
+
+
+
+                        </div><!-- /.card-body -->
+                    </div>
+
+                </div>
+            </div>
+            <div class="cards-container p-0">
+                <div class="card  p-0">
+                    <div class="card-header border-0 bgc-primary-d1 card-header-sm p-0">
+                        <h6 class="card-title text-white-tp2 pl-2">
+                            2. Datos de Igafom
+                        </h6>
+                    </div><!-- /.card-header -->
+                    <div class="card-body p-2">
+                        <div class="p-2">
+                            <div id="divCondicionLev">
+                                <div class="form-row">
+                                    <div class="form-group col-sm-2">
+                                        <label>Tipo Archivo</label>
+                                        <select id="cmbTipoArchivoLevSus" class="form-control">
+                                            <option selected value="0">ELEGIR...</option>
+                                            <option value="IMAGEN">Imagen</option>
+                                            <option value="DOCUMENTO">Documento</option>
+                                        </select>
+                                        <label id="lblErrorcmbTipoArchivoLevSus" style="color: red; font-size: 12px !important; display: none"></label>
+                                    </div>
+                                    <div class="form-group col-sm-3">
+                                        <label>Tipo Documento</label>
+                                        <select id="cmbTipoDocLevSus" class="form-control">
+                                            <option selected value="0">ELEGIR...</option>
+                                            <option value="CARGOLEVSUS">CARGO LEVANTAMIENTO SUSPENSIÓN</option>
+                                            <option value="OTROSLEVSUS">Otros documentos suspensión</option>
+                                        </select>
+                                        <label id="lblErrorcmbTipoDocLevSus" style="color: red; font-size: 12px !important; display: none"></label>
+                                    </div>
+                                    <div class="form-group col-sm-3" id="divDescripArchLevSus" style="display:none">
+                                        <label>Descripción</label>
+                                        <input id="txtDescArchLevSus" name="txtDescArchLevSus" autocomplete="off"  type="text" class="pr-2 form-control" size="1" />
+                                        <label id="lblErrortxtDescArchLevSus" style="color: red; font-size: 12px !important; display: none"></label>
+                                    </div>
+                                    <div class="form-group col-sm-4">
+                                        <label>Subir Archivo</label>
+                                        <input id="filesLevSus" name="filesLevSus" type="file" class="pr-2" size="1" />
+                                    </div>
+                                </div>
+                            </div>
+                                <div class="row">
+                                    <div class="col-lg-12 order-last order-lg-first">
+                                        <div class="card border-0">
+                                            <div class="card-header bg-transparent border-0 pl-1">
+                                                <h5 class="card-title mb-2 mb-md-0 text-120">
+                                                    <i class="fa fa-file mr-1 text-default text-90"></i>
+                                                    <span class="text-105">Documentos</span>
+                                                </h5>
+                                                <div class="card-toolbar align-self-center">
+                                                    <a href="#" data-action="toggle" class="card-toolbar-btn text-grey text-110"><i class="fa fa-chevron-up"></i></a>
+                                                </div>
+                                            </div>
+                                            <div class="card-body p-0 border-t-2 brc-default-l2">
+                                                <table class="table text-dark-m2 text-95" id="tableLevSus">
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div><!-- /.card-body -->
+                        </div>
+
+                </div>
+                <div class="p-2">
+                    <center>
+                        <button class="btn btn-success" data-dismiss="modal">Guardar</button>
+                    </center>
+                </div>
+            </div>
+
+
+
+        </div>
+
+    </div>
+
+
+</div>
+
+<div class="modal fade" id="myModalResolucion" role="dialog">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+
+        <!-- Modal content-->
+        <div class="modal-content ">
+            <div class="modal-header">
+
+                <h4 class="modal-title">Resolución</h4>
+                <button type="button" class="close" id="btnCerrarResolucion" data-dismiss="modal">&times;</button>
+            </div>
+
+            <div class="cards-container p-0">
+                <div class="card  p-0">
+                    <div class="card-header border-0 bgc-primary-d1 card-header-sm p-0">
+                        <h6 class="card-title text-white-tp2 pl-2">
+                            1. Datos de Reinfo
+                        </h6>
+                    </div><!-- /.card-header -->
+                    <div class="card-body p-2">
+                        <div class="p-2">
+                            <input type="text" id="TxtIndicadorResolucion" style="display:none" />
+                            <input type="text" id="txtId_Resolucion" style="display:none" />
+                            <div class="form-row">
+                                <div class="form-group col-sm-4">
+                                    <label>RUC</label>
+                                    <input type="text" class="form-control input-number" id="txtRucProveedorResolucion" readonly />
+                                    <label id="lblErrortxtRucProveedorResolucion" style="color: red; font-size: 12px !important; display: none"></label>
+                                </div>
+                                <div class="form-group col-sm-8">
+                                    <label>Razón Social</label>
+                                    <input type="text" class="form-control" id="txtRazonSocialResolucion" readonly>
+                                    <label id="lblErrortxtRazonSocialResolucion" style="color: red; font-size: 12px !important; display: none"></label>
+
+                                </div>
+
+
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-sm-4">
+                                    <label>Código Concesión</label>
+                                    <input type="text" class="form-control input-number" id="txtCodDMResolucion" readonly>
+                                    <label id="lblErrortxtCodDMResolucion" style="color: red; font-size: 12px !important; display: none"></label>
+                                </div>
+                                <div class="form-group col-sm-5">
+                                    <label>Nombre Concesión</label>
+                                    <input type="text" class="form-control" id="txtNomConceResolucion" readonly>
+                                    <label id="lblErrortxtNomConceResolucion" style="color: red; font-size: 12px !important; display: none"></label>
+                                </div>
+
+                            </div>
+
+
+
+                        </div><!-- /.card-body -->
+                    </div>
+
+                </div>
+            </div>
+            <div class="cards-container p-0">
+                <div class="card  p-0">
+                    <div class="card-header border-0 bgc-primary-d1 card-header-sm p-0">
+                        <h6 class="card-title text-white-tp2 pl-2">
+                            2. Datos de Igafom
+                        </h6>
+                    </div><!-- /.card-header -->
+                    <div class="card-body p-2">
+                        <div class="p-2">
+                            <div id="divCondicionResolucion">
+                                <div class="form-row">
+                                    <div class="form-group col-sm-3">
+                                        <label>Tipo Archivo</label>
+                                        <select id="cmbTipoArchivoResolucion" class="form-control">
+                                            <option selected value="0">ELEGIR...</option>
+                                            <option value="IMAGEN">Imagen</option>
+                                            <option value="DOCUMENTO">Documento</option>
+                                        </select>
+                                        <label id="lblErrorcmbTipoArchivoResolucion" style="color: red; font-size: 12px !important; display: none"></label>
+                                    </div>
+                                    <div class="form-group col-sm-3">
+                                        <label>Tipo Documento</label>
+                                        <select id="cmbTipoDocResolucion" class="form-control">
+                                            <option selected value="0">ELEGIR...</option>
+                                            <option value="RESOLUCION">RESOLUCIÓN</option>
+                                        </select>
+                                        <label id="lblErrorcmbTipoDocResolucion" style="color: red; font-size: 12px !important; display: none"></label>
+                                    </div>
+                                    <div class="form-group col-sm-4">
+                                        <label>Subir Archivo</label>
+                                        <input id="filesResolucion" name="filesResolucion" type="file" class="pr-2" size="1" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 order-last order-lg-first">
+                                    <div class="card border-0">
+                                        <div class="card-header bg-transparent border-0 pl-1">
+                                            <h5 class="card-title mb-2 mb-md-0 text-120">
+                                                <i class="fa fa-file mr-1 text-default text-90"></i>
+                                                <span class="text-105">Documentos</span>
+                                            </h5>
+                                            <div class="card-toolbar align-self-center">
+                                                <a href="#" data-action="toggle" class="card-toolbar-btn text-grey text-110"><i class="fa fa-chevron-up"></i></a>
+                                            </div>
+                                        </div>
+                                        <div class="card-body p-0 border-t-2 brc-default-l2">
+                                            <table class="table text-dark-m2 text-95" id="tableResolucion">
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div><!-- /.card-body -->
+                    </div>
+
+                </div>
+                <div class="p-2">
+                    <center>
+                        <button class="btn btn-success" data-dismiss="modal">Guardar</button>
+                    </center>
+                </div>
+            </div>
+
+
+
+        </div>
+
+    </div>
+
+
+</div>
+
+<div class="modal" id="myModalLoading" tabindex="-1" role="dialog" style="display: block;" hidden>
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <div class="modal-body">
+
+                <div class=" d-flex flex-column justify-content-between align-items-center">
+                    <p class="pt-2" style="color:darkblue">Por favor espere.....</p>
+                    <div class="fas fa-spinner fa-spin text-purple-m1 fa-2x mb-3"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js"></script>
+
+
+<script src="~/content/js/igafom.js"></script>
+<script src="~/content/js/General.js"></script>
+<link href="~/node_modules/toastr/toastr.min.css" rel="stylesheet" />
+<script src="~/node_modules/toastr/toastr.min.js"></script>

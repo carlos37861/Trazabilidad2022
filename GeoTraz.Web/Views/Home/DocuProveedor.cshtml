@@ -1,0 +1,239 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div>
+    <div class="card radius-1 pt-0">
+        <div class="card-header">
+            <h5 class="card-title text-110 text-dark-tp2">
+                @*@ViewBag.Message*@
+                DOCUMENTOS DE PROVEEDORES
+            </h5>
+
+
+        </div><!-- /.card-header -->
+
+
+
+    </div>
+</div>
+<div class="cards-container ">
+    <div class="card  ">
+        <div class="card-header p-0 pl-2 pt-1">
+            <h5 class="card-title text-black-50">
+                <i class="fa fa-filter mr-2px "></i>  Filtros de Búsqueda
+            </h5>
+        </div>
+        <div class="card-body p-1">
+            <div class="p-2">
+                <div class="form-row">
+                    <div class="form-group col-md-2">
+                        <label>RUC</label>
+                        <input type="text" class="form-control input-number" id="txtRucFiltrar" placeholder="RUC">
+                    </div>
+
+                    <div class="form-group col-md-3">
+                        <label for="inputCity">Razón Social</label>
+                        <input type="text" class="form-control" placeholder="Razón Social" id="txtRazonSocialFiltrar">
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="inputZip">Código Concesión</label>
+                        <input type="text" class="form-control" id="txtCodConcesionFiltrar" placeholder="Código Concesión">
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="inputZip">Nombre Concesión</label>
+                        <input type="text" class="form-control" id="txNombreConceFiltrar" placeholder="Nombre Concesión">
+                    </div>
+                    <div class="form-group col-md-1">
+                        <label>Buscar</label><br />
+                        <button class="btn btn-success text-white" id="btnSearch"><i class="fas fa-search text-110 align-text-bottom mr-1"></i> Buscar</button>
+                    </div>
+                    <div class="form-group col-md-1">
+                        <label for="inputCity">Acción</label><br />
+                        <button class="btn btn-warning text-white" id="btnReset"><i class="fas fa-sync-alt text-110 align-text-bottom mr-1"></i> Limpiar</button>
+                    </div>
+                    <div class="form-group col-md-1" style="display:none">
+                        <label for="">Exportar</label><br />
+                        <button class="btn btn-secondary text-white" id="btnExportar"><i class="fa fa-download text-110 align-text-bottom mr-1"></i> Exportar</button>
+                    </div>
+
+                </div>
+                <div class="form-row" style="display:none">
+
+                    <div class="form-group col-md-3">
+                        <label for="inputZip">Nombre del Derecho Minero</label>
+                        <input type="text" class="form-control" id="txtNomDerechoMineroFiltrar" placeholder="Nombre del Derecho Minero">
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label>Trazabilidad</label>
+                        <select id="cmbResultadoFiltrar" class="form-control">
+                            <option selected value="0">TODOS...</option>
+                            <option>TRAZABLE</option>
+                            <option>PENDIENTE</option>
+                            <option>NO TRAZABLE</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="form-field-mask-1">
+                            Fecha de Reinfo
+                        </label>
+                        <div class="input-group">
+                            <input type="date" class="form-control form-control" id="txtFechaReinfoFiltrar" />
+                        </div>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="form-field-mask-1">
+                            Sede
+                        </label>
+                        <div class="input-group">
+                            <select id="cmbSedeFiltrar" class="form-control">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<link rel="stylesheet" type="text/css" href="./node_modules/bootstrap-table/dist/bootstrap-table.css">
+<div>
+    <div class="card radius-1 pt-2 pl-3 pb-0">
+        <div class="">
+            <table class="table text-dark-m2 text-95" id="table">
+            </table>
+        </div><!-- /.card-body -->
+    </div>
+</div>
+
+<div class="modal fade" id="myModalDeclaracionMinera" role="dialog">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Documentos de Proveedor</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="cards-container p-0">
+                <div class="card  p-0">
+                    <div class="card-body p-2">
+                        <div class="p-0">
+                            <input type="text" id="TxtIndicador" style="display:none" />
+                            <input type="text" id="txtId_IdReinfo" style="display:none" />
+                            <table class="table" border="1">
+                                <tr>
+                                    <td colspan="1" style="font-size:13px"><label><strong>RAZÓN SOCIAL:</strong></label></td>
+                                    <td colspan="3"><label id="txtRazonSocial"></label></td>
+                                    <td><label style="font-size:13px"><strong>RUC:</strong></label></td>
+                                    <td><label id="txtRucProveedor"></label></td>
+                                </tr>
+                                <tr>
+                                    <td><label style="font-size:13px"><strong>DERECHO MINERO:</strong></label></td>
+                                    <td> <label id="txtNomDerechoMinero"></label></td>
+                                    <td><label style="font-size:13px"><strong>CÓDIGO CONCESIÓN:</strong></label></td>
+                                    <td> <label id="txtCodConcesion"></label></td>
+                                    <td><label style="font-size:13px"><strong>NOMBRE CONCESIÓN:</strong></label></td>
+                                    <td> <label id="txtNomConcesion"></label></td>
+                                </tr>
+                            </table>
+                            <div class="col-12 col-md-12 p-0">
+                                <div class="card border-0">
+                                    <div class="card-body bgc-white border-1 border-t-0 brc-info p-0">
+                                        <link rel="stylesheet" type="text/css" href="./node_modules/bootstrap-table/dist/bootstrap-table.css">
+                                        <div>
+                                            <div class="card radius-1 pt-0">
+                                                <div class="card-header p-2">
+                                                    <div class="card-title text-110 text-dark-tp2">
+                                                        <div class="form-row">
+                                                            <div class="form-group col-sm-3">
+                                                                <label>Tipo Documento</label>
+                                                                <select id="cmbTipoDocProv" class="form-control">
+                                                                    <option selected value="0">ELEGIR...</option>
+                                                                    <option value="CONTRATO DE SUMINISTRO DE MINERAL">CONTRATO DE SUMINISTRO DE MINERAL</option>
+                                                                    <option value="CARTA DE PRESENTACION">CARTA DE PRESENTACION</option>
+                                                                    <option value="FICHA RUC">FICHA RUC (REGISTRO UNICO DE CONTRIBUYENTE)</option>
+                                                                    <option value="ESCRITURA DE CONSTITUCION">ESCRITURA DE CONSTITUCION</option>
+                                                                    <option value="VIGENCIA DE PODER">VIGENCIA DE PODER</option>
+                                                                    <option value="REINFO">COMPROBANTE PARA EL REGISTRO INTEGRAL DE FORMALIZACION MINERA (REINFO)</option>
+                                                                    <option value="CONTRATO DE CESION O EXPLOTACION">CONTRATO DE CESION O EXPLOTACION, INSCRITO EN REGISTROS PUBLICOS </option>
+                                                                    <option value="DECLARACION DE CONOCIMIENTO DEL PROVEEDOR">DECLARACION DE CONOCIMIENTO DEL PROVEEDOR</option>
+                                                                    <option value="DECLARACION JURADA DE ORIGEN MINERAL">DECLARACION JURADA DE ORIGEN MINERAL</option>
+                                                                    <option value="BUSQUEDA UIF-PERU">BUSQUEDA UIF-PERU (OFICIAL DE CUMPLIMIENTO)</option>
+                                                                    <option value="ESTUDIO AMBIENTAL">CONSTANCIA DE HABER PRESENTADO ESTUDIO AMBIENTAL</option>
+                                                                    <option value="ACTUALIZACION DE COORDENADAS">CONSTANCIA DE ACTUALIZACION DE COORDENADAS (SI SE DA EL CASO)</option>
+                                                                    <option value="DELITO DE LAVADO DE ACTIVOS">BUSQUEDA EN GOOGLE "DELITO DE LAVADO DE ACTIVOS"</option>
+                                                                    <option value="INFORME DE TRAZABILIDAD">INFORME DE TRAZABILIDAD</option>
+                                                                </select>
+                                                                <label id="lblErrorcmbTipoDocProv" style="color: red; font-size: 12px !important; display: none"></label>
+                                                            </div>
+                                                            <div class="form-group col-sm-3">
+                                                                <label>Nombre de documento</label>
+                                                                <input id="txtDescArchDocProv" name="txtDescArchDocProv" autocomplete="off" type="text" class="pr-2 form-control" size="1" />
+                                                                <label id="txtDescArchDocProv" style="color: red; font-size: 12px !important; display: block"></label>
+                                                            </div>
+                                                            <div class="form-group col-sm-4">
+                                                                <label>Subir Archivo</label><br />
+                                                                <input id="filesDocProv" name="filesDocProv" type="file" class="pr-2" size="3" />
+                                                                <label id="lblErrorfilesDocProv" style="color: red; font-size: 12px !important; display: none"></label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div><!-- /.card-header -->
+                                                <div class="">
+                                                    <table class="table text-dark-m2 text-95" id="tableDocProv">
+                                                    </table>
+                                                </div><!-- /.card-body -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- /.card-body -->
+                    </div>
+
+                </div>
+            </div>
+
+            @*<div>
+                    <figure class="highcharts-figure">
+                        <div id="container"></div>
+
+                    </figure>
+                </div>*@
+            <div class="col-md-12 p-2">
+                <div>
+                    <center>
+                        @*<button type="button" class="btn btn-success" id="btnAgregarEditarDeclaracion" onclick="AgregarOeditarDeclaracion()">Guardar</button>*@
+                        <button type="button" class="btn btn-danger" data-dismiss="modal" id="btnCancelar"><i class="fa fa-times-circle text-110 align-text-bottom mr-1"></i> Cerrar</button><br /><br />
+                        @*<button type="button" class="btn btn-success" data-dismiss="modal">Guardar</button>*@
+                    </center>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="myModalLoading" tabindex="-1" role="dialog" style="display: block;" hidden>
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class=" d-flex flex-column justify-content-between align-items-center">
+                    <p class="pt-2" style="color:darkblue">Por favor espere.....</p>
+                    <div class="fas fa-spinner fa-spin text-purple-m1 fa-2x mb-3"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js"></script>
+<link href="~/content/css/declaracionminera.css" rel="stylesheet" />
+<script type="text/javascript" src="~/node_modules/jqtree/tree.jquery.js"></script>
+<script src="~/content/js/DocuProveedor.js"></script>
+<script src="~/content/js/General.js"></script>
+<link href="~/node_modules/toastr/toastr.min.css" rel="stylesheet" />
+<script src="~/node_modules/toastr/toastr.min.js"></script>
+

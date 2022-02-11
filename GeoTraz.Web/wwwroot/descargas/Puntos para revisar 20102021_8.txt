@@ -1,0 +1,10 @@
+reportes:
+
+* FECHA DE CREACION cambiar a fecha de informe por el "realizado por"    **** OK *******
+* popup que consulte que campos exportar al excel en REINFO MINERO ***** REVISAR 
+* documento ingemmet: tipo de documento ("constancia de reinfo","mapa de ubicacion" y "reporte de concesion")
+* En "* Si el derecho minero se encuentra Extinguido adjuntar el reporte del Ingemmet" un check si agregó un reporte de concesión
+* en el espacio blanco abanjo 2.2 en campo agregar un check si agreó mapa de ubicacion
+* en metros al costaod un check si agregó constancia de reinfo.
+
+

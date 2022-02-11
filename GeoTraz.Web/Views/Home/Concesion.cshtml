@@ -1,0 +1,111 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@*<script>
+        document.onreadystatechange = function () {
+            console.log("ready!");
+            fnValidaSesion()
+        }
+    </script>*@
+<div>
+    <div class="card radius-1 pt-0">
+        <div class="card-header">
+            <h5 class="card-title text-110 text-dark-tp2">
+                @*@ViewBag.Message*@
+                CONCESIONES
+            </h5>
+        </div><!-- /.card-header -->
+    </div>
+</div>
+
+<link rel="stylesheet" type="text/css" href="./node_modules/bootstrap-table/dist/bootstrap-table.css">
+<div>
+    <div class="card radius-1 pt-2 pl-3 pb-0">
+        <div class="card-header p-0">
+            <h5 class="card-title text-110 text-dark-tp2">
+                <button class="btn btn-secondary radius-2 border-b-2 px-0 py-2px  btn-text-slide-x text-white" id="BtnAgregar" onclick="getConcesion(0)" style="width: 18.5rem">
+                    <span class="btn-text-2 move-right">
+                        <span class="d-inline-block bgc-white-tp9 shadow-sm radius-2px h-4 px-25 pt-1 mr-1 border-1">
+                            <i class="fa fa-plus text-white-tp2 text-110 mt-3px"></i>
+                        </span>
+                    </span>Nueva Concesión
+                </button>
+            </h5>
+        </div><!-- /.card-header -->
+        <div class="">
+            <table class="table text-dark-m2 text-95" id="table">
+            </table>
+        </div><!-- /.card-body -->
+    </div>
+</div>
+<div class="modal fade" id="myModalConcesion" role="dialog">
+    <div class="modal-dialog modal-dialog-centered">
+        <!-- Modal content-->
+        <div class="modal-content m-0">
+            <div class="modal-header">
+                <h4 class="modal-title"> Datos de Concesión</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="card">
+                <div class="card-body p-0">
+                    <div class="p-1">
+                        <div class="col-sm-12">
+                            <input type="text" id="TxtIndicador" style="display:none" />
+                            <input type="text" id="txtId_Concesion" style="display:none" />
+                            <div class="form-row">
+                                <div class="form-group col-sm-12">
+                                    <label>Sede</label>
+                                    <select id="cmbSede" class="form-control">
+                                    </select>
+                                    <label id="lblErrorcmbSede" style="color: red; font-size: 12px !important; display: none"></label>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-sm-12">
+                                    <label>Código Concesión</label>
+                                    <input type="text" class="form-control" id="txtCodConcesion" autocomplete="off" onkeyup="mayus(this);">
+                                    <label id="lblErrortxtCodConcesion" style="color: red; font-size: 12px !important; display: none"></label>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-sm-12">
+                                    <label>Nombre Concesión</label>
+                                    <input type="text" class="form-control" id="txtNomConcesion" autocomplete="off" onkeyup="mayus(this);">
+                                    <label id="lblErrortxtNomConcesion" style="color: red; font-size: 12px !important; display: none"></label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- /.card-body -->
+            </div>
+            <div>
+                <center>
+                    <br />
+                    <button type="button" class="btn btn-success" id="GuardarConcesion" onclick="AgregarOeditarConcesion()"><i class="fa fa-save text-110 align-text-bottom mr-1"></i>Guardar</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" id="btnCancelar"><i class="fa fa-times-circle text-110 align-text-bottom mr-1"></i>Cancelar</button><br /><br />
+                </center>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="myModalLoading" tabindex="-1" role="dialog" style="display: block;" hidden>
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class=" d-flex flex-column justify-content-between align-items-center">
+                    <p class="pt-2" style="color:darkblue">Por favor espere.....</p>
+                    <div class="fas fa-spinner fa-spin text-purple-m1 fa-2x mb-3"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js"></script>
+
+<script src="~/content/js/Concesion.js"></script>
+<script src="~/content/js/General.js"></script>
+<link href="~/node_modules/toastr/toastr.min.css" rel="stylesheet" />
+<script src="~/node_modules/toastr/toastr.min.js"></script>
+
+

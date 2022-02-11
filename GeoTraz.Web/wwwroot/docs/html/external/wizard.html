@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+ <head>
+   <meta charset="utf-8">
+   <title>Wizard &amp; Validation</title>
+   
+   <base href="./../" />
+   
+   <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap-reboot.css">
+   <link rel="stylesheet" href="../../node_modules/prism-themes/themes/prism-material-light.css">
+   <link rel="stylesheet" href="../../node_modules/prismjs/plugins/line-highlight/prism-line-highlight.css">
+   <link rel="stylesheet" href="../assets/style.css" /> </head>
+
+ <body>
+   <div class="body-container">
+	   <div class="navbar">
+	   
+	   	<div class="navbar-brand">
+	   	   Ace Admin Docs
+	   	</div>
+	   	 
+	   	<div class="navbar-menu">
+	   		<a href="./external/form.html" class="prev-link" title="Form Elements">‹</a>
+	   
+	   		<a href="./external/gallery.html" class="next-link" title="Gallery">›</a>
+	   	</div>
+	    
+	   </div>
+	   <div class="main-container">
+		 <div class="sidebar">
+		  <ul class="nav">
+		 	<li class="nav-item">
+		 		  <a href="./index.html" data-href="/">Home</a>
+		 		
+		 	</li>	<li class="nav-item">
+		 		  <a href="#">Changes</a>
+		 		
+		 			<ul class="nav">
+		 				 <li class="nav-item">
+		 				 	  <a href="./changes/changelog.html" data-href="/changes/changelog">Changelog</a>
+		 				 	
+		 				 </li>			 <li class="nav-item">
+		 				 	  <a href="./changes/migration.html" data-href="/changes/migration">Migration</a>
+		 				 	
+		 				 </li>		</ul>
+		 	</li>	<li class="nav-item">
+		 		  <a href="#">Files</a>
+		 		
+		 			<ul class="nav">
+		 				 <li class="nav-item">
+		 				 	  <a href="./files/overview.html" data-href="/files/overview">Overview</a>
+		 				 	
+		 				 </li>			 <li class="nav-item">
+		 				 	  <a href="./files/sass-css.html" data-href="/files/sass-css">CSS</a>
+		 				 	
+		 				 </li>			 <li class="nav-item">
+		 				 	  <a href="./files/javascript.html" data-href="/files/javascript">Javascript</a>
+		 				 	
+		 				 </li>			 <li class="nav-item">
+		 				 	  <a href="./files/demo-files.html" data-href="/files/demo-files">Demo files</a>
+		 				 	
+		 				 </li>		</ul>
+		 	</li>	<li class="nav-item">
+		 		  <a href="#">CSS</a>
+		 		
+		 			<ul class="nav">
+		 				 <li class="nav-item">
+		 				 	  <a href="./css/colors.html" data-href="/css/colors">Colors</a>
+		 				 	
+		 				 </li>			 <li class="nav-item">
+		 				 	  <a href="./css/spacing-sizing.html" data-href="/css/spacing-sizing">Spacing &amp; Sizing</a>
+		 				 	
+		 				 </li>			 <li class="nav-item">
+		 				 	  <a href="./css/d-style.html" data-href="/css/d-style">Dynamic Styling</a>
+		 				 	
+		 				 </li>			 <li class="nav-item">
+		 				 	  <a href="./css/text-typography.html" data-href="/css/text-typography">Text &amp; Typography</a>
+		 				 	
+		 				 </li>			 <li class="nav-item">
+		 				 	  <a href="./css/buttons.html" data-href="/css/buttons">Buttons</a>
+		 				 	
+		 				 </li>			 <li class="nav-item">
+		 				 	  <a href="./css/misc.html" data-href="/css/misc">Misc</a>
+		 				 	
+		 				 </li>		</ul>
+		 	</li>	<li class="nav-item">
+		 		  <a href="#">Basics</a>
+		 		
+		 			<ul class="nav">
+		 				 <li class="nav-item">
+		 				 	  <a href="./basics/themes.html" data-href="/basics/themes">Themes</a>
+		 				 	
+		 				 </li>			 <li class="nav-item">
+		 				 	  <a href="./basics/layouts.html" data-href="/basics/layouts">Page Layout</a>
+		 				 	
+		 				 </li>			 <li class="nav-item">
+		 				 	  <a href="./basics/navbar.html" data-href="/basics/navbar">Navbar</a>
+		 				 	
+		 				 </li>			 <li class="nav-item">
+		 				 	  <a href="./basics/sidebar.html" data-href="/basics/sidebar">Sidebar</a>
+		 				 	
+		 				 </li>			 <li class="nav-item">
+		 				 	  <a href="./basics/content.html" data-href="/basics/content">Content</a>
+		 				 	
+		 				 </li>			 <li class="nav-item">
+		 				 	  <a href="./basics/footer.html" data-href="/basics/footer">Footer</a>
+		 				 	
+		 				 </li>			 <li class="nav-item">
+		 				 	  <a href="./basics/settings.html" data-href="/basics/settings">Settings</a>
+		 				 	
+		 				 </li>		</ul>
+		 	</li>	<li class="nav-item">
+		 		  <a href="#">Components</a>
+		 		
+		 			<ul class="nav">
+		 				 <li class="nav-item">
+		 				 	  <a href="./components/scrollbars.html" data-href="/components/scrollbars">Scrollbars</a>
+		 				 	
+		 				 </li>			 <li class="nav-item">
+		 				 	  <a href="./components/modals.html" data-href="/components/modals">Modals &amp; Asides</a>
+		 				 	
+		 				 </li>			 <li class="nav-item">
+		 				 	  <a href="./components/alerts.html" data-href="/components/alerts">Alerts &amp; Notifications</a>
+		 				 	
+		 				 </li>			 <li class="nav-item">
+		 				 	  <a href="./components/dropdowns.html" data-href="/components/dropdowns">Dropdowns</a>
+		 				 	
+		 				 </li>			 <li class="nav-item">
+		 				 	  <a href="./components/tooltips.html" data-href="/components/tooltips">Tooltips &amp; Popovers</a>
+		 				 	
+		 				 </li>			 <li class="nav-item">
+		 				 	  <a href="./components/tabs.html" data-href="/components/tabs">Tabs</a>
+		 				 	
+		 				 </li>			 <li class="nav-item">
+		 				 	  <a href="./components/accordions.html" data-href="/components/accordions">Accordions</a>
+		 				 	
+		 				 </li>			 <li class="nav-item">
+		 				 	  <a href="./components/form.html" data-href="/components/form">Form Elements</a>
+		 				 	
+		 				 </li>			 <li class="nav-item">
+		 				 	  <a href="./components/widgets.html" data-href="/components/widgets">Widget Boxes</a>
+		 				 	
+		 				 </li>		</ul>
+		 	</li>	<li class="nav-item">
+		 		  <a href="#">Pages</a>
+		 		
+		 			<ul class="nav">
+		 				 <li class="nav-item">
+		 				 	  <a href="./pages/overview.html" data-href="/pages/overview">Overview</a>
+		 				 	
+		 				 </li>		</ul>
+		 	</li>	<li class="nav-item">
+		 		  <a href="#">Frameworks &amp; Libraries</a>
+		 		
+		 			<ul class="nav">
+		 				 <li class="nav-item">
+		 				 	  <a href="./external/bs-jquery.html" data-href="/external/bs-jquery">Bootstrap &amp; jQuery</a>
+		 				 	
+		 				 </li>			 <li class="nav-item">
+		 				 	  <a href="./external/fonts-icons.html" data-href="/external/fonts-icons">Fonts &amp; Icons</a>
+		 				 	
+		 				 </li>			 <li class="nav-item">
+		 				 	  <a href="./external/charts.html" data-href="/external/charts">Charts</a>
+		 				 	
+		 				 </li>			 <li class="nav-item">
+		 				 	  <a href="./external/tables.html" data-href="/external/tables">Tables &amp; Grids</a>
+		 				 	
+		 				 </li>			 <li class="nav-item">
+		 				 	  <a href="./external/form.html" data-href="/external/form">Form Elements</a>
+		 				 	
+		 				 </li>			 <li class="nav-item">
+		 				 	  <a href="./external/wizard.html" data-href="/external/wizard">Wizard &amp; Validation</a>
+		 				 	
+		 				 </li>			 <li class="nav-item">
+		 				 	  <a href="./external/gallery.html" data-href="/external/gallery">Gallery</a>
+		 				 	
+		 				 </li>			 <li class="nav-item">
+		 				 	  <a href="./external/calendar.html" data-href="/external/calendar">Calendar</a>
+		 				 	
+		 				 </li>			 <li class="nav-item">
+		 				 	  <a href="./external/wysiwyg.html" data-href="/external/wysiwyg">Wysiwyg</a>
+		 				 	
+		 				 </li>			 <li class="nav-item">
+		 				 	  <a href="./external/treeview.html" data-href="/external/treeview">Treeview</a>
+		 				 	
+		 				 </li>			 <li class="nav-item">
+		 				 	  <a href="./external/other.html" data-href="/external/other">Other</a>
+		 				 	
+		 				 </li>		</ul>
+		 	</li>	<li class="nav-item">
+		 		  <a href="./credits.html" data-href="/credits">Credits</a>
+		 		
+		 	</li> </ul>
+		 </div>		 <div class="toc"></div>		 <div role="main" class="main-content">
+			<div class="page-content">
+			 <h1 id="wizard-validation"><div class="h-inner">Wizard &amp; Validation <a href="./external/wizard.html#wizard-validation"></a></div></h1>
+<h2 id="wizard"><div class="h-inner">Wizard <a href="./external/wizard.html#wizard"></a></div></h2>
+<p>SmartWizard plugin in included Ace's demo.<br>
+The plugin has different styles for wizard steps but currently Ace only supports &quot;Circles&quot; style that looks like the wizard in older versions of Ace.</p>
+<p>The styling is done inside <code>_plugin-wizard.scss</code> .</p>
+<p>You should also include the following:</p>
+<ul>
+<li><code>smartwizard/dist/css/smart_wizard.min.css</code></li>
+<li><code>smartwizard/dist/css/smart_wizard_theme_circles.min.css</code></li>
+</ul>
+<h3 id="syntax"><div class="h-inner">Syntax <a href="./external/wizard.html#syntax"></a></div></h3>
+<p>The html is like this:</p>
+<div class="code-wrap">
+						<span class="language-badge">html</span>
+						<pre class="language-html"><code class="language-html">&lt;div id=&quot;mywizard&quot;&gt;&#13;&#10;  &lt;ul class=&quot;mx-auto&quot;&gt;&#13;&#10;    &lt;li&gt;&#13;&#10;      &lt;a href=&quot;#step-1&quot;&gt;&#13;&#10;       &lt;span class=&quot;step-title&quot;&gt;&#13;&#10;        &lt;!-- show this when we are before or inside this step --&gt;&#13;&#10;        1&#13;&#10;       &lt;/span&gt;&#13;&#10;&#13;&#10;       &lt;span class=&quot;step-title-done&quot;&gt;&#13;&#10;        &lt;!-- show this when we are after this step --&gt;&#13;&#10;        &lt;i class=&quot;fa fa-check text-success-m1&quot;&gt;&lt;/i&gt;&#13;&#10;       &lt;/span&gt;&#13;&#10;      &lt;/a&gt;&#13;&#10;      &lt;span class=&quot;step-description&quot;&gt;&#13;&#10;        Step 1&#13;&#10;      &lt;/span&gt;&#13;&#10;    &lt;/li&gt;&#13;&#10;&#13;&#10;    &lt;li&gt;&#13;&#10;      ...&#13;&#10;    &lt;/li&gt;&#13;&#10;  &lt;/ul&gt;&#13;&#10;&lt;/div&gt;&#13;&#10;</code></pre>
+					</div>
+<p>If you want the animated progressbar, you should add a <code>li.wizard-progressbar</code> and use javascript to dynamically set its width:</p>
+<div class="code-wrap">
+						<span class="language-badge">html</span>
+						<pre class="language-html"><code class="language-html">&lt;div id=&quot;mywizard&quot;&gt;&#13;&#10;  &lt;ul class=&quot;mx-auto&quot;&gt;&#13;&#10;    &lt;li class=&quot;wizard-progressbar&quot;&gt;&lt;/li&gt;&#13;&#10;&#13;&#10;    &lt;li&gt;&#13;&#10;      &lt;a href=&quot;#step-1&quot;&gt;&#13;&#10;      ...&#13;&#10;      &lt;/a&gt;&#13;&#10;    &lt;/li&gt;&#13;&#10;&#13;&#10;    ...&#13;&#10;  &lt;/ul&gt;&#13;&#10;&lt;/div&gt;&#13;&#10;</code></pre>
+					</div>
+<div class="code-wrap">
+						<span class="language-badge">js</span>
+						<pre class="language-js"><code class="language-js">var stepCount = $(&#39;#mywizard&#39;).find(&#39;li &gt; a&#39;).length&#13;&#10;var left = (100 / (stepCount * 2))&#13;&#10;$(&#39;#mywizard&#39;).find(&#39;.wizard-progressbar&#39;).css( {left: left+&#39;%&#39;, right: left+&#39;%&#39;} )&#13;&#10;&#13;&#10;$(&#39;#mywizard&#39;).smartWizard({&#13;&#10;  ...&#13;&#10;  .on(&quot;showStep&quot;, function(e, anchorObject, stepNumber, stepDirection) {&#13;&#10;    var progress = parseInt((stepNumber + 1) * 100 / stepCount)&#13;&#10;&#13;&#10;    var halfStepWidth = parseInt(100 / stepCount) / 2&#13;&#10;    progress -= halfStepWidth;//because for example for the first step, we don&#39;t want progressbar to move all the way to next step&#13;&#10;&#13;&#10;    $(&#39;#mywizard&#39;).find(&#39;.wizard-progressbar&#39;).css(&#39;max-width&#39;, progress+&#39;%&#39;)&#13;&#10;  }&#13;&#10;})&#13;&#10;</code></pre>
+					</div>
+<h2 id="validation"><div class="h-inner">Validation <a href="./external/wizard.html#validation"></a></div></h2>
+<p>You can use HTML5's built-in validation or a plugin</p>
+<h3 id="html5"><div class="h-inner">HTML5 <a href="./external/wizard.html#html5"></a></div></h3>
+<div class="code-wrap">
+						<span class="language-badge">js</span>
+						<pre class="language-js"><code class="language-js">$(&#39;#mywizard&quot;)&#13;&#10;.on(&quot;leaveStep&quot;, function(e, anchorObject, stepNumber, stepDirection) {&#13;&#10;  if (stepNumber == 0 &amp;&amp; stepDirection == &#39;forward&#39;)  {&#13;&#10;    var form = document.getElementById(&#39;validation-form&#39;);&#13;&#10;    if (form.checkValidity() === false) {&#13;&#10;      event.preventDefault();&#13;&#10;      event.stopPropagation();&#13;&#10;&#13;&#10;      form.classList.add(&#39;was-validated&#39;);&#13;&#10;      return false;&#13;&#10;    }&#13;&#10;  }&#13;&#10;})&#13;&#10;</code></pre>
+					</div>
+<p>This adds Bootstrap's custom styling to form elements depending on their valid/invalid status</p>
+<h3 id="plugin"><div class="h-inner">Plugin <a href="./external/wizard.html#plugin"></a></div></h3>
+<p>I've used <em>jQuery Validation Plugin</em> in this demo. Please refer to its documentation for more info and see
+<code>application/views/default/pages/partials/form-wizard/@page-script.js</code>
+for an example.</p>
+<p>The important functions are <code>highlight</code> , <code>success</code> and <code>errorPlacement</code> in which you decide how to display error/success messages.</p>
+
+			</div>
+			
+			<div class="footer">
+			 <div class="footer-inner">
+			      <a href="./external/form.html" class="prev-link">
+			          Form Elements
+			      </a>
+			
+			      <a href="./external/gallery.html" class="next-link">
+			          Gallery
+			      </a>
+			 </div>
+			
+			 <a href="#" class="btn-scroll-up">↑</a>
+			</div>		 </div>	
+	   </div><!-- /.main-container -->
+
+   </div>
+   
+   <script type="text/javascript" src="../../node_modules/jquery/dist/jquery.js"></script>
+   <script type="text/javascript" src="../../node_modules/prismjs/prism.js"></script>
+   <script type="text/javascript" src="../../node_modules/prismjs/plugins/line-highlight/prism-line-highlight.js"></script>
+   
+   <script type="text/javascript">
+   var currentPage = "/external/wizard";
+   </script>
+   <script type="text/javascript" src="../assets/docs.js"></script> </body> 
+</html>
