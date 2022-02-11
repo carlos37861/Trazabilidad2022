@@ -165,7 +165,6 @@ function cargardatosTabla() {
                 checkboxHeader: true,
                 search: false,
                 searchAlign: "left",
-                //showSearchButton: true,
                 sortable: true,
                 detailView: false,
                 detailFormatter: "detailFormatter",
