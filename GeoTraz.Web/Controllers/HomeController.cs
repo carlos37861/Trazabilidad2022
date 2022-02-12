@@ -35,7 +35,7 @@ namespace GeoTraz.Web.Controllers
         {
             _logger = logger;
         }
-         
+         //VISTAS
         #region VISTAS
         public IActionResult Login()
         {
