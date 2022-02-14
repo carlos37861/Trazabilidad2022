@@ -369,7 +369,6 @@ function ListaSedesFiltrar() {
 }
 
 function getReinfo(id,condicion) {
-
         LimpiarLabels();
         $.ajax({
             url: '/Home/BuscarReinfo?N_CODREINFO=' + id,
@@ -386,9 +385,7 @@ function getReinfo(id,condicion) {
                     $("#txtRucProveedor").val(value.v_RUC);
                     $("#txtCodConcesion").val(value.v_CODCONSECION);
                     $("#txtNomConcesion").val(value.v_NOMCONSECION);
-                    
                     $("#txtNomDerechoMinero").val(value.v_NOMDERECHMINE);
-
                     $("#txtTipoActividad").val(value.v_CODTIPOACT);
                     //ZONA DE UBIGEO
                     $("#cmbDepartamento").val(dep + '0000');
@@ -396,26 +393,21 @@ function getReinfo(id,condicion) {
                     $("#cmbCiudad").val(dist);
                     $("#cmbSede").val(value.n_SEDE);
                     //FIN ZONA UBIGEO
-
                     $('#txtId_IdReinfo').val(value.n_CODREINFO);
-
                     $.ajax({
                         url: '/Home/ListRepLegales?codAnexo=' + value.v_RUC + '&tipo=P',
                         type: 'GET',
                         dataType: 'json',
                         data: 'data',
                         success: function (data) {
-                       
                             var datos = data.data;
                             $(datos).each(function (index, value) {
-
                                 $("#txtNombreRepLegal").val(value.v_NOM);
                                 $("#txtApePat").val(value.v_PAT);
                                 $("#txtApeMat").val(value.v_MAT);
                                 $("#txtTelefono").val(value.v_TLF);
                                 $("#txtEmail").val(value.v_EMAIL);
                                 $("#txtDireccion").val(value.v_DIRE);
-           
                                 $("#txtEmailPass").val(value.v_PASSEMAIL);
                                 $('#TxtIndicador').val(1);
                             });
@@ -439,17 +431,12 @@ function getReinfo(id,condicion) {
                                     $("#DivPerNat").hide();
                                     $("#DivRepLegal").show();
                                 } else if (value.v_TPPER == "N") {
-
                                     $("#txtCorreoPerNat").val(value.v_EMAIL);
                                     $("#txtDirecPerNat").val(value.v_DIRE);
                                     $("#txtTelPerNat").val(value.v_CEL);
-
-  
-
                                     $("#DivPerNat").show();
                                     $("#DivRepLegal").hide();
                                 }
-
                             });
                             //var fecha = new Date();
                             //var anio = fecha.getFullYear();
@@ -467,7 +454,6 @@ function getReinfo(id,condicion) {
                                 $("#txtCorreoContador").attr('disabled', false);
                                 $("#divDecMinera").css("display", "block");
                                 $("#btnAgregarEditarDeclaracion").attr('disabled', false);
-
                             }
                             $.ajax({
                                 url: '/Home/ValidaDeclaracionMinera?N_CODREIN=' + id,
@@ -476,12 +462,10 @@ function getReinfo(id,condicion) {
                                 data: 'data',
                                 success: function (data) {
                                     var datos = data.data;
-
                                     if (data.data.length == "0") {
                                         LimpiarTextos();
                                     }
                                     $(datos).each(function (index, value) {
-
                                         if (data.data.length > 0) {
                                             $("#txtObsDecMin").val(value.v_OBSERVACION),
                                             $("#txtNomContador").val(value.v_NOMCONTADOR),
@@ -497,12 +481,8 @@ function getReinfo(id,condicion) {
             
                         },
 
-
                     });
                 });
-
-
-
             },
 
 
