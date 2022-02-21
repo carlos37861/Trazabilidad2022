@@ -876,9 +876,6 @@ function Filtrar() {
                         clickToSelect: false,
                     }],
                 ],
-
-
-
                 icons: {
                     columns: 'fa-th-list text-orange-d1',
 
