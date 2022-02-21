@@ -122,24 +122,28 @@ function cargardatosTabla() {
                         formatter: DecMinera2021S1,
                         title: 'SEMESTRE 1',
                         align: 'center',
+                        sortable: true
                     },
                     {
                         field: 'v_2021SEM2',
                         formatter: DecMinera2021S2,
                         title: 'SEMESTRE 2',
                         align: 'center',
+                        sortable: true
                     },
                     {
                         field: 'v_2022SEM1',
                         formatter: DecMinera2022S1,
                         title: 'SEMESTRE 1',
                         align: 'center',
+                        sortable: true
                     },
                     {
                         field: 'v_2022SEM2',
                         formatter: DecMinera2022S2,
                         title: 'SEMESTRE 2',
                         align: 'center',
+                        sortable: true
                     },
                     {
                         field: 'n_CODREINFO',
@@ -178,7 +182,6 @@ function cargardatosTabla() {
                 printPageBuilder: function (table) {
                     var bsHref = $('link[rel=stylesheet][href*="/bootstrap.css"], link[rel=stylesheet][href*="/bootstrap.min.css"]').attr('href');
                     //get bootstrap.css
-
                     return '<html>\
                                 <head>\
                                   <link rel="stylesheet" type="text/css" href="'+ bsHref + '">\
@@ -212,7 +215,6 @@ function cargardatosTabla() {
                                 </a>\
                               </div > ';
         }
-
     }
     function Sede(value, row, index, field) {
         var nomSede = ""
@@ -232,7 +234,6 @@ function cargardatosTabla() {
                 });
             },
         });
-
         return '<label>' + nomSede + '</label>';
     }
 
@@ -248,7 +249,6 @@ function cargardatosTabla() {
         }
     }
     function DecMinera2021S2(value, row, index, field) {
-
         if (value > 0) {
             return '<div class="action-buttons">\
                                        <input type="checkbox" id="cbox2" disabled checked value="second_checkbox">\
@@ -297,7 +297,6 @@ function cargardatosTabla() {
             field: 'n_CODREINFO',
             values: ids
         });
-
         $removeBtn.prop('disabled', true)
     });
 }
@@ -318,7 +317,7 @@ jQuery(function ($) {
     $.ajax({
         async: false,
         url: '/Home/CargarUser',
-        type: 'GET',
+        type: 'GET', 
         dataType: 'json',
         data: 'data',
         success: function (data) {
@@ -476,21 +475,12 @@ function getReinfo(id,condicion) {
                                     $("#myModalDeclaracionMinera").modal({ backdrop: 'static', keyboard: false })
                                     $("#myModalDeclaracionMinera").modal('show');
                                 }
-
                             });
-            
                         },
-
                     });
                 });
             },
-
-
         });
-
-    
-   
-
 }
 
 function AgregarOeditarDeclaracion() {
@@ -847,24 +837,28 @@ function Filtrar() {
                         formatter: DecMinera2021S1,
                         title: 'SEMESTRE 1',
                         align: 'center',
+                        sortable: true
                     },
                     {
                         field: 'n_CODREINFO',
                         formatter: DecMinera2021S2,
                         title: 'SEMESTRE 2',
                         align: 'center',
+                        sortable: true
                     },
                     {
                         field: 'n_CODREINFO',
                         formatter: DecMinera2022S1,
                         title: 'SEMESTRE 1',
                         align: 'center',
+                        sortable: true
                     },
                     {
                         field: 'n_CODREINFO',
                         formatter: DecMinera2022S2,
                         title: 'SEMESTRE 2',
                         align: 'center',
+                        sortable: true
                     },
                     {
                         field: 'n_CODREINFO',
@@ -886,7 +880,6 @@ function Filtrar() {
 
                     search: 'fa-search text-blue'
                 },
-
 
                 toolbar: "#table-toolbar",
                 theadClasses: "bgc-white text-grey text-uppercase text-80",
@@ -940,8 +933,6 @@ function Filtrar() {
     
     //Creación de iconos
     function formatTableCellActions(value, row, index, field) {
-
-
         if (sedeReinfo == UserSede || UserSede==1) {
             return '<div class="action-buttons">\
                                 <a class="text-purple mx-2px" href="#" onclick=getReinfo('+ value + ',0) >\
@@ -1051,7 +1042,6 @@ function Filtrar() {
         }
     }
     function Sede(value, row, index, field) {
-
         var nomSede = ""
         $.ajax({
             async: false,
@@ -1069,7 +1059,6 @@ function Filtrar() {
                 });
             },
         });
-
         return '<label>' + nomSede + '</label>';
     }
     //enable/disable 'remove' button
@@ -1084,12 +1073,10 @@ function Filtrar() {
             return row.id
         });
 
-
         $_table.bootstrapTable('remove', {
             field: 'n_CODREINFO',
             values: ids
         });
-
         $removeBtn.prop('disabled', true)
     });
 }
@@ -1159,7 +1146,6 @@ function SumaToneladas1semestre() {
     var txtAbrilT = parseFloat($("#txtAbrilT").val());
     var txtMayoT = parseFloat($("#txtMayoT").val());
     var txtJunioT = parseFloat($("#txtJunioT").val());
-
     var txtTotalS1T = parseFloat(txtEneroT + txtFebreroT + txtMarzoT + txtAbrilT + txtMayoT + txtJunioT );
     if (isNaN(txtEneroT)) {
         txtEneroT = parseFloat(0);
@@ -1179,7 +1165,6 @@ function SumaToneladas1semestre() {
     if (isNaN(txtJunioT)) {
         txtJunioT = parseFloat(0);
     }
-
     if (isNaN(txtTotalS1T)) {
         $("#txtTotalS1T").val((txtEneroT + txtFebreroT + txtMarzoT + txtAbrilT + txtMayoT + txtJunioT).toFixed(3));
     } else {
@@ -1229,7 +1214,6 @@ function PromLey1semestre() {
     var txtAbrilL = parseFloat($("#txtAbrilL").val());
     var txtMayoL = parseFloat($("#txtMayoL").val());
     var txtJunioL = parseFloat($("#txtJunioL").val());
-
     var txtTotalS1L = parseFloat((txtEneroL + txtFebreroL + txtMarzoL + txtAbrilL + txtMayoL + txtJunioL)/6);
     if (isNaN(txtEneroL)) {
         txtEneroL = parseFloat(0);
@@ -1249,7 +1233,6 @@ function PromLey1semestre() {
     if (isNaN(txtJunioL)) {
         txtJunioL = parseFloat(0);
     }
-
     if (isNaN(txtTotalS1L)) {
         $("#txtTotalS1L").val(((txtEneroL + txtFebreroL + txtMarzoL + txtAbrilL + txtMayoL + txtJunioL) / 6).toFixed(3));
     } else {
@@ -1264,7 +1247,6 @@ function PromLey2semestre() {
     var txtOctubreL = parseFloat($("#txtOctubreL").val());
     var txtNoviembreL = parseFloat($("#txtNoviembreL").val());
     var txtDiciembreL = parseFloat($("#txtDiciembreL").val());
-
     var txtTotalS2L = parseFloat((txtJulioL + txtAgostoL + txtSetiembreL + txtOctubreL + txtNoviembreL + txtDiciembreL) / 6);
     if (isNaN(txtJulioL)) {
         txtJulioL = parseFloat(0);
@@ -1284,7 +1266,6 @@ function PromLey2semestre() {
     if (isNaN(txtDiciembreL)) {
         txtDiciembreL = parseFloat(0);
     }
-
     if (isNaN(txtTotalS2L)) {
         $("#txtTotalS2L").val(((txtJulioL + txtAgostoL + txtSetiembreL + txtOctubreL + txtNoviembreL + txtDiciembreL) / 6).toFixed(3));
     } else {
@@ -1306,57 +1287,44 @@ function cargardatosTablaCargoDecMinera(id,condicion){
             $_dataDecMin = datos;
             $_tableDecMin.bootstrapTable('destroy').bootstrapTable({
                 data: $_dataDecMin,
-
                 columns: [
-
                     {
                         field: 'v_TIPOIMAG',
                         title: 'AÑO',
-
                         sortable: true
                     },
                     {
                         field: 'v_TIPOIGAFOM',
                         title: 'SEMESTRE',
-
                         sortable: true,
                     },
                     {
                         field: 'v_NOMBRE',
                         title: 'Nombre de Archivo',
-
                         sortable: true,
                     },
                     {
                         field: 'v_NOMBRE',
                         title: '<i class="fa fa-cog text-white-d1 text-130"></i>',
-
                         formatter: formatTableCellActions2,
                         width: 140,
                         align: 'center',
                         printIgnore: true,
                         clickToSelect: false,
-
                     },
-
                     {
                         field: 'n_CODARCHIVO',
                         title: '<i class="fa fa-cog text-white-d1 text-130"></i>',
-
                         formatter: formatTableCellActions,
                         width: 140,
                         align: 'center',
                         printIgnore: true,
                         clickToSelect: false,
-
                     },
-
                 ],
 
                 icons: {
                     columns: 'fa-th-list text-orange-d1',
-
-
                     search: 'fa-search text-blue'
                 },
 
@@ -1364,28 +1332,23 @@ function cargardatosTablaCargoDecMinera(id,condicion){
                 toolbar: "#table-toolbar",
                 theadClasses: "bgc-primary-tp2 text-white text-uppercase text-80",
                 clickToSelect: true,
-
                 checkboxHeader: true,
                 search: false,
+                //Alinea la caja de texto busqueda a la izquierda
                 searchAlign: "left",
                 //showSearchButton: true,
-
                 sortable: false,
-
                 detailView: false,
                 detailFormatter: "detailFormatter",
-
                 pagination: true,
                 paginationLoop: false,
-
                 buttonsClass: "outline-default btn-smd bgc-white btn-h-light-primary btn-a-outline-primary py-1",
-
+                //sección de exportar
                 showExport: false,
                 showPrint: false,
                 showColumns: false,
                 showFullscreen: false,
-
-
+                //sección de impresión.
                 printPageBuilder: function (table) {
                     var bsHref = $('link[rel=stylesheet][href*="/bootstrap.css"], link[rel=stylesheet][href*="/bootstrap.min.css"]').attr('href');
                     //get bootstrap.css
@@ -1476,7 +1439,7 @@ function descargar(value) {
             if (data == 0) {
                 toastr["error"]("Ocurrio un error o no existe el archivo");
             } else {
-                w = window.open("/Home/Descargarvirunga cerveza pais?" + parametros, "_blank");
+                w = window.open("/Home/Descargar?" + parametros, "_blank");
                 $(w).ready(function () {
                     toastr["success"]("Se descargó el archivo:  " + value);
                 });

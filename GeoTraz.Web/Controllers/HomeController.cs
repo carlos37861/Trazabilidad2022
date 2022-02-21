@@ -605,7 +605,6 @@ namespace GeoTraz.Web.Controllers
             try
             {
                 List<ArchivosDTO> archivos = new List<ArchivosDTO>();
-
                 if (files.Count > 0)
                 {
                     foreach (var file in files)
