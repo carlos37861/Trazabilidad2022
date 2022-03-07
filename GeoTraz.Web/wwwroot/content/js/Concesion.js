@@ -19,7 +19,7 @@ function cargardatosTabla() {
 
             $('#myModalLoading').attr('hidden', true);
             $('#myModalLoading').modal('hide');
-            $('#liConcesion').addClass('active');
+            $('#liconcesion').addClass('active');
         },
         success: function (data) {
             

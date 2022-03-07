@@ -9,7 +9,7 @@ namespace GeoTraz.Core
 {
     public interface IUnitOfWork : IDisposable
     {
-          IReinfoRepository ReinfoRepository { get; }
+        IReinfoRepository ReinfoRepository { get; }
         IArchivosRepository ArchivosRepository { get; }
         IDeclaracionMineraRepository DeclaracionMineraRepository { get; }
         IReporteRepository ReporteRepository { get; }

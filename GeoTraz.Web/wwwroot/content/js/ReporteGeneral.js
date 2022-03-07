@@ -23,7 +23,7 @@ function cargardatosTabla() {
 
             $('#myModalLoading').attr('hidden', true);
             $('#myModalLoading').modal('hide');
-            $('#liReporteGeneral').addClass('active');
+            $('#lireporte3').addClass('active');
         },
         success: function (data) {
             var datos = data.data;

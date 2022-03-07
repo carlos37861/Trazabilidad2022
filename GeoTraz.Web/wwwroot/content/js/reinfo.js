@@ -1371,7 +1371,6 @@ jQuery(function ($) {
     cargardatosTabla();
     cargardatosTabla2();
     cargardatosTabla3();
-    
 
     ListaDepartamentos();
     ListaDepartamentosPrint();
@@ -1564,10 +1563,9 @@ function ListaSedesPrint() {
                 $('#cmbSedePrint').append('<option value=' + value.n_CODSEDE + '>' + value.v_NOMSEDE + '</option > ');
             });
         }
-
-
     });
 }
+
 function ListaSedesFiltrar() {
     $.ajax({
         url: '/Home/ListaSedes',
@@ -1584,6 +1582,21 @@ function ListaSedesFiltrar() {
             });
         }
     });
+
+    //PRUEBA DE FETCH Y JAVASCRITP PURO
+
+    //let element = document.getElementById('cmbSedeFiltrar');
+    //fetch('/Home/ListaSedes')
+    //    .then(response => response.json())
+    //    .then(data => {
+    //        data.forEach(obj => {
+    //            Object.entries(obj).forEach(([key, value]) => {
+    //                console.log(`${key} ${value}`);
+    //            });
+    //            console.log('-------------------');
+    //        });
+    //    }).catch(err => console.log(err));
+  
 }
 function ListaFirmantesRealizado() {
     $.ajax({

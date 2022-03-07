@@ -40,7 +40,7 @@ function cargardatosTabla() {
         complete: function () {
             $('#myModalLoading').attr('hidden', true);
             $('#myModalLoading').modal('hide');
-            $('#liDocuCapacitacion').addClass('active');
+            $('#lidocumentocapacitacion').addClass('active');
         },
         success: function (data) {
             var datos = data.data;

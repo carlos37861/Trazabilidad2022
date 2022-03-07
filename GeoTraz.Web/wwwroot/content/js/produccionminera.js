@@ -21,7 +21,7 @@ function cargardatosTabla() {
         complete: function () {
             $('#myModalLoading').attr('hidden', true);
             $('#myModalLoading').modal('hide');
-            $('#liDeclaracionMinera').addClass('active');
+            $('#lideclaracionminera').addClass('active');
         },
         success: function (data) {
             var datos = data.data;

@@ -22,7 +22,7 @@ jQuery(function ($) {
                 $("#lblBotonesSede" + UserSede).addClass("active");
             });
         },
-    });
+    }); 
 });
 
 // CREACIÓN DE GRAFICOS SEGUN LA SEDE QUE SELECCIONE
@@ -76,7 +76,6 @@ function filtraSedeReporte(id) {
                 } else if (value.v_RESULTADOS == "NO TRAZABLE") {
                     notrazable = notrazable + 1;
                 }
-
                 //CONTADOR ESTADO PROVEEDOR
                 if (value.v_ESTADOIGAFOM == "FORMALIZADO") {
                     formalizado = formalizado + 1

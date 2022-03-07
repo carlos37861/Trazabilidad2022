@@ -221,6 +221,38 @@ namespace GeoTraz.Web.Controllers
         #endregion
 
         #region USUARIOS
+        //[HttpPost]
+        //public async Task<JsonResult> LoginUsuario(Usuario usuario)
+        //{
+        //    AuthToken.Token = HttpClientIdentity.GetTokenClient("xOpyt0J7HSAqs5X", "OLktEtciYxJxN2R");
+        //    AuthToken.AppID = 10;
+        //    Usuario oUser = HttpClientIdentity.LoginUsuario(usuario.V_LOGIN, usuario.V_PASS, AuthToken.AppID.ToString());
+        //    if (oUser != null)
+        //    {
+        //        if (oUser.UserRolesApp.Count() > 0)
+        //        {
+        //            foreach (var roles in oUser.UserRolesApp)
+        //            {
+        //                if (roles.V_IDROLE == "R1001")
+        //                {
+        //                    AuthToken.LoginName = oUser.V_LOGIN;
+        //                    AuthToken.CodSede = oUser.N_CODSEDE;
+        //                    //AuthToken.RolUser = oUser.UserRolesApp.ToList()[0].V_IDROLE;
+        //                    HttpContext.Session.SetComplexData("usuariologin", oUser);
+        //                }
+        //            }
+        //        }
+        //        else
+        //        {
+        //            oUser = null;
+        //        }
+        //    }
+        //    else
+        //    {
+        //        oUser = null;
+        //    }
+        //    return Json(new { data = oUser });
+        //}
         [HttpPost]
         public async Task<JsonResult> LoginUsuario(Usuario usuario)
         {
@@ -229,23 +261,9 @@ namespace GeoTraz.Web.Controllers
             Usuario oUser = HttpClientIdentity.LoginUsuario(usuario.V_LOGIN, usuario.V_PASS, AuthToken.AppID.ToString());
             if (oUser != null)
             {
-                if (oUser.UserRolesApp.Count() > 0)
-                {
-                    foreach (var roles in oUser.UserRolesApp)
-                    {
-                        if (roles.V_IDROLE == "R1001")
-                        {
-                            AuthToken.LoginName = oUser.V_LOGIN;
-                            AuthToken.CodSede = oUser.N_CODSEDE;
-                            //AuthToken.RolUser = oUser.UserRolesApp.ToList()[0].V_IDROLE;
-                            HttpContext.Session.SetComplexData("usuariologin", oUser);
-                        }
-                    }
-                }
-                else
-                {
-                    oUser = null;
-                }
+                AuthToken.LoginName = oUser.V_LOGIN;
+                AuthToken.CodSede = oUser.N_CODSEDE;
+                HttpContext.Session.SetComplexData("usuariologin", oUser);
             }
             else
             {
@@ -253,7 +271,6 @@ namespace GeoTraz.Web.Controllers
             }
             return Json(new { data = oUser });
         }
-
         public async Task<JsonResult> CargarUser()
         {
             Usuario oUser = new Usuario();
@@ -267,31 +284,31 @@ namespace GeoTraz.Web.Controllers
 
         #region MENU
 
-        [HttpGet]
-        public async Task<JsonResult> ListaMenu(string userId, string rol)
-        {
-            List<RutaPadre> ListaRutas =  HttpClientIdentity.GetUserMenuRol(userId, rol);
-            List<RutaPadre> padreList = new List<RutaPadre>();
-            List<RutaPadre> padreListSend = new List<RutaPadre>();
-            foreach(RutaPadre obj in ListaRutas)
-            {
-               String[] lista = obj.V_PARENT.Split(".");
-                if (lista.Length == 1)
-                {
-                    //obj.Hijos_List = ListaRutas.Where(x => x.V_PARENT.Substring(0, 1) == obj.V_PARENT && !String.IsNullOrEmpty(x.V_FUNC)).ToList();
-                    padreList.Add(obj);
-                }
-            }
-            foreach (RutaPadre obj in padreList)
-            {
-                if (String.IsNullOrEmpty(obj.V_FUNC))
-                {
-                    obj.Hijos_List = ListaRutas.Where(x => x.V_PARENT.Substring(0, 1) == obj.V_PARENT && !String.IsNullOrEmpty(x.V_FUNC)).ToList();
-                }
-                padreListSend.Add(obj);
-            }
-            return Json(new { data = padreListSend });
-        }
+        //[HttpGet]
+        //public async Task<JsonResult> ListaMenu(string userId, string rol)
+        //{
+        //    List<RutaPadre> ListaRutas =  HttpClientIdentity.GetUserMenuRol(userId, rol);
+        //    List<RutaPadre> padreList = new List<RutaPadre>();
+        //    List<RutaPadre> padreListSend = new List<RutaPadre>();
+        //    foreach(RutaPadre obj in ListaRutas)
+        //    {
+        //       String[] lista = obj.V_PARENT.Split(".");
+        //        if (lista.Length == 1)
+        //        {
+        //            //obj.Hijos_List = ListaRutas.Where(x => x.V_PARENT.Substring(0, 1) == obj.V_PARENT && !String.IsNullOrEmpty(x.V_FUNC)).ToList();
+        //            padreList.Add(obj);
+        //        }
+        //    }
+        //    foreach (RutaPadre obj in padreList)
+        //    {
+        //        if (String.IsNullOrEmpty(obj.V_FUNC))
+        //        {
+        //            obj.Hijos_List = ListaRutas.Where(x => x.V_PARENT.Substring(0, 1) == obj.V_PARENT && !String.IsNullOrEmpty(x.V_FUNC)).ToList();
+        //        }
+        //        padreListSend.Add(obj);
+        //    }
+        //    return Json(new { data = padreListSend });
+        //}
 
         #endregion
 

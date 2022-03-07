@@ -23,16 +23,13 @@ function cargardatosTabla() {
 
             $('#myModalLoading').attr('hidden', true);
             $('#myModalLoading').modal('hide');
-            $('#liDocuProveedor').addClass('active');
+            $('#lidocumentoproveedor').addClass('active');
         },
         success: function (data) {
-
             var datos = data.data;
-
             $_data = datos;
             $_table.bootstrapTable('destroy').bootstrapTable({
                 data: $_data,
-
                 columns: [
                     {
                         field: 'n_SEDE',

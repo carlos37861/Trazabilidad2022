@@ -25,7 +25,7 @@ function cargardatosTabla() {
         complete: function () {
             $('#myModalLoading').attr('hidden', true);
             $('#myModalLoading').modal('hide');
-            $('#liDocumentos').addClass('active');
+            $('#lidocumentosayuda').addClass('active');
         },
         success: function (data) {
             var datos = data.data;

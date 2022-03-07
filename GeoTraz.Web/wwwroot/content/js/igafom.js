@@ -30,7 +30,7 @@ function cargardatosTabla() {
 
             $('#myModalLoading').attr('hidden', true);
             $('#myModalLoading').modal('hide');
-            $('#liIgafom').addClass('active');
+            $('#liigafom').addClass('active');
         },
         success: function (data) {
 

@@ -45,7 +45,7 @@ function cargardatosTabla() {
 
             $('#myModalLoading').attr('hidden', true);
             $('#myModalLoading').modal('hide');
-            $('#liReporte').addClass('active');
+            $('#lireporte2').addClass('active');
         },
         success: function (data) {
 

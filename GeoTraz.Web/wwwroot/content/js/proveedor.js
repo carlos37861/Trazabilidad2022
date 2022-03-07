@@ -15,7 +15,7 @@ function cargardatosTabla() {
             complete: function () {
                 $('#myModalLoading').attr('hidden', true);
                 $('#myModalLoading').modal('hide');
-                $("#liProveedor").addClass('active');
+                $("#liproveedor").addClass('active');
             },
             success: function (data) {
                 var datos = data.data;

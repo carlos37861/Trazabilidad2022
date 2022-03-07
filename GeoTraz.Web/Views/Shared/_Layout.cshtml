@@ -74,15 +74,8 @@
 
 
     <!-- include vendor stylesheets used in "Dashboard" page. see "application/views/default/pages/partials/dashboard/vendor-stylesheets.hbs" -->
-
-
     <link rel="stylesheet" type="text/css" href="~/dist/css/ace-font.css">
-
-
-
     <link rel="stylesheet" type="text/css" href="~/dist/css/ace.css">
-
-
     <link rel="icon" type="image/png" href="~/assets/image/user2.png" />
 
     <!-- "Dashboard" page styles specific to this page for demo purposes -->
@@ -124,7 +117,6 @@
                     </span>
                 </button>
 
-
                 <div class="navbar-menu collapse navbar-collapse navbar-backdrop" id="navbarMenu">
 
                     <div class="navbar-nav">
@@ -164,7 +156,6 @@
                                         </div>
                                         <div class="dropdown-divider"></div>
                                     </div>
-
                                     <a class="dropdown-item btn btn-outline-blue" href="@Url.Action("Logout","Home")">
                                         <i class="fa fa-power-off text-warning-d1 text-105 mr-1 "></i>
                                         Cerrar Sesión
@@ -189,53 +180,59 @@
                         </div>
                         <hr />
                         <ul class="nav has-active-border" role="navigation" aria-label="Main">
-                            <li class="nav-item"  id="lidashboard">
-                            
-                                <a href="@Url.Action("Dashboard","Home")" class="nav-link" >
+
+                            <li class="nav-item" id="lidashboard">
+
+                                <a href="@Url.Action("Dashboard","Home")" class="nav-link">
 
                                     <i class="nav-icon fa fa-user-circle text-blue"></i>
                                     <span class="nav-text fadeable">
                                         <span>TRAZABILIDAD</span>
                                     </span>
                                 </a>
-                                    <b class="sub-arrow"></b>
+                                <b class="sub-arrow"></b>
                             </li>
                         </ul>
                         <hr />
                         <ul class="nav has-active-border" role="navigation" aria-label="Main" id="ulMenu">
-                            @*<li class="nav-item" id="liMantenimiento" style="display:none">
-                                    <a href="#" class="nav-link dropdown-toggle">
-                                        <i class="nav-icon fa fa-cog"></i>
-                                        <span class="nav-text fadeable">
-                                            <span>Mantenimientos</span>
-                                        </span>
-                                        <b class="caret fa fa-angle-left rt-n90"></b>
-                                    </a>
-                                        <div class="hideable submenu collapse">
-                                            <ul class="submenu-inner">
-                                                <li class="nav-item" id="liproveedor">
-                                                    <a href="@Url.Action("Proveedor","Home")" class="nav-link">
-                                                        <i class="nav-icon fa fa-building"></i>
-                                                        <span class="nav-text fadeable">
-                                                            <span>Proveedores</span>
-                                                        </span>
-                                                    </a>
-                                                    <b class="sub-arrow"></b>
-                                                </li>
-                                                <li class="nav-item" id="liconcesion">
-                                                    <a href="@Url.Action("Concesion","Home")" class="nav-link">
-                                                        <i class="nav-icon fa fa-id-card"></i>
-                                                        <span class="nav-text fadeable">
-                                                            <span>Concesiones</span>
-                                                        </span>
-                                                    </a>
-                                                    <b class="sub-arrow"></b>
-                                                </li>
-                                            </ul>
-                                        </div>
-                            <b class="sub-arrow"></b>
-                        </li>
-                            <li class="nav-item" id="lireinfominero" style="display:none">
+                            <li class="nav-item-caption">
+                                <span class="fadeable pl-3">MÓDULOS</span>
+                                <span class="fadeinable mt-n2 text-125">&hellip;</span>
+
+                            </li>
+                            <li class="nav-item" id="liMantenimiento" style="display:none">
+                                <a href="#" class="nav-link dropdown-toggle">
+                                    <i class="nav-icon fa fa-cog"></i>
+                                    <span class="nav-text fadeable">
+                                        <span>Mantenimientos</span>
+                                    </span>
+                                    <b class="caret fa fa-angle-left rt-n90"></b>
+                                </a>
+                                <div class="hideable submenu collapse">
+                                    <ul class="submenu-inner">
+                                        <li class="nav-item" id="liproveedor">
+                                            <a href="@Url.Action("Proveedor","Home")" class="nav-link">
+                                                <i class="nav-icon fa fa-building"></i>
+                                                <span class="nav-text fadeable">
+                                                    <span>Proveedores</span>
+                                                </span>
+                                            </a>
+                                            <b class="sub-arrow"></b>
+                                        </li>
+                                        <li class="nav-item" id="liconcesion">
+                                            <a href="@Url.Action("Concesion","Home")" class="nav-link">
+                                                <i class="nav-icon fa fa-id-card"></i>
+                                                <span class="nav-text fadeable">
+                                                    <span>Concesiones</span>
+                                                </span>
+                                            </a>
+                                            <b class="sub-arrow"></b>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <b class="sub-arrow"></b>
+                            </li>
+                            <li class="nav-item" id="liReinfo" style="display:none">
                                 <a href="@Url.Action("Reinfo","Home")" class="nav-link">
                                     <i class="nav-icon fa fa-list-alt"></i>
                                     <span class="nav-text fadeable">
@@ -271,7 +268,7 @@
                                 </a>
                                 <b class="sub-arrow"></b>
                             </li>
-                            <li class="nav-item" id="lireporte" style="display: none">
+                            <li class="nav-item" id="liReporte" style="display: none">
                                 <a href="#" class="nav-link dropdown-toggle">
                                     <i class="nav-icon nav-icon fa fa-file"></i>
                                     <span class="nav-text fadeable">
@@ -366,7 +363,7 @@
                                     </ul>
                                 </div>
                                 <b class="sub-arrow"></b>
-                            </li>*@
+                            </li>
                         </ul>
                     </div><!-- /.sidebar scroll -->
                 </div>

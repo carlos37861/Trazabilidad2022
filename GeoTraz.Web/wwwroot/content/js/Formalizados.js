@@ -35,7 +35,7 @@ function cargardatosTabla() {
 
             $('#myModalLoading').attr('hidden', true);
             $('#myModalLoading').modal('hide');
-            $('#liFormalizados').addClass('active');
+            $('#liformalizados').addClass('active');
         },
         success: function (data) {
 

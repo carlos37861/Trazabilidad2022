@@ -48,7 +48,7 @@ function cargardatosTabla() {
 
             $('#myModalLoading').attr('hidden', true);
             $('#myModalLoading').modal('hide');
-            $('#liCatalogo').addClass('active');
+            $('#lidocatalogo').addClass('active');
         },
         success: function (data) {
             var datos = data.data;
