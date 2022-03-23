@@ -160,15 +160,12 @@ namespace GeoTraz.Web.Data
                 //dataResult = JsonConvert.DeserializeObject<List<ReinfoDTO>>(data);
                 return Convert.ToInt32(data);
             }
-
             return 0;
-
         }
 
 
         public static async Task<int> EliminarReporte(ReporteDTO reporte)
         {
-
             HttpClientHandler clientHandler = new HttpClientHandler();
             clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
             HttpClient _httpClient = new HttpClient(clientHandler);
