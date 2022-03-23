@@ -24,7 +24,7 @@ namespace GeoTraz.Web.Data
         //        HttpClientHandler clientHandler = new HttpClientHandler();
         //        clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
         //        HttpClient _httpClient = new HttpClient(clientHandler);
-        //        String UriGeneral = JsonHelper.GetSection("UriGeneral") + "Firmantes/lista-firmantes";
+        //        String UriGeneral = JsonHelper.GetSection("UriPrueba") + "Firmantes/lista-firmantes";
         //        List<FirmantesDTO> dataResult = new List<FirmantesDTO>();
         //        string _TOKEN = AuthToken.Token;
         //        if (_TOKEN == null)

@@ -72,5 +72,9 @@ namespace GeoTraz.Common.Entities
         public int V_2022SEM1 { get; set; }
         public int V_2022SEM2 { get; set; }
 
+        public int V_CONTRATOEXPLOTACION { get; set; }
+        public int V_CONTRATOCESION { get; set; }
+        public int V_CONTRATOTERRESUPERFICIAL { get; set; }
+
     }
 }

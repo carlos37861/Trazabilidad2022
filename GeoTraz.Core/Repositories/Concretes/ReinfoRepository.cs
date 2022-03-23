@@ -215,7 +215,9 @@ namespace GeoTraz.Core.Repositories.Concretes
                             V_2021SEM2 = sqlDataReader[51] == DBNull.Value ? 0 : Convert.ToInt32(sqlDataReader[51]),
                             V_2022SEM1 = sqlDataReader[52] == DBNull.Value ? 0 : Convert.ToInt32(sqlDataReader[52]),
                             V_2022SEM2 = sqlDataReader[53] == DBNull.Value ? 0 : Convert.ToInt32(sqlDataReader[53]),
-
+                            V_CONTRATOEXPLOTACION = sqlDataReader[54] == DBNull.Value ? 0 : Convert.ToInt32(sqlDataReader[54]),
+                            V_CONTRATOCESION = sqlDataReader[55] == DBNull.Value ? 0 : Convert.ToInt32(sqlDataReader[55]),
+                            V_CONTRATOTERRESUPERFICIAL = sqlDataReader[56] == DBNull.Value ? 0 : Convert.ToInt32(sqlDataReader[56]),
                         };
                         List.Add(Obj);
                     }
@@ -445,6 +447,9 @@ namespace GeoTraz.Core.Repositories.Concretes
                             V_2021SEM2 = sqlDataReader[51] == DBNull.Value ? 0 : Convert.ToInt32(sqlDataReader[51]),
                             V_2022SEM1 = sqlDataReader[52] == DBNull.Value ? 0 : Convert.ToInt32(sqlDataReader[52]),
                             V_2022SEM2 = sqlDataReader[53] == DBNull.Value ? 0 : Convert.ToInt32(sqlDataReader[53]),
+                            V_CONTRATOEXPLOTACION = sqlDataReader[54] == DBNull.Value ? 0 : Convert.ToInt32(sqlDataReader[54]),
+                            V_CONTRATOCESION = sqlDataReader[55] == DBNull.Value ? 0 : Convert.ToInt32(sqlDataReader[55]),
+                            V_CONTRATOTERRESUPERFICIAL = sqlDataReader[56] == DBNull.Value ? 0 : Convert.ToInt32(sqlDataReader[56]),
                         };
                         List.Add(Obj);
                     }

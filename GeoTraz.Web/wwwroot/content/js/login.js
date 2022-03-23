@@ -18,7 +18,7 @@ function login() {
     }
         if (fnValidarUsuario()) {
         $('#myModalLoading').modal('show');
-        $.ajax({
+        $.ajax({ 
             type: "post",
             url: "/Home/LoginUsuario",
             data: usuario,
@@ -46,7 +46,7 @@ function login() {
 
         });
       
-    }ñ
+    }
  
 };
 

@@ -2758,12 +2758,15 @@ namespace GeoTraz.Web.Controllers
                 worksheet.Column(3).Width = 50;
                 worksheet.Column(4).Width = 40;
                 worksheet.Column(5).Width = 40;
-                worksheet.Column(6).Width = 40;
+                worksheet.Column(6).Width = 30;
                 worksheet.Column(7).Width = 20;
                 worksheet.Column(8).Width = 28;
+                worksheet.Column(9).Width = 28;
+                worksheet.Column(10).Width = 28;
+
 
                 ////TITULO
-                string TitleRange = "A2:H2";
+                string TitleRange = "A2:J2";
                 var celltitle = worksheet.Cells[TitleRange];
                 celltitle.Merge = true;
                 celltitle.Style.Font.Bold = true;
@@ -2771,36 +2774,52 @@ namespace GeoTraz.Web.Controllers
                 celltitle.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
                 celltitle.Value = "Reporte Formalizados";
 
+
+                ////TITULO CONTRATO
+                string TitleRange2 = "F4:H4";
+                var celltitle2 = worksheet.Cells[TitleRange2];
+                celltitle2.Merge = true;
+                celltitle2.Style.Font.Bold = true;
+                celltitle2.Style.Font.Size = 12;
+                celltitle2.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                celltitle2.Value = "Contrato";
+
                 // CABECERA MANUAL
-                var cellFamilia = worksheet.Cells["A4"];
+                var cellFamilia = worksheet.Cells["A5"];
                 cellFamilia.Value = "Sede";
                 cellFamilia.Merge = true;
 
-                var cellCodigo = worksheet.Cells["B4"];
+                var cellCodigo = worksheet.Cells["B5"];
                 cellCodigo.Value = "Ruc";
                 cellCodigo.Merge = true;
 
-                var cellCaracteristicasTitle = worksheet.Cells["C4"];
+                var cellCaracteristicasTitle = worksheet.Cells["C5"];
                 cellCaracteristicasTitle.Value = "Proveedor";
                 cellCaracteristicasTitle.Merge = true;
 
-                var cellDescripcion = worksheet.Cells["D4"];
+                var cellDescripcion = worksheet.Cells["D5"];
                 cellDescripcion.Value = "Código Concesión";
 
-                var cellNomCon = worksheet.Cells["E4"];
+                var cellNomCon = worksheet.Cells["E5"];
                 cellNomCon.Value = "Nombre Concesión";
 
-                var cellCantIgafCorrec = worksheet.Cells["F4"];
-                cellCantIgafCorrec.Value = "Contrato";
+                var cellContExplotacion = worksheet.Cells["F5"];
+                cellContExplotacion.Value = "Explotación";
 
-                var cellIgafPrev = worksheet.Cells["G4"];
+                var cellContratoCesion = worksheet.Cells["G5"];
+                cellContratoCesion.Value = "Cesión";
+
+                var cellTerrenoSuper = worksheet.Cells["h5"];
+                cellTerrenoSuper.Value = "Terreno Superficial";
+
+                var cellIgafPrev = worksheet.Cells["I5"];
                 cellIgafPrev.Value = "Resolución";
 
-                var cellLevSus = worksheet.Cells["H4"];
+                var cellLevSus = worksheet.Cells["J5"];
                 cellLevSus.Value = "Otros Documentos";
 
                 // STILOS A LA CABECERA
-                string HeaderRange = "A4:H4";
+                string HeaderRange = "A5:J5";
                 worksheet.Cells[HeaderRange].Style.Fill.PatternType = ExcelFillStyle.Solid;
                 worksheet.Cells[HeaderRange].Style.Fill.BackgroundColor.SetColor(ColorTranslator.FromHtml("#cfecfe"));
                 worksheet.Cells[HeaderRange].Style.Border.Top.Style = ExcelBorderStyle.Thin;
@@ -2811,8 +2830,21 @@ namespace GeoTraz.Web.Controllers
                 worksheet.Cells[HeaderRange].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
                 worksheet.Cells[HeaderRange].Style.VerticalAlignment = ExcelVerticalAlignment.Center;
 
+                // STILOS A LA CABECERA
+                string HeaderRange2 = "F4:H4";
+                worksheet.Cells[HeaderRange2].Style.Fill.PatternType = ExcelFillStyle.Solid;
+                worksheet.Cells[HeaderRange2].Style.Fill.BackgroundColor.SetColor(ColorTranslator.FromHtml("#cfecfe"));
+                worksheet.Cells[HeaderRange2].Style.Border.Top.Style = ExcelBorderStyle.Thin;
+                worksheet.Cells[HeaderRange2].Style.Border.Right.Style = ExcelBorderStyle.Thin;
+                worksheet.Cells[HeaderRange2].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+                worksheet.Cells[HeaderRange2].Style.Border.Left.Style = ExcelBorderStyle.Thin;
+                worksheet.Cells[HeaderRange2].Style.Border.Top.Color.SetColor(Color.Black);
+                worksheet.Cells[HeaderRange2].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                worksheet.Cells[HeaderRange2].Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+
+
                 //variab
-                int i = 5;
+                int i = 6;
                 foreach (ReinfoDTO dat in httpClient)
                 {
                     var cell = worksheet.Cells[i, 1];
@@ -2862,7 +2894,7 @@ namespace GeoTraz.Web.Controllers
                     cell5.Style.WrapText = true;
 
                     var cell6 = worksheet.Cells[i, 6];
-                    cell6.Value = dat.V_CONTRATO == 1 ? "Si" : "No";
+                    cell6.Value = dat.V_CONTRATOEXPLOTACION == 1 ? "Si" : "No";
                     cell6.Style.Border.Top.Style = ExcelBorderStyle.Thin;
                     cell6.Style.Border.Right.Style = ExcelBorderStyle.Thin;
                     cell6.Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
@@ -2871,7 +2903,7 @@ namespace GeoTraz.Web.Controllers
                     cell6.Style.WrapText = true;
 
                     var cell7 = worksheet.Cells[i, 7];
-                    cell7.Value = dat.V_RESOLUCION == 1 ? "Si" : "No";
+                    cell7.Value = dat.V_CONTRATOCESION == 1 ? "Si" : "No";
                     cell7.Style.Border.Top.Style = ExcelBorderStyle.Thin;
                     cell7.Style.Border.Right.Style = ExcelBorderStyle.Thin;
                     cell7.Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
@@ -2880,13 +2912,31 @@ namespace GeoTraz.Web.Controllers
                     cell7.Style.WrapText = true;
 
                     var cell8 = worksheet.Cells[i, 8];
-                    cell8.Value = dat.V_OTROSDOCS == 1 ? "Si" : "No";
+                    cell8.Value = dat.V_CONTRATOTERRESUPERFICIAL == 1 ? "Si" : "No";
                     cell8.Style.Border.Top.Style = ExcelBorderStyle.Thin;
                     cell8.Style.Border.Right.Style = ExcelBorderStyle.Thin;
                     cell8.Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
                     cell8.Style.Border.Left.Style = ExcelBorderStyle.Thin;
                     cell8.Style.Font.Color.SetColor(System.Drawing.Color.Black);
                     cell8.Style.WrapText = true;
+
+                    var cell9 = worksheet.Cells[i, 9];
+                    cell9.Value = dat.V_RESOLUCION == 1 ? "Si" : "No";
+                    cell9.Style.Border.Top.Style = ExcelBorderStyle.Thin;
+                    cell9.Style.Border.Right.Style = ExcelBorderStyle.Thin;
+                    cell9.Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+                    cell9.Style.Border.Left.Style = ExcelBorderStyle.Thin;
+                    cell9.Style.Font.Color.SetColor(System.Drawing.Color.Black);
+                    cell9.Style.WrapText = true;
+
+                    var cell10 = worksheet.Cells[i, 10];
+                    cell10.Value = dat.V_OTROSDOCS == 1 ? "Si" : "No";
+                    cell10.Style.Border.Top.Style = ExcelBorderStyle.Thin;
+                    cell10.Style.Border.Right.Style = ExcelBorderStyle.Thin;
+                    cell10.Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+                    cell10.Style.Border.Left.Style = ExcelBorderStyle.Thin;
+                    cell10.Style.Font.Color.SetColor(System.Drawing.Color.Black);
+                    cell10.Style.WrapText = true;
 
 
                     excel.Save();
@@ -2909,6 +2959,12 @@ namespace GeoTraz.Web.Controllers
             var finpreventivo = 0;
             var inicioformalizados = 0;
             var finformalizados = 0;
+            var inicioformalizadosContrato = 0;
+            var finformalizadosContrato = 0;
+            var inicioDec2021 = 0;
+            var finDec2021 = 0;
+            var inicioDec2022 = 0;
+            var finDec2022 = 0;
             int contador2020 = 0;
             int contador2021 = 0;
             int contador2022 = 0;
@@ -3010,8 +3066,13 @@ namespace GeoTraz.Web.Controllers
                 cabecera = cabecera + ",INFORME PREVENTIVO";
                 cabecera = cabecera + ",OTROS PREVENTIVO";
                 cabecera = cabecera + ",CARGO LEVANTAMIENTO DE SUSPENSION";
-                cabecera = cabecera + ",CARGO DECLARACION MINERA";
-                cabecera = cabecera + ",CONTRATO FORMALIZADOS";
+                cabecera = cabecera + ",SEMESTRE 1";
+                cabecera = cabecera + ",SEMESTRE 2";
+                cabecera = cabecera + ",SEMESTRE 1";
+                cabecera = cabecera + ",SEMESTRE 2";
+                cabecera = cabecera + ",EXPLOTACIÓN";
+                cabecera = cabecera + ",CESIÓN";
+                cabecera = cabecera + ",TERRENO SUPERFICIAL";
                 cabecera = cabecera + ",RESOLUCION FORMALIZADOS";
                 cabecera = cabecera + ",OTROS FORMALIZADOS";
 
@@ -3707,7 +3768,8 @@ namespace GeoTraz.Web.Controllers
 
                     e = e + 1;
                     var cell55 = worksheet.Cells[i, e];
-                    cell55.Value = nc.V_CARGODECMINERA == 1 ? "Si" : "No";
+                    inicioDec2021 = e;
+                    cell55.Value = nc.V_2021SEM1 == 1 ? "Si" : "No";
                     cell55.Style.Border.Top.Style = ExcelBorderStyle.Thin;
                     cell55.Style.Border.Right.Style = ExcelBorderStyle.Thin;
                     cell55.Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
@@ -3716,10 +3778,11 @@ namespace GeoTraz.Web.Controllers
                     worksheet.Column(e).Width = 30;
                     cell55.Style.WrapText = true;
 
+
                     e = e + 1;
-                    inicioformalizados = e;
                     var cell56 = worksheet.Cells[i, e];
-                    cell56.Value = nc.V_CONTRATO == 1 ? "Si" : "No";
+                    finDec2021 = e;
+                    cell56.Value = nc.V_2021SEM2 == 1 ? "Si" : "No";
                     cell56.Style.Border.Top.Style = ExcelBorderStyle.Thin;
                     cell56.Style.Border.Right.Style = ExcelBorderStyle.Thin;
                     cell56.Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
@@ -3730,7 +3793,8 @@ namespace GeoTraz.Web.Controllers
 
                     e = e + 1;
                     var cell57 = worksheet.Cells[i, e];
-                    cell57.Value = nc.V_RESOLUCION == 1 ? "Si" : "No";
+                    inicioDec2022 = e;
+                    cell57.Value = nc.V_2022SEM1 == 1 ? "Si" : "No";
                     cell57.Style.Border.Top.Style = ExcelBorderStyle.Thin;
                     cell57.Style.Border.Right.Style = ExcelBorderStyle.Thin;
                     cell57.Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
@@ -3740,16 +3804,89 @@ namespace GeoTraz.Web.Controllers
                     cell57.Style.WrapText = true;
 
                     e = e + 1;
-                    finformalizados = e;
                     var cell58 = worksheet.Cells[i, e];
-                    cell58.Value = nc.V_OTROSDOCS == 1 ? "Si" : "No";
+                    finDec2022 = e;
+                    cell58.Value = nc.V_2022SEM2 == 1 ? "Si" : "No";
                     cell58.Style.Border.Top.Style = ExcelBorderStyle.Thin;
                     cell58.Style.Border.Right.Style = ExcelBorderStyle.Thin;
                     cell58.Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
                     cell58.Style.Border.Left.Style = ExcelBorderStyle.Thin;
                     cell58.Style.Font.Color.SetColor(System.Drawing.Color.Black);
                     worksheet.Column(e).Width = 30;
-                    cell58.Style.WrapText = true;
+                    cell55.Style.WrapText = true;
+
+                    //e = e + 1;
+                    //var cell59 = worksheet.Cells[i, e];
+                    //cell55.Value = nc.V_CARGODECMINERA == 1 ? "Si" : "No";
+                    //cell55.Style.Border.Top.Style = ExcelBorderStyle.Thin;
+                    //cell55.Style.Border.Right.Style = ExcelBorderStyle.Thin;
+                    //cell55.Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+                    //cell55.Style.Border.Left.Style = ExcelBorderStyle.Thin;
+                    //cell55.Style.Font.Color.SetColor(System.Drawing.Color.Black);
+                    //worksheet.Column(e).Width = 30;
+                    //cell55.Style.WrapText = true;
+
+                    //fin dec minera
+
+                    e = e + 1;
+                    inicioformalizados = e;
+                    inicioformalizadosContrato = e;
+                    var cell59 = worksheet.Cells[i, e];
+                    cell59.Value = nc.V_CONTRATOEXPLOTACION == 1 ? "Si" : "No";
+                    cell59.Style.Border.Top.Style = ExcelBorderStyle.Thin;
+                    cell59.Style.Border.Right.Style = ExcelBorderStyle.Thin;
+                    cell59.Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+                    cell59.Style.Border.Left.Style = ExcelBorderStyle.Thin;
+                    cell59.Style.Font.Color.SetColor(System.Drawing.Color.Black);
+                    worksheet.Column(e).Width = 30;
+                    cell59.Style.WrapText = true;
+
+                    e = e + 1;
+                    var cell60 = worksheet.Cells[i, e];
+                    cell60.Value = nc.V_CONTRATOCESION == 1 ? "Si" : "No";
+                    cell60.Style.Border.Top.Style = ExcelBorderStyle.Thin;
+                    cell60.Style.Border.Right.Style = ExcelBorderStyle.Thin;
+                    cell60.Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+                    cell60.Style.Border.Left.Style = ExcelBorderStyle.Thin;
+                    cell60.Style.Font.Color.SetColor(System.Drawing.Color.Black);
+                    worksheet.Column(e).Width = 30;
+                    cell60.Style.WrapText = true;
+
+                    e = e + 1;
+                    var cell61 = worksheet.Cells[i, e];
+                    finformalizadosContrato = e;
+                    cell61.Value = nc.V_CONTRATOTERRESUPERFICIAL == 1 ? "Si" : "No";
+                    cell61.Style.Border.Top.Style = ExcelBorderStyle.Thin;
+                    cell61.Style.Border.Right.Style = ExcelBorderStyle.Thin;
+                    cell61.Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+                    cell61.Style.Border.Left.Style = ExcelBorderStyle.Thin;
+                    cell61.Style.Font.Color.SetColor(System.Drawing.Color.Black);
+                    worksheet.Column(e).Width = 30;
+                    cell61.Style.WrapText = true;
+
+
+                    e = e + 1;
+                    var cell62 = worksheet.Cells[i, e];
+                    cell62.Value = nc.V_RESOLUCION == 1 ? "Si" : "No";
+                    cell62.Style.Border.Top.Style = ExcelBorderStyle.Thin;
+                    cell62.Style.Border.Right.Style = ExcelBorderStyle.Thin;
+                    cell62.Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+                    cell62.Style.Border.Left.Style = ExcelBorderStyle.Thin;
+                    cell62.Style.Font.Color.SetColor(System.Drawing.Color.Black);
+                    worksheet.Column(e).Width = 30;
+                    cell62.Style.WrapText = true;
+
+                    e = e + 1;
+                    finformalizados = e;
+                    var cell63 = worksheet.Cells[i, e];
+                    cell63.Value = nc.V_OTROSDOCS == 1 ? "Si" : "No";
+                    cell63.Style.Border.Top.Style = ExcelBorderStyle.Thin;
+                    cell63.Style.Border.Right.Style = ExcelBorderStyle.Thin;
+                    cell63.Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+                    cell63.Style.Border.Left.Style = ExcelBorderStyle.Thin;
+                    cell63.Style.Font.Color.SetColor(System.Drawing.Color.Black);
+                    worksheet.Column(e).Width = 30;
+                    cell63.Style.WrapText = true;
 
                     excel.Save();
                     i++;
@@ -3793,7 +3930,7 @@ namespace GeoTraz.Web.Controllers
                 ////TITULO FORMALIZADO
                 var codiniF = Letter(inicioformalizados - 1);
                 var codfinF = Letter(finformalizados - 1);
-                string TitleRangeIgafF = codiniF + "3:" + codfinF + "3";
+                string TitleRangeIgafF = codiniF + "2:" + codfinF + "2";
                 var celltitleIgafF = worksheet.Cells[TitleRangeIgafF];
                 celltitleIgafF.Merge = true;
                 celltitleIgafF.Style.Font.Bold = true;
@@ -3801,8 +3938,52 @@ namespace GeoTraz.Web.Controllers
                 celltitleIgafF.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
                 celltitleIgafF.Value = "FORMALIZADOS";
 
+                ////TITULO FORMALIZADO
+                var codiniFC = Letter(inicioformalizadosContrato - 1);
+                var codfinFC = Letter(finformalizadosContrato - 1);
+                string TitleRangeIgafFC = codiniFC + "3:" + codfinFC + "3";
+                var celltitleIgafFC = worksheet.Cells[TitleRangeIgafFC];
+                celltitleIgafFC.Merge = true;
+                celltitleIgafFC.Style.Font.Bold = true;
+                celltitleIgafFC.Style.Font.Size = 11;
+                celltitleIgafFC.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                celltitleIgafFC.Value = "CONTRATO";
+
+                //DECLARACION MINERA
+                var codiniDec = Letter(inicioDec2021 - 1);
+                var codfinDec = Letter(finDec2022 - 1);
+                string TitleRangeDec = codiniDec + "2:" + codfinDec + "2";
+                var celltitleDec = worksheet.Cells[TitleRangeDec];
+                celltitleDec.Merge = true;
+                celltitleDec.Style.Font.Bold = true;
+                celltitleDec.Style.Font.Size = 11;
+                celltitleDec.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                celltitleDec.Value = "DECLARACIÓN MINERA";
+
+                ////TITULO 2021
+                var codiniDec2021 = Letter(inicioDec2021 - 1);
+                var codfinDec2021 = Letter(finDec2021 - 1);
+                string TitleRangeDec2021 = codiniDec2021 + "3:" + codfinDec2021 + "3";
+                var celltitleDec2021 = worksheet.Cells[TitleRangeDec2021];
+                celltitleDec2021.Merge = true;
+                celltitleDec2021.Style.Font.Bold = true;
+                celltitleDec2021.Style.Font.Size = 11;
+                celltitleDec2021.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                celltitleDec2021.Value = "2021";
+
+                ////TITULO 2021
+                var codiniDec2022 = Letter(inicioDec2022 - 1);
+                var codfinDec2022 = Letter(finDec2022 - 1);
+                string TitleRangeDec2022 = codiniDec2022 + "3:" + codfinDec2022 + "3";
+                var celltitleDec2022 = worksheet.Cells[TitleRangeDec2022];
+                celltitleDec2022.Merge = true;
+                celltitleDec2022.Style.Font.Bold = true;
+                celltitleDec2022.Style.Font.Size = 11;
+                celltitleDec2022.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                celltitleDec2022.Value = "2022";
+
                 // STILOS A LA CABECERA
-                string HeaderRange3 = codiniF + "3:" + codfinF + "3";
+                string HeaderRange3 = codiniF + "2:" + codfinF + "2";
                 worksheet.Cells[HeaderRange3].Style.Fill.PatternType = ExcelFillStyle.Solid;
                 worksheet.Cells[HeaderRange3].Style.Fill.BackgroundColor.SetColor(ColorTranslator.FromHtml("#cfecaa"));
                 worksheet.Cells[HeaderRange3].Style.Border.Top.Style = ExcelBorderStyle.Thin;
@@ -3812,6 +3993,42 @@ namespace GeoTraz.Web.Controllers
                 worksheet.Cells[HeaderRange3].Style.Border.Top.Color.SetColor(Color.Black);
                 worksheet.Cells[HeaderRange3].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
                 worksheet.Cells[HeaderRange3].Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+
+                // STILOS A LA CABECERA
+                string HeaderRangeDec = codiniDec2021 + "2:" + codfinDec2022 + "2";
+                worksheet.Cells[HeaderRangeDec].Style.Fill.PatternType = ExcelFillStyle.Solid;
+                worksheet.Cells[HeaderRangeDec].Style.Fill.BackgroundColor.SetColor(ColorTranslator.FromHtml("#cfecaa"));
+                worksheet.Cells[HeaderRangeDec].Style.Border.Top.Style = ExcelBorderStyle.Thin;
+                worksheet.Cells[HeaderRangeDec].Style.Border.Right.Style = ExcelBorderStyle.Thin;
+                worksheet.Cells[HeaderRangeDec].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+                worksheet.Cells[HeaderRangeDec].Style.Border.Left.Style = ExcelBorderStyle.Thin;
+                worksheet.Cells[HeaderRangeDec].Style.Border.Top.Color.SetColor(Color.Black);
+                worksheet.Cells[HeaderRangeDec].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                worksheet.Cells[HeaderRangeDec].Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+
+                // STILOS A LA CABECERA CONTRATO
+                string HeaderRange4 = codiniFC + "3:" + codfinFC + "3";
+                worksheet.Cells[HeaderRange4].Style.Fill.PatternType = ExcelFillStyle.Solid;
+                worksheet.Cells[HeaderRange4].Style.Fill.BackgroundColor.SetColor(ColorTranslator.FromHtml("#cfecfe"));
+                worksheet.Cells[HeaderRange4].Style.Border.Top.Style = ExcelBorderStyle.Thin;
+                worksheet.Cells[HeaderRange4].Style.Border.Right.Style = ExcelBorderStyle.Thin;
+                worksheet.Cells[HeaderRange4].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+                worksheet.Cells[HeaderRange4].Style.Border.Left.Style = ExcelBorderStyle.Thin;
+                worksheet.Cells[HeaderRange4].Style.Border.Top.Color.SetColor(Color.Black);
+                worksheet.Cells[HeaderRange4].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                worksheet.Cells[HeaderRange4].Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+
+                // STILOS A LA CABECERA DEC MINERA
+                string HeaderRange5 = codiniDec2021 + "3:" + codfinDec2022 + "3";
+                worksheet.Cells[HeaderRange5].Style.Fill.PatternType = ExcelFillStyle.Solid;
+                worksheet.Cells[HeaderRange5].Style.Fill.BackgroundColor.SetColor(ColorTranslator.FromHtml("#cfecfe"));
+                worksheet.Cells[HeaderRange5].Style.Border.Top.Style = ExcelBorderStyle.Thin;
+                worksheet.Cells[HeaderRange5].Style.Border.Right.Style = ExcelBorderStyle.Thin;
+                worksheet.Cells[HeaderRange5].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+                worksheet.Cells[HeaderRange5].Style.Border.Left.Style = ExcelBorderStyle.Thin;
+                worksheet.Cells[HeaderRange5].Style.Border.Top.Color.SetColor(Color.Black);
+                worksheet.Cells[HeaderRange5].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                worksheet.Cells[HeaderRange5].Style.VerticalAlignment = ExcelVerticalAlignment.Center;
 
                 using (var stream = new MemoryStream())
                 {

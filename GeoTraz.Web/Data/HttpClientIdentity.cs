@@ -94,7 +94,7 @@ namespace GeoTraz.Web.Data
         public static List<RutaPadre> GetUserMenuRol(string userId, string rol)
         {
             ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, sslPolicyErrors) => true;
-            var client = new RestClient(JsonHelper.GetSection("UriPrueba"));
+            var client = new RestClient(JsonHelper.GetSection("UriGeneral"));
             // var request = new RestRequest("/usuario/GetUserMenuRol/", Method.GET)
             var request = new RestRequest("/Ruta/GetUserMenuRol/", Method.GET)
              .AddHeader("Authorization", "Bearer " + AuthToken.Token);

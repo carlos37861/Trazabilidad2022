@@ -40,13 +40,38 @@ function cargardatosTabla() {
         success: function (data) {
 
             var datos = data.data;
-
+            console.log(datos);
             $_data = datos;
             $_table.bootstrapTable('destroy').bootstrapTable({
                 data: $_data,
 
 
-                columns: [
+                columns:
+                    [
+                   [
+                       {
+                           field: '',
+                           title: '',
+                           colspan: 5,
+                           align: 'center',
+                       },
+                       {
+                           field: '',
+                           title: 'CONTRATOS',
+                           width: 140,
+                           colspan: 4,
+                           align: 'center',
+                       },
+                       {
+                           field: '',
+                           title: '',
+                           width: 140,
+                           colspan: 4,
+                           align: 'center',
+                       },
+                   ],
+          
+                    [
                     {
                         field: 'n_SEDE',
                         title: 'SEDE',
@@ -74,14 +99,32 @@ function cargardatosTabla() {
                         sortable: true,
                     },
                     {
-                        field: 'v_CONTRATO',
-                        title: 'Contrato',
-                        formatter: contrato,
+                        field: 'v_CONTRATOEXPLOTACION',
+                        title: 'Explotación',
+                        formatter: contratoexp,
                         width: 140,
                         align: 'center',
                         printIgnore: true,
                         clickToSelect: false,
-                    },
+                        },
+                        {
+                            field: 'v_CONTRATOCESION',
+                            title: 'Cesión',
+                            formatter: contratocesion,
+                            width: 140,
+                            align: 'center',
+                            printIgnore: true,
+                            clickToSelect: false,
+                        },
+                        {
+                            field: 'v_CONTRATOTERRESUPERFICIAL',
+                            title: 'Terreno<br>Superficial',
+                            formatter: contratoTerrSuper,
+                            width: 140,
+                            align: 'center',
+                            printIgnore: true,
+                            clickToSelect: false,
+                        },
                     {
                         field: 'n_CODREINFO',
                         title: '<i class="fa fa-cogs text-secondary-d1 text-130"></i>',
@@ -127,6 +170,7 @@ function cargardatosTabla() {
                         printIgnore: true,
                         clickToSelect: false,
                     },
+                ],
                 ],
 
                 icons: {
@@ -193,26 +237,6 @@ function cargardatosTabla() {
 
     }
     function AccionResolucion(value, row, index, field) {
-        //var sedeReinfo = 0;
-        //$.ajax({
-        //    async: false,
-        //    url: '/Home/BuscarReinfo?N_CODREINFO=' + value,
-        //    type: 'GET',
-        //    dataType: 'json',
-        //    data: 'data',
-        //    success: function (data) {
-        //        var datos = data.data;
-        //        $(datos).each(function (index, val) {
-
-        //            sedeReinfo = val.n_SEDE;
-
-        //        });
-
-        //    },
-
-
-        //});
-
         if (sedeReinfo == UserSede || UserSede==1) {
             return '<div class="action-buttons">\
                                  <a class="text-purple mx-2px" style="cursor:pointer;" onclick=getResolucion('+ value + ',0) >\
@@ -227,7 +251,7 @@ function cargardatosTabla() {
                               </div>';
         }
     }
-    function contrato(value, row, index, field) {
+    function contratoexp(value, row, index, field) {
         if (value == 1) {
             return '<div class="action-buttons">\
                                <input type="checkbox" id="cbox2" disabled checked value="second_checkbox">\
@@ -237,30 +261,31 @@ function cargardatosTabla() {
                                <input type="checkbox" id="cbox2" disabled value="second_checkbox">\
                               </div>';
         }
-
+    }
+    function contratocesion(value, row, index, field) {
+        if (value == 1) {
+            return '<div class="action-buttons">\
+                               <input type="checkbox" id="cbox2" disabled checked value="second_checkbox">\
+                              </div>';
+        } else {
+            return '<div class="action-buttons">\
+                               <input type="checkbox" id="cbox2" disabled value="second_checkbox">\
+                              </div>';
+        }
+    }
+    function contratoTerrSuper(value, row, index, field) {
+        if (value == 1) {
+            return '<div class="action-buttons">\
+                               <input type="checkbox" id="cbox2" disabled checked value="second_checkbox">\
+                              </div>';
+        } else {
+            return '<div class="action-buttons">\
+                               <input type="checkbox" id="cbox2" disabled value="second_checkbox">\
+                              </div>';
+        }
     }
     function AccionContrato(value, row, index, field) {
-        //var sedeReinfo = 0;
-        //$.ajax({
-        //    async: false,
-        //    url: '/Home/BuscarReinfo?N_CODREINFO=' + value,
-        //    type: 'GET',
-        //    dataType: 'json',
-        //    data: 'data',
-        //    success: function (data) {
-        //        var datos = data.data;
-        //        $(datos).each(function (index, val) {
-
-        //            sedeReinfo = val.n_SEDE;
-
-        //        });
-
-        //    },
-
-
-        //});
-
-        if (sedeReinfo == UserSede || UserSede==1) {
+         if (sedeReinfo == UserSede || UserSede==1) {
             return '<div class="action-buttons">\
                                  <a class="text-purple mx-2px" style="cursor:pointer;" onclick=getContrato('+ value + ',0) >\
                                   <i class="fa fa-search text-105"></i>\
@@ -1394,105 +1419,132 @@ function Filtrar() {
             $_data = datos;
             $_table.bootstrapTable('destroy').bootstrapTable({
                 data: $_data,
+                columns:
+                    [
+                        [
+                            {
+                                field: '',
+                                title: '',
+                                colspan: 5,
+                                align: 'center',
+                            },
+                            {
+                                field: '',
+                                title: 'CONTRATOS',
+                                width: 140,
+                                colspan: 4,
+                                align: 'center',
+                            },
+                            {
+                                field: '',
+                                title: '',
+                                width: 140,
+                                colspan: 4,
+                                align: 'center',
+                            },
+                        ],
 
-
-                columns: [
-                    {
-                        field: 'n_SEDE',
-                        title: 'SEDE',
-                        formatter: Sede,
-                        sortable: true
-                    },
-                    {
-                        field: 'v_RUC',
-                        title: 'Ruc',
-
-                        sortable: true
-                    },
-                    {
-                        field: 'v_PROVEEDOR',
-                        title: '<label style="width:320px">Proveedor</label>',
-
-                        sortable: true,
-                    },
-                    {
-                        field: 'v_CODCONSECION',
-                        title: 'Código Concesión',
-
-                        sortable: true,
-                    },
-                    {
-                        field: 'v_NOMCONSECION',
-                        title: 'Nombre Concesión',
-
-                        sortable: true,
-                    },
-                    {
-                        field: 'v_CONTRATO',
-                        title: 'Contrato',
-
-                        formatter: contrato,
-                        width: 140,
-                        align: 'center',
-                        printIgnore: true,
-                        clickToSelect: false,
-
-                    },
-                    {
-                        field: 'n_CODREINFO',
-                        title: '<i class="fa fa-cogs text-secondary-d1 text-130"></i>',
-
-                        formatter: AccionContrato,
-                        width: 140,
-                        align: 'center',
-                        printIgnore: true,
-                        clickToSelect: false,
-
-                    },
-
-                    {
-                        field: 'v_RESOLUCION',
-                        title: 'Resolución',
-
-                        formatter: Resolucion,
-                        width: 140,
-                        align: 'center',
-                        printIgnore: true,
-                        clickToSelect: false,
-
-                    },
-                    {
-                        field: 'n_CODREINFO',
-                        title: '<i class="fa fa-cogs text-secondary-d1 text-130"></i>',
-                        formatter: AccionResolucion,
-                        width: 140,
-                        align: 'center',
-                        printIgnore: true,
-                        clickToSelect: false,
-                    },
-                    {
-                        field: 'v_OTROSDOCS',
-                        title: 'Otros<br>Documentos',
-                        formatter: OtrosDocumentos,
-                        width: 140,
-                        align: 'center',
-                        printIgnore: true,
-                        clickToSelect: false,
-
-                    },
-                    {
-                        field: 'n_CODREINFO',
-                        title: '<i class="fa fa-cogs text-secondary-d1 text-130"></i>',
-
-                        formatter: AccionOtrosDocumentos,
-                        width: 140,
-                        align: 'center',
-                        printIgnore: true,
-                        clickToSelect: false,
-
-                    },
-
-                ],
+                        [
+                            {
+                                field: 'n_SEDE',
+                                title: 'SEDE',
+                                formatter: Sede,
+                                sortable: true
+                            },
+                            {
+                                field: 'v_RUC',
+                                title: 'Ruc',
+                                sortable: true
+                            },
+                            {
+                                field: 'v_PROVEEDOR',
+                                title: '<label style="width:320px">Proveedor</label>',
+                                sortable: true,
+                            },
+                            {
+                                field: 'v_CODCONSECION',
+                                title: 'Código Concesión',
+                                sortable: true,
+                            },
+                            {
+                                field: 'v_NOMCONSECION',
+                                title: 'Nombre Concesión',
+                                sortable: true,
+                            },
+                            {
+                                field: 'v_CONTRATOEXPLOTACION',
+                                title: 'Explotación',
+                                formatter: contratoexp,
+                                width: 140,
+                                align: 'center',
+                                printIgnore: true,
+                                clickToSelect: false,
+                            },
+                            {
+                                field: 'v_CONTRATOCESION',
+                                title: 'Cesión',
+                                formatter: contratocesion,
+                                width: 140,
+                                align: 'center',
+                                printIgnore: true,
+                                clickToSelect: false,
+                            },
+                            {
+                                field: 'v_CONTRATOTERRESUPERFICIAL',
+                                title: 'Terreno<br>Superficial',
+                                formatter: contratoTerrSuper,
+                                width: 140,
+                                align: 'center',
+                                printIgnore: true,
+                                clickToSelect: false,
+                            },
+                            {
+                                field: 'n_CODREINFO',
+                                title: '<i class="fa fa-cogs text-secondary-d1 text-130"></i>',
+                                formatter: AccionContrato,
+                                width: 140,
+                                align: 'center',
+                                printIgnore: true,
+                                clickToSelect: false,
+                            },
+                            {
+                                field: 'v_RESOLUCION',
+                                title: 'Resolución',
+                                formatter: Resolucion,
+                                width: 140,
+                                align: 'center',
+                                printIgnore: true,
+                                clickToSelect: false,
+                            },
+                            {
+                                field: 'n_CODREINFO',
+                                title: '<i class="fa fa-cogs text-secondary-d1 text-130"></i>',
+                                formatter: AccionResolucion,
+                                width: 140,
+                                align: 'center',
+                                printIgnore: true,
+                                clickToSelect: false,
+                            },
+                            {
+                                field: 'v_OTROSDOCS',
+                                title: 'Otros<br>Documentos',
+                                formatter: OtrosDocumentos,
+                                width: 140,
+                                align: 'center',
+                                printIgnore: true,
+                                clickToSelect: false,
+                            },
+                            {
+                                field: 'n_CODREINFO',
+                                title: '<i class="fa fa-cogs text-secondary-d1 text-130"></i>',
+                                formatter: AccionOtrosDocumentos,
+                                width: 140,
+                                align: 'center',
+                                printIgnore: true,
+                                clickToSelect: false,
+                            },
+                        ],
+                    ],
 
                 icons: {
                     columns: 'fa-th-list text-orange-d1',
@@ -1554,18 +1606,6 @@ function Filtrar() {
 
     });
 
-
-    //function formatTableCellActions(value, row, index, field) {
-    //    return '<div class="action-buttons">\
-    //                        <a class="text-success mx-2px"  onclick=getAmbiente('+ value + ') >\
-    //                          <i class="fa fa-pencil-alt text-105"></i>\
-    //                        </a>\
-    //                        <a class="text-danger-m1 mx-2px" href="#" onclick=DeleteAmbiente('+ value + ')>\
-    //                          <i class="fa fa-trash-alt text-105"></i>\
-    //                        </a>\
-    //                      </div > ';
-    //}
-
     function Resolucion(value, row, index, field) {
 
         if (value == 1) {
@@ -1580,25 +1620,6 @@ function Filtrar() {
 
     }
     function AccionResolucion(value, row, index, field) {
-        //var sedeReinfo = 0;
-        //$.ajax({
-        //    async: false,
-        //    url: '/Home/BuscarReinfo?N_CODREINFO=' + value,
-        //    type: 'GET',
-        //    dataType: 'json',
-        //    data: 'data',
-        //    success: function (data) {
-        //        var datos = data.data;
-        //        $(datos).each(function (index, val) {
-
-        //            sedeReinfo = val.n_SEDE;
-
-        //        });
-
-        //    },
-
-
-        //});
 
         if (sedeReinfo == UserSede || UserSede==1) {
             return '<div class="action-buttons">\
@@ -1614,7 +1635,31 @@ function Filtrar() {
                               </div>';
         }
     }
-    function contrato(value, row, index, field) {
+    function contratoexp(value, row, index, field) {
+        if (value == 1) {
+            return '<div class="action-buttons">\
+                               <input type="checkbox" id="cbox2" disabled checked value="second_checkbox">\
+                              </div>';
+        } else {
+            return '<div class="action-buttons">\
+                               <input type="checkbox" id="cbox2" disabled value="second_checkbox">\
+                              </div>';
+        }
+
+    }
+    function contratocesion(value, row, index, field) {
+        if (value == 1) {
+            return '<div class="action-buttons">\
+                               <input type="checkbox" id="cbox2" disabled checked value="second_checkbox">\
+                              </div>';
+        } else {
+            return '<div class="action-buttons">\
+                               <input type="checkbox" id="cbox2" disabled value="second_checkbox">\
+                              </div>';
+        }
+
+    }
+    function contratoTerrSuper(value, row, index, field) {
         if (value == 1) {
             return '<div class="action-buttons">\
                                <input type="checkbox" id="cbox2" disabled checked value="second_checkbox">\
@@ -1627,21 +1672,6 @@ function Filtrar() {
 
     }
     function AccionContrato(value, row, index, field) {
-        //var sedeReinfo = 0;
-        ////var UserSede = 0;
-        //$.ajax({
-        //    async: false,
-        //    url: '/Home/BuscarReinfo?N_CODREINFO=' + value,
-        //    type: 'GET',
-        //    dataType: 'json',
-        //    data: 'data',
-        //    success: function (data) {
-        //        var datos = data.data;
-        //        $(datos).each(function (index, val) {
-        //            sedeReinfo = val.n_SEDE;
-        //        });
-        //    },
-        //});
 
         if (sedeReinfo == UserSede || UserSede==1) {
             return '<div class="action-buttons">\

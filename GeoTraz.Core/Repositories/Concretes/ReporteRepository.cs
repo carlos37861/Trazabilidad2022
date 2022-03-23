@@ -494,10 +494,21 @@ namespace GeoTraz.Core.Repositories.Concretes
                             V_OTROSPREVENT= sqlDataReader[56] == DBNull.Value ? 0 : Convert.ToInt32(sqlDataReader[56]),
                             V_CARGOLEVSUS= sqlDataReader[57] == DBNull.Value ? 0 : Convert.ToInt32(sqlDataReader[57]),
                             V_CARGODECMINERA= sqlDataReader[58] == DBNull.Value ? 0 : Convert.ToInt32(sqlDataReader[58]),
-                            V_CONTRATO= sqlDataReader[59] == DBNull.Value ? 0 : Convert.ToInt32(sqlDataReader[59]),
-                            V_RESOLUCION= sqlDataReader[60] == DBNull.Value ? 0 : Convert.ToInt32(sqlDataReader[60]),
-                            V_OTROSDOCS= sqlDataReader[61] == DBNull.Value ? 0 : Convert.ToInt32(sqlDataReader[61]),
-                            V_RESOLUCIONIGAFOM= sqlDataReader[62] == DBNull.Value ? 0 : Convert.ToInt32(sqlDataReader[62])
+                            
+                            V_2021SEM1 = sqlDataReader[59] == DBNull.Value ? 0 : Convert.ToInt32(sqlDataReader[59]),
+                            V_2021SEM2 = sqlDataReader[60] == DBNull.Value ? 0 : Convert.ToInt32(sqlDataReader[60]),
+                            V_2022SEM1 = sqlDataReader[61] == DBNull.Value ? 0 : Convert.ToInt32(sqlDataReader[61]),
+                            V_2022SEM2 = sqlDataReader[62] == DBNull.Value ? 0 : Convert.ToInt32(sqlDataReader[62]),
+
+                            V_CONTRATO = sqlDataReader[63] == DBNull.Value ? 0 : Convert.ToInt32(sqlDataReader[63]),
+
+                            V_CONTRATOEXPLOTACION = sqlDataReader[64] == DBNull.Value ? 0 : Convert.ToInt32(sqlDataReader[64]),
+                            V_CONTRATOCESION = sqlDataReader[65] == DBNull.Value ? 0 : Convert.ToInt32(sqlDataReader[65]),
+                            V_CONTRATOTERRESUPERFICIAL = sqlDataReader[66] == DBNull.Value ? 0 : Convert.ToInt32(sqlDataReader[66]),
+
+                            V_RESOLUCION = sqlDataReader[67] == DBNull.Value ? 0 : Convert.ToInt32(sqlDataReader[67]),
+                            V_OTROSDOCS= sqlDataReader[68] == DBNull.Value ? 0 : Convert.ToInt32(sqlDataReader[68]),
+                            V_RESOLUCIONIGAFOM= sqlDataReader[69] == DBNull.Value ? 0 : Convert.ToInt32(sqlDataReader[69])
                         };
                         List.Add(Obj);
                     }

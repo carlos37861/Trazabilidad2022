@@ -101,9 +101,6 @@ namespace GeoTraz.Web.Data
                 throw new ArgumentOutOfRangeException("error", ex);
             }
 
-    
-
-
         }
 
         public static async Task<List<ReporteDTO>> BuscarReporte(ReporteDTO reporte)
