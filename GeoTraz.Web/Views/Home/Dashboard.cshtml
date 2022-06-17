@@ -31,438 +31,591 @@
         font-weight: 900;
         padding: 0.5em;
     }
+
     .highcharts-data-table td, .highcharts-data-table th, .highcharts-data-table caption {
         padding: 0.5em;
     }
+
     .highcharts-data-table thead tr, .highcharts-data-table tr:nth-child(even) {
         background: #f8f8f8;
     }
+
     .highcharts-data-table tr:hover {
         background: #f1f7ff;
     }
 </style>
+<div class="col-12 tabs-above p-0">
 
-<div class="p-1" style="zoom:70%" id="divContenedorGraficos">
-    <div class="row">
-        <div class="col-12 col-md-12">
-            <div class="d-flex justify-content-between border-b-1 brc-purple-m4 ">
-                <h1 class="font-light text-grey-d2 border-b-1 brc-success-l1" id="lblSede"> Selecionar Sede</h1>
-                <button class="btn btn-wide btn-bold btn-lighter-primary btn-h-outline-pink btn-a-grey pr-3" type="button" id="btnBuscarSedes"><i class="fa fa fa-search"></i>Buscar Sede</button>
-            </div>
-        </div>
-    </div>
-    <div class="form-row">
-        <div class="col-sm-4 mt-0 mt-lg-0 p-1 pl-1">
-            <div class="card border-0 h-100">
-                <div class="card-header border-0 bgc-info-d1 card-header-sm">
-                    <h6 class="card-title pt-0">
-                        <i class="mr-1 fa fa-signal text-white-tp2"></i>
-                        <span class="text-110 text-white">Resultado Reinfo </span>
-                    </h6>
-                </div>
-                <div class="card-body px-0 bgc-white border-2 border-t-0 brc-primary-m4 pb-0 flex-grow-1 d-flex flex-column p-0">
-                    <div class="flex-grow-1 d-flex align-items-center p-0" style="height:20%">
-                        <figure class="highcharts-figure p-0 pr-3">
-                            <div id="ResulReinfo" class="p-0"></div>
-                            <p class="highcharts-description p-0">
-                            </p>
-                        </figure>
-                    </div>
-                    <hr class="brc-default-l1 w-95 mt-3 mb-0 p-0" />
-                    <div class="row mx-0 pb-2 pt-1 p-0">
-                        <div class="col-12 col-sm-4 d-inline-flex">
-                            <div class="h-100 d-flex align-items-center px-2">
-                                <i class="fa fa-check-circle fa-2x" style="color: #2ECC71"></i>
-                            </div>
-                            <div class="pl-1 pt-2">
-                                <span class="text-180 text-grey-d2" id="spanTrazables"></span>
-                                <br />
-                                <span class="text-grey-m1 text-100">Trazables</span>
-                            </div>
-                            <div class="position-rc h-75 border-l-1 brc-default-l1 d-none d-sm-block"></div>
-                            <div class="position-bc w-90 border-t-1 brc-default-l2 d-sm-none mb-n1"></div>
+    <ul class="nav nav-tabs nav-justified" role="tablist">
+        <li class="nav-item mr-1px">
+            <a class="nav-link active text-left radius-0" id="home-tab" data-toggle="tab" href="#home1" role="tab" aria-controls="home" aria-selected="true">
+                <i class="fa fa-signal text-blue-m1 mr-3px"></i>
+                General
+            </a>
+        </li>
+        <li class="nav-item mr-1px">
+            <a class="nav-link text-left radius-0" id="profile-tab" data-toggle="tab" href="#profile1" role="tab" aria-controls="profile" aria-selected="false">
+                <i class="fa fa-map-marker text-pink-m2 mr-3px"></i>
+                Por Sedes
+            </a>
+        </li>
+    </ul>
+
+    <div class="tab-content rounded-bottom">
+        <div class="tab-pane fade show active text-95" id="home1" role="tabpanel" aria-labelledby="home-tab">
+
+            <div class="form-row">
+                <div class="col-sm-6 mt-0 mt-lg-0 p-1 pl-1">
+                    <div class="card border-0 h-100">
+                        <div class="card-header border-0 bgc-info-d1 card-header-sm">
+                            <h6 class="card-title pt-0">
+                                <i class="mr-1 fa fa-signal text-white-tp2"></i>
+                                <span class="text-110 text-white">Informe de Trazabilidad (solo Trazables)</span>
+                            </h6>
                         </div>
-                        <div class="col-12 col-sm-4 d-inline-flex">
-                            <div class="h-100 d-flex align-items-center px-2">
-                                <i class="fa fa-check-circle fa-2x" style="color: #F1C40F"></i>
-                            </div>
-                            <div class="pl-1 pt-2">
-                                <span class="text-180 text-grey-d2" id="spanPendientes"></span>
-                                <br />
-                                <span class="text-grey-m1 text-100">Pendientes</span>
-                            </div>
-                            <div class="position-rc h-75 border-l-1 brc-default-l1 d-none d-sm-block"></div>
-                            <div class="position-bc w-90 border-t-1 brc-default-l2 d-sm-none mb-n1"></div>
-                        </div>
-                        <div class="col-12 col-sm-4 d-inline-flex">
-                            <div class="h-100 d-flex align-items-center px-2">
-                                <i class="fa fa-exclamation-triangle fa-2x" style="color: #E74C3C"></i>
-                            </div>
-                            <div class="pl-1 pt-2">
-                                <span class="text-180 text-grey-d2" id="spanNotrazables"></span>
-                                <br />
-                                <span class="text-grey-m1 text-100">No Trazables</span>
-                            </div>
-                        </div>
-                    </div>
+                        <div class="card-body px-0 bgc-white border-2 border-t-0 brc-primary-m4 pb-0 flex-grow-1 d-flex flex-column p-0">
+                            <div class="flex-grow-1 d-flex align-items-center p-0" style="height:20%">
+                                <figure class="highcharts-figure">
+                                    <div class="form-row pl-2">
+                                        <div class="form-group col-md-3">
+                                            <label>Año</label>
+                                            <select id="cmbAnioFiltrar" class="form-control">
+                                                <option value="2023">2023</option>
+                                                <option value="2022">2022</option>
+                                                <option value="2021">2021</option>
+                                                <option value="2020">2020</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label>Mes</label>
+                                            <select id="cmbMesFiltrar" class="form-control">
+                                                <option selected value="0">TODOS</option>
+                                                <option value="1">Enero</option>
+                                                <option value="2">Febrero</option>
+                                                <option value="3">Marzo</option>
+                                                <option value="4">Abril</option>
+                                                <option value="5">Mayo</option>
+                                                <option value="6">Junio</option>
+                                                <option value="7">Julio</option>
+                                                <option value="8">Agosto</option>
+                                                <option value="9">Septiembre</option>
+                                                <option value="10">Octubre</option>
+                                                <option value="11">Noviembre</option>
+                                                <option value="12">Diciembre</option>
+                                            </select>
+                                        </div>
 
+                                    </div>
+                                    <hr />
+                                    <div id="containerGeneral"></div>
+                                </figure>
 
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-4 mt-0 mt-sm-0 p-1 pl-1">
-            <div class="card border-0 h-100">
-                <div class="card-header border-0 bgc-info-d1 card-header-sm">
-                    <h6 class="card-title pt-0">
-                        <i class="mr-1 fa fa-signal text-white-tp2"></i>
-                        <span class="text-110 text-white">Estado del Proveedor </span>
-                    </h6>
-                </div>
-
-                <div class="card-body px-0 bgc-white border-2 border-t-0 brc-primary-m4 pb-0 flex-grow-1 d-flex flex-column p-0">
-                    <div class="flex-grow-1 d-flex align-items-center p-0" style="height:20%">
-                        <figure class="highcharts-figure p-0 pr-3">
-                            <div id="containerEstadoIgafom" class="p-0"></div>
-                            <p class="highcharts-description p-0">
-
-                            </p>
-                        </figure>
-
-                    </div>
-
-                    <hr class="brc-default-l1 w-95 mt-3 mb-0 p-0" />
-
-                    <div class="row mx-0 pb-2 pt-1 p-0">
-                        <div class="col-12 col-sm-4 d-inline-flex">
-                            <div class="h-100 d-flex align-items-center px-2">
-                                <i class="fa fa-check-circle fa-2x" style="color: #101A93"></i>
-                            </div>
-                            <div class="pl-1 pt-2">
-                                <span class="text-180 text-grey-d2" id="spanFormalizados"></span>
-                                <br />
-                                <span class="text-grey-m1 text-100">Formalizados</span>
                             </div>
 
-                            <div class="position-rc h-75 border-l-1 brc-default-l1 d-none d-sm-block"></div>
-                            <div class="position-bc w-90 border-t-1 brc-default-l2 d-sm-none mb-n1"></div>
-                        </div>
-                        <div class="col-12 col-sm-4 d-inline-flex">
-                            <div class="h-100 d-flex align-items-center px-2">
-                                <i class="fa fa-clock fa-2x" style="color: #4381CD"></i>
-                            </div>
-                            <div class="pl-1 pt-2">
-                                <span class="text-180 text-grey-d2" id="spanVigente"></span>
-                                <br />
-                                <span class="text-grey-m1 text-100">Vigentes</span>
-                            </div>
-                            <div class="position-rc h-75 border-l-1 brc-default-l1 d-none d-sm-block"></div>
-                            <div class="position-bc w-90 border-t-1 brc-default-l2 d-sm-none mb-n1"></div>
-                        </div>
+                            <hr class="brc-default-l1 w-95 mt-3 mb-0 p-0" />
 
-                        <div class="col-12 col-sm-4 d-inline-flex">
-                            <div class="h-100 d-flex align-items-center px-2">
-                                <i class="fa fa-exclamation-triangle fa-2x" style="color: #E62E1F"></i>
+                            <div class="row mx-0 pb-2 pt-1 p-0">
+                                <div class="col-12 col-sm-12 d-inline-flex">
+                                    <div class="h-100 d-flex align-items-center px-2">
+                                        <i class="fa fa-check-circle fa-2x text-success"></i>
+                                    </div>
+                                    <div class="pl-1 pt-2">
+                                        <span class="text-180 text-grey-d2" id="spanTotalGeneral"></span>
+                                        <br />
+                                        <span class="text-grey-m1 text-100">Total Informes Trazables</span>
+                                    </div>
+                                </div>
+
                             </div>
-                            <div class="pl-1 pt-2">
-                                <span class="text-180 text-grey-d2" id="spanSuspendidos"></span>
-                                <br />
-                                <span class="text-grey-m1 text-100">Suspendidos</span>
-                            </div>
+
+
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-4 mt-0 mt-sm-0 p-1">
-            <div class="card border-0 h-100">
-                <div class="card-header border-0 bgc-info-d1 card-header-sm">
-                    <h6 class="card-title pt-0">
-                        <i class="mr-1 fa fa-signal text-white-tp2"></i>
-                        <span class="text-110 text-white">Declaración de Producción</span>
-                    </h6>
 
                 </div>
-
-                <div class="card-body px-0 bgc-white border-2 border-t-0 brc-primary-m4 pb-0 flex-grow-1 d-flex flex-column p-0">
-                    <div class="flex-grow-1 d-flex align-items-center p-0" style="height:20%">
-                        <figure class="highcharts-figure p-0 pr-3">
-                            <div id="containerEstadoReinfo" class="p-0"></div>
-                            <p class="highcharts-description p-0">
-
-                            </p>
-                        </figure>
-
-                    </div>
-
-                    <hr class="brc-default-l1 w-95 mt-3 mb-0 p-0" />
-
-                    <div class="row mx-0 pb-2 pt-1 p-0">
-                        <div class="col-12 col-sm-6 d-inline-flex">
-                            <div class="h-100 d-flex align-items-center px-2">
-                                <i class="fa fa-check-circle fa-2x text-success"></i>
-                            </div>
-                            <div class="pl-1 pt-2">
-                                <span class="text-180 text-grey-d2" id="spanSi"></span>
-                                <br />
-                                <span class="text-grey-m1 text-100">Si</span>
-                            </div>
-
-                            <div class="position-rc h-75 border-l-1 brc-default-l1 d-none d-sm-block"></div>
-                            <div class="position-bc w-90 border-t-1 brc-default-l2 d-sm-none mb-n1"></div>
+                <div class="col-sm-6 mt-0 mt-lg-0 p-1 pl-1">
+                    <div class="card border-0 h-100">
+                        <div class="card-header border-0 bgc-info-d1 card-header-sm">
+                            <h6 class="card-title pt-0">
+                                <i class="mr-1 fa fa-signal text-white-tp2"></i>
+                                <span class="text-110 text-white">Declaración de Producción</span>
+                            </h6>
                         </div>
+                        <div class="card-body px-0 bgc-white border-2 border-t-0 brc-primary-m4 pb-0 flex-grow-1 d-flex flex-column p-0">
+                            <div class="flex-grow-1 d-flex align-items-center p-0" style="height:20%">
+                                <figure class="highcharts-figure">
+                                    <div class="form-row pl-2">
+                                        <div class="form-group col-md-3">
+                                            <label>Año</label>
+                                            <select id="cmbAnioDecFiltrar" class="form-control">
+                                                <option value="2023">2023</option>
+                                                <option value="2022">2022</option>
+                                                <option value="2021">2021</option>
+                                                <option value="2020">2020</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label>Semestre</label>
+                                            <select id="cmbSemestreFiltrar" class="form-control">
+                                                <option value="SEMESTRE1">Semestre I</option>
+                                                <option value="SEMESTRE2">Semestre II</option>
+                                            </select>
+                                        </div>
+          
+                                    </div>
+                                    <hr />
+                                    <div id="containerGeneral2"></div>
+                                </figure>
 
-                        <div class="col-12 col-sm-6 d-inline-flex">
-                            <div class="h-100 d-flex align-items-center px-2">
-                                <i class="fa fa-times-circle fa-2x text-danger-m3"></i>
-                            </div>
-                            <div class="pl-1 pt-2">
-                                <span class="text-180 text-grey-d2" id="spanNo"></span>
-                                <br />
-                                <span class="text-grey-m1 text-100">No</span>
                             </div>
 
-                            <div class="position-rc h-75 border-l-1 brc-default-l1 d-none d-sm-block"></div>
-                            <div class="position-bc w-90 border-t-1 brc-default-l2 d-sm-none mb-n1"></div>
+                            <hr class="brc-default-l1 w-95 mt-3 mb-0 p-0" />
+
+                            <div class="row mx-0 pb-2 pt-1 p-0" hidden>
+                                <div class="col-12 col-sm-12 d-inline-flex">
+                                    <div class="h-100 d-flex align-items-center px-2">
+                                        <i class="fa fa-check-circle fa-2x text-success"></i>
+                                    </div>
+                                    <div class="pl-1 pt-2">
+                                        <span class="text-180 text-grey-d2" id="spanTotalGeneral"></span>
+                                        <br />
+                                        <span class="text-grey-m1 text-100">Total Informes Trazables</span>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
                         </div>
-
-
                     </div>
-
 
                 </div>
             </div>
         </div>
-        <div class="col-sm-3 mt-0 mt-sm-0 p-1">
-            <div class="card border-0 h-100">
-                <div class="card-header border-0 bgc-info-d1 card-header-sm">
-                    <h6 class="card-title pt-0">
-                        <i class="mr-1 fa fa-signal text-white-tp2"></i>
-                        <span class="text-110 text-white">Cargo Igafom Correctivo</span>
-                    </h6>
-                </div>
-                <div class="card-body px-0 bgc-white border-2 border-t-0 brc-primary-m4 pb-0 flex-grow-1 d-flex flex-column p-0">
-                    <div class="flex-grow-1 d-flex align-items-center p-0" style="height:20%">
-                        <figure class="highcharts-figure pt-3">
-                            <div id="containerIgafCorrectivo" class="p-0"></div>
-                            <p class="highcharts-description p-0">
-
-                            </p>
-                        </figure>
-
-                    </div>
-                    <hr class="brc-default-l1 w-95 mt-3 mb-0 p-0" />
-                    <div class="row mx-0 pb-2 pt-1 p-0">
-                        <div class="col-12 col-sm-6 d-inline-flex">
-                            <div class="h-100 d-flex align-items-center px-2">
-                                <i class="fa fa-check-circle fa-2x text-success"></i>
+        <div class="tab-pane fade text-95" id="profile1" role="tabpanel" aria-labelledby="profile-tab">
+                    <div class="p-1" style="zoom:70%" id="divContenedorGraficos">
+                        <div class="row">
+                            <div class="col-12 col-md-12">
+                                <div class="d-flex justify-content-between border-b-1 brc-purple-m4 ">
+                                    <h1 class="font-light text-grey-d2 border-b-1 brc-success-l1" id="lblSede"> Selecionar Sede</h1>
+                                    <button class="btn btn-wide btn-bold btn-lighter-primary btn-h-outline-pink btn-a-grey pr-3" type="button" id="btnBuscarSedes"><i class="fa fa fa-search"></i>Buscar Sede</button>
+                                </div>
                             </div>
-                            <div class="pl-1 pt-2">
-                                <span class="text-180 text-grey-d2" id="spanSiCorrec"></span>
-                                <br />
-                                <span class="text-grey-m1 text-100">Si</span>
-                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-sm-4 mt-0 mt-lg-0 p-1 pl-1">
+                                <div class="card border-0 h-100">
+                                    <div class="card-header border-0 bgc-info-d1 card-header-sm">
+                                        <h6 class="card-title pt-0">
+                                            <i class="mr-1 fa fa-signal text-white-tp2"></i>
+                                            <span class="text-110 text-white">Resultado Reinfo </span>
+                                        </h6>
+                                    </div>
+                                    <div class="card-body px-0 bgc-white border-2 border-t-0 brc-primary-m4 pb-0 flex-grow-1 d-flex flex-column p-0">
+                                        <div class="flex-grow-1 d-flex align-items-center p-0" style="height:20%">
+                                            <figure class="highcharts-figure p-0 pr-3">
+                                                <div id="ResulReinfo" class="p-0"></div>
+                                                <p class="highcharts-description p-0">
+                                                </p>
+                                            </figure>
+                                        </div>
+                                        <hr class="brc-default-l1 w-95 mt-3 mb-0 p-0" />
+                                        <div class="row mx-0 pb-2 pt-1 p-0">
+                                            <div class="col-12 col-sm-4 d-inline-flex">
+                                                <div class="h-100 d-flex align-items-center px-2">
+                                                    <i class="fa fa-check-circle fa-2x" style="color: #2ECC71"></i>
+                                                </div>
+                                                <div class="pl-1 pt-2">
+                                                    <span class="text-180 text-grey-d2" id="spanTrazables"></span>
+                                                    <br />
+                                                    <span class="text-grey-m1 text-100">Trazables</span>
+                                                </div>
+                                                <div class="position-rc h-75 border-l-1 brc-default-l1 d-none d-sm-block"></div>
+                                                <div class="position-bc w-90 border-t-1 brc-default-l2 d-sm-none mb-n1"></div>
+                                            </div>
+                                            <div class="col-12 col-sm-4 d-inline-flex">
+                                                <div class="h-100 d-flex align-items-center px-2">
+                                                    <i class="fa fa-check-circle fa-2x" style="color: #F1C40F"></i>
+                                                </div>
+                                                <div class="pl-1 pt-2">
+                                                    <span class="text-180 text-grey-d2" id="spanPendientes"></span>
+                                                    <br />
+                                                    <span class="text-grey-m1 text-100">Pendientes</span>
+                                                </div>
+                                                <div class="position-rc h-75 border-l-1 brc-default-l1 d-none d-sm-block"></div>
+                                                <div class="position-bc w-90 border-t-1 brc-default-l2 d-sm-none mb-n1"></div>
+                                            </div>
+                                            <div class="col-12 col-sm-4 d-inline-flex">
+                                                <div class="h-100 d-flex align-items-center px-2">
+                                                    <i class="fa fa-exclamation-triangle fa-2x" style="color: #E74C3C"></i>
+                                                </div>
+                                                <div class="pl-1 pt-2">
+                                                    <span class="text-180 text-grey-d2" id="spanNotrazables"></span>
+                                                    <br />
+                                                    <span class="text-grey-m1 text-100">No Trazables</span>
+                                                </div>
+                                            </div>
+                                        </div>
 
-                            <div class="position-rc h-75 border-l-1 brc-default-l1 d-none d-sm-block"></div>
-                            <div class="position-bc w-90 border-t-1 brc-default-l2 d-sm-none mb-n1"></div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 mt-0 mt-sm-0 p-1 pl-1">
+                                <div class="card border-0 h-100">
+                                    <div class="card-header border-0 bgc-info-d1 card-header-sm">
+                                        <h6 class="card-title pt-0">
+                                            <i class="mr-1 fa fa-signal text-white-tp2"></i>
+                                            <span class="text-110 text-white">Estado del Proveedor </span>
+                                        </h6>
+                                    </div>
+                                    <div class="card-body px-0 bgc-white border-2 border-t-0 brc-primary-m4 pb-0 flex-grow-1 d-flex flex-column p-0">
+                                        <div class="flex-grow-1 d-flex align-items-center p-0" style="height:20%">
+                                            <figure class="highcharts-figure p-0 pr-3">
+                                                <div id="containerEstadoIgafom" class="p-0"></div>
+                                                <p class="highcharts-description p-0">
+
+                                                </p>
+                                            </figure>
+
+                                        </div>
+
+                                        <hr class="brc-default-l1 w-95 mt-3 mb-0 p-0" />
+
+                                        <div class="row mx-0 pb-2 pt-1 p-0">
+                                            <div class="col-12 col-sm-4 d-inline-flex">
+                                                <div class="h-100 d-flex align-items-center px-2">
+                                                    <i class="fa fa-check-circle fa-2x" style="color: #101A93"></i>
+                                                </div>
+                                                <div class="pl-1 pt-2">
+                                                    <span class="text-180 text-grey-d2" id="spanFormalizados"></span>
+                                                    <br />
+                                                    <span class="text-grey-m1 text-100">Formalizados</span>
+                                                </div>
+
+                                                <div class="position-rc h-75 border-l-1 brc-default-l1 d-none d-sm-block"></div>
+                                                <div class="position-bc w-90 border-t-1 brc-default-l2 d-sm-none mb-n1"></div>
+                                            </div>
+                                            <div class="col-12 col-sm-4 d-inline-flex">
+                                                <div class="h-100 d-flex align-items-center px-2">
+                                                    <i class="fa fa-clock fa-2x" style="color: #4381CD"></i>
+                                                </div>
+                                                <div class="pl-1 pt-2">
+                                                    <span class="text-180 text-grey-d2" id="spanVigente"></span>
+                                                    <br />
+                                                    <span class="text-grey-m1 text-100">Vigentes</span>
+                                                </div>
+                                                <div class="position-rc h-75 border-l-1 brc-default-l1 d-none d-sm-block"></div>
+                                                <div class="position-bc w-90 border-t-1 brc-default-l2 d-sm-none mb-n1"></div>
+                                            </div>
+
+                                            <div class="col-12 col-sm-4 d-inline-flex">
+                                                <div class="h-100 d-flex align-items-center px-2">
+                                                    <i class="fa fa-exclamation-triangle fa-2x" style="color: #E62E1F"></i>
+                                                </div>
+                                                <div class="pl-1 pt-2">
+                                                    <span class="text-180 text-grey-d2" id="spanSuspendidos"></span>
+                                                    <br />
+                                                    <span class="text-grey-m1 text-100">Suspendidos</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 mt-0 mt-sm-0 p-1">
+                                <div class="card border-0 h-100">
+                                    <div class="card-header border-0 bgc-info-d1 card-header-sm">
+                                        <h6 class="card-title pt-0">
+                                            <i class="mr-1 fa fa-signal text-white-tp2"></i>
+                                            <span class="text-110 text-white">Declaración de Producción</span>
+                                        </h6>
+                                    </div>
+                                    <div class="card-body px-0 bgc-white border-2 border-t-0 brc-primary-m4 pb-0 flex-grow-1 d-flex flex-column p-0">
+                                        <div class="flex-grow-1 d-flex align-items-center p-0" style="height:20%">
+                                            <figure class="highcharts-figure p-0 pr-3">
+                                                <div id="containerEstadoReinfo" class="p-0"></div>
+                                                <p class="highcharts-description p-0">
+
+                                                </p>
+                                            </figure>
+
+                                        </div>
+
+                                        <hr class="brc-default-l1 w-95 mt-3 mb-0 p-0" />
+
+                                        <div class="row mx-0 pb-2 pt-1 p-0">
+                                            <div class="col-12 col-sm-6 d-inline-flex">
+                                                <div class="h-100 d-flex align-items-center px-2">
+                                                    <i class="fa fa-check-circle fa-2x text-success"></i>
+                                                </div>
+                                                <div class="pl-1 pt-2">
+                                                    <span class="text-180 text-grey-d2" id="spanSi"></span>
+                                                    <br />
+                                                    <span class="text-grey-m1 text-100">Si</span>
+                                                </div>
+
+                                                <div class="position-rc h-75 border-l-1 brc-default-l1 d-none d-sm-block"></div>
+                                                <div class="position-bc w-90 border-t-1 brc-default-l2 d-sm-none mb-n1"></div>
+                                            </div>
+
+                                            <div class="col-12 col-sm-6 d-inline-flex">
+                                                <div class="h-100 d-flex align-items-center px-2">
+                                                    <i class="fa fa-times-circle fa-2x text-danger-m3"></i>
+                                                </div>
+                                                <div class="pl-1 pt-2">
+                                                    <span class="text-180 text-grey-d2" id="spanNo"></span>
+                                                    <br />
+                                                    <span class="text-grey-m1 text-100">No</span>
+                                                </div>
+
+                                                <div class="position-rc h-75 border-l-1 brc-default-l1 d-none d-sm-block"></div>
+                                                <div class="position-bc w-90 border-t-1 brc-default-l2 d-sm-none mb-n1"></div>
+                                            </div>
+
+
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3 mt-0 mt-sm-0 p-1">
+                                <div class="card border-0 h-100">
+                                    <div class="card-header border-0 bgc-info-d1 card-header-sm">
+                                        <h6 class="card-title pt-0">
+                                            <i class="mr-1 fa fa-signal text-white-tp2"></i>
+                                            <span class="text-110 text-white">Cargo Igafom Correctivo</span>
+                                        </h6>
+                                    </div>
+                                    <div class="card-body px-0 bgc-white border-2 border-t-0 brc-primary-m4 pb-0 flex-grow-1 d-flex flex-column p-0">
+                                        <div class="flex-grow-1 d-flex align-items-center p-0" style="height:20%">
+                                            <figure class="highcharts-figure pt-3">
+                                                <div id="containerIgafCorrectivo" class="p-0"></div>
+                                                <p class="highcharts-description p-0">
+
+                                                </p>
+                                            </figure>
+
+                                        </div>
+                                        <hr class="brc-default-l1 w-95 mt-3 mb-0 p-0" />
+                                        <div class="row mx-0 pb-2 pt-1 p-0">
+                                            <div class="col-12 col-sm-6 d-inline-flex">
+                                                <div class="h-100 d-flex align-items-center px-2">
+                                                    <i class="fa fa-check-circle fa-2x text-success"></i>
+                                                </div>
+                                                <div class="pl-1 pt-2">
+                                                    <span class="text-180 text-grey-d2" id="spanSiCorrec"></span>
+                                                    <br />
+                                                    <span class="text-grey-m1 text-100">Si</span>
+                                                </div>
+
+                                                <div class="position-rc h-75 border-l-1 brc-default-l1 d-none d-sm-block"></div>
+                                                <div class="position-bc w-90 border-t-1 brc-default-l2 d-sm-none mb-n1"></div>
+                                            </div>
+
+                                            <div class="col-12 col-sm-6 d-inline-flex">
+                                                <div class="h-100 d-flex align-items-center px-2">
+                                                    <i class="fa fa-times-circle fa-2x text-danger-m3"></i>
+                                                </div>
+                                                <div class="pl-1 pt-2">
+                                                    <span class="text-180 text-grey-d2" id="spanNoCorrec"></span>
+                                                    <br />
+                                                    <span class="text-grey-m1 text-100">No</span>
+                                                </div>
+
+                                                <div class="position-rc h-75 border-l-1 brc-default-l1 d-none d-sm-block"></div>
+                                                <div class="position-bc w-90 border-t-1 brc-default-l2 d-sm-none mb-n1"></div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3 mt-0 sm-lg-0 p-1">
+                                <div class="card border-0 h-100">
+                                    <div class="card-header border-0 bgc-info-d1 card-header-sm">
+                                        <h6 class="card-title pt-0">
+                                            <i class="mr-1 fa fa-signal text-white-tp2"></i>
+                                            <span class="text-110 text-white">Cargo Igafom Preventivo</span>
+                                        </h6>
+                                    </div>
+
+                                    <div class="card-body px-0 bgc-white border-2 border-t-0 brc-primary-m4 pb-0 flex-grow-1 d-flex flex-column p-0">
+                                        <div class="flex-grow-1 d-flex align-items-center p-0" style="height:20%">
+                                            <figure class="highcharts-figure pt-3">
+                                                <div id="containerIgafPrev" class="p-0"></div>
+                                                <p class="highcharts-description p-0">
+
+                                                </p>
+                                            </figure>
+
+                                        </div>
+
+                                        <hr class="brc-default-l1 w-95 mt-3 mb-0 p-0" />
+
+                                        <div class="row mx-0 pb-2 pt-1 p-0">
+                                            <div class="col-12 col-sm-6 d-inline-flex">
+                                                <div class="h-100 d-flex align-items-center px-2">
+                                                    <i class="fa fa-check-circle fa-2x text-success"></i>
+                                                </div>
+                                                <div class="pl-1 pt-2">
+                                                    <span class="text-180 text-grey-d2" id="spanSiPrev"></span>
+                                                    <br />
+                                                    <span class="text-grey-m1 text-100">Si</span>
+                                                </div>
+
+                                                <div class="position-rc h-75 border-l-1 brc-default-l1 d-none d-sm-block"></div>
+                                                <div class="position-bc w-90 border-t-1 brc-default-l2 d-sm-none mb-n1"></div>
+                                            </div>
+                                            <div class="col-12 col-sm-6 d-inline-flex">
+                                                <div class="h-100 d-flex align-items-center px-2">
+                                                    <i class="fa fa-times-circle fa-2x text-danger-m3"></i>
+                                                </div>
+                                                <div class="pl-1 pt-2">
+                                                    <span class="text-180 text-grey-d2" id="spanNoPrev"></span>
+                                                    <br />
+                                                    <span class="text-grey-m1 text-100">No</span>
+                                                </div>
+                                                <div class="position-rc h-75 border-l-1 brc-default-l1 d-none d-sm-block"></div>
+                                                <div class="position-bc w-90 border-t-1 brc-default-l2 d-sm-none mb-n1"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3 mt-0 mt-sm-0 p-1">
+                                <div class="card border-0 h-100">
+                                    <div class="card-header border-0 bgc-info-d1 card-header-sm">
+                                        <h6 class="card-title pt-0">
+                                            <i class="mr-1 fa fa-signal text-white-tp2"></i>
+                                            <span class="text-110 text-white">Informe Igafom Correctivo</span>
+                                        </h6>
+                                    </div>
+
+                                    <div class="card-body px-0 bgc-white border-2 border-t-0 brc-primary-m4 pb-0 flex-grow-1 d-flex flex-column p-0">
+                                        <div class="flex-grow-1 d-flex align-items-center p-0" style="height:20%">
+                                            <figure class="highcharts-figure pt-3">
+                                                <div id="containerIgafCorrecInforme" class="p-0"></div>
+                                                <p class="highcharts-description p-0">
+
+                                                </p>
+                                            </figure>
+
+                                        </div>
+
+                                        <hr class="brc-default-l1 w-95 mt-3 mb-0 p-0" />
+
+                                        <div class="row mx-0 pb-2 pt-1 p-0">
+                                            <div class="col-12 col-sm-6 d-inline-flex">
+                                                <div class="h-100 d-flex align-items-center px-2">
+                                                    <i class="fa fa-check-circle fa-2x text-success"></i>
+                                                </div>
+                                                <div class="pl-1 pt-2">
+                                                    <span class="text-180 text-grey-d2" id="spanSiCorrecInforme"></span>
+                                                    <br />
+                                                    <span class="text-grey-m1 text-100">Si</span>
+                                                </div>
+
+                                                <div class="position-rc h-75 border-l-1 brc-default-l1 d-none d-sm-block"></div>
+                                                <div class="position-bc w-90 border-t-1 brc-default-l2 d-sm-none mb-n1"></div>
+                                            </div>
+
+                                            <div class="col-12 col-sm-6 d-inline-flex">
+                                                <div class="h-100 d-flex align-items-center px-2">
+                                                    <i class="fa fa-times-circle fa-2x text-danger-m3"></i>
+                                                </div>
+                                                <div class="pl-1 pt-2">
+                                                    <span class="text-180 text-grey-d2" id="spanNoCorrecInforme"></span>
+                                                    <br />
+                                                    <span class="text-grey-m1 text-100">No</span>
+                                                </div>
+
+                                                <div class="position-rc h-75 border-l-1 brc-default-l1 d-none d-sm-block"></div>
+                                                <div class="position-bc w-90 border-t-1 brc-default-l2 d-sm-none mb-n1"></div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3 mt-0 mt-sm-0 p-1">
+                                <div class="card border-0 h-100">
+                                    <div class="card-header border-0 bgc-info-d1 card-header-sm">
+                                        <h6 class="card-title pt-0">
+                                            <i class="mr-1 fa fa-signal text-white-tp2"></i>
+                                            <span class="text-110 text-white">Informe Igafom Preventivo</span>
+                                        </h6>
+                                    </div>
+                                    <div class="card-body px-0 bgc-white border-2 border-t-0 brc-primary-m4 pb-0 flex-grow-1 d-flex flex-column p-0">
+                                        <div class="flex-grow-1 d-flex align-items-center p-0" style="height:20%">
+                                            <figure class="highcharts-figure pt-3">
+                                                <div id="containerIgafPrevInforme" class="p-0"></div>
+                                                <p class="highcharts-description p-0">
+                                                </p>
+                                            </figure>
+                                        </div>
+                                        <hr class="brc-default-l1 w-95 mt-3 mb-0 p-0" />
+                                        <div class="row mx-0 pb-2 pt-1 p-0">
+                                            <div class="col-12 col-sm-6 d-inline-flex">
+                                                <div class="h-100 d-flex align-items-center px-2">
+                                                    <i class="fa fa-check-circle fa-2x text-success"></i>
+                                                </div>
+                                                <div class="pl-1 pt-2">
+                                                    <span class="text-180 text-grey-d2" id="spanSiPrevInforme"></span>
+                                                    <br />
+                                                    <span class="text-grey-m1 text-100">Si</span>
+                                                </div>
+
+                                                <div class="position-rc h-75 border-l-1 brc-default-l1 d-none d-sm-block"></div>
+                                                <div class="position-bc w-90 border-t-1 brc-default-l2 d-sm-none mb-n1"></div>
+                                            </div>
+
+                                            <div class="col-12 col-sm-6 d-inline-flex">
+                                                <div class="h-100 d-flex align-items-center px-2">
+                                                    <i class="fa fa-times-circle fa-2x text-danger-m3"></i>
+                                                </div>
+                                                <div class="pl-1 pt-2">
+                                                    <span class="text-180 text-grey-d2" id="spanNoPrevInforme"></span>
+                                                    <br />
+                                                    <span class="text-grey-m1 text-100">No</span>
+                                                </div>
+
+                                                <div class="position-rc h-75 border-l-1 brc-default-l1 d-none d-sm-block"></div>
+                                                <div class="position-bc w-90 border-t-1 brc-default-l2 d-sm-none mb-n1"></div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="col-12 col-sm-6 d-inline-flex">
-                            <div class="h-100 d-flex align-items-center px-2">
-                                <i class="fa fa-times-circle fa-2x text-danger-m3"></i>
-                            </div>
-                            <div class="pl-1 pt-2">
-                                <span class="text-180 text-grey-d2" id="spanNoCorrec"></span>
-                                <br />
-                                <span class="text-grey-m1 text-100">No</span>
-                            </div>
-
-                            <div class="position-rc h-75 border-l-1 brc-default-l1 d-none d-sm-block"></div>
-                            <div class="position-bc w-90 border-t-1 brc-default-l2 d-sm-none mb-n1"></div>
-                        </div>
-                    </div>
-
-
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-3 mt-0 sm-lg-0 p-1">
-            <div class="card border-0 h-100">
-                <div class="card-header border-0 bgc-info-d1 card-header-sm">
-                    <h6 class="card-title pt-0">
-                        <i class="mr-1 fa fa-signal text-white-tp2"></i>
-                        <span class="text-110 text-white">Cargo Igafom Preventivo</span>
-                    </h6>
-                </div>
-
-                <div class="card-body px-0 bgc-white border-2 border-t-0 brc-primary-m4 pb-0 flex-grow-1 d-flex flex-column p-0">
-                    <div class="flex-grow-1 d-flex align-items-center p-0" style="height:20%">
-                        <figure class="highcharts-figure pt-3">
-                            <div id="containerIgafPrev" class="p-0"></div>
-                            <p class="highcharts-description p-0">
-
-                            </p>
-                        </figure>
-
-                    </div>
-
-                    <hr class="brc-default-l1 w-95 mt-3 mb-0 p-0" />
-
-                    <div class="row mx-0 pb-2 pt-1 p-0">
-                        <div class="col-12 col-sm-6 d-inline-flex">
-                            <div class="h-100 d-flex align-items-center px-2">
-                                <i class="fa fa-check-circle fa-2x text-success"></i>
-                            </div>
-                            <div class="pl-1 pt-2">
-                                <span class="text-180 text-grey-d2" id="spanSiPrev"></span>
-                                <br />
-                                <span class="text-grey-m1 text-100">Si</span>
-                            </div>
-
-                            <div class="position-rc h-75 border-l-1 brc-default-l1 d-none d-sm-block"></div>
-                            <div class="position-bc w-90 border-t-1 brc-default-l2 d-sm-none mb-n1"></div>
-                        </div>
-                        <div class="col-12 col-sm-6 d-inline-flex">
-                            <div class="h-100 d-flex align-items-center px-2">
-                                <i class="fa fa-times-circle fa-2x text-danger-m3"></i>
-                            </div>
-                            <div class="pl-1 pt-2">
-                                <span class="text-180 text-grey-d2" id="spanNoPrev"></span>
-                                <br />
-                                <span class="text-grey-m1 text-100">No</span>
-                            </div>
-                            <div class="position-rc h-75 border-l-1 brc-default-l1 d-none d-sm-block"></div>
-                            <div class="position-bc w-90 border-t-1 brc-default-l2 d-sm-none mb-n1"></div>
-                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="col-sm-3 mt-0 mt-sm-0 p-1">
-            <div class="card border-0 h-100">
-                <div class="card-header border-0 bgc-info-d1 card-header-sm">
-                    <h6 class="card-title pt-0">
-                        <i class="mr-1 fa fa-signal text-white-tp2"></i>
-                        <span class="text-110 text-white">Informe Igafom Correctivo</span>
-                    </h6>
-                </div>
+       </div>
 
-                <div class="card-body px-0 bgc-white border-2 border-t-0 brc-primary-m4 pb-0 flex-grow-1 d-flex flex-column p-0">
-                    <div class="flex-grow-1 d-flex align-items-center p-0" style="height:20%">
-                        <figure class="highcharts-figure pt-3">
-                            <div id="containerIgafCorrecInforme" class="p-0"></div>
-                            <p class="highcharts-description p-0">
-
-                            </p>
-                        </figure>
-
-                    </div>
-
-                    <hr class="brc-default-l1 w-95 mt-3 mb-0 p-0" />
-
-                    <div class="row mx-0 pb-2 pt-1 p-0">
-                        <div class="col-12 col-sm-6 d-inline-flex">
-                            <div class="h-100 d-flex align-items-center px-2">
-                                <i class="fa fa-check-circle fa-2x text-success"></i>
-                            </div>
-                            <div class="pl-1 pt-2">
-                                <span class="text-180 text-grey-d2" id="spanSiCorrecInforme"></span>
-                                <br />
-                                <span class="text-grey-m1 text-100">Si</span>
-                            </div>
-
-                            <div class="position-rc h-75 border-l-1 brc-default-l1 d-none d-sm-block"></div>
-                            <div class="position-bc w-90 border-t-1 brc-default-l2 d-sm-none mb-n1"></div>
-                        </div>
-
-                        <div class="col-12 col-sm-6 d-inline-flex">
-                            <div class="h-100 d-flex align-items-center px-2">
-                                <i class="fa fa-times-circle fa-2x text-danger-m3"></i>
-                            </div>
-                            <div class="pl-1 pt-2">
-                                <span class="text-180 text-grey-d2" id="spanNoCorrecInforme"></span>
-                                <br />
-                                <span class="text-grey-m1 text-100">No</span>
-                            </div>
-
-                            <div class="position-rc h-75 border-l-1 brc-default-l1 d-none d-sm-block"></div>
-                            <div class="position-bc w-90 border-t-1 brc-default-l2 d-sm-none mb-n1"></div>
-                        </div>
-                    </div>
-
-
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-3 mt-0 mt-sm-0 p-1">
-            <div class="card border-0 h-100">
-                <div class="card-header border-0 bgc-info-d1 card-header-sm">
-                    <h6 class="card-title pt-0">
-                        <i class="mr-1 fa fa-signal text-white-tp2"></i>
-                        <span class="text-110 text-white">Informe Igafom Preventivo</span>
-                    </h6>
-                </div>
-                <div class="card-body px-0 bgc-white border-2 border-t-0 brc-primary-m4 pb-0 flex-grow-1 d-flex flex-column p-0">
-                    <div class="flex-grow-1 d-flex align-items-center p-0" style="height:20%">
-                        <figure class="highcharts-figure pt-3">
-                            <div id="containerIgafPrevInforme" class="p-0"></div>
-                            <p class="highcharts-description p-0">
-                            </p>
-                        </figure>
-                    </div>
-                    <hr class="brc-default-l1 w-95 mt-3 mb-0 p-0" />
-                    <div class="row mx-0 pb-2 pt-1 p-0">
-                        <div class="col-12 col-sm-6 d-inline-flex">
-                            <div class="h-100 d-flex align-items-center px-2">
-                                <i class="fa fa-check-circle fa-2x text-success"></i>
-                            </div>
-                            <div class="pl-1 pt-2">
-                                <span class="text-180 text-grey-d2" id="spanSiPrevInforme"></span>
-                                <br />
-                                <span class="text-grey-m1 text-100">Si</span>
-                            </div>
-
-                            <div class="position-rc h-75 border-l-1 brc-default-l1 d-none d-sm-block"></div>
-                            <div class="position-bc w-90 border-t-1 brc-default-l2 d-sm-none mb-n1"></div>
-                        </div>
-
-                        <div class="col-12 col-sm-6 d-inline-flex">
-                            <div class="h-100 d-flex align-items-center px-2">
-                                <i class="fa fa-times-circle fa-2x text-danger-m3"></i>
-                            </div>
-                            <div class="pl-1 pt-2">
-                                <span class="text-180 text-grey-d2" id="spanNoPrevInforme"></span>
-                                <br />
-                                <span class="text-grey-m1 text-100">No</span>
-                            </div>
-
-                            <div class="position-rc h-75 border-l-1 brc-default-l1 d-none d-sm-block"></div>
-                            <div class="position-bc w-90 border-t-1 brc-default-l2 d-sm-none mb-n1"></div>
-                        </div>
-                    </div>
-
-
-                </div>
-            </div>
-        </div>
-    </div>
-  
 </div>
-  <div class="modal fade m-0" id="myModalSedes" tabindex="-1" role="dialog" aria-hidden="true" style="zoom: 80%">
-        <div class="modal-dialog modal-dialog-centered  modal-xl" role="document">
-            <div class="modal-content">
-                <div class="modal-body ace-scrollbar p-0 ">
-                    <div class="card-body bg-white border-1 border-t-0 brc-primary-l1">
-                        <div class="row d-flex mx-1 mx-lg-0 btn-group btn-group-toggle" data-toggle="buttons" id="lstSedes">
-                        </div>
+
+<div class="modal fade m-0" id="myModalSedes" tabindex="-1" role="dialog" aria-hidden="true" style="zoom: 80%">
+    <div class="modal-dialog modal-dialog-centered  modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-body ace-scrollbar p-0 ">
+                <div class="card-body bg-white border-1 border-t-0 brc-primary-l1">
+                    <div class="row d-flex mx-1 mx-lg-0 btn-group btn-group-toggle" data-toggle="buttons" id="lstSedes">
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 <div class="modal" id="myModalLoading" tabindex="-1" role="dialog" style="display: block; zoom: 110%" hidden>
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content" style="background-color:snow">
-            <div class="modal-body" >
+            <div class="modal-body">
                 <div class=" d-flex flex-column justify-content-between align-items-center">
                     <p class="pt-2" style="color:darkblue">Por favor espere.....</p>
                     <div class="pos-rel my-3" style="width: 2.85rem; height: 2.25rem;">

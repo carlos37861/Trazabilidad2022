@@ -204,6 +204,21 @@ namespace GeoTraz.Web.Controllers
             }
         }
 
+        public IActionResult Notice()
+        {
+            Usuario usuarioLogin = HttpContext.Session.GetComplexData<Usuario>("usuariologin");
+            if (usuarioLogin != null)
+            {
+                ViewBag.message = usuarioLogin.V_LOGIN;
+                ViewBag.sede = usuarioLogin.N_CODSEDE;
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Login", "Home");
+            }
+        }
+        
         public IActionResult ReporteGeneral()
         {
             Usuario usuarioLogin = HttpContext.Session.GetComplexData<Usuario>("usuariologin");
@@ -565,6 +580,40 @@ namespace GeoTraz.Web.Controllers
 
             return Json(new { data = httpClient });
         }
+
+
+        [HttpGet]
+        public async Task<JsonResult> FiltrarReinfoGrafico(string V_ANIO, string V_MES)
+        {
+            ReinfoDTO rei = new ReinfoDTO();
+            rei.V_ANIO = V_ANIO;
+            rei.V_MES = V_MES;
+
+            var httpClient = await HttpClientReinfo.FiltrarReinfoGrafico(rei);
+
+            return Json(new { data = httpClient });
+        }
+
+        [HttpGet]
+        public async Task<JsonResult> FiltrarDeclaracionGrafico(string V_ANIO, string V_SEMESTRE)
+        {
+            ReinfoDTO rei = new ReinfoDTO();
+            rei.V_ANIO = V_ANIO;
+            rei.V_SEMESTRE = V_SEMESTRE;
+
+            var httpClient = await HttpClientReinfo.FiltrarDeclaracionGrafico(rei);
+            var data=from p in httpClient.GroupBy(p => p.N_SEDE)
+            select new
+            {
+                p.First().N_SEDE,
+                Si = p.Count(x=>x.N_DATOS==1),
+                No= p.Count(x => x.N_DATOS == 0)
+            };
+            return Json(new { data = data });
+
+        }
+
+
         [HttpGet]
         public async Task<JsonResult> ValidaReinfo(string V_RUC, string V_CODCONSECION)
         {

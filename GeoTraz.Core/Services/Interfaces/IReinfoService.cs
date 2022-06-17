@@ -17,5 +17,8 @@ namespace GeoTraz.Core.Services.Interfaces
         Task<IEnumerable<ReinfoDTO>> BuscarReinfo(ReinfoDTO reinfo);
         Task<IEnumerable<ReinfoDTO>> FiltrarReinfo(ReinfoDTO reinfo);
         Task<IEnumerable<ReinfoDTO>> ValidaReinfo(ReinfoDTO reinfo);
+
+        Task<IEnumerable<ReinfoDTO>> FiltrarReinfoGrafico(ReinfoDTO reinfo);
+        Task<IEnumerable<ReinfoDTO>> FiltrarDeclaracionGrafico(ReinfoDTO reinfo);
     }
 }

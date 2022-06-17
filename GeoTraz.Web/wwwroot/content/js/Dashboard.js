@@ -22,7 +22,8 @@ jQuery(function ($) {
                 $("#lblBotonesSede" + UserSede).addClass("active");
             });
         },
-    }); 
+    });
+
 });
 
 // CREACIÓN DE GRAFICOS SEGUN LA SEDE QUE SELECCIONE
@@ -84,14 +85,12 @@ function filtraSedeReporte(id) {
                 } else if (value.v_ESTADOIGAFOM == "SUSPENDIDO") {
                     suspendido = suspendido + 1
                 }
-
                 //CONTADOR DECLARACION DE PRODUCCION
                 if (value.v_CARGODECMINERA == 1) {
                     contadorDecMinSi = contadorDecMinSi + 1;
                 } else if (value.v_CARGODECMINERA == 0) {
                     contadorDecMinNo = contadorDecMinNo + 1;
                 }
-
                 //CONTADOR CARGO IGAFOM CORRECTIVO
                 if (value.v_CARGOCORRECT == 1) {
                     contadorCargoCorrectSi = contadorCargoCorrectSi + 1;
@@ -116,7 +115,6 @@ function filtraSedeReporte(id) {
                 } else if (value.v_INFORMEPREVENT == 0) {
                     contadorInformePrevNo = contadorInformePrevNo + 1;
                 }
-
             });
             //SPAN RESLTADO REINFOR
             $("#spanTrazables").text(trazable);
@@ -271,7 +269,6 @@ function filtraSedeReporte(id) {
                                 y: suspendido,
                                 color: '#E62E1F'
                             }
-
                         ]
                     }
                 ]
@@ -757,6 +754,12 @@ $.ajax({
     }
 });
 
+var currentTime = new Date();
+var year = currentTime.getFullYear();
+$("#cmbAnioFiltrar").val(year);
+GraficoGeneral(year, '0');
+GraficoDocGeneral(year, 'SEMESTRE1');
+
 $("#btnBuscarSedes").click(function () {
 //$("#myModalSedes").modal({ backdrop: 'static', keyboard: false })
     $("#myModalSedes").modal('show');
@@ -764,6 +767,35 @@ $("#btnBuscarSedes").click(function () {
 $("#btnExportarGrafico").click(function () {
     $("#divContenedorGraficos").printThis();
 });
+
+$("#cmbAnioFiltrar").change(function () {
+    if ($("#cmbAnioFiltrar").val() == "0") {
+        $("#cmbMesFiltrar").attr("disabled", true);
+    } else {
+        $("#cmbMesFiltrar").attr("disabled", false);
+    }
+    let anio = $("#cmbAnioFiltrar").val();
+    let mes = $("#cmbMesFiltrar").val();
+    GraficoGeneral(anio, mes);
+});
+$("#cmbMesFiltrar").change(function () {
+    let anio = $("#cmbAnioFiltrar").val();
+    let mes = $("#cmbMesFiltrar").val();
+    GraficoGeneral(anio, mes);
+});
+
+//evento cambiar combo declaración minera
+$("#cmbAnioDecFiltrar").change(function () {
+    let anio = $("#cmbAnioDecFiltrar").val();
+    let semestre = $("#cmbSemestreFiltrar").val();
+    GraficoDocGeneral(anio, semestre);
+});
+$("#cmbSemestreFiltrar").change(function () {
+    let anio = $("#cmbAnioDecFiltrar").val();
+    let semestre = $("#cmbSemestreFiltrar").val();
+    GraficoDocGeneral(anio, semestre);
+});
+ 
 
 //EVENTO QUE MUESTRA NOMBRE AL ELEGIR LA SEDE
 function clickSedes(id) {
@@ -803,4 +835,199 @@ function buscaNombreSede(id) {
         }
     });
     return nombresede;
+}
+
+//FUNCION PARA MOSTRAR TODAS LAS SEDES EN GRAFICO Y CANTIDAD DE INFORMES
+function GraficoGeneral(anio,mes) {
+    $.ajax({
+        url: '/Home/FiltrarReinfoGrafico?V_ANIO=' + anio + '&V_MES=' + mes,
+        type: 'GET',
+        dataType: 'json',
+        beforeSend: function () {
+            $('#myModalLoading').removeAttr('hidden');
+            $('#myModalLoading').modal("show");
+        },
+        complete: function () {
+            $('#myModalLoading').attr('hidden', true);
+            $('#myModalLoading').modal('hide');
+            $("#myModalSedes").modal('hide');
+        },
+        data: 'data',
+        success: function (data) {
+            var ArraySede = []
+            var ArrayCantidad = []
+            var Total = 0;
+            var datos = data.data;
+            $(datos).each(function (index, value) {
+                $.ajax({
+                    async: false,
+                    url: '/Home/ListaSedes',
+                    type: 'GET',
+                    dataType: 'json',
+                    data: 'data',
+                    success: function (data) {
+                        var datos = data.data;
+                        $(datos).each(function (index, value1) {
+                            if (value1.n_CODSEDE == value.n_SEDE) {
+                                ArraySede.push(value1.v_NOMSEDE);
+                            }
+                        });
+                    }
+                });
+                ArrayCantidad.push(value.v_CANTIDAD);
+            });
+            var result = ArrayCantidad.map(i => Number(i));
+
+            for (let i = 0; i < result.length; i++) {
+                Total += result[i];
+            }
+            var month = $("#cmbMesFiltrar option:selected").text();
+            $('#spanTotalGeneral').text(Total);
+            Highcharts.chart('containerGeneral', {
+                title: {
+                    text: 'Informes ' + anio + ' - Mes: ' + month
+                },
+                subtitle: {
+                    text: ''
+                },
+                yAxis: {
+                    title: {
+                        text: 'Cantidad de Informes'
+                    }
+                },
+                xAxis: {
+                    categories: ArraySede
+                },
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'middle',
+                },
+                plotOptions: {
+                    line: {
+                        dataLabels: {
+                            enabled: true
+                        },
+                        enableMouseTracking: true
+                    }
+                },
+                series: [{
+                    name: 'Cantidad',
+                    data: result
+                }],
+                responsive: {
+                    rules: [{
+                        condition: {
+                            maxWidth: 500
+                        },
+                        chartOptions: {
+                            legend: {
+                                layout: 'horizontal',
+                                align: 'center',
+                                verticalAlign: 'bottom'
+                            }
+                        }
+                    }]
+                }
+            });
+        },
+
+    });
+}
+
+function GraficoDocGeneral(anio, semestre) {
+    // CREACIÓN DE GRAFICOS SEGUN LA SEDE QUE SELECCIONE
+    $.ajax({
+        url: '/Home/FiltrarDeclaracionGrafico?V_ANIO=' + anio + '&V_SEMESTRE=' + semestre,
+        type: 'GET',
+        dataType: 'json',
+        beforeSend: function () {
+            $('#myModalLoading').removeAttr('hidden');
+            $('#myModalLoading').modal("show");
+        },
+        complete: function () {
+            $('#myModalLoading').attr('hidden', true);
+            $('#myModalLoading').modal('hide');
+            $("#myModalSedes").modal('hide');
+        },
+        data: 'data',
+        success: function (data) {
+            //VARIABLES GLOBALES DE LA FUNCION
+            var datos = data.data;
+            console.log(datos);
+            var ArraySedes = [];
+            var ArraySi = [];
+            var ArrayNo = [];
+            $(datos).each(function (index, value) {
+                $.ajax({
+                    async: false,
+                    url: '/Home/ListaSedes',
+                    type: 'GET',
+                    dataType: 'json',
+                    data: 'data',
+                    success: function (data) {
+                        var datos = data.data;
+                        $(datos).each(function (index, value1) {
+                            if (value1.n_CODSEDE == value.n_SEDE) {
+                                ArraySedes.push(value1.v_NOMSEDE);
+                            }
+                        });
+                    }
+                });
+                ArraySi.push(value.si);
+                ArrayNo.push(value.no);
+            });
+
+            Highcharts.chart('containerGeneral2', {
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: 'Declaración de Producción'
+                },
+                xAxis: {
+                    categories: ArraySedes
+                },
+                yAxis: [{
+                    min: 0,
+                    title: {
+                        text: 'Cantidad de Informes'
+                    }
+                }, {
+                    title: {
+                        text: ''
+                    },
+                    opposite: true
+                }],
+                legend: {
+                    shadow: true
+                },
+                tooltip: {
+                    shared: true
+                },
+                plotOptions: {
+                    column: {
+                        grouping: false,
+                        shadow: false,
+                        borderWidth: 0
+                    }
+                },
+                series: [{
+                    name: 'Si',
+                    color: 'rgb(40, 167, 69)',
+                    data: ArraySi,
+                    pointPadding: 0.3,
+                    pointPlacement: -0.2
+                }, {
+                    name: 'No',
+                    color: 'rgb(225, 91, 91)',
+                    data: ArrayNo,
+                    pointPadding: 0.4,
+                    pointPlacement: -0.2
+
+                }]
+            });
+
+        },
+    });
 }

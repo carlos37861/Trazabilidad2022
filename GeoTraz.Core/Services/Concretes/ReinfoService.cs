@@ -80,5 +80,21 @@ namespace GeoTraz.Core.Services.Concretes
             var lista = await uow.ReinfoRepository.ValidaReinfo(entidad);
             return mapper.Map<IEnumerable<ReinfoDTO>>(lista);
         }
+
+        public async Task<IEnumerable<ReinfoDTO>> FiltrarReinfoGrafico(ReinfoDTO reinfo)
+        {
+            var entidad = mapper.Map<Reinfo>(reinfo);
+            var lista = await uow.ReinfoRepository.FiltrarReinfoGrafico(entidad);
+            return mapper.Map<IEnumerable<ReinfoDTO>>(lista);
+        }
+
+
+
+        public async Task<IEnumerable<ReinfoDTO>> FiltrarDeclaracionGrafico(ReinfoDTO reinfo)
+        {
+            var entidad = mapper.Map<Reinfo>(reinfo);
+            var lista = await uow.ReinfoRepository.FiltrarDeclarionGrafico(entidad);
+            return mapper.Map<IEnumerable<ReinfoDTO>>(lista);
+        }
     }
 }

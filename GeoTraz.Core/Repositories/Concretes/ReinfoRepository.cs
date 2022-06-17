@@ -530,5 +530,76 @@ namespace GeoTraz.Core.Repositories.Concretes
             }
 
         }
+
+        public async Task<IEnumerable<Reinfo>> FiltrarReinfoGrafico(Reinfo reinfo)
+        {
+            List<Reinfo> List = new List<Reinfo>();
+            try
+            {
+                using (var command = CreateCommand())
+                {
+                    command.CommandText = "[TRAZABILIDAD].[TZ_LIST_REINFOGRAFICO]";
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@V_ANIO", reinfo.V_ANIO);
+                    command.Parameters.AddWithValue("@V_MES", reinfo.V_MES);
+
+                    SqlDataReader sqlDataReader = await command.ExecuteReaderAsync(CommandBehavior.SingleResult);
+
+                    while (sqlDataReader.Read())
+                    {
+                        Reinfo Obj = new Reinfo()
+                        {
+                            N_SEDE = sqlDataReader[0] == DBNull.Value ? 0 : Convert.ToInt32(sqlDataReader[0]),
+                            V_ANIO = sqlDataReader[1].ToString(),
+                            V_CANTIDAD = sqlDataReader[2].ToString(),
+
+  
+                        };
+                        List.Add(Obj);
+                    }
+                    sqlDataReader.Close();
+                    return List;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new ArgumentOutOfRangeException("error", ex);
+            }
+
+        }
+
+        public async Task<IEnumerable<Reinfo>> FiltrarDeclarionGrafico(Reinfo reinfo)
+        {
+            List<Reinfo> List = new List<Reinfo>();
+            try
+            {
+                using (var command = CreateCommand())
+                {
+                    command.CommandText = "[TRAZABILIDAD].[TZ_LIST_DECLARACIONGRAFICO]";
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@V_ANIO", reinfo.V_ANIO);
+                    command.Parameters.AddWithValue("@V_SEMESTRE", reinfo.V_SEMESTRE);
+
+                    SqlDataReader sqlDataReader = await command.ExecuteReaderAsync(CommandBehavior.SingleResult);
+
+                    while (sqlDataReader.Read())
+                    {
+                        Reinfo Obj = new Reinfo()
+                        {
+                            N_SEDE = sqlDataReader[0] == DBNull.Value ? 0 : Convert.ToInt32(sqlDataReader[0]),
+                            N_DATOS = Convert.ToInt32(sqlDataReader[1].ToString()),
+
+                        };
+                        List.Add(Obj);
+                    }
+                    sqlDataReader.Close();
+                    return List;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new ArgumentOutOfRangeException("error", ex);
+            }
+        }
     }
 }

@@ -86,7 +86,21 @@ namespace GeoTraz.Api.Controllers
             return Ok(obj);
         }
 
-      
+        [Route("filtrar-reinfografico")]
+        public async Task<ActionResult> FiltrarReinfoGrafico(ReinfoDTO reinfo)
+        {
+            ReinfoService objAmb = new ReinfoService(uow);
+            IEnumerable<ReinfoDTO> obj = await objAmb.FiltrarReinfoGrafico(reinfo);
+            return Ok(obj);
+        }
+
+        [Route("filtrar-declaraciongrafico")]
+        public async Task<ActionResult> FiltrarDeclaracionGrafico(ReinfoDTO reinfo)
+        {
+            ReinfoService objAmb = new ReinfoService(uow);
+            IEnumerable<ReinfoDTO> obj = await objAmb.FiltrarDeclaracionGrafico(reinfo);
+            return Ok(obj);
+        }
 
 
 

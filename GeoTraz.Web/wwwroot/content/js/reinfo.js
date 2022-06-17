@@ -52,6 +52,8 @@ $("#txtFechaReinfo").focusout(function () {
     }
 });
 
+$('#myModalNotice').removeAttr('hidden');
+$('#myModalNotice').modal("show");
 //VERIFICA SI EXISTE LA FECHA
 function existeFecha(fecha) {
     var fechaf = fecha.split("/");

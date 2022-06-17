@@ -76,5 +76,14 @@ namespace GeoTraz.Common.Entities
         public int V_CONTRATOCESION { get; set; }
         public int V_CONTRATOTERRESUPERFICIAL { get; set; }
 
+        //filtrar para el grafico
+        public string V_ANIO { get; set; }
+        public string V_MES{ get; set; }
+        public string V_CANTIDAD { get; set; }
+
+        public int  N_DATOS { get; set; }
+        public string V_SEMESTRE { get; set; }
+
+
     }
 }
