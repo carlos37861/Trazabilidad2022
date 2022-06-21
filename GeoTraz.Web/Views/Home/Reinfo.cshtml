@@ -967,13 +967,11 @@
         <div class="modal-content">
 
             <div class="modal-body">
-
                 <div class=" d-flex flex-column justify-content-between align-items-center">
                     <p class="pt-2" style="color:darkblue">Por favor espere.....</p>
                     <div class="fas fa-spinner fa-spin text-purple-m1 fa-2x mb-3"></div>
                 </div>
             </div>
-
         </div>
     </div>
 </div>
@@ -982,30 +980,29 @@
         <div class="modal-content">
 
             <div class="modal-body">
-
                 <div class=" d-flex flex-column justify-content-between align-items-center">
                     <p class="pt-2 text-110" style="color:indigo">CARGANDO REPORTE.....</p>
                     <i class="fas fa-sync fa-spin text-purple-m1 text-170 mb-3"></i>
                 </div>
             </div>
-
         </div>
     </div>
 </div>
-<div class="modal" id="myModalNotice" tabindex="-1" role="dialog" style="display: block;" hidden>
-    <div class="modal-dialog modal-dialog-centered">
+
+<div class="modal" role="dialog" id="myModalNotice" tabindex="-1" style="display: block;" hidden>
+    <div class="modal-dialog  modal-xl modal-dialog-centered" role="document">
         <div class="modal-content">
-            <div class="modal-body">
-                <div class=" d-flex flex-column justify-content-between align-items-center">
-                    <p class="pt-2 text-110" style="color:indigo">CARGANDO REPORTE NOTICIAS.....</p>
-                    <img src="~/assets/image/user.jpg" />
-                    <i class="fas fa-sync fa-spin text-purple-m1 text-170 mb-3"></i>
-                </div>
+            <div class="modal-body text-center">
+                <img id="ImagenContentNoticias" class="img-rounded" height="100%" width="100%" alt="Imagen"/>
             </div>
-
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
         </div>
     </div>
 </div>
+
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js"></script>
 
