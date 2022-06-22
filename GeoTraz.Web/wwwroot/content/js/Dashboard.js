@@ -757,8 +757,10 @@ $.ajax({
 var currentTime = new Date();
 var year = currentTime.getFullYear();
 $("#cmbAnioFiltrar").val(year);
+$("#cmbAnioDecFiltrar").val(year);
 GraficoGeneral(year, '0');
 GraficoDocGeneral(year, 'SEMESTRE1');
+
 
 $("#btnBuscarSedes").click(function () {
 //$("#myModalSedes").modal({ backdrop: 'static', keyboard: false })
@@ -887,6 +889,9 @@ function GraficoGeneral(anio,mes) {
                 title: {
                     text: 'Informes ' + anio + ' - Mes: ' + month
                 },
+                exporting: {
+                    enabled: false
+                },
                 subtitle: {
                     text: ''
                 },
@@ -949,6 +954,7 @@ function GraficoDocGeneral(anio, semestre) {
             $('#myModalLoading').attr('hidden', true);
             $('#myModalLoading').modal('hide');
             $("#myModalSedes").modal('hide');
+            $('#myModalSedes').css("background-color", "red");
         },
         data: 'data',
         success: function (data) {
@@ -982,6 +988,10 @@ function GraficoDocGeneral(anio, semestre) {
                 chart: {
                     type: 'column'
                 },
+
+                exporting: {
+                    enabled: false
+                },
                 title: {
                     text: 'Declaración de Producción'
                 },
@@ -991,7 +1001,7 @@ function GraficoDocGeneral(anio, semestre) {
                 yAxis: [{
                     min: 0,
                     title: {
-                        text: 'Cantidad de Informes'
+                        text: 'Cantidad'
                     }
                 }, {
                     title: {
@@ -999,6 +1009,7 @@ function GraficoDocGeneral(anio, semestre) {
                     },
                     opposite: true
                 }],
+
                 legend: {
                     shadow: true
                 },

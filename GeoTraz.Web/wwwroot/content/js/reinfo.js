@@ -51,7 +51,7 @@ $("#txtFechaReinfo").focusout(function () {
         $("#txtFechaReinfo").val('');
     }
 });
-
+fnEliminaArchivosDescargados();
 //VERIFICA SI EXISTE LA FECHA
 function existeFecha(fecha) {
     var fechaf = fecha.split("/");
@@ -5254,15 +5254,16 @@ function fnCargarNoticia(){
                             $('#myModalNotice').removeAttr('hidden');
                             $('#myModalNotice').modal("show");
                         }
-                        
                     },
-
                 });
-
             });
 
         },
 
     });
 
+}
+
+async function fnEliminaArchivosDescargados() {
+    await fetch('/Home/EliminarArchivos', { method: 'GET' });
 }

@@ -610,7 +610,6 @@ namespace GeoTraz.Web.Controllers
                 No= p.Count(x => x.N_DATOS == 0)
             };
             return Json(new { data = data });
-
         }
 
 
@@ -918,6 +917,24 @@ namespace GeoTraz.Web.Controllers
             {
                 throw new Exception((ex.Response as FtpWebResponse).StatusDescription);
                 
+            }
+        }
+
+        [HttpGet]
+        public void EliminarArchivos()
+        {
+            try
+            {
+                DirectoryInfo di = new DirectoryInfo(@"wwwroot\descargas\");
+
+                foreach (FileInfo file in di.GetFiles())
+                {
+                    file.Delete();
+                }
+            }
+            catch (WebException ex)
+            {
+                throw new Exception((ex.Response as FtpWebResponse).StatusDescription);
             }
         }
 
