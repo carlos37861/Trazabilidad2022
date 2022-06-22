@@ -33,7 +33,6 @@ namespace GeoTraz.Api
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             //app.UseCors(options =>
-            //{
             //    options.WithOrigins("*");
             //    options.AllowAnyMethod();
             //    options.AllowAnyHeader();

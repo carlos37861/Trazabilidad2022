@@ -5229,17 +5229,12 @@ function fnValidarReinfo() {
     return isSave;
 }
 
-function fnCargarNoticia() {
+function fnCargarNoticia(){
     $.ajax({
         url: '/Home/ListaArchivo?N_CODIGAFOM=0&N_CODREIN=%&V_TIPOIMAG=NOTICIAS&V_TIPOIGAFOM=%',
         type: 'GET',
         dataType: 'json',
         data: 'data',
-        complete: function () {
-            $('#myModalNotice').removeAttr('hidden');
-            $('#myModalNotice').modal("show");
-
-        },
         success: function (data) {
             var datos = data.data;
             $(datos).each(function (index, value) {
@@ -5251,7 +5246,15 @@ function fnCargarNoticia() {
                     data: 'data',
                     success: function (data) {
                         var datos = data.data;
-                        $("#ImagenContentNoticias").attr('src', datos);
+                        if (datos == "") {
+                            $('#myModalNotice').attr('hidden', true);
+                            $('#myModalNotice').modal('hide');
+                        } else {
+                            $("#ImagenContentNoticias").attr('src', datos);
+                            $('#myModalNotice').removeAttr('hidden');
+                            $('#myModalNotice').modal("show");
+                        }
+                        
                     },
 
                 });

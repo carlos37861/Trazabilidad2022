@@ -165,11 +165,4 @@ $(document).ready(function () {
 
 });
 
-   
-$('#imgLaytaruma').click(function () {
-    window.location.href = '@Url.Action("Reinfo", "Home")';
-});
-$('#imgLaytaruma2').click(function () {
-    window.location.href = '@Url.Action("Reinfo", "Home")';
-});
 
