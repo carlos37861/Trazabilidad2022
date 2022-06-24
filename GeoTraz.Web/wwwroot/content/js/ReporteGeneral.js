@@ -44,7 +44,8 @@ function cargardatosTabla() {
                         sortable: true
                     },
                     {
-                        field: 'v_FECHAREALIZADO',
+                        field: 'v_FECHAREALIZADO', 
+                        formatter: REVISADO,
                         title: 'FECHA REALIZADO:',
                         sortable: true
                     },
@@ -146,7 +147,15 @@ function cargardatosTabla() {
                                 </a>\
                                </div > ';
     }
+    function REVISADO(value, row, index, field) {
+        if (value == "01/01/1900") {
 
+            return '<label></label>';
+        } else {
+            return '<label>' + value + '</label>';
+        }
+
+    }
     function Sede(value, row, index, field) {
 
         var nomSede = ""

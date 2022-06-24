@@ -50,7 +50,7 @@ function cargardatosTabla() {
         success: function (data) {
 
             var datos = data.data;
-
+            console.log(datos);
             $_data = datos;
             $_table.bootstrapTable('destroy').bootstrapTable({
                 data: $_data,
@@ -71,6 +71,7 @@ function cargardatosTabla() {
                     {
                         field: 'v_FECHAREALIZADO',
                         title: 'FECHA REALIZADO:',
+                        formatter: REVISADO,
                         sortable: true
                     },
                     {
@@ -217,6 +218,15 @@ function cargardatosTabla() {
         else if (value == "NT") {
             return '<label  style="color:#E74C3C;">NO TRAZABLE</label>';
         }
+    }
+    function REVISADO(value, row, index, field) {
+        if (value == "01/01/1900") {
+
+            return '<label></label>';
+        } else{
+            return '<label>' + value+'</label>';
+        }
+   
     }
 
     //enable/disable 'remove' button
@@ -643,6 +653,7 @@ function Filtrar() {
                     {
                         field: 'v_FECHAREALIZADO',
                         title: 'FECHA REALIZADO:',
+                        formatter: REVISADO,
                         sortable: true
                     },
                     {
@@ -772,6 +783,7 @@ function Filtrar() {
 
         return '<label>' + nomSede + '</label>';
     }
+
     function RESULTADO(value, row, index, field) {
 
         if (value == "TZ") {
@@ -783,7 +795,15 @@ function Filtrar() {
             return '<label  style="color:#E74C3C;">NO TRAZABLE</label>';
         }
     }
+    function REVISADO(value, row, index, field) {
+        if (value == "01/01/1900") {
 
+            return '<label></label>';
+        } else {
+            return '<label>' + value + '</label>';
+        }
+
+    }
     //enable/disable 'remove' button
     var $removeBtn = $('#remove-btn');
 

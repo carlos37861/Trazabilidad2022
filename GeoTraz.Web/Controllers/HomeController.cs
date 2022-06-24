@@ -507,7 +507,6 @@ namespace GeoTraz.Web.Controllers
         [HttpPost]
         public async Task<JsonResult> AgregarReinfo(ReinfoDTO objRein)
         {
-
             var RegRein = await HttpClientReinfo.AgregarReinfo(objRein);
 
             return Json(new { data = RegRein });
@@ -516,7 +515,8 @@ namespace GeoTraz.Web.Controllers
         [HttpPost]
         public async Task<JsonResult> EditarReinfo(ReinfoDTO objRein)
         {
-
+            Usuario usuarioLogin = HttpContext.Session.GetComplexData<Usuario>("usuariologin");
+            objRein.V_USUMODIF = usuarioLogin.V_LOGIN;
             var EditRein = await HttpClientReinfo.EditarReinfo(objRein);
 
             return Json(new { data = EditRein });
@@ -3182,7 +3182,7 @@ namespace GeoTraz.Web.Controllers
                     e = 1;
                     List<ReporteDTO> list_nc = new List<ReporteDTO>();
                     list_nc = httpClient.Where(x => x.N_CODREIN == c.N_CODREIN).ToList();
-                    ReporteDTO nc = list_nc.Last();
+                    ReporteDTO nc = list_nc.First();
 
                     var cell1 = worksheet.Cells[i, e];
                     cell1.Value = nc.N_CODREIN;
@@ -3202,7 +3202,7 @@ namespace GeoTraz.Web.Controllers
                         if (a < list_nc.Count())
                         {
                             var cell2 = worksheet.Cells[i, e];
-                            cell2.Value = list_nc[a].V_FECCREACION;
+                            cell2.Value = list_nc[a].V_FECCREACION; 
                             cell2.Style.Border.Top.Style = ExcelBorderStyle.Thin;
                             cell2.Style.Border.Right.Style = ExcelBorderStyle.Thin;
                             cell2.Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
@@ -3504,7 +3504,7 @@ namespace GeoTraz.Web.Controllers
 
                     e = e + 1;
                     var cell26 = worksheet.Cells[i, e];
-                    cell26.Value = nc.V_FECREINFO;
+                    cell26.Value = nc.V_FECREINFO == "01/01/1900" ? "" : nc.V_FECREINFO;
                     cell26.Style.Border.Top.Style = ExcelBorderStyle.Thin;
                     cell26.Style.Border.Right.Style = ExcelBorderStyle.Thin;
                     cell26.Style.Border.Bottom.Style = ExcelBorderStyle.Thin;

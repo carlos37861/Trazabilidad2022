@@ -110,7 +110,7 @@ namespace GeoTraz.Core.Repositories.Concretes
                     command.Parameters.AddWithValue("@V_ESTADOIGAFOM", objReinfo.V_ESTADOIGAFOM);
                     command.Parameters.AddWithValue("@V_RESULTADOS", objReinfo.V_RESULTADOS);
                     command.Parameters.AddWithValue("@V_CONCLUSION", objReinfo.V_CONCLUSION == null ? "" : objReinfo.V_CONCLUSION);
-                    command.Parameters.AddWithValue("@V_USUMODIF","PRUEBA" /*objReinfo.V_USUMODIF*/);
+                    command.Parameters.AddWithValue("@V_USUMODIF",objReinfo.V_USUMODIF);
                     command.Parameters.AddWithValue("@V_ESTADO", objReinfo.V_ESTADO);
                     command.Parameters.AddWithValue("@V_SITUACIONINGEMMET", objReinfo.V_SITUACIONINGEMMET == null ? "" : objReinfo.V_SITUACIONINGEMMET);
                     command.Parameters.AddWithValue("@V_SITACIONDECMINERA", objReinfo.V_SITACIONDECMINERA == null ? "" : objReinfo.V_SITACIONDECMINERA);
