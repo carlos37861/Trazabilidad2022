@@ -954,7 +954,6 @@ function GraficoDocGeneral(anio, semestre) {
             $('#myModalLoading').attr('hidden', true);
             $('#myModalLoading').modal('hide');
             $("#myModalSedes").modal('hide');
-            $('#myModalSedes').css("background-color", "red");
         },
         data: 'data',
         success: function (data) {
