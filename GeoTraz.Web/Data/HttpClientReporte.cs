@@ -17,7 +17,6 @@ namespace GeoTraz.Web.Data
     {
         public static async Task<List<ReporteDTO>> ListaReporte()
         {
-
             HttpClientHandler clientHandler = new HttpClientHandler();
             clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
             HttpClient _httpClient = new HttpClient(clientHandler);
@@ -42,15 +41,11 @@ namespace GeoTraz.Web.Data
                 var data = await response.Content.ReadAsStringAsync();
                 dataResult = JsonConvert.DeserializeObject<List<ReporteDTO>>(data);
             }
-
             return dataResult;
-
-
         }
 
         public static async Task<List<ReporteDTO>> ListaReporteDistinct()
         {
-
             HttpClientHandler clientHandler = new HttpClientHandler();
             clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
             HttpClient _httpClient = new HttpClient(clientHandler);

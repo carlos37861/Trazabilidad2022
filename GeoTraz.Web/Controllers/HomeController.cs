@@ -3195,7 +3195,6 @@ namespace GeoTraz.Web.Controllers
                     worksheet.Column(e).Width = 18;
                     //foreach (ReporteDTO c in lis_distinc)
                     //{
-                    
                     e++;
                     for (int a = 0; a < maxversion; a++)
                     {
