@@ -20,7 +20,7 @@ function cargardatosTabla() {
         url: '/Home/ListaReinfo',
         type: 'GET',
         dataType: 'json',
-        data: 'data',
+        data: 'data', 
         beforeSend: function () {
             $('#myModalLoading').removeAttr('hidden');
             $('#myModalLoading').modal("show");
