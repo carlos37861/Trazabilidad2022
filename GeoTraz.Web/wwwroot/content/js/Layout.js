@@ -145,7 +145,13 @@ $(document).ready(function () {
                     if (condicion.substr(0, 2) == "TZ" || condicion.substr(0, 2) == "tz")  {
                         $("#liReinfo").css("display", "block");
                         $("#liReporte").css("display", "block");
-                    } else {
+                    } else if (condicion.substr(0, 2) == "FI" || condicion.substr(0, 2) == "fi") {
+                        $("#liReinfo").css("display", "block");
+                        $("#liReporte").css("display", "block");
+                        $("#liDocDeProveedor").css("display", "block");
+                        $("#lidocumentoproveedor").css("display", "none");
+                    }
+                    else {
                         $("#liMantenimiento").css("display", "block");
                         $("#liReinfo").css("display", "block");
                         $("#liigafom").css("display", "block");

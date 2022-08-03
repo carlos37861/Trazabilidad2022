@@ -233,7 +233,13 @@ function cargardatosTabla() {
 
         if (sedeReinfo == UserSede || UserSede == 1) {
             if (UsuarioNom.substr(0, 2) == "TZ" || UsuarioNom.substr(0, 2) == "tz") {
-               return '<div class="action-buttons">\
+                return '<div class="action-buttons">\
+                               <a class="text-purple-m1 mx-2px" href="#" onclick=PrintReinfo('+ value + ',1)>\
+                                 <i class="fa fa-print text-105"></i>\
+                               </a>\
+                             </div > ';
+            } else if (UsuarioNom.substr(0, 2) == "FI" || UsuarioNom.substr(0, 2) == "fi") {
+                return '<div class="action-buttons">\
                                <a class="text-purple-m1 mx-2px" href="#" onclick=PrintReinfo('+ value + ',1)>\
                                  <i class="fa fa-print text-105"></i>\
                                </a>\
@@ -302,15 +308,12 @@ $removeBtn.click(function () {
     var ids = $.map($_table.bootstrapTable('getSelections'), function (row) {
         return row.id
     });
-
-
     $_table.bootstrapTable('remove', {
         field: 'n_CODREINFO',
         values: ids
     });
     $removeBtn.prop('disabled', true)
 });
-
 
 }
 //TABLA DE PROVEEDORES
@@ -1427,7 +1430,7 @@ jQuery(function ($) {
             $(datos).each(function (index, value) {
                 UserSede = value.n_CODSEDE;
                 UsuarioNom = value.v_LOGIN;
-                if (UsuarioNom.substr(0, 2) == "TZ" || UsuarioNom.substr(0, 2) == "tz") {
+                if (UsuarioNom.substr(0, 2) == "TZ" || UsuarioNom.substr(0, 2) == "tz" || UsuarioNom.substr(0, 2) == "FI" || UsuarioNom.substr(0, 2) == "fi" ) {
                     $("#BtnAgregarReinfo").css("display", "none");
                 } else {
                     $("#BtnAgregarReinfo").css("display", "block");
@@ -2900,109 +2903,114 @@ function SumaTrabajadores() {
 }
 //REGISTRA EL REINFO Y LO PLASMA EN LA TABLA REPORTE PARA DESPUES MOSTRAR
 function Imprimir() {
-                     var RegRepo = {
-                        objRepo: {
-                            N_CODREIN: $("#txtId_reinfoReporte").val(),
-                            V_REALIZADOPOR: $("#cmbRealizadopor").val(),
-                            V_REVISADOPOR: $("#cmbRevisadopor").val(),
-                            V_FECHAREALIZADO: $("#txtFechaRealizado").val(),
-                            V_FECHAREVISADO: $("#txtFechaRevisado").val(),
-                            //CAMPO DE REINFO
-                            V_RUC: $("#txtRucPrint").val(),
-                            V_PROVEEDOR: $("#txtPersonaNaturalJurPrint").val(),
-                            V_CODCONSECION: $("#txtCodigoDMPrint").val(),
-                            V_NOMCONSECION: $("#txtConcesionPrint").val(),
-                            N_TMPH: $("#txtTmphMesPrint").val(),
-                            N_TMPS: $("#txtTmpsMesPrint").val(),
-                            V_UBIGEO: $("#cmbCiudadPrint").val(),
-                            V_NOMDERECHMINE: $("#txtNomDerMinPrint").val(),
-                            V_CODZONAREI: $("#txtZonaReinPrint").val(),
-                            N_NORTE1: $("#txtNorte1Print").val(),
-                            N_ESTE1: $("#txtEste1Print").val(),
-                            N_NORTE2: $("#txtNorte2Print").val(),
-                            N_ESTE2: $("#txtEste2Print").val(),
-                            v_CODTIPOACT: $("#txtTipoActivPrint").val(),
-                            V_FECREINFO: $("#txtFechaReinfoPrint").val(),
-                            V_COMPONENT: $("#cmbComponentePrint").val(),
-                            v_CODZONACAMP: $("#cmbZonaCampoPrint").val(),
-                            N_NORTEC: $("#txtNorteCPrint").val(),
-                            N_ESTEC: $("#txtEsteCPrint").val(),
-                            N_DIFCORDE: $("#txtDifCoordenadasPrint").val(),
-                            N_SEDE: $("#cmbSedePrint").val(),
-                            V_DESCRILABOR: $("#txtDescripLaborPrint").val(),
-                            N_CANTHOMBRE: $("#txtCantHombPrint").val(),
-                            N_CANTMUJE: $("#txtCantMujePrint").val(),
-                            N_TOTALTRAB: $("#txtTotalPersoPrint").val(),
-                            V_IGAFOMCORREC: $("#cmbIgafomCorrectPrint").val(),
-                            V_IGAFOMPREV: $("#cmbIgafomPrevenPrint").val(),
-                            V_ESTADOIGAFOM: $("#cmbEstadoIgafomPrint").val(),
-                            V_RESULTADOS: $("#cmbResultadoPrint").val(),
-                            V_CONCLUSION: $("#txtConclusionPrint").val(),
-                            //FIN
-                             V_USUREGISTRO: UsuarioNom,
-                            V_PROTOCOLO: $("#lblProtocolo").text(),
-                            N_VERSION: $("#lblVersionReport").text(),
-                            V_VERSIONPROTOCOLO: $("#lblVersionPrint").text(),
-                            V_FECHAVERSION: $("#lblFechaPrint").text(),
-                            //agregado para version 3
-                            V_SITUACIONINGEMMET: $("#cmbSituacionIngemmetPrint").val(),
-                            V_SITACIONDECMINERA: $("#cmbSituacionProduccionPrint").val(),
-                            V_ANIO: $("#txtAnioPrint").val(),
-                            V_MES: $("#txtSemestrePrint").val(),
-                        }
-                    };
-                    $.ajax({
-                        url: '/Home/AgregarReporte',
-                        type: 'POST',
-                        dataType: 'json',
-                        data: RegRepo,
-                        success: function (data) {
-                            if (data != null) {
-                                Swal.fire({
-                                    position: 'center',
-                                    icon: 'success',
-                                    title: 'Se genero el reporte',
-                                    showConfirmButton: false,
-                                    timer: 1500
-                                });
-                                toastr["success"]("Reporte Generado en modulo Reporte");
-
-                                //ZONA DE BUSCAR ID DE REPORTE
-                                $.ajax({
-                                    url: '/Home/BuscarIdReport?N_CODREIN=' + $('#txtId_reinfoReporte').val(),
-                                    type: 'GET',
-                                    dataType: 'json',
-                                    data: 'data',
-                                    success: function (data) {
-                                        var datos = data.data;
-                                        $(datos).each(function (index, value) {
-                                            GuardarDetalleReporteLabor(value.n_CODREPORTE);
-                                            GuardarDetalleReporteEquipos(value.n_CODREPORTE);
-                                            GuardarDetalleReporteAmbiente(value.n_CODREPORTE);
-                                            GuardarDetalleReporteDetEquipos(value.n_CODREPORTE);
-                                            GuardarDetalleReporteDetAmbiente(value.n_CODREPORTE);
-                                        });
-                                    },
-
-
-                                });
-
-                                //MUESTRA LA VISTA PREVIA PARA GENERAR PDF O IMPRIMIR 
-                                //$("#IdImprimir").printThis();
-                                $("#myModalPrint").modal('hide');
-                                //$("#myModalPrintV3").modal('hide');
-                                
-                            } else {
-                                Swal.fire({
-                                    position: 'center',
-                                    icon: 'error',
-                                    title: 'No se pudo guardar el Reporte',
-                                    showConfirmButton: false,
-                                    timer: 1500
-                                })
-                            }
-                        },
+    if (fnValidaReporte()) {
+        var RegRepo = {
+            objRepo: {
+                N_CODREIN: $("#txtId_reinfoReporte").val(),
+                V_REALIZADOPOR: $("#cmbRealizadopor").val(),
+                V_REVISADOPOR: $("#cmbRevisadopor").val(),
+                V_FECHAREALIZADO: $("#txtFechaRealizado").val(),
+                V_FECHAREVISADO: $("#txtFechaRevisado").val(),
+                //CAMPO DE REINFO
+                V_RUC: $("#txtRucPrint").val(),
+                V_PROVEEDOR: $("#txtPersonaNaturalJurPrint").val(),
+                V_CODCONSECION: $("#txtCodigoDMPrint").val(),
+                V_NOMCONSECION: $("#txtConcesionPrint").val(),
+                N_TMPH: $("#txtTmphMesPrint").val(),
+                N_TMPS: $("#txtTmpsMesPrint").val(),
+                V_UBIGEO: $("#cmbCiudadPrint").val(),
+                V_NOMDERECHMINE: $("#txtNomDerMinPrint").val(),
+                V_CODZONAREI: $("#txtZonaReinPrint").val(),
+                N_NORTE1: $("#txtNorte1Print").val(),
+                N_ESTE1: $("#txtEste1Print").val(),
+                N_NORTE2: $("#txtNorte2Print").val(),
+                N_ESTE2: $("#txtEste2Print").val(),
+                v_CODTIPOACT: $("#txtTipoActivPrint").val(),
+                V_FECREINFO: $("#txtFechaReinfoPrint").val(),
+                V_COMPONENT: $("#cmbComponentePrint").val(),
+                v_CODZONACAMP: $("#cmbZonaCampoPrint").val(),
+                N_NORTEC: $("#txtNorteCPrint").val(),
+                N_ESTEC: $("#txtEsteCPrint").val(),
+                N_DIFCORDE: $("#txtDifCoordenadasPrint").val(),
+                N_SEDE: $("#cmbSedePrint").val(),
+                V_DESCRILABOR: $("#txtDescripLaborPrint").val(),
+                N_CANTHOMBRE: $("#txtCantHombPrint").val(),
+                N_CANTMUJE: $("#txtCantMujePrint").val(),
+                N_TOTALTRAB: $("#txtTotalPersoPrint").val(),
+                V_IGAFOMCORREC: $("#cmbIgafomCorrectPrint").val(),
+                V_IGAFOMPREV: $("#cmbIgafomPrevenPrint").val(),
+                V_ESTADOIGAFOM: $("#cmbEstadoIgafomPrint").val(),
+                V_RESULTADOS: $("#cmbResultadoPrint").val(),
+                V_CONCLUSION: $("#txtConclusionPrint").val(),
+                //FIN
+                V_USUREGISTRO: UsuarioNom,
+                V_PROTOCOLO: $("#lblProtocolo").text(),
+                N_VERSION: $("#lblVersionReport").text(),
+                V_VERSIONPROTOCOLO: $("#lblVersionPrint").text(),
+                V_FECHAVERSION: $("#lblFechaPrint").text(),
+                //agregado para version 3
+                V_SITUACIONINGEMMET: $("#cmbSituacionIngemmetPrint").val(),
+                V_SITACIONDECMINERA: $("#cmbSituacionProduccionPrint").val(),
+                V_ANIO: $("#txtAnioPrint").val(),
+                V_MES: $("#txtSemestrePrint").val(),
+            }
+        };
+        $.ajax({
+            url: '/Home/AgregarReporte',
+            type: 'POST',
+            dataType: 'json',
+            data: RegRepo,
+            success: function (data) {
+                if (data != null) {
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'Se genero el reporte',
+                        showConfirmButton: false,
+                        timer: 1500
                     });
+                    toastr["success"]("Reporte Generado en modulo Reporte");
+
+                    //ZONA DE BUSCAR ID DE REPORTE
+                    $.ajax({
+                        url: '/Home/BuscarIdReport?N_CODREIN=' + $('#txtId_reinfoReporte').val(),
+                        type: 'GET',
+                        dataType: 'json',
+                        data: 'data',
+                        success: function (data) {
+                            var datos = data.data;
+                            $(datos).each(function (index, value) {
+                                GuardarDetalleReporteLabor(value.n_CODREPORTE);
+                                GuardarDetalleReporteEquipos(value.n_CODREPORTE);
+                                GuardarDetalleReporteAmbiente(value.n_CODREPORTE);
+                                GuardarDetalleReporteDetEquipos(value.n_CODREPORTE);
+                                GuardarDetalleReporteDetAmbiente(value.n_CODREPORTE);
+                            });
+                        },
+
+
+                    });
+
+                    //MUESTRA LA VISTA PREVIA PARA GENERAR PDF O IMPRIMIR 
+                    //$("#IdImprimir").printThis();
+                    $("#myModalPrint").modal('hide');
+                    //$("#myModalPrintV3").modal('hide');
+
+                } else {
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'error',
+                        title: 'No se pudo guardar el Reporte',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                }
+            },
+        });
+    } else {
+        toastr["error"]("Debe seleccionar fecha de informe...");
+    }
+
  }
 //MUESTRA REINFO VISTA PREVIA
 function PrintReinfo(id,condicion) {
@@ -3490,6 +3498,12 @@ function Filtrar() {
     function formatTableCellActions(value, row, index, field) {
         if (sedeReinfo == UserSede || UserSede == 1) {
             if (UsuarioNom.substr(0, 2) == "TZ" || UsuarioNom.substr(0, 2) == "tz") {
+                return '<div class="action-buttons">\
+                               <a class="text-purple-m1 mx-2px" href="#" onclick=PrintReinfo('+ value + ',1)>\
+                                 <i class="fa fa-print text-105"></i>\
+                               </a>\
+                             </div > ';
+            } else if (UsuarioNom.substr(0, 2) == "FI" || UsuarioNom.substr(0, 2) == "fi") {
                 return '<div class="action-buttons">\
                                <a class="text-purple-m1 mx-2px" href="#" onclick=PrintReinfo('+ value + ',1)>\
                                  <i class="fa fa-print text-105"></i>\
@@ -4400,9 +4414,7 @@ function crearModalV2() {
         <div class="modal-content">\
             <div class="modal-header">\
                 <h6 class="modal-title">REPORTE REINFO</h6>\
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">\
-                    <span aria-hidden="true">&times;</span>\
-                </button>\
+                <a data-dismiss="modal" title="Close" class="close mt-3 mr-3 p-0" style="align-text:center">X</a>\
             </div>\
             <div id="IdImprimir">\
                 <div class="modal-body ace-scrollbar p-0">\
@@ -4632,7 +4644,7 @@ function crearModalV2() {
                                 </tr>\
                                 <tr>\
                                     <td class="p-1" style="font-size: 11px">FECHA DE INFORME: </td>\
-                                    <td class="p-1" style="font-size: 11px"><input type="date" id="txtFechaRealizado" onkeydown="return false" autocomplete="off" style="width:50%" /></td>\
+                                    <td class="p-1" style="font-size: 11px"><input type="date" id="txtFechaRealizado" onkeydown="return false" autocomplete="off" style="width:50%" /><label id="lblErrortxtFechaRealizado" style="color: red; font-size: 12px !important; display: none"></label></td>\
                                     <td class="p-1" style="font-size: 11px">FECHA DE INFORME:</td>\
                                     <td class="p-1" style="font-size: 11px"><input type="date" id="txtFechaRevisado" onkeydown="return false" autocomplete="off" style="width:50%" /></td>\
                                 </tr>\
@@ -4709,9 +4721,7 @@ function crearModalV3() {
         <div class="modal-content">\
             <div class="modal-header">\
                 <h6 class="modal-title">REPORTE REINFO VERSION 3</h6>\
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">\
-                    <span aria-hidden="true">&times;</span>\
-                </button>\
+                 <a data-dismiss="modal" title="Close" class="close mt-3 mr-3 p-0" style="align-text:center">X</a>\
             </div>\
             <div id="IdImprimir">\
                 <div class="modal-body ace-scrollbar p-0">\
@@ -4985,7 +4995,7 @@ function crearModalV3() {
                                 </tr>\
                                 <tr>\
                                     <td class="p-1" style="font-size: 11px" align="right">FECHA DE INFORME: </td>\
-                                    <td class="p-1" style="font-size: 11px"><input type="date" id="txtFechaRealizado" onkeydown="return false" autocomplete="off" style="width:50%" /></td>\
+                                    <td class="p-1" style="font-size: 11px"><input type="date" id="txtFechaRealizado" onkeydown="return false" autocomplete="off" style="width:50%" /><label id="lblErrortxtFechaRealizado" style="color: red; font-size: 12px !important; display: none"></td>\
                                     <td class="p-1" style="font-size: 11px" align="right">FECHA DE INFORME:</td>\
                                     <td class="p-1" style="font-size: 11px"><input type="date" id="txtFechaRevisado" onkeydown="return false" autocomplete="off" style="width:50%" /></td>\
                                 </tr>\
@@ -5226,6 +5236,19 @@ function fnValidarReinfo() {
         //    });
         //}
     }
+    return isSave;
+}
+
+function fnValidaReporte() {
+    var isSave = true;
+    var txtFechaRealizado = $("#txtFechaRealizado").val().trim();
+    if (txtFechaRealizado == "") {
+        $('#lblErrortxtFechaRealizado').css("display", "block");
+        $("#lblErrortxtFechaRealizado").text("(*) Datos Obligatorios");
+        isSave = false;
+    } else {
+        $('#lblErrortxtFechaRealizado').css("display", "none");
+        $("#lblErrortxtFechaRealizado").text(""); }
     return isSave;
 }
 
