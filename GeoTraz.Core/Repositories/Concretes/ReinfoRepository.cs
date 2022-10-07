@@ -579,7 +579,7 @@ namespace GeoTraz.Core.Repositories.Concretes
                     command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@V_ANIO", reinfo.V_ANIO);
                     command.Parameters.AddWithValue("@V_SEMESTRE", reinfo.V_SEMESTRE);
-
+                    command.Parameters.AddWithValue("@V_RESULTADOS", reinfo.V_RESULTADOS);
                     SqlDataReader sqlDataReader = await command.ExecuteReaderAsync(CommandBehavior.SingleResult);
 
                     while (sqlDataReader.Read())

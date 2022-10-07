@@ -4335,6 +4335,7 @@ function RevisaIgafomPreventivo(id) {
     });
 }
 function RevisaDecMinera(id) {
+    console.log(id);
     $.ajax({
         async: false,
         url: '/Home/ListaArchivo?N_CODIGAFOM=2&N_CODREIN=' + id + '&V_TIPOIMAG=%&V_TIPOIGAFOM=%',
@@ -4345,8 +4346,11 @@ function RevisaDecMinera(id) {
             var datos = data.data;
             if (datos.length >=1) {
                 $('#cboxDecMinera').prop('checked', true);
+                //05/10/2022
+                $("#cmbSituacionProduccionPrint").val('DECLARADO');
             } else {
                 $('#cboxDecMinera').prop('checked', false);
+                $("#cmbSituacionProduccionPrint").val('0');
             }
             $(datos).each(function (index, value) {
                 $('#txtAnioPrint').val(value.v_TIPOIMAG);

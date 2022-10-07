@@ -161,7 +161,15 @@
                                                 <option value="SEMESTRE2">Semestre II</option>
                                             </select>
                                         </div>
-          
+                                        <div class="form-group col-md-3">
+                                            <label>Resultado</label>
+                                            <select id="cmbResultadoFiltrar" class="form-control">
+                                                <option selected value="%">TODOS</option>
+                                                <option>TRAZABLE</option>
+                                                <option>PENDIENTE</option>
+                                                <option>NO TRAZABLE</option>
+                                            </select>
+                                        </div>
                                     </div>
                                     <hr />
                                     <div id="containerGeneral2"></div>
@@ -334,6 +342,23 @@
                                     <div class="card-body px-0 bgc-white border-2 border-t-0 brc-primary-m4 pb-0 flex-grow-1 d-flex flex-column p-0">
                                         <div class="flex-grow-1 d-flex align-items-center p-0" style="height:20%">
                                             <figure class="highcharts-figure p-0 pr-3">
+                                                <div class="row pt-1 pl-2">
+                                                    <div class="form-group col-md-3">
+                                                        <label>Año</label>
+                                                        <select id="cmbAnioDecFiltrarSede" class="form-control">
+                                                            <option selected value="2022">2022</option>
+                                                            <option  value="2021">2021</option>
+                                                            <option  value="2020">2020</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group col-md-3">
+                                                        <label>Semestre</label>
+                                                        <select id="cmbSemestreFiltrarSede" class="form-control">
+                                                            <option value="SEMESTRE1">Semestre I</option>
+                                                            <option value="SEMESTRE2">Semestre II</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
                                                 <div id="containerEstadoReinfo" class="p-0"></div>
                                                 <p class="highcharts-description p-0">
 
@@ -388,9 +413,19 @@
                                             <span class="text-110 text-white">Cargo Igafom Correctivo</span>
                                         </h6>
                                     </div>
+
                                     <div class="card-body px-0 bgc-white border-2 border-t-0 brc-primary-m4 pb-0 flex-grow-1 d-flex flex-column p-0">
                                         <div class="flex-grow-1 d-flex align-items-center p-0" style="height:20%">
                                             <figure class="highcharts-figure pt-3">
+                                                <div class="form-group col-md-4">
+                                                    <label>Resultado</label>
+                                                    <select id="cmbResultadoFiltrarCarIgaCorre" class="form-control">
+                                                        <option selected value="%">TODOS</option>
+                                                        <option>TRAZABLE</option>
+                                                        <option>PENDIENTE</option>
+                                                        <option>NO TRAZABLE</option>
+                                                    </select>
+                                                </div>
                                                 <div id="containerIgafCorrectivo" class="p-0"></div>
                                                 <p class="highcharts-description p-0">
 
@@ -445,6 +480,15 @@
                                     <div class="card-body px-0 bgc-white border-2 border-t-0 brc-primary-m4 pb-0 flex-grow-1 d-flex flex-column p-0">
                                         <div class="flex-grow-1 d-flex align-items-center p-0" style="height:20%">
                                             <figure class="highcharts-figure pt-3">
+                                                <div class="form-group col-md-4">
+                                                    <label>Resultado</label>
+                                                    <select id="cmbResultadoFiltrarCarIgaPrev" class="form-control">
+                                                        <option selected value="%">TODOS</option>
+                                                        <option>TRAZABLE</option>
+                                                        <option>PENDIENTE</option>
+                                                        <option>NO TRAZABLE</option>
+                                                    </select>
+                                                </div>
                                                 <div id="containerIgafPrev" class="p-0"></div>
                                                 <p class="highcharts-description p-0">
 
@@ -497,6 +541,15 @@
                                     <div class="card-body px-0 bgc-white border-2 border-t-0 brc-primary-m4 pb-0 flex-grow-1 d-flex flex-column p-0">
                                         <div class="flex-grow-1 d-flex align-items-center p-0" style="height:20%">
                                             <figure class="highcharts-figure pt-3">
+                                                <div class="form-group col-md-4">
+                                                    <label>Resultado</label>
+                                                    <select id="cmbResultadoFiltrarInfIgaCorre" class="form-control">
+                                                        <option selected value="%">TODOS</option>
+                                                        <option>TRAZABLE</option>
+                                                        <option>PENDIENTE</option>
+                                                        <option>NO TRAZABLE</option>
+                                                    </select>
+                                                </div>
                                                 <div id="containerIgafCorrecInforme" class="p-0"></div>
                                                 <p class="highcharts-description p-0">
 
@@ -552,6 +605,15 @@
                                     <div class="card-body px-0 bgc-white border-2 border-t-0 brc-primary-m4 pb-0 flex-grow-1 d-flex flex-column p-0">
                                         <div class="flex-grow-1 d-flex align-items-center p-0" style="height:20%">
                                             <figure class="highcharts-figure pt-3">
+                                                <div class="form-group col-md-4">
+                                                    <label>Resultado</label>
+                                                    <select id="cmbResultadoFiltrarInfIgaPrev" class="form-control">
+                                                        <option selected value="%">TODOS</option>
+                                                        <option>TRAZABLE</option>
+                                                        <option>PENDIENTE</option>
+                                                        <option>NO TRAZABLE</option>
+                                                    </select>
+                                                </div>
                                                 <div id="containerIgafPrevInforme" class="p-0"></div>
                                                 <p class="highcharts-description p-0">
                                                 </p>

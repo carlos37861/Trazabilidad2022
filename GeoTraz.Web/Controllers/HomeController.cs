@@ -595,11 +595,12 @@ namespace GeoTraz.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<JsonResult> FiltrarDeclaracionGrafico(string V_ANIO, string V_SEMESTRE)
+        public async Task<JsonResult> FiltrarDeclaracionGrafico(string V_ANIO, string V_SEMESTRE,string V_RESULTADOS)
         {
             ReinfoDTO rei = new ReinfoDTO();
             rei.V_ANIO = V_ANIO;
             rei.V_SEMESTRE = V_SEMESTRE;
+            rei.V_RESULTADOS = V_RESULTADOS;
 
             var httpClient = await HttpClientReinfo.FiltrarDeclaracionGrafico(rei);
             var data=from p in httpClient.GroupBy(p => p.N_SEDE)

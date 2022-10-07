@@ -3,6 +3,7 @@
 var UserSede = 0;
 var UsuarioNom = "";
 
+
 jQuery(function ($) {
     $('#lidashboard').addClass('active');
     $.ajax({
@@ -52,8 +53,6 @@ function filtraSedeReporte(id) {
             var formalizado = 0;
             var vigente = 0;
             var suspendido = 0;
-            var contadorDecMinSi = 0;
-            var contadorDecMinNo = 0;
             var contadorCargoCorrectSi = 0;
             var contadorCargoCorrectNo = 0;
             var contadorCargoPrevSi = 0;
@@ -63,7 +62,26 @@ function filtraSedeReporte(id) {
             var contadorInformePrevSi = 0;
             var contadorInformePrevNo = 0;
             var contadorRegistros = 0;
-            
+
+            //variables para semestre y año
+            var contadorDecMinSi = 0;
+            var contadorDecMinNo = 0;
+            var v_2020SEM1_SI = 0;
+            var v_2020SEM2_SI = 0;
+            var v_2021SEM1_SI = 0;
+            var v_2021SEM2_SI = 0;
+            var v_2022SEM1_SI = 0;
+            var v_2022SEM2_SI = 0;
+
+            var v_2020SEM1_NO = 0;
+            var v_2020SEM2_NO = 0;
+            var v_2021SEM1_NO = 0;
+            var v_2021SEM2_NO = 0;
+            var v_2022SEM1_NO = 0;
+            var v_2022SEM2_NO = 0;
+
+            var contadorDecMinSiTOTAL = 0;
+            var contadorDecMinNoTOTAL = 0;
 
             $(datos).each(function (index, value) {
                 //CONTADOR DE REGISTROS
@@ -91,6 +109,29 @@ function filtraSedeReporte(id) {
                 } else if (value.v_CARGODECMINERA == 0) {
                     contadorDecMinNo = contadorDecMinNo + 1;
                 }
+
+                //CONTADORES DE SEMESTRE Y AÑO (BITACORA DE CAMBIOS SET2022)
+                if (value.v_2021SEM1> 0) {
+                    v_2021SEM1_SI = v_2021SEM1_SI + 1;
+                } else  {
+                    v_2021SEM1_NO = v_2021SEM1_NO + 1;
+                }
+                if (value.v_2021SEM2 > 0) {
+                    v_2021SEM2_SI = v_2021SEM2_SI + 1;
+                } else {
+                    v_2021SEM2_NO = v_2021SEM2_NO + 1;
+                }
+                if (value.v_2022SEM1 > 0) {
+                    v_2022SEM1_SI = v_2022SEM1_SI + 1;
+                } else {
+                    v_2022SEM1_NO = v_2022SEM1_NO + 1;
+                }
+                if (value.v_2022SEM2 > 0) {
+                    v_2022SEM2_SI = v_2022SEM2_SI + 1;
+                } else {
+                    v_2022SEM2_NO = v_2022SEM2_NO + 1;
+                }
+
                 //CONTADOR CARGO IGAFOM CORRECTIVO
                 if (value.v_CARGOCORRECT == 1) {
                     contadorCargoCorrectSi = contadorCargoCorrectSi + 1;
@@ -116,6 +157,33 @@ function filtraSedeReporte(id) {
                     contadorInformePrevNo = contadorInformePrevNo + 1;
                 }
             });
+
+            if ($("#cmbAnioDecFiltrarSede").val() == "2020" && $("#cmbSemestreFiltrarSede").val() == "SEMESTRE1") {
+                contadorDecMinSiTOTAL = v_2020SEM1_SI;
+                contadorDecMinNoTOTAL = v_2020SEM1_NO;
+
+            } else if ($("#cmbAnioDecFiltrarSede").val() == "2020" && $("#cmbSemestreFiltrarSede").val() == "SEMESTRE2") {
+                contadorDecMinSiTOTAL = v_2020SEM2_SI;
+                contadorDecMinNoTOTAL = v_2020SEM2_NO;
+            } else if ($("#cmbAnioDecFiltrarSede").val() == "2021" && $("#cmbSemestreFiltrarSede").val() == "SEMESTRE1") {
+                contadorDecMinSiTOTAL = v_2021SEM1_SI;
+                contadorDecMinNoTOTAL = v_2021SEM1_NO;
+            } else if ($("#cmbAnioDecFiltrarSede").val() == "2021" && $("#cmbSemestreFiltrarSede").val() == "SEMESTRE2") {
+                contadorDecMinSiTOTAL = v_2021SEM2_SI;
+                contadorDecMinNoTOTAL = v_2021SEM2_NO;
+            } else if ($("#cmbAnioDecFiltrarSede").val() == "2022" && $("#cmbSemestreFiltrarSede").val() == "SEMESTRE1") {
+                contadorDecMinSiTOTAL = v_2022SEM1_SI;
+                contadorDecMinNoTOTAL = v_2022SEM1_NO;
+            } else if ($("#cmbAnioDecFiltrarSede").val() == "2022" && $("#cmbSemestreFiltrarSede").val() == "SEMESTRE2") {
+                contadorDecMinSiTOTAL = v_2022SEM2_SI;
+                contadorDecMinNoTOTAL = v_2022SEM2_NO;
+            } else {
+                contadorDecMinSiTOTAL = contadorDecMinSi;
+                contadorDecMinNoTOTAL = contadorDecMinNo;
+            }
+            //SPAN DECLARACION MINERA
+            $("#spanSi").text(contadorDecMinSiTOTAL);
+            $("#spanNo").text(contadorDecMinNoTOTAL);
             //SPAN RESLTADO REINFOR
             $("#spanTrazables").text(trazable);
             $("#spanPendientes").text(pendiente);
@@ -124,9 +192,7 @@ function filtraSedeReporte(id) {
             $("#spanFormalizados").text(formalizado);
             $("#spanVigente").text(vigente);
             $("#spanSuspendidos").text(suspendido);
-            //SPAN DECLARACION MINERA
-            $("#spanSi").text(contadorDecMinSi);
-            $("#spanNo").text(contadorDecMinNo);
+
             //SPAN CARGO IGAFOM CORRECTIVO
             $("#spanSiCorrec").text(contadorCargoCorrectSi);
             $("#spanNoCorrec").text(contadorCargoCorrectNo);
@@ -177,6 +243,55 @@ function filtraSedeReporte(id) {
                 $('#containerEstadoReinfo').css("display", "block");
                 $('#containerEstadoIgafom').css("display", "block");
             }
+            //HIGHCHART RESULTADO REINFO
+            Highcharts.chart('ResulReinfo', {
+                chart: {
+                    type: 'pie',
+                    options3d: {
+                        enabled: true,
+                        alpha: 45,
+                        beta: 0
+                    }
+                },
+                title: {
+                    text: ''
+                },
+                colors: ['#2ECC71', '#F1C40F', '#E74C3C',],
+                accessibility: {
+                    point: {
+                        valueSuffix: '%'
+                    }
+                },
+                exporting: {
+                    enabled: false
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>',
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        depth: 35,
+                        dataLabels: {
+                            style: {
+                                fontSize: '14px',
+                            },
+                            enabled: true,
+                            format: '{point.name}'
+                        }
+                    }
+                },
+                series: [{
+                    type: 'pie',
+                    name: 'Resultados',
+                    data: [
+                        ['TRAZABLE: ' + trazable, roundTrazable],
+                        ['PENDIENTE: ' + pendiente, roundPendiente],
+                        ['NO TRAZABLE: ' + notrazable, roundNoTrazable],
+                    ]
+                }]
+            });
             //HIGHCHART ESTADO PROVEEDOR
             Highcharts.chart('containerEstadoIgafom', {
                 chart: {
@@ -328,13 +443,13 @@ function filtraSedeReporte(id) {
                         data: [
                             {
                                 name: "Si",
-                                y: contadorDecMinSi,
+                                y: contadorDecMinSiTOTAL,
                                 color: '#28a745'
 
                             },
                             {
                                 name: "No ",
-                                y: contadorDecMinNo,
+                                y: contadorDecMinNoTOTAL,
                                 color: '#e15b5b'
                             },
 
@@ -658,55 +773,7 @@ function filtraSedeReporte(id) {
                 ]
 
             });
-            //HIGHCHART RESULTADO REINFO
-            Highcharts.chart('ResulReinfo', {
-                chart: {
-                    type: 'pie',
-                    options3d: {
-                        enabled: true,
-                        alpha: 45,
-                        beta: 0
-                    }
-                },
-                title: {
-                    text: ''
-                },
-                colors: ['#2ECC71', '#F1C40F','#E74C3C', ],
-                accessibility: {
-                    point: {
-                        valueSuffix: '%'
-                    }
-                },
-                exporting: {
-                    enabled: false
-                },
-                tooltip: {
-                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>',
-                },
-                plotOptions: {
-                    pie: {
-                        allowPointSelect: true,
-                        cursor: 'pointer',
-                        depth: 35,
-                        dataLabels: {
-                            style: {
-                                fontSize: '14px',
-                            },
-                            enabled: true,
-                            format: '{point.name}'
-                        }
-                    }
-                },
-                series: [{
-                    type: 'pie',
-                    name: 'Resultados',
-                    data: [
-                        ['TRAZABLE: ' + trazable, roundTrazable],
-                        ['PENDIENTE: ' + pendiente, roundPendiente],
-                        ['NO TRAZABLE: ' + notrazable, roundNoTrazable],
-                    ]
-                }]
-            });
+
         },
     });
 }  
@@ -754,12 +821,524 @@ $.ajax({
     }
 });
 
+
+//evento cambiar combo declaración minera POR SEDES
+$("#cmbAnioDecFiltrarSede").change(function () {
+    filtraSedeReporte(UserSede);
+});
+$("#cmbSemestreFiltrarSede").change(function () {
+    filtraSedeReporte(UserSede);
+});
+console.log(UserSede);
+
+$("#cmbResultadoFiltrarCarIgaCorre").change(function () {
+    console.log(UserSede);
+    $.ajax({
+        url: '/Home/FiltrarReinfo?V_RUC=%&V_PROVEEDOR=%&V_CODCONSECION=%&V_NOMCONSECION=%%&V_NOMDERECHMINE=%&V_FECREINFO=%&V_RESULTADOS=' + $("#cmbResultadoFiltrarCarIgaCorre").val() + '&N_SEDES=' + UserSede,
+        type: 'GET',
+        dataType: 'json',
+        beforeSend: function () {
+            $('#myModalLoading').removeAttr('hidden');
+            $('#myModalLoading').modal("show");
+
+        },
+        complete: function () {
+            $('#myModalLoading').attr('hidden', true);
+            $('#myModalLoading').modal('hide');
+            $("#myModalSedes").modal('hide');
+        },
+        data: 'data',
+        success: function (data) {
+            //VARIABLES GLOBALES DE LA FUNCION
+            var datos = data.data;
+
+            var contadorCargoCorrectSi = 0;
+            var contadorCargoCorrectNo = 0;
+
+            var contadorRegistros = 0;
+
+
+            $(datos).each(function (index, value) {
+                //CONTADOR DE REGISTROS
+                contadorRegistros = contadorRegistros + 1;
+
+                //CONTADOR CARGO IGAFOM CORRECTIVO
+                if (value.v_CARGOCORRECT == 1) {
+                    contadorCargoCorrectSi = contadorCargoCorrectSi + 1;
+                } else if (value.v_CARGOCORRECT == 0) {
+                    contadorCargoCorrectNo = contadorCargoCorrectNo + 1;
+                }
+
+            });
+
+            //SPAN CARGO IGAFOM CORRECTIVO
+            $("#spanSiCorrec").text(contadorCargoCorrectSi);
+            $("#spanNoCorrec").text(contadorCargoCorrectNo);
+
+            //HIGHCHART CARGO IGAFOM CORRECTIVO
+            Highcharts.chart('containerIgafCorrectivo', {
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: ''
+                },
+                exporting: {
+                    enabled: false
+                },
+                subtitle: {
+                    text: ''
+                },
+                accessibility: {
+                    announceNewData: {
+                        enabled: true
+                    }
+                },
+                xAxis: {
+                    type: 'category',
+                    labels: {
+                        style: {
+                            fontSize: '20px',
+                        },
+                    }
+                },
+                yAxis: {
+                    title: {
+                        text: ''
+                    },
+                    labels: {
+                        style: {
+                            fontSize: '15px',
+                        },
+                    }
+
+                },
+                legend: {
+                    enabled: false
+                },
+                plotOptions: {
+                    series: {
+                        borderWidth: 0,
+                        dataLabels: {
+                            enabled: true,
+                            format: '{point.y}',
+                            style: {
+                                fontSize: '14px',
+                            },
+                        }
+                    }
+                },
+
+                tooltip: {
+                    headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+                    pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y}</b> del Total<br/>'
+                },
+
+                series: [
+                    {
+                        name: "Cargo Igafom Correctivo",
+                        colorByPoint: true,
+                        data: [
+                            {
+                                name: "Si",
+                                y: contadorCargoCorrectSi,
+                                color: '#28a745'
+
+                            },
+                            {
+                                name: "No",
+                                y: contadorCargoCorrectNo,
+                                color: '#e15b5b'
+                            },
+                        ]
+                    }
+                ]
+
+            });
+
+        },
+    });
+});
+$("#cmbResultadoFiltrarCarIgaPrev").change(function () {
+    $.ajax({
+        url: '/Home/FiltrarReinfo?V_RUC=%&V_PROVEEDOR=%&V_CODCONSECION=%&V_NOMCONSECION=%%&V_NOMDERECHMINE=%&V_FECREINFO=%&V_RESULTADOS=' + $("#cmbResultadoFiltrarCarIgaPrev").val() + '&N_SEDES=' + UserSede,
+        type: 'GET',
+        dataType: 'json',
+        beforeSend: function () {
+            $('#myModalLoading').removeAttr('hidden');
+            $('#myModalLoading').modal("show");
+
+        },
+        complete: function () {
+            $('#myModalLoading').attr('hidden', true);
+            $('#myModalLoading').modal('hide');
+            $("#myModalSedes").modal('hide');
+        },
+        data: 'data',
+        success: function (data) {
+            //VARIABLES GLOBALES DE LA FUNCION
+            var datos = data.data;
+
+            var contadorCargoPrevSi = 0;
+            var contadorCargoPrevNo = 0;
+
+            var contadorRegistros = 0;
+
+
+            $(datos).each(function (index, value) {
+                //CONTADOR DE REGISTROS
+                contadorRegistros = contadorRegistros + 1;
+
+                //CONTADOR CARGO IGAFOM PREVENTIVO
+                if (value.v_CARGOPREVENT == 1) {
+                    contadorCargoPrevSi = contadorCargoPrevSi + 1;
+                } else if (value.v_CARGOPREVENT == 0) {
+                    contadorCargoPrevNo = contadorCargoPrevNo + 1;
+                }
+
+            });
+
+            //SPAN CARGO IGAFOM PREVENTIVO
+            $("#spanSiPrev").text(contadorCargoPrevSi);
+            $("#spanNoPrev").text(contadorCargoPrevNo);
+
+            //HIGHCHART CARGO IGAFOM PREVENTIVO
+            Highcharts.chart('containerIgafPrev', {
+                title: {
+                    text: ''
+                },
+                chart: {
+                    type: 'column'
+                },
+                exporting: {
+                    enabled: false
+                },
+                subtitle: {
+                    text: ''
+                },
+                accessibility: {
+                    announceNewData: {
+                        enabled: true
+                    }
+                },
+                xAxis: {
+                    type: 'category',
+                    labels: {
+                        style: {
+                            fontSize: '20px',
+                        },
+                    }
+                },
+                yAxis: {
+                    title: {
+                        text: ''
+                    },
+                    labels: {
+                        style: {
+                            fontSize: '15px',
+                        },
+                    }
+
+                },
+                legend: {
+                    enabled: false
+                },
+                plotOptions: {
+                    series: {
+                        borderWidth: 0,
+                        dataLabels: {
+                            enabled: true,
+                            format: '{point.y}'
+                        }
+                    }
+                },
+
+                tooltip: {
+                    headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+                    pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y}</b> del Total<br/>'
+                },
+
+                series: [
+                    {
+                        name: "Cargo Igafom Preventivo",
+                        colorByPoint: true,
+                        data: [
+                            {
+                                name: "Si",
+                                y: contadorCargoPrevSi,
+                                color: '#28a745'
+
+                            },
+                            {
+                                name: "No",
+                                y: contadorCargoPrevNo,
+                                color: '#e15b5b'
+                            },
+                        ]
+                    }
+                ]
+
+            });
+        },
+    });
+});
+$("#cmbResultadoFiltrarInfIgaCorre").change(function () {
+    $.ajax({
+        url: '/Home/FiltrarReinfo?V_RUC=%&V_PROVEEDOR=%&V_CODCONSECION=%&V_NOMCONSECION=%%&V_NOMDERECHMINE=%&V_FECREINFO=%&V_RESULTADOS=' + $("#cmbResultadoFiltrarInfIgaCorre").val() + '&N_SEDES=' + UserSede,
+        type: 'GET',
+        dataType: 'json',
+        beforeSend: function () {
+            $('#myModalLoading').removeAttr('hidden');
+            $('#myModalLoading').modal("show");
+
+        },
+        complete: function () {
+            $('#myModalLoading').attr('hidden', true);
+            $('#myModalLoading').modal('hide');
+            $("#myModalSedes").modal('hide');
+        },
+        data: 'data',
+        success: function (data) {
+            //VARIABLES GLOBALES DE LA FUNCION
+            var datos = data.data;
+            var contadorInformeCorrecNo = 0;
+            var contadorInformeCorrecSi = 0;
+
+            var contadorRegistros = 0;
+
+
+            $(datos).each(function (index, value) {
+                //CONTADOR DE REGISTROS
+                contadorRegistros = contadorRegistros + 1;
+
+                //CONTADOR INFORME IGAFOM CORRECTIVO
+                if (value.v_INFOMERCORRECT == 1) {
+                    contadorInformeCorrecSi = contadorInformeCorrecSi + 1;
+                } else if (value.v_INFOMERCORRECT == 0) {
+                    contadorInformeCorrecNo = contadorInformeCorrecNo + 1;
+                }
+
+            });
+
+
+            //SPAN INFORME IGAFOM CORRECTIVO
+            $("#spanSiCorrecInforme").text(contadorInformeCorrecSi);
+            $("#spanNoCorrecInforme").text(contadorInformeCorrecNo);
+
+         
+            //HIGHCHART INFORME IGAFOM CORRECTIVO
+            Highcharts.chart('containerIgafCorrecInforme', {
+                title: {
+                    text: ''
+                },
+                chart: {
+                    type: 'column'
+                },
+                exporting: {
+                    enabled: false
+                },
+                subtitle: {
+                    text: ''
+                },
+                accessibility: {
+                    announceNewData: {
+                        enabled: true
+                    }
+                },
+                xAxis: {
+                    type: 'category',
+                    labels: {
+                        style: {
+                            fontSize: '20px',
+                        },
+                    }
+                },
+                yAxis: {
+                    title: {
+                        text: ''
+                    },
+                    labels: {
+                        style: {
+                            fontSize: '15px',
+                        },
+                    }
+
+                },
+                legend: {
+                    enabled: false
+                },
+                plotOptions: {
+                    series: {
+                        borderWidth: 0,
+                        dataLabels: {
+                            enabled: true,
+                            format: '{point.y}',
+                            style: {
+                                fontSize: '14px',
+                            },
+                        }
+                    }
+                },
+
+                tooltip: {
+                    headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+                    pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y}</b> del Total<br/>'
+                },
+
+                series: [
+                    {
+                        name: "Informe Igafom Correctivo",
+                        colorByPoint: true,
+                        data: [
+                            {
+                                name: "Si",
+                                y: contadorInformeCorrecSi,
+                                color: '#28a745'
+
+                            },
+                            {
+                                name: "No",
+                                y: contadorInformeCorrecNo,
+                                color: '#e15b5b'
+                            },
+                        ]
+                    }
+                ]
+
+            });
+
+
+        },
+    });
+});
+$("#cmbResultadoFiltrarInfIgaPrev").change(function () {
+    $.ajax({
+        url: '/Home/FiltrarReinfo?V_RUC=%&V_PROVEEDOR=%&V_CODCONSECION=%&V_NOMCONSECION=%%&V_NOMDERECHMINE=%&V_FECREINFO=%&V_RESULTADOS=' + $("#cmbResultadoFiltrarInfIgaPrev").val() + '&N_SEDES=' + UserSede,
+        type: 'GET',
+        dataType: 'json',
+        beforeSend: function () {
+            $('#myModalLoading').removeAttr('hidden');
+            $('#myModalLoading').modal("show");
+
+        },
+        complete: function () {
+            $('#myModalLoading').attr('hidden', true);
+            $('#myModalLoading').modal('hide');
+            $("#myModalSedes").modal('hide');
+        },
+        data: 'data',
+        success: function (data) {
+            //VARIABLES GLOBALES DE LA FUNCION
+            var datos = data.data;
+            var contadorInformePrevSi = 0;
+            var contadorInformePrevNo = 0;
+            var contadorRegistros = 0;
+
+
+            $(datos).each(function (index, value) {
+                //CONTADOR DE REGISTROS
+                contadorRegistros = contadorRegistros + 1;
+                //CONTADOR INFORME IGAFOM CORRECTIVO
+                if (value.v_INFORMEPREVENT == 1) {
+                    contadorInformePrevSi = contadorInformePrevSi + 1;
+                } else if (value.v_INFORMEPREVENT == 0) {
+                    contadorInformePrevNo = contadorInformePrevNo + 1;
+                }
+            });
+            //SPAN INFORME IGAFOM PREVENTIVO
+            $("#spanSiPrevInforme").text(contadorInformePrevSi);
+            $("#spanNoPrevInforme").text(contadorInformePrevNo);
+           
+            //HIGHCHART INFORME IGAFOM PREVENTIVO
+            Highcharts.chart('containerIgafPrevInforme', {
+                title: {
+                    text: ''
+                },
+                chart: {
+                    type: 'column'
+                },
+                exporting: {
+                    enabled: false
+                },
+                subtitle: {
+                    text: ''
+                },
+                accessibility: {
+                    announceNewData: {
+                        enabled: true
+                    }
+                },
+                xAxis: {
+                    type: 'category',
+                    labels: {
+                        style: {
+                            fontSize: '20px',
+                        },
+                    }
+                },
+                yAxis: {
+                    title: {
+                        text: ''
+                    },
+                    labels: {
+                        style: {
+                            fontSize: '15px',
+                        },
+                    }
+                },
+                legend: {
+                    enabled: false
+                },
+                plotOptions: {
+                    series: {
+                        borderWidth: 0,
+                        dataLabels: {
+                            enabled: true,
+                            format: '{point.y}',
+                            style: {
+                                fontSize: '14px',
+                            },
+                        }
+                    }
+                },
+                tooltip: {
+                    headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+                    pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y}</b> del Total<br/>'
+                },
+
+                series: [
+                    {
+                        name: "Informe Igafom Preventivo",
+                        colorByPoint: true,
+                        data: [
+                            {
+                                name: "Si",
+                                y: contadorInformePrevSi,
+                                color: '#28a745'
+
+                            },
+                            {
+                                name: "No",
+                                y: contadorInformePrevNo,
+                                color: '#e15b5b'
+                            },
+                        ]
+                    }
+                ]
+
+            });
+
+        },
+    });
+});
+
+
 var currentTime = new Date();
 var year = currentTime.getFullYear();
 $("#cmbAnioFiltrar").val(year);
 $("#cmbAnioDecFiltrar").val(year);
 GraficoGeneral(year, '0');
-GraficoDocGeneral(year, 'SEMESTRE1');
+GraficoDocGeneral(year, 'SEMESTRE1','%');
 
 
 $("#btnBuscarSedes").click(function () {
@@ -790,15 +1369,22 @@ $("#cmbMesFiltrar").change(function () {
 $("#cmbAnioDecFiltrar").change(function () {
     let anio = $("#cmbAnioDecFiltrar").val();
     let semestre = $("#cmbSemestreFiltrar").val();
-    GraficoDocGeneral(anio, semestre);
+    let resultado = $("#cmbResultadoFiltrar").val();
+    GraficoDocGeneral(anio, semestre, resultado);
 });
 $("#cmbSemestreFiltrar").change(function () {
     let anio = $("#cmbAnioDecFiltrar").val();
     let semestre = $("#cmbSemestreFiltrar").val();
-    GraficoDocGeneral(anio, semestre);
+    let resultado = $("#cmbResultadoFiltrar").val();
+    GraficoDocGeneral(anio, semestre, resultado);
+});
+$("#cmbResultadoFiltrar").change(function () {
+    let anio = $("#cmbAnioDecFiltrar").val();
+    let semestre = $("#cmbSemestreFiltrar").val();
+    let resultado = $("#cmbResultadoFiltrar").val();
+    GraficoDocGeneral(anio, semestre, resultado);
 });
  
-
 //EVENTO QUE MUESTRA NOMBRE AL ELEGIR LA SEDE
 function clickSedes(id) {
     $.ajax({
@@ -813,6 +1399,7 @@ function clickSedes(id) {
                 if (value.n_CODSEDE == id) {
                     $("#lblSede").text(value.v_NOMSEDE);
                     filtraSedeReporte(value.n_CODSEDE);
+                    UserSede = value.n_CODSEDE;
                 }
             });
         }
@@ -940,10 +1527,10 @@ function GraficoGeneral(anio,mes) {
     });
 }
 
-function GraficoDocGeneral(anio, semestre) {
+function GraficoDocGeneral(anio, semestre,resultado) {
     // CREACIÓN DE GRAFICOS SEGUN LA SEDE QUE SELECCIONE
     $.ajax({
-        url: '/Home/FiltrarDeclaracionGrafico?V_ANIO=' + anio + '&V_SEMESTRE=' + semestre,
+        url: '/Home/FiltrarDeclaracionGrafico?V_ANIO=' + anio + '&V_SEMESTRE=' + semestre + '&V_RESULTADOS=' + resultado,
         type: 'GET',
         dataType: 'json',
         beforeSend: function () {
@@ -1041,3 +1628,4 @@ function GraficoDocGeneral(anio, semestre) {
         },
     });
 }
+
