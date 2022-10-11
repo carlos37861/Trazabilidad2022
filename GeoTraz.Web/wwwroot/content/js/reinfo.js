@@ -3020,6 +3020,8 @@ function PrintReinfo(id,condicion) {
     var output = (day < 10 ? '0' : '') + day + '/' + (month < 10 ? '0' : '') + month + '/' + d.getFullYear();
     $('#txtFechaRevisado').val('');
     $('#txtFechaRealizado').val('');
+    $("#txtAnioPrint").val('');
+    $("#txtSemestrePrint").val('');
         $.ajax({
             url: '/Home/BuscarReinfo?N_CODREINFO=' + id,
             type: 'GET',

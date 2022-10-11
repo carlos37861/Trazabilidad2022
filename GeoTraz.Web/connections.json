@@ -5,7 +5,7 @@
     //"ConnSeguridad": "xL9aoa+Uoi6Nzq6iHQeiY8MaFka7mxGqBdX1P",
     //"ConnIntegra": "xL9aoa+Uoi6Nzq6iHQeiY8MaFka7mxGqBdX1PjW"
     "UriPrueba": "https://localhost:44317/api/"
-    //"UriPrueba": "http://172.16.0.244:2703/"
+    //"UriPrueba": "http://localhost:8089/api/"
   },
   "Initial": {
     "Empresa": "73",
