@@ -145,6 +145,7 @@ $(document).ready(function () {
                     if (condicion.substr(0, 2) == "TZ" || condicion.substr(0, 2) == "tz")  {
                         $("#liReinfo").css("display", "block");
                         $("#liReporte").css("display", "block");
+                        $("#liDocDeProveedor").css("display", "block");
                     } else if (condicion.substr(0, 2) == "FI" || condicion.substr(0, 2) == "fi") {
                         $("#liReinfo").css("display", "block");
                         $("#liReporte").css("display", "block");
