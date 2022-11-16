@@ -17,6 +17,7 @@ namespace GeoTraz.Core.Repositories.Concretes
             _context = context;
             _transaction = transaction;
         }
+        
         public async Task<int> AgregarReinfo(Reinfo objReinfo)
         {
             try
@@ -61,7 +62,6 @@ namespace GeoTraz.Core.Repositories.Concretes
                     command.Parameters.AddWithValue("@V_SITUACIONINGEMMET", objReinfo.V_SITUACIONINGEMMET == null ? "" : objReinfo.V_SITUACIONINGEMMET);
                     command.Parameters.AddWithValue("@V_SITACIONDECMINERA", objReinfo.V_SITACIONDECMINERA == null ? "" : objReinfo.V_SITACIONDECMINERA);
 
-
                     return Convert.ToInt32(await command.ExecuteNonQueryAsync());
                 }
             }
@@ -69,7 +69,6 @@ namespace GeoTraz.Core.Repositories.Concretes
             {
                 throw new ArgumentOutOfRangeException("error", ex);
             }
-
         }
 
         public async Task<int> EditarReinfo(Reinfo objReinfo)
@@ -115,7 +114,6 @@ namespace GeoTraz.Core.Repositories.Concretes
                     command.Parameters.AddWithValue("@V_SITUACIONINGEMMET", objReinfo.V_SITUACIONINGEMMET == null ? "" : objReinfo.V_SITUACIONINGEMMET);
                     command.Parameters.AddWithValue("@V_SITACIONDECMINERA", objReinfo.V_SITACIONDECMINERA == null ? "" : objReinfo.V_SITACIONDECMINERA);
                     return Convert.ToInt32(await command.ExecuteNonQueryAsync());
-
                 }
             }
             catch (Exception ex)
@@ -156,7 +154,7 @@ namespace GeoTraz.Core.Repositories.Concretes
                     command.CommandText = "TRAZABILIDAD.TZ_LST_REINFO";
                     command.CommandType = CommandType.StoredProcedure;
                     SqlDataReader sqlDataReader = await command.ExecuteReaderAsync(CommandBehavior.SingleResult);
-
+                    
                     while (sqlDataReader.Read())
                     {
                         Reinfo Obj = new Reinfo()
@@ -588,7 +586,6 @@ namespace GeoTraz.Core.Repositories.Concretes
                         {
                             N_SEDE = sqlDataReader[0] == DBNull.Value ? 0 : Convert.ToInt32(sqlDataReader[0]),
                             N_DATOS = Convert.ToInt32(sqlDataReader[1].ToString()),
-
                         };
                         List.Add(Obj);
                     }

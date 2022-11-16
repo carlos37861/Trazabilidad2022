@@ -830,6 +830,7 @@ $("#cmbSemestreFiltrarSede").change(function () {
     filtraSedeReporte(UserSede);
 });
 
+
 $("#cmbResultadoFiltrarCarIgaCorre").change(function () {
     $.ajax({
         url: '/Home/FiltrarReinfo?V_RUC=%&V_PROVEEDOR=%&V_CODCONSECION=%&V_NOMCONSECION=%%&V_NOMDERECHMINE=%&V_FECREINFO=%&V_RESULTADOS=' + $("#cmbResultadoFiltrarCarIgaCorre").val() + '&N_SEDES=' + UserSede,
