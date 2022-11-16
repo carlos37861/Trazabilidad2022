@@ -40,7 +40,6 @@ function cargardatosTabla() {
         success: function (data) {
 
             var datos = data.data;
-            console.log(datos);
             $_data = datos;
             $_table.bootstrapTable('destroy').bootstrapTable({
                 data: $_data,

@@ -4337,7 +4337,6 @@ function RevisaIgafomPreventivo(id) {
     });
 }
 function RevisaDecMinera(id) {
-    console.log(id);
     $.ajax({
         async: false,
         url: '/Home/ListaArchivo?N_CODIGAFOM=2&N_CODREIN=' + id + '&V_TIPOIMAG=%&V_TIPOIGAFOM=%',

@@ -829,10 +829,8 @@ $("#cmbAnioDecFiltrarSede").change(function () {
 $("#cmbSemestreFiltrarSede").change(function () {
     filtraSedeReporte(UserSede);
 });
-console.log(UserSede);
 
 $("#cmbResultadoFiltrarCarIgaCorre").change(function () {
-    console.log(UserSede);
     $.ajax({
         url: '/Home/FiltrarReinfo?V_RUC=%&V_PROVEEDOR=%&V_CODCONSECION=%&V_NOMCONSECION=%%&V_NOMDERECHMINE=%&V_FECREINFO=%&V_RESULTADOS=' + $("#cmbResultadoFiltrarCarIgaCorre").val() + '&N_SEDES=' + UserSede,
         type: 'GET',
@@ -1546,7 +1544,6 @@ function GraficoDocGeneral(anio, semestre,resultado) {
         success: function (data) {
             //VARIABLES GLOBALES DE LA FUNCION
             var datos = data.data;
-            console.log(datos);
             var ArraySedes = [];
             var ArraySi = [];
             var ArrayNo = [];
