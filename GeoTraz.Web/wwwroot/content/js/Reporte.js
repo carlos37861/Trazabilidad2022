@@ -71,7 +71,7 @@ function cargardatosTabla() {
                         field: 'v_FECHAREALIZADO',
                         title: 'FECHA REALIZADO:',
                         formatter: REVISADO,
-                        sortable: true
+                        sortable: true  
                     },
                     {
                         field: 'n_VERSION',
@@ -653,7 +653,7 @@ function Filtrar() {
                         field: 'v_FECHAREALIZADO',
                         title: 'FECHA REALIZADO:',
                         formatter: REVISADO,
-                        sortable: true
+                        sortable: false
                     },
                     {
                         field: 'n_VERSION',

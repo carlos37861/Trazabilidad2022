@@ -71,7 +71,7 @@ function cargardatosTabla() {
                         field: 'v_FECREINFO',
                         title: 'Fecha Reinfo',
 
-                        sortable: true,
+                        sortable: false,
                     },
 
                     {
@@ -370,7 +370,7 @@ function Filtrar() {
                     {
                         field: 'v_FECREINFO',
                         title: 'Fecha Reinfo',
-                        sortable: true,
+                        sortable: false,
                     },
                     {
                         field: 'n_CODREINFO',

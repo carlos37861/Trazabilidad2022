@@ -47,7 +47,7 @@ function cargardatosTabla() {
                         field: 'v_FECHAREALIZADO', 
                         formatter: REVISADO,
                         title: 'FECHA REALIZADO:',
-                        sortable: true
+                        sortable: false
                     },
                     {
                         field: 'n_VERSION',

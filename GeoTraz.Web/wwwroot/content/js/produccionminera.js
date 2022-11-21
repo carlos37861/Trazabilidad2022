@@ -115,7 +115,7 @@ function cargardatosTabla() {
                     {
                         field: 'v_FECREINFO',
                         title: 'Fecha Reinfo',
-                        sortable: true,
+                        sortable: false,
                     },
                     {
                         field: 'v_2021SEM1',
@@ -830,7 +830,7 @@ function Filtrar() {
                     {
                         field: 'v_FECREINFO',
                         title: 'Fecha Reinfo',
-                        sortable: true,
+                        sortable: false,
                     },
                     {
                         field: 'n_CODREINFO',
