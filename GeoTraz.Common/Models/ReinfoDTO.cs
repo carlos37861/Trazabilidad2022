@@ -82,5 +82,6 @@ namespace GeoTraz.Common.Models
         public string V_CANTIDAD { get; set; }
         public int N_DATOS { get; set; }
         public string V_SEMESTRE { get; set; }
+        public string V_DESCUBICACION_PB { get; set; }
     }
 }

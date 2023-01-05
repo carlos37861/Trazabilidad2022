@@ -147,13 +147,14 @@
 
 <div class="modal fade m-0" id="myModalReinfo" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
+
         <div class="modal-content">
 
             <div class="modal-header">
                 <h5 class="modal-title">Reinfo Minero</h5>
-                @*<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
-                </button>*@
+                </button>
             </div>
 
             <div class="modal-body ace-scrollbar p-0">
@@ -416,6 +417,7 @@
                                             <option value="BOCAMINA-PIQUE">BOCAMINA-PIQUE</option>
                                             <option value="BOCAMINA-CORTADA">BOCAMINA-CORTADA</option>
                                             <option value="TAJO-ABIERTO">TAJO-ABIERTO</option>
+                                            <option value="UBICACIÓN-P. BENEFICIO">UBICACIÓN-P. BENEFICIO</option>
                                         </select>
                                         <label id="lblErrorcmbComponente" style="color: red; font-size: 12px !important; display: none"></label>
                                     </div>
@@ -438,6 +440,10 @@
                                         <label>Este C</label>
                                         <input type="text" class="form-control" autocomplete="off" id="txtEsteC" name="txtEsteC" maxlength="8" onkeypress="return filterFloat(event,this);" onkeyup="CalcularDifCoordenadas()">
                                         <label id="lblErrortxtEsteC" style="color: red; font-size: 12px !important; display: none"></label>
+                                    </div>
+                                    <div class="form-group col-md-12" id="divDesUbiPB">
+                                        <label>Dirección Ubicación-P. Beneficio</label>
+                                        <input class="form-control" id="txtDesUbiPB"  autocomplete="off" maxlength="255" placeholder="Dirección (opcional)" style="border-color: cornflowerblue"/>
                                     </div>
                                 </div>
                                 <div id="DivFileCampoPrincipal">

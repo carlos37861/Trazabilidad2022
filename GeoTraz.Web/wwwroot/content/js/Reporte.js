@@ -332,6 +332,14 @@ function getReporte(id) {
                 $("#cmbSituacionProduccionPrint").val(value.v_SITACIONDECMINERA);
                 $("#txtAnioPrint").val(value.v_ANIO);
                 $("#txtSemestrePrint").val(value.v_MES);
+                //MOSTRAR 
+                if (value.v_COMPONENT == "UBICACIÓN-P. BENEFICIO") {
+                    $("#divDesUbiPBPrint").show();
+                } else {
+                    $("#divDesUbiPBPrint").hide();
+                }
+
+                $("#txtDesUbiPBPrint").val(value.v_DESCUBICACION_PB);
 
             
                 if (value.v_RESULTADOS == "TZ") {
@@ -986,12 +994,13 @@ function crearModalV3() {
                                             <td class="p-1" style="font-size: 11px; border: groove"><input type="text" style="width:100%" border="1" readonly id="txtNorteCPrint" /></td>\
                                             <td class="p-1" style="font-size: 11px; border: groove"><input type="text" style="width:100%" border="1" readonly id="txtEsteCPrint" /></td>\
                                         </tr>\
+                                        <tr id="divDesUbiPBPrint"> <td class="p-1" colspan="4" style="font-size: 11px; border: groove"><input type="text" style="width:100%" border="1" readonly id="txtDesUbiPBPrint"/></td></tr>\
                                     </table>\
                                 </td>\
                             </tr>\
                             <tr>\
-                                <td class="p-1" style="font-size: 10px" colspan="2">2.3 DIFERENCIA ENTRE COORDENADAS: <input type="text" border="1" readonly style="width:17%" class="pl-2" id="txtDifCoordenadasPrint" /> METROS</td>\
-                                <td class="p-1" style="font-size: 11px;display:none">2.4 SEDE: <select type="text" id="cmbSedePrint" border="1" disabled="disabled" style="width:100%;border-color:black;color: black;font:bold" class="pl-2" /></td>\
+                                <td class="p-1" style="font-size: 9px" colspan="2">2.3 DIFERENCIA ENTRE COORDENADAS: <input type="text" border="1" readonly style="width:17%" class="pl-2" id="txtDifCoordenadasPrint" /> METROS</td>\
+                                <td class="p-1" style="font-size: 10px;display:none">2.4 SEDE: <select type="text" id="cmbSedePrint" border="1" disabled="disabled" style="width:100%;border-color:black;color: black;font:bold" class="pl-2" /></td>\
                             </tr>\
                             <tr>\
                                 <td colspan="3" class="p-0">\
@@ -1009,7 +1018,7 @@ function crearModalV3() {
                                 </td>\
                             </tr>\
                             <tr>\
-                                <td class="p-1" colspan="2" style="font-size: 10px; background-color:lightgray">03. DESCRIPCIÓN DE LA LABOR Y MINERALES:</td>\
+                                <td class="p-1" colspan="2" style="font-size: 9px; background-color:lightgray">03. DESCRIPCIÓN DE LA LABOR Y MINERALES:</td>\
                             </tr>\
                              <tr>\
                                 <td class="p-1" colspan="2" style="font-size: 8px;">CARACTERISTICAS DE LA LABOR (Capacidad de producción - Clasificación de Mineral que extrae; óxidos y/o súlfuros - Tipos de Minerales )</td>\
@@ -1113,7 +1122,7 @@ function crearModalV3() {
                             </tr>\
                         </table>\
                         <div>\
-                            <table class="p-5" border="1" style="width:100%">\
+                            <table class="p-3" border="1" style="width:100%">\
                                 <tr>\
                                     <td class="p-1" colspan="2" width="20%" style="font-size: 11px">REALIZADO POR: </td>\
                                     <td class="p-1" colspan="2" width="20%" style="font-size: 11px">REVISADO POR:</td>\
@@ -1151,14 +1160,17 @@ function crearModalV3() {
                     <label>N° de Reporte:</label> <label id="lblVersionPrint" class="pl-1"></label>\
                 </div>\
                 <button type="button" class="btn btn-success" onclick="Imprimir()"><i class="fa fa-print text-110 align-text-bottom mr-1"></i>Imprimir</button>\
-                <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times-circle text-110 align-text-bottom mr-1"></i>Cerrar</button><br /><br />\
-            </div >\
+                <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times-circle text-110 align-text-bottom mr-1"></i>Cerrar</button><br/><br/>\
+            </div>\
             </div>\
     </div>');
     ListaDepartamentosPrint();
     ListaSedesPrint();
     
 }
+
+
+//FUNCION MODAL V2 SIN USO ACTUALMENTE, CON PROBABLIDAD DE MEJORA
 function crearModalV2() {
     $("#myModalPrint").empty();
     $("#myModalPrint").append('<div class="modal-dialog modal-xl table-responsive" role="document">\
@@ -1262,6 +1274,7 @@ function crearModalV2() {
                                             <td class="p-1" style="font-size: 11px"><input type="text" style="width:100%" readonly border="1" id="txtNorteCPrint" /></td>\
                                             <td class="p-1" style="font-size: 11px"><input type="text" style="width:100%" readonly border="1" id="txtEsteCPrint" /></td>\
                                         </tr>\
+                                        <tr id="divDesUbiPBPrint"> <td class="p-1" colspan="4" style="font-size: 11px; border: groove"><input type="text" style="width:100%" border="1" readonly id="txtDesUbiPBPrint"/></td></tr>\
                                     </table>\
                                 </td>\
                             </tr>\

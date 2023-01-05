@@ -83,7 +83,7 @@ namespace GeoTraz.Common.Entities
 
         public int  N_DATOS { get; set; }
         public string V_SEMESTRE { get; set; }
-
+        public string V_DESCUBICACION_PB { get; set; }
 
     }
 }

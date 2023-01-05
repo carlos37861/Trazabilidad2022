@@ -61,6 +61,7 @@ namespace GeoTraz.Core.Repositories.Concretes
                     command.Parameters.AddWithValue("@V_ESTADO", objReinfo.V_ESTADO);
                     command.Parameters.AddWithValue("@V_SITUACIONINGEMMET", objReinfo.V_SITUACIONINGEMMET == null ? "" : objReinfo.V_SITUACIONINGEMMET);
                     command.Parameters.AddWithValue("@V_SITACIONDECMINERA", objReinfo.V_SITACIONDECMINERA == null ? "" : objReinfo.V_SITACIONDECMINERA);
+                    command.Parameters.AddWithValue("@V_DESCUBICACION_PB", objReinfo.V_DESCUBICACION_PB == null ? "" : objReinfo.V_DESCUBICACION_PB);
 
                     return Convert.ToInt32(await command.ExecuteNonQueryAsync());
                 }
@@ -113,6 +114,7 @@ namespace GeoTraz.Core.Repositories.Concretes
                     command.Parameters.AddWithValue("@V_ESTADO", objReinfo.V_ESTADO);
                     command.Parameters.AddWithValue("@V_SITUACIONINGEMMET", objReinfo.V_SITUACIONINGEMMET == null ? "" : objReinfo.V_SITUACIONINGEMMET);
                     command.Parameters.AddWithValue("@V_SITACIONDECMINERA", objReinfo.V_SITACIONDECMINERA == null ? "" : objReinfo.V_SITACIONDECMINERA);
+                    command.Parameters.AddWithValue("@V_DESCUBICACION_PB", objReinfo.V_DESCUBICACION_PB == null ? "" : objReinfo.V_DESCUBICACION_PB);
                     return Convert.ToInt32(await command.ExecuteNonQueryAsync());
                 }
             }
@@ -216,6 +218,7 @@ namespace GeoTraz.Core.Repositories.Concretes
                             V_CONTRATOEXPLOTACION = sqlDataReader[54] == DBNull.Value ? 0 : Convert.ToInt32(sqlDataReader[54]),
                             V_CONTRATOCESION = sqlDataReader[55] == DBNull.Value ? 0 : Convert.ToInt32(sqlDataReader[55]),
                             V_CONTRATOTERRESUPERFICIAL = sqlDataReader[56] == DBNull.Value ? 0 : Convert.ToInt32(sqlDataReader[56]),
+                            V_DESCUBICACION_PB= sqlDataReader[57].ToString(),
                         };
                         List.Add(Obj);
                     }
@@ -352,7 +355,8 @@ namespace GeoTraz.Core.Repositories.Concretes
                             V_USUMODIF = sqlDataReader[34].ToString(),
                             V_ESTADO = sqlDataReader[35].ToString(),
                             V_SITUACIONINGEMMET = sqlDataReader[36].ToString(),
-                            V_SITACIONDECMINERA = sqlDataReader[37].ToString()
+                            V_SITACIONDECMINERA = sqlDataReader[37].ToString(),
+                            V_DESCUBICACION_PB = sqlDataReader[38].ToString(),
 
                         };
                         List.Add(Obj);
@@ -448,6 +452,7 @@ namespace GeoTraz.Core.Repositories.Concretes
                             V_CONTRATOEXPLOTACION = sqlDataReader[54] == DBNull.Value ? 0 : Convert.ToInt32(sqlDataReader[54]),
                             V_CONTRATOCESION = sqlDataReader[55] == DBNull.Value ? 0 : Convert.ToInt32(sqlDataReader[55]),
                             V_CONTRATOTERRESUPERFICIAL = sqlDataReader[56] == DBNull.Value ? 0 : Convert.ToInt32(sqlDataReader[56]),
+                            V_DESCUBICACION_PB= sqlDataReader[37].ToString()
                         };
                         List.Add(Obj);
                     }

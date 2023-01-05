@@ -95,7 +95,7 @@ namespace GeoTraz.Common.Entities
         public int V_CONTRATOCESION { get; set; }
         public int V_CONTRATOTERRESUPERFICIAL { get; set; }
 
-
+        public string V_DESCUBICACION_PB { get; set; }
 
     }
 }

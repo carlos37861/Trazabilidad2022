@@ -31,6 +31,8 @@ var VERSIONREINFO = "";
 //VARIABLE DE DOCUMENTOS INGEMMET
 var formDataIngemmet = new FormData();
 
+$("#divDesUbiPB").hide();
+
 $("#txtFechaReinfo").focusout(function () {
     var fecha = $("#txtFechaReinfo").val();
     var fechaFormato = fecha.split("-");
@@ -1680,6 +1682,16 @@ $("#cmbProvincia").change(function () {
 });
 //#endregion
 
+//CONSULTAR cmbComponente SI TIENE VALOR UBICACIÓN-P. BENEFICIO DEBE MOSTRAR UNA CAJA DE TEXTO PARA UNA DESCRIPCIÓN
+
+$("#cmbComponente").change(function () {
+    if ($("#cmbComponente").val() == "UBICACIÓN-P. BENEFICIO") {
+        $("#divDesUbiPB").show();
+    } else {
+        $("#divDesUbiPB").hide();
+    }
+});
+
 //EXPORTAR EN EXCEL
 $('#btnExportar').click(function () {
     //$("#myModalOpcionesExport").modal('show');
@@ -1768,6 +1780,7 @@ function getReinfo(id) {
     $("#cmbProvincia").prop("disabled", true);
     $("#cmbCiudad").prop("disabled", true);
     $("#idListaDocIngemmet").empty();
+    $("#divDesUbiPB").hide();
     $("#filesIngemmet").val('');
     $("#cmbTipoDocIngemmet").val('0');
     formDataIngemmet = new FormData();
@@ -1795,6 +1808,7 @@ function getReinfo(id) {
 
         $("#txtCodigoDM").prop('disabled',true);
         $("#txtConcesion").prop('disabled', true);
+
         $.ajax({
             url: '/Home/BuscarReinfo?N_CODREINFO=' + id,
             type: 'GET',
@@ -1840,6 +1854,13 @@ function getReinfo(id) {
                     $("#cmbEstadoIgafom").val(value.v_ESTADOIGAFOM);
                     $("#cmbResultado").val(value.v_RESULTADOS);
                     $("#txtConclusion").val(value.v_CONCLUSION);
+                    $("#txtDesUbiPB").val(value.v_DESCUBICACION_PB);
+                    if (value.v_COMPONENT == "UBICACIÓN-P. BENEFICIO") {
+                        $("#divDesUbiPB").show();
+                    } else {
+                        $("#divDesUbiPB").hide();
+                    }
+                    
                     if (value.v_SITUACIONINGEMMET == "") {
                         $("#cmbIngemmet").val('0');
                     } else {
@@ -2001,6 +2022,7 @@ function AgregarOeditarReinfo() {
                     V_ESTADO: 'A',
                     V_SITUACIONINGEMMET: $("#cmbIngemmet").val(),
                     V_SITACIONDECMINERA: $("#cmbSituacionMine").val(),
+                    v_DESCUBICACION_PB: $("#txtDesUbiPB").val()
                 }
             };
             $.ajax({
@@ -2060,7 +2082,8 @@ function AgregarOeditarReinfo() {
                     V_USUREGISTRO: UsuarioNom,
                     V_ESTADO: 'A',
                     V_SITUACIONINGEMMET: $("#cmbIngemmet").val(),
-                    V_SITACIONDECMINERA: $("#cmbSituacionMine").val()
+                    V_SITACIONDECMINERA: $("#cmbSituacionMine").val(),
+                    v_DESCUBICACION_PB: $("#txtDesUbiPB").val()
                 }
             };
             $.ajax({
@@ -2953,6 +2976,7 @@ function Imprimir() {
                 V_SITACIONDECMINERA: $("#cmbSituacionProduccionPrint").val(),
                 V_ANIO: $("#txtAnioPrint").val(),
                 V_MES: $("#txtSemestrePrint").val(),
+                V_DESCUBICACION_PB: $("#txtDesUbiPBPrint").val()
             }
         };
         $.ajax({
@@ -3080,7 +3104,15 @@ function PrintReinfo(id,condicion) {
                   
                     $("#cmbSituacionIngemmetPrint").val(value.v_SITUACIONINGEMMET);
                     $("#cmbSituacionProduccionPrint").val(value.v_SITACIONDECMINERA);
+
+                    if (value.v_COMPONENT == "UBICACIÓN-P. BENEFICIO") {
+                        $("#divDesUbiPBPrint").show();
+                    } else {
+                        $("#divDesUbiPBPrint").hide();
+                    }
                     
+                    $("#txtDesUbiPBPrint").val(value.v_DESCUBICACION_PB);
+
 
                     if (value.v_RESULTADOS == "TRAZABLE") {
                         $("#cmbResultadoPrint").val('TZ');
@@ -3092,7 +3124,7 @@ function PrintReinfo(id,condicion) {
                         $("#cmbResultadoPrint").val('P');
                         $("#cmbResultadoPrint").css('background-color', '#F1C40F');
                     }
-                    //$("#txtFechaActual").text(output);
+                    //$("#txtFechaActual").text(output); 
                     //CAMBIAR DE COLOR ESTADO PROVEEDOR
                     if (value.v_ESTADOIGAFOM == "FORMALIZADO") {
                         $("#cmbEstadoIgafomPrint").val('FORMALIZADO');
@@ -4839,6 +4871,7 @@ function crearModalV3() {
                                             <td class="p-1" style="font-size: 11px; border: groove"><input type="text" style="width:100%" border="1" readonly id="txtNorteCPrint" /></td>\
                                             <td class="p-1" style="font-size: 11px; border: groove"><input type="text" style="width:100%" border="1" readonly id="txtEsteCPrint" /></td>\
                                         </tr>\
+                                        <tr id="divDesUbiPBPrint"> <td class="p-1" colspan="4" style="font-size: 11px; border: groove"><input type="text" style="width:100%" border="1" readonly id="txtDesUbiPBPrint"/></td></tr>\
                                     </table>\
                                 </td>\
                             </tr>\

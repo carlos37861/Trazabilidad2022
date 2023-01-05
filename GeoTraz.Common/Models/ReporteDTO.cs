@@ -91,5 +91,7 @@ namespace GeoTraz.Common.Models
         public int V_CONTRATOEXPLOTACION { get; set; }
         public int V_CONTRATOCESION { get; set; }
         public int V_CONTRATOTERRESUPERFICIAL { get; set; }
+
+        public string V_DESCUBICACION_PB { get; set; }
     }
 }
