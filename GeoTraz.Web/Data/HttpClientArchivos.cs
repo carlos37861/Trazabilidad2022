@@ -18,7 +18,7 @@ namespace GeoTraz.Web.Data
             HttpClientHandler clientHandler = new HttpClientHandler();
             clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
             HttpClient _httpClient = new HttpClient(clientHandler);
-            String UriGeneral = JsonHelper.GetSection("UriPrueba") + "Archivos/add-archivo";
+            String UriGeneral = JsonHelper.GetSection("UriGeneral") + "Archivos/add-archivo";
             //List<ArchivoDTO> dataResult = new List<ArchivoDTO>();
             var dataResult = 0;
             string _TOKEN = AuthToken.Token;
@@ -49,7 +49,7 @@ namespace GeoTraz.Web.Data
             HttpClientHandler clientHandler = new HttpClientHandler();
             clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
             HttpClient _httpClient = new HttpClient(clientHandler);
-            String UriGeneral = JsonHelper.GetSection("UriPrueba") + "Archivos/delete-archivo";
+            String UriGeneral = JsonHelper.GetSection("UriGeneral") + "Archivos/delete-archivo";
             //List<ArchivosDTO> dataResult = new List<ArchivosDTO>();
             string _TOKEN = AuthToken.Token;
             if (_TOKEN == null)
@@ -81,7 +81,7 @@ namespace GeoTraz.Web.Data
             HttpClientHandler clientHandler = new HttpClientHandler();
             clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
             HttpClient _httpClient = new HttpClient(clientHandler);
-            String UriGeneral = JsonHelper.GetSection("UriPrueba") + "Archivos/delete-archivo-id";
+            String UriGeneral = JsonHelper.GetSection("UriGeneral") + "Archivos/delete-archivo-id";
             //List<ArchivosDTO> dataResult = new List<ArchivosDTO>();
             string _TOKEN = AuthToken.Token;
             if (_TOKEN == null)
@@ -112,7 +112,7 @@ namespace GeoTraz.Web.Data
             HttpClientHandler clientHandler = new HttpClientHandler();
             clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
             HttpClient _httpClient = new HttpClient(clientHandler);
-            String UriGeneral = JsonHelper.GetSection("UriPrueba") + "Archivos/lista-archivo";
+            String UriGeneral = JsonHelper.GetSection("UriGeneral") + "Archivos/lista-archivo";
             List<ArchivosDTO> dataResult = new List<ArchivosDTO>();
             string _TOKEN = AuthToken.Token;
             if (_TOKEN == null)
@@ -141,7 +141,7 @@ namespace GeoTraz.Web.Data
             HttpClientHandler clientHandler = new HttpClientHandler();
             clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
             HttpClient _httpClient = new HttpClient(clientHandler);
-            String UriGeneral = JsonHelper.GetSection("UriPrueba") + "Archivos/filtra-archivo";
+            String UriGeneral = JsonHelper.GetSection("UriGeneral") + "Archivos/filtra-archivo";
             List<ArchivosDTO> dataResult = new List<ArchivosDTO>();
             string _TOKEN = AuthToken.Token;
             if (_TOKEN == null)
@@ -170,7 +170,7 @@ namespace GeoTraz.Web.Data
             HttpClientHandler clientHandler = new HttpClientHandler();
             clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
             HttpClient _httpClient = new HttpClient(clientHandler);
-            String UriGeneral = JsonHelper.GetSection("UriPrueba") + "Archivos/lista4-archivo";
+            String UriGeneral = JsonHelper.GetSection("UriGeneral") + "Archivos/lista4-archivo";
             List<ArchivosDTO> dataResult = new List<ArchivosDTO>();
             string _TOKEN = AuthToken.Token;
             if (_TOKEN == null)
@@ -200,7 +200,7 @@ namespace GeoTraz.Web.Data
             HttpClientHandler clientHandler = new HttpClientHandler();
             clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
             HttpClient _httpClient = new HttpClient(clientHandler);
-            String UriGeneral = JsonHelper.GetSection("UriPrueba") + "Archivos/busca-imagen";
+            String UriGeneral = JsonHelper.GetSection("UriGeneral") + "Archivos/busca-imagen";
             List<ArchivosDTO> dataResult = new List<ArchivosDTO>();
             string _TOKEN = AuthToken.Token;
             if (_TOKEN == null)
@@ -231,7 +231,7 @@ namespace GeoTraz.Web.Data
             HttpClientHandler clientHandler = new HttpClientHandler();
             clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
             HttpClient _httpClient = new HttpClient(clientHandler);
-            String UriGeneral = JsonHelper.GetSection("UriPrueba") + "Archivos/lista-validacargo";
+            String UriGeneral = JsonHelper.GetSection("UriGeneral") + "Archivos/lista-validacargo";
             List<ArchivosDTO> dataResult = new List<ArchivosDTO>();
             string _TOKEN = AuthToken.Token;
             if (_TOKEN == null)

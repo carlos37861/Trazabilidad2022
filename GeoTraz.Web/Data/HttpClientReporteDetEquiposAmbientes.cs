@@ -19,7 +19,7 @@ namespace GeoTraz.Web.Data
             HttpClientHandler clientHandler = new HttpClientHandler();
             clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
             HttpClient _httpClient = new HttpClient(clientHandler);
-            String UriGeneral = JsonHelper.GetSection("UriPrueba") + "ReporteDetEquiposAmbientes/add-reporteDetEquiposAmbientes";
+            String UriGeneral = JsonHelper.GetSection("UriGeneral") + "ReporteDetEquiposAmbientes/add-reporteDetEquiposAmbientes";
             string _TOKEN = AuthToken.Token;
             if (_TOKEN == null)
             {
@@ -48,7 +48,7 @@ namespace GeoTraz.Web.Data
             HttpClientHandler clientHandler = new HttpClientHandler();
             clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
             HttpClient _httpClient = new HttpClient(clientHandler);
-            String UriGeneral = JsonHelper.GetSection("UriPrueba") + "ReporteDetEquiposAmbientes/lista-reporteDetEquiposAmbientes";
+            String UriGeneral = JsonHelper.GetSection("UriGeneral") + "ReporteDetEquiposAmbientes/lista-reporteDetEquiposAmbientes";
             List<ReporteDetEquiposAmbientesDTO> dataResult = new List<ReporteDetEquiposAmbientesDTO>();
             string _TOKEN = AuthToken.Token;
             if (_TOKEN == null)

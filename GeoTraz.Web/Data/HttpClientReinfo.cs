@@ -23,7 +23,7 @@ namespace GeoTraz.Web.Data
             HttpClientHandler clientHandler = new HttpClientHandler();
            clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
             HttpClient _httpClient = new HttpClient(clientHandler);
-            string UriGeneral = JsonHelper.GetSection("UriPrueba") + "Reinfo/lista-reinfo";
+            string UriGeneral = JsonHelper.GetSection("UriGeneral") + "Reinfo/lista-reinfo";
             List<ReinfoDTO> dataResult = new List<ReinfoDTO>();
             string _TOKEN = AuthToken.Token;
             if (_TOKEN == null)
@@ -54,7 +54,7 @@ namespace GeoTraz.Web.Data
             HttpClientHandler clientHandler = new HttpClientHandler();
             clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
             HttpClient _httpClient = new HttpClient(clientHandler);
-            String UriGeneral = JsonHelper.GetSection("UriPrueba") + "Reinfo/busca-reinfo";
+            String UriGeneral = JsonHelper.GetSection("UriGeneral") + "Reinfo/busca-reinfo";
             List<ReinfoDTO> dataResult = new List<ReinfoDTO>();
             string _TOKEN = AuthToken.Token;
             if (_TOKEN == null)
@@ -88,7 +88,7 @@ namespace GeoTraz.Web.Data
             HttpClientHandler clientHandler = new HttpClientHandler();
             clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
             HttpClient _httpClient = new HttpClient(clientHandler);
-            String UriGeneral = JsonHelper.GetSection("UriPrueba") + "Reinfo/busca-reinfo-edit";
+            String UriGeneral = JsonHelper.GetSection("UriGeneral") + "Reinfo/busca-reinfo-edit";
             List<ReinfoDTO> dataResult = new List<ReinfoDTO>();
             string _TOKEN = AuthToken.Token;
             if (_TOKEN == null)
@@ -121,7 +121,7 @@ namespace GeoTraz.Web.Data
             HttpClientHandler clientHandler = new HttpClientHandler();
             clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
             HttpClient _httpClient = new HttpClient(clientHandler);
-            String UriGeneral = JsonHelper.GetSection("UriPrueba") + "Reinfo/filtrar-reinfo";
+            String UriGeneral = JsonHelper.GetSection("UriGeneral") + "Reinfo/filtrar-reinfo";
             List<ReinfoDTO> dataResult = new List<ReinfoDTO>();
             string _TOKEN = AuthToken.Token;
             if (_TOKEN == null)
@@ -151,7 +151,7 @@ namespace GeoTraz.Web.Data
             HttpClientHandler clientHandler = new HttpClientHandler();
             clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
             HttpClient _httpClient = new HttpClient(clientHandler);
-            String UriGeneral = JsonHelper.GetSection("UriPrueba") + "Reinfo/filtrar-reinfografico";
+            String UriGeneral = JsonHelper.GetSection("UriGeneral") + "Reinfo/filtrar-reinfografico";
             List<ReinfoDTO> dataResult = new List<ReinfoDTO>();
             string _TOKEN = AuthToken.Token;
             if (_TOKEN == null)
@@ -180,7 +180,7 @@ namespace GeoTraz.Web.Data
             HttpClientHandler clientHandler = new HttpClientHandler();
             clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
             HttpClient _httpClient = new HttpClient(clientHandler);
-            String UriGeneral = JsonHelper.GetSection("UriPrueba") + "Reinfo/filtrar-declaraciongrafico";
+            String UriGeneral = JsonHelper.GetSection("UriGeneral") + "Reinfo/filtrar-declaraciongrafico";
             List<ReinfoDTO> dataResult = new List<ReinfoDTO>();
             string _TOKEN = AuthToken.Token;
             if (_TOKEN == null)
@@ -208,7 +208,7 @@ namespace GeoTraz.Web.Data
             HttpClientHandler clientHandler = new HttpClientHandler();
             clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
             HttpClient _httpClient = new HttpClient(clientHandler);
-            String UriGeneral = JsonHelper.GetSection("UriPrueba") + "Reinfo/valida-reinfo";
+            String UriGeneral = JsonHelper.GetSection("UriGeneral") + "Reinfo/valida-reinfo";
             List<ReinfoDTO> dataResult = new List<ReinfoDTO>();
             string _TOKEN = AuthToken.Token;
             if (_TOKEN == null)
@@ -237,7 +237,7 @@ namespace GeoTraz.Web.Data
                 HttpClientHandler clientHandler = new HttpClientHandler();
                 clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
                 HttpClient _httpClient = new HttpClient(clientHandler);
-                String UriGeneral = JsonHelper.GetSection("UriPrueba") + "Reinfo/add-reinfo";
+                String UriGeneral = JsonHelper.GetSection("UriGeneral") + "Reinfo/add-reinfo";
                 List<ReinfoDTO> dataResult = new List<ReinfoDTO>();
                 string _TOKEN = AuthToken.Token;
                 if (_TOKEN == null)
@@ -274,7 +274,7 @@ namespace GeoTraz.Web.Data
             HttpClientHandler clientHandler = new HttpClientHandler();
             clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
             HttpClient _httpClient = new HttpClient(clientHandler);
-            String UriGeneral = JsonHelper.GetSection("UriPrueba") + "Reinfo/update-reinfo";
+            String UriGeneral = JsonHelper.GetSection("UriGeneral") + "Reinfo/update-reinfo";
             List<ReinfoDTO> dataResult = new List<ReinfoDTO>();
             string _TOKEN = AuthToken.Token;
             if (_TOKEN == null)
@@ -305,7 +305,7 @@ namespace GeoTraz.Web.Data
             HttpClientHandler clientHandler = new HttpClientHandler();
             clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
             HttpClient _httpClient = new HttpClient(clientHandler);
-            String UriGeneral = JsonHelper.GetSection("UriPrueba") + "Reinfo/delete-reinfo";
+            String UriGeneral = JsonHelper.GetSection("UriGeneral") + "Reinfo/delete-reinfo";
             List<ReinfoDTO> dataResult = new List<ReinfoDTO>();
             string _TOKEN = AuthToken.Token;
             if (_TOKEN == null)

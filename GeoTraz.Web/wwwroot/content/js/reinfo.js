@@ -1776,7 +1776,7 @@ $('#cmbTipoDocIngemmet1').change(function () {
 });
 
 //CAPTURA EL ID REINFO Y MUESTRA DATOS
-function getReinfo(id) {
+async function getReinfo(id) {
     $("#cmbProvincia").prop("disabled", true);
     $("#cmbCiudad").prop("disabled", true);
     $("#idListaDocIngemmet").empty();
@@ -1784,8 +1784,8 @@ function getReinfo(id) {
     $("#filesIngemmet").val('');
     $("#cmbTipoDocIngemmet").val('0');
     formDataIngemmet = new FormData();
-    cargardatosTabla2();
-    cargardatosTabla3();
+    await cargardatosTabla2();
+    await cargardatosTabla3();
     if (id > 0) {
         LimpiarLabels();
         $("#files1").hide();
@@ -1814,9 +1814,9 @@ function getReinfo(id) {
             type: 'GET',
             dataType: 'json',
             data: 'data',
-            success: function (data) {
+            success:  async function (data) {
                 var datos = data.data;
-                $(datos).each(function (index, value) {
+                $(datos).each(async function (index, value) {
                     var dep = (value.v_UBIGEO).substring(0, 2);
                     var prov = (value.v_UBIGEO).substring(0, 4);
                     var dist = (value.v_UBIGEO).substring(0, 6);
@@ -1873,16 +1873,16 @@ function getReinfo(id) {
                     }
                     $('#txtId_reinfo').val(value.n_CODREINFO); 
                     $('#TxtIndicador').val(1);
-                    cargardatosTablafile1(id);
-                    cargardatosTablafile2(id);
-                    cargardatosTablafile3(id);
+                    await cargardatosTablafile1(id);
+                    await cargardatosTablafile2(id);
+                    await cargardatosTablafile3(id);
                     //cargar lista de equiposambientes
-                    buscarequiposreinfo(id);
-                    buscarambientereinfo(id);
-                    buscarequiposfaltantes(id);
-                    buscarambientesfaltantes(id);
-                    cargardatosTablafileIngemmet(id);
-                    cargardatosTablafileCampo(id); 
+                    await buscarequiposreinfo(id);
+                    await buscarambientereinfo(id);
+                    await buscarequiposfaltantes(id);
+                    await buscarambientesfaltantes(id);
+                    await cargardatosTablafileIngemmet(id);
+                    await cargardatosTablafileCampo(id);
                     $("#myModalReinfo").modal({ backdrop: 'static', keyboard: false })
                     $("#myModalReinfo").modal('show');
                 });
@@ -1894,8 +1894,8 @@ function getReinfo(id) {
         } else {
 
         $('#cmbSede').prop("disabled", false);
-        LimpiarTextos();
-        LimpiarLabels();
+        await LimpiarTextos();
+        await LimpiarLabels();
 
         $("#idListaDocIngemmet").empty();
         $("#filesIngemmet").val('');
@@ -1906,8 +1906,8 @@ function getReinfo(id) {
         $('#LstAmbientes').empty();
         $('#LstHerramientasEmpresa').empty();
         $('#LstAmbientesEmpresa').empty();
-        cargarListaEquipos();
-        cargarListaAmbientes();
+        await cargarListaEquipos();
+        await cargarListaAmbientes();
         var fecha = new Date(); //Fecha actual
         var mes = fecha.getMonth() + 1; //obteniendo mes
         var dia = fecha.getDate(); //obteniendo dia
@@ -4292,7 +4292,7 @@ function buscarambientereinfo(id) {
             $('#LstAmbientesEmpresa').empty();
             var datos = data.data;
             $(datos).each(function (index, value) {
-                $('#LstAmbientesEmpresa').append('<option value=' + value.n_CODEQUIPOS + '>' + value.v_DESCRIPCION + '</option > ');
+                $('#LstAmbientesEmpresa').append('<option value=' + value.n_CODEQUIPOS + '>' + value.v_DESCRIPCION + '</option>');
             });
 
         },

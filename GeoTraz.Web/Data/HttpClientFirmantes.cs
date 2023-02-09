@@ -24,7 +24,7 @@ namespace GeoTraz.Web.Data
         //        HttpClientHandler clientHandler = new HttpClientHandler();
         //        clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
         //        HttpClient _httpClient = new HttpClient(clientHandler);
-        //        String UriGeneral = JsonHelper.GetSection("UriPrueba") + "Firmantes/lista-firmantes";
+        //        String UriGeneral = JsonHelper.GetSection("UriGeneral") + "Firmantes/lista-firmantes";
         //        List<FirmantesDTO> dataResult = new List<FirmantesDTO>();
         //        string _TOKEN = AuthToken.Token;
         //        if (_TOKEN == null)
@@ -58,7 +58,7 @@ namespace GeoTraz.Web.Data
             try
             {
                 ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, sslPolicyErrors) => true;
-                var client = new RestClient(JsonHelper.GetSection("UriPrueba"));
+                var client = new RestClient(JsonHelper.GetSection("UriGeneral"));
                 var request = new RestRequest("/Firmantes/lista-firmantes/", Method.GET)
                 .AddHeader("Authorization", "Bearer " + AuthToken.Token);
                 request.AddParameter("V_DNI", V_DNI);

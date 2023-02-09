@@ -33,7 +33,7 @@ namespace GeoTraz.Core.Repositories.Concretes
                         {
                             N_CODFIRMANTES = sqlDataReader[0] == DBNull.Value ? 0 : Convert.ToInt32(sqlDataReader[0]),
                             V_DNI = sqlDataReader[1].ToString(),
-                            V_NOMBRES = sqlDataReader[2].ToString(), 
+                            V_NOMBRES = sqlDataReader[2].ToString(),
                             V_TIPOIMAG = sqlDataReader[3].ToString(),
                             V_FOTOFIRMA = sqlDataReader[4].ToString(),
                             V_RUTA = sqlDataReader[5].ToString(),
