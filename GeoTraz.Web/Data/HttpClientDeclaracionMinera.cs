@@ -19,7 +19,7 @@ namespace GeoTraz.Web.Data
             HttpClientHandler clientHandler = new HttpClientHandler();
             clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
             HttpClient _httpClient = new HttpClient(clientHandler);
-            String UriGeneral = JsonHelper.GetSection("UriGeneral") + "DeclaracionMinera/add-declaracionminera";
+            String UriGeneral = JsonHelper.GetSection("UriPrueba") + "DeclaracionMinera/add-declaracionminera";
             List<DeclaracionMineraDTO> dataResult = new List<DeclaracionMineraDTO>();
             string _TOKEN = AuthToken.Token;
             if (_TOKEN == null)
@@ -51,7 +51,7 @@ namespace GeoTraz.Web.Data
             HttpClientHandler clientHandler = new HttpClientHandler();
             clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
             HttpClient _httpClient = new HttpClient(clientHandler);
-            String UriGeneral = JsonHelper.GetSection("UriGeneral") + "DeclaracionMinera/valida-declaracionminera";
+            String UriGeneral = JsonHelper.GetSection("UriPrueba") + "DeclaracionMinera/valida-declaracionminera";
             List<DeclaracionMineraDTO> dataResult = new List<DeclaracionMineraDTO>();
             string _TOKEN = AuthToken.Token;
             if (_TOKEN == null)
@@ -83,7 +83,7 @@ namespace GeoTraz.Web.Data
             HttpClientHandler clientHandler = new HttpClientHandler();
             clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
             HttpClient _httpClient = new HttpClient(clientHandler);
-            String UriGeneral = JsonHelper.GetSection("UriGeneral") + "DeclaracionMinera/update-declaracionminera";
+            String UriGeneral = JsonHelper.GetSection("UriPrueba") + "DeclaracionMinera/update-declaracionminera";
             List<DeclaracionMineraDTO> dataResult = new List<DeclaracionMineraDTO>();
             string _TOKEN = AuthToken.Token;
             if (_TOKEN == null)

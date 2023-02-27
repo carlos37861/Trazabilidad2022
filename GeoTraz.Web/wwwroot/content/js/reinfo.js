@@ -2854,7 +2854,8 @@ function uploadFilesCampo(inputId, id) {
 }
 //CAPTURA EL ID DE ARCHIVO Y MUESTRA SUS DATOS
 function getArchivo(id) {
-   
+    $('#myModalLoading').removeAttr('hidden');
+    $('#myModalLoading').modal("show");
     $("#myModalImagen").modal('show');
     $("#ImagenContent").empty();
         $.ajax({
@@ -2876,6 +2877,8 @@ function getArchivo(id) {
                             $("#ImagenContent").empty();
                             //$("#prueba").append('<a class="text-success mx-2px" href="' + datos + '" download>DESCARGAR</a >');
                             $("#ImagenContent").attr('src', datos);
+                            $('#myModalLoading').attr('hidden', true);
+                            $('#myModalLoading').modal('hide');
                         },
 
                     });

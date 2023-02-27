@@ -58,7 +58,7 @@ namespace GeoTraz.Web.Data
             try
             {
                 ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, sslPolicyErrors) => true;
-                var client = new RestClient(JsonHelper.GetSection("UriGeneral"));
+                var client = new RestClient(JsonHelper.GetSection("UriPrueba"));
                 var request = new RestRequest("/Firmantes/lista-firmantes/", Method.GET)
                 .AddHeader("Authorization", "Bearer " + AuthToken.Token);
                 request.AddParameter("V_DNI", V_DNI);

@@ -19,7 +19,7 @@ namespace GeoTraz.Web.Data
             HttpClientHandler clientHandler = new HttpClientHandler();
             clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
             HttpClient _httpClient = new HttpClient(clientHandler);
-            String UriGeneral = JsonHelper.GetSection("UriGeneral") + "EquiposAmbientes/lista-equiposambientes";
+            String UriGeneral = JsonHelper.GetSection("UriPrueba") + "EquiposAmbientes/lista-equiposambientes";
             List<EquiposAmbientesDTO> dataResult = new List<EquiposAmbientesDTO>();
             string _TOKEN = AuthToken.Token;
             if (_TOKEN == null)
@@ -50,7 +50,7 @@ namespace GeoTraz.Web.Data
             HttpClientHandler clientHandler = new HttpClientHandler();
             clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
             HttpClient _httpClient = new HttpClient(clientHandler);
-            String UriGeneral = JsonHelper.GetSection("UriGeneral") + "EquiposAmbientes/lista-equiposambientesreinfo";
+            String UriGeneral = JsonHelper.GetSection("UriPrueba") + "EquiposAmbientes/lista-equiposambientesreinfo";
             List<EquiposAmbientesDTO> dataResult = new List<EquiposAmbientesDTO>();
             string _TOKEN = AuthToken.Token;
             if (_TOKEN == null)
@@ -82,7 +82,7 @@ namespace GeoTraz.Web.Data
                 HttpClientHandler clientHandler = new HttpClientHandler();
                 clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
                 HttpClient _httpClient = new HttpClient(clientHandler);
-                String UriGeneral = JsonHelper.GetSection("UriGeneral") + "EquiposAmbientes/add-equiposambientesreinfo";
+                String UriGeneral = JsonHelper.GetSection("UriPrueba") + "EquiposAmbientes/add-equiposambientesreinfo";
                 List<EquiposAmbientesDTO> dataResult = new List<EquiposAmbientesDTO>();
                 string _TOKEN = AuthToken.Token;
                 if (_TOKEN == null)
@@ -120,7 +120,7 @@ namespace GeoTraz.Web.Data
                 HttpClientHandler clientHandler = new HttpClientHandler();
                 clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
                 HttpClient _httpClient = new HttpClient(clientHandler);
-                String UriGeneral = JsonHelper.GetSection("UriGeneral") + "EquiposAmbientes/del-equiposambientesreinfo";
+                String UriGeneral = JsonHelper.GetSection("UriPrueba") + "EquiposAmbientes/del-equiposambientesreinfo";
                 List<EquiposAmbientesDTO> dataResult = new List<EquiposAmbientesDTO>();
                 string _TOKEN = AuthToken.Token;
                 if (_TOKEN == null)
@@ -157,7 +157,7 @@ namespace GeoTraz.Web.Data
             HttpClientHandler clientHandler = new HttpClientHandler();
             clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
             HttpClient _httpClient = new HttpClient(clientHandler);
-            String UriGeneral = JsonHelper.GetSection("UriGeneral") + "EquiposAmbientes/lista-equiposambientesFaltantes";
+            String UriGeneral = JsonHelper.GetSection("UriPrueba") + "EquiposAmbientes/lista-equiposambientesFaltantes";
             List<EquiposAmbientesDTO> dataResult = new List<EquiposAmbientesDTO>();
             string _TOKEN = AuthToken.Token;
             if (_TOKEN == null)
