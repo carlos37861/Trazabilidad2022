@@ -80,7 +80,7 @@ namespace GeoTraz.Web.Data
         {
             try
             {
-                var client = new RestClient(JsonHelper.GetSection("UriPrueba"));
+                var client = new RestClient(JsonHelper.GetSection("UriGeneral"));
                 var request = new RestRequest("ListaGeneral/DatosVersionTrazabilidad/", Method.GET)
                 .AddHeader("Authorization", "Bearer " + AuthToken.Token);
                 IRestResponse response = await client.ExecuteTaskAsync(request);
