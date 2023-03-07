@@ -895,7 +895,7 @@ function crearModalV3() {
                     <input type="text" id="txtId_reinfoReporte" style="display:none" />\
                     <table class="table table-responsive" style="width:100%" border="1">\
                         <tr>\
-                            <th rowspan="4"><img src="/images/laytaruma.png" class="pt-2" /></th>\
+                            <th rowspan="4"><img src="/images/laytaruma.png" class="pt-1" /></th>\
                             <th width="61%"> <center><h5><strong>MINERA LAYTARUMA S.A.</strong></h5></center></th>\
                             <th width="25%" class="p-0 pl-1 pt-1" style="font-size:12px">\
                                 Protocolo: <label id="lblProtocoloPrint"></label>\
@@ -942,59 +942,59 @@ function crearModalV3() {
                         </tr>\
                     </table>\
                         <table class="" border="1">\
-                            <tr><th class="p-1" colspan="4" style="font-size: 10px; background-color: lightgray ">02. COORDENADAS</th></tr>\
-                            <tr><td class="p-1" style="font-size: 10px">2.1 EN REINFO/ IGAFOM</td><td class="p-1" style="font-size: 10px">2.2 EN CAMPO</td>\
+                            <tr><th class="p-1" colspan="4" style="font-size: 9px; background-color: lightgray ">02. COORDENADAS</th></tr>\
+                            <tr><td class="p-1" style="font-size: 9px">2.1 EN REINFO/ IGAFOM</td><td class="p-1" style="font-size: 9px">2.2 EN CAMPO</td>\
                             <tr><td class="p-1">\
                                     <table>\
                                         <tr>\
-                                            <th class="p-1" style="font-size:11px" width="23%"></th>\
-                                            <th class="p-1" style="font-size:11px"></th>\
-                                            <th class="p-1" colspan="4" style="font-size:11px;border:groove"><center>WGS-84</center></th>\
-                                            <th class="p-1" style="font-size:11px"></th>\
-                                            <th class="p-1" style="font-size:11px"></th>\
+                                            <th class="p-1" style="font-size:10px" width="23%"></th>\
+                                            <th class="p-1" style="font-size:10px"></th>\
+                                            <th class="p-1" colspan="4" style="font-size:10px;border:groove"><center>WGS-84</center></th>\
+                                            <th class="p-1" style="font-size:10px"></th>\
+                                            <th class="p-1" style="font-size:10px"></th>\
                                         </tr>\
                                         <tr>\
-                                            <th class="p-1" style="font-size: 11px; border: groove" width="23%">DERECHO MINERO</th>\
-                                            <th class="p-1" style="font-size: 11px; border: groove">ZONA</th>\
-                                            <th class="p-1" style="font-size: 11px; border: groove">1.NORTE</th>\
-                                            <th class="p-1" style="font-size: 11px; border: groove">1.ESTE</th>\
-                                            <th class="p-1" style="font-size: 11px; border: groove">2.NORTE</th>\
-                                            <th class="p-1" style="font-size: 11px; border: groove">2.ESTE</th>\
-                                            <th class="p-1" style="font-size: 11px; border: groove">ACTIVIDAD</th>\
-                                            <th class="p-1" style="font-size: 11px; border: groove">FECHA</th>\
+                                            <th class="p-1" style="font-size: 10px; border: groove" width="23%">DERECHO MINERO</th>\
+                                            <th class="p-1" style="font-size: 10px; border: groove">ZONA</th>\
+                                            <th class="p-1" style="font-size: 10px; border: groove">1.NORTE</th>\
+                                            <th class="p-1" style="font-size: 10px; border: groove">1.ESTE</th>\
+                                            <th class="p-1" style="font-size: 10px; border: groove">2.NORTE</th>\
+                                            <th class="p-1" style="font-size: 10px; border: groove">2.ESTE</th>\
+                                            <th class="p-1" style="font-size: 10px; border: groove">ACTIVIDAD</th>\
+                                            <th class="p-1" style="font-size: 10px; border: groove">FECHA</th>\
                                         </tr>\
                                         <tr>\
-                                            <td class="p-1" style="font-size: 11px; border: groove" width="30%"><input type="text" style="width:100%" border="1" readonly id="txtNomDerMinPrint" /></td>\
-                                            <td class="p-1" style="font-size: 11px; border: groove"><input type="text" style="width:100%" border="1" readonly id="txtZonaReinPrint" /></td>\
-                                            <td class="p-1" style="font-size: 11px; border: groove"><input type="text" style="width:100%" border="1" readonly id="txtNorte1Print" /></td>\
-                                            <td class="p-1" style="font-size: 11px; border: groove"><input type="text" style="width:100%" border="1" readonly id="txtEste1Print" /></td>\
-                                            <td class="p-1" style="font-size: 11px; border: groove"><input type="text" style="width:100%" border="1" readonly id="txtNorte2Print" /></td>\
-                                            <td class="p-1" style="font-size: 11px; border: groove"><input type="text" style="width:100%" border="1" readonly id="txtEste2Print" /></td>\
-                                            <td class="p-1" width="16%" style="font-size: 11px; border: groove"><input type="text" style="width:100%" border="1" readonly id="txtTipoActivPrint" /></td>\
-                                            <td class="p-1" width="11%" style="font-size: 11px; border: groove"><input type="text" style="width:100%" border="1" readonly id="txtFechaReinfoPrint" /></td>\
+                                            <td class="p-1" style="font-size: 10px; border: groove" width="30%"><input type="text" style="width:100%" border="1" readonly id="txtNomDerMinPrint" /></td>\
+                                            <td class="p-1" style="font-size: 10px; border: groove"><input type="text" style="width:100%" border="1" readonly id="txtZonaReinPrint" /></td>\
+                                            <td class="p-1" style="font-size: 10px; border: groove"><input type="text" style="width:100%" border="1" readonly id="txtNorte1Print" /></td>\
+                                            <td class="p-1" style="font-size: 10px; border: groove"><input type="text" style="width:100%" border="1" readonly id="txtEste1Print" /></td>\
+                                            <td class="p-1" style="font-size: 10px; border: groove"><input type="text" style="width:100%" border="1" readonly id="txtNorte2Print" /></td>\
+                                            <td class="p-1" style="font-size: 10px; border: groove"><input type="text" style="width:100%" border="1" readonly id="txtEste2Print" /></td>\
+                                            <td class="p-1" width="16%" style="font-size: 10px; border: groove"><input type="text" style="width:100%" border="1" readonly id="txtTipoActivPrint" /></td>\
+                                            <td class="p-1" width="11%" style="font-size: 10px; border: groove"><input type="text" style="width:100%" border="1" readonly id="txtFechaReinfoPrint" /></td>\
                                         </tr>\
                                     </table>\
                                 </td>\
                                 <td class="p-1">\
                                     <table>\
                                         <tr>\
-                                            <th class="p-1" style="font-size: 11px;"></th>\
-                                            <th class="p-1" style="font-size: 11px;"></th>\
+                                            <th class="p-1" style="font-size: 10px;"></th>\
+                                            <th class="p-1" style="font-size: 10px;"></th>\
                                             <th class="p-1" colspan="2" style="font-size: 11px; border: groove"><center>WSG-84</center></th>\
                                         </tr>\
                                         <tr>\
-                                            <th class="p-1" style="font-size: 11px; border: groove "  width="46%">COMPONENTE</th>\
-                                            <th class="p-1" style="font-size: 11px; border: groove">ZONA</th>\
-                                            <th class="p-1" style="font-size: 11px; border: groove">NORTE</th>\
-                                            <th class="p-1" style="font-size: 11px; border: groove">ESTE</th>\
+                                            <th class="p-1" style="font-size: 10px; border: groove "  width="46%">COMPONENTE</th>\
+                                            <th class="p-1" style="font-size: 10px; border: groove">ZONA</th>\
+                                            <th class="p-1" style="font-size: 10px; border: groove">NORTE</th>\
+                                            <th class="p-1" style="font-size: 10px; border: groove">ESTE</th>\
                                         </tr>\
                                         <tr>\
-                                            <td class="p-1" style="font-size: 11px; border: groove"><input type="text" style="width:100%" border="1" readonly id="cmbComponentePrint" /></td>\
-                                            <td class="p-1" style="font-size: 11px; border: groove"><input type="text" style="width:100%" border="1" readonly id="cmbZonaCampoPrint" /></td>\
-                                            <td class="p-1" style="font-size: 11px; border: groove"><input type="text" style="width:100%" border="1" readonly id="txtNorteCPrint" /></td>\
-                                            <td class="p-1" style="font-size: 11px; border: groove"><input type="text" style="width:100%" border="1" readonly id="txtEsteCPrint" /></td>\
+                                            <td class="p-1" style="font-size: 10px; border: groove"><input type="text" style="width:100%" border="1" readonly id="cmbComponentePrint" /></td>\
+                                            <td class="p-1" style="font-size: 10px; border: groove"><input type="text" style="width:100%" border="1" readonly id="cmbZonaCampoPrint" /></td>\
+                                            <td class="p-1" style="font-size: 10px; border: groove"><input type="text" style="width:100%" border="1" readonly id="txtNorteCPrint" /></td>\
+                                            <td class="p-1" style="font-size: 10px; border: groove"><input type="text" style="width:100%" border="1" readonly id="txtEsteCPrint" /></td>\
                                         </tr>\
-                                        <tr id="divDesUbiPBPrint"> <td class="p-1" colspan="4" style="font-size: 11px; border: groove"><input type="text" style="width:100%" border="1" readonly id="txtDesUbiPBPrint"/></td></tr>\
+                                        <tr id="divDesUbiPBPrint"> <td class="p-1" colspan="4" style="font-size: 10px; border: groove"><input type="text" style="width:100%" border="1" readonly id="txtDesUbiPBPrint"/></td></tr>\
                                     </table>\
                                 </td>\
                             </tr>\
@@ -1008,11 +1008,11 @@ function crearModalV3() {
                                         <tr>\
                                             <td class="p-1" width="13%" style="font-size: 10px">UBICACIÓN POLITICA</td>\
                                             <td class="p-1" style="font-size: 10px">DEPARTAMENTO</td>\
-                                            <td class="p-1" width="30%" style="font-size: 11px"><select type="text" id="cmbDepartamentoPrint" disabled="disabled" style="width:100%;border-color:black;color: black;font:bold" /></td>\
+                                            <td class="p-1" width="30%" style="font-size: 10px"><select type="text" id="cmbDepartamentoPrint" disabled="disabled" style="width:100%;border-color:black;color: black;font:bold" /></td>\
                                             <td class="p-1" style="font-size: 10px">PROVINCIA</td>\
-                                            <td class="p-1" width="30%" style="font-size: 11px"><select type="text" id="cmbProvinciaPrint" disabled="disabled" style="width:100%;border-color:black;color: black;font:bold" /></td>\
+                                            <td class="p-1" width="30%" style="font-size: 10px"><select type="text" id="cmbProvinciaPrint" disabled="disabled" style="width:100%;border-color:black;color: black;font:bold" /></td>\
                                             <td class="p-1" style="font-size: 10px">DISTRITO</td>\
-                                            <td class="p-1" width="30%" style="font-size: 11px"><select type="text" id="cmbCiudadPrint" disabled="disabled" style="width:100%;border-color:black;color: black;font:bold" /></td>\
+                                            <td class="p-1" width="30%" style="font-size: 10px"><select type="text" id="cmbCiudadPrint" disabled="disabled" style="width:100%;border-color:black;color: black;font:bold" /></td>\
                                         </tr>\
                                     </table>\
                                 </td>\
@@ -1024,7 +1024,7 @@ function crearModalV3() {
                                 <td class="p-1" colspan="2" style="font-size: 8px;">CARACTERISTICAS DE LA LABOR (Capacidad de producción - Clasificación de Mineral que extrae; óxidos y/o súlfuros - Tipos de Minerales )</td>\
                             </tr>\
                             <tr>\
-                                <td colspan="2" class="p-2" style="font-size: 11px">\
+                                <td colspan="2" class="p-2" style="font-size: 10px">\
                                     <textarea type="text" style="width:100%;resize:none" readonly id="txtDescripLaborPrint"></textarea>\
                                 </td>\
                             </tr>\
@@ -1166,7 +1166,7 @@ function crearModalV3() {
     </div>');
     ListaDepartamentosPrint();
     ListaSedesPrint();
-    
+
 }
 
 
